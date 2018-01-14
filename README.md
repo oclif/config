@@ -1,6 +1,8 @@
 @dxcli/config
 =============
 
+base config object and standard interfaces for dxcli components
+
 [![Version](https://img.shields.io/npm/v/@dxcli/config.svg)](https://npmjs.org/package/@dxcli/config)
 [![CircleCI](https://circleci.com/gh/dxcli/config/tree/master.svg?style=svg)](https://circleci.com/gh/dxcli/config/tree/master)
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/dxcli/config?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/config/branch/master)
