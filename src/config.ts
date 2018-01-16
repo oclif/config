@@ -17,20 +17,21 @@ export interface IConfigBase {
   arch: string
   bin: string
   cacheDir: string
+  commandsDir: string | undefined
   configDir: string
   dataDir: string
   dirname: string
   errlog: string
   home: string
+  hooks: {[k: string]: string[]}
   name: string
   pjson: IPluginPJSON | ICLIPJSON
   platform: string
   shell: string
-  windows: boolean
-  commandsDir: string | undefined
-  userAgent: string
   tsconfig: TSConfig | undefined
-  hooks: {[k: string]: string[]}
+  userAgent: string
+  version: string
+  windows: boolean
 }
 
 export interface IPluginConfig extends IConfigBase {
@@ -52,6 +53,11 @@ export interface TSConfig {
     rootDir?: string
     outDir?: string
   }
+}
+
+export interface ConfigOptions {
+  name?: string
+  root?: string
 }
 
 const debug = require('debug')('@dxcli/config')
@@ -227,7 +233,7 @@ export abstract class ConfigBase implements IConfigBase {
 }
 
 export class PluginConfig extends ConfigBase implements IPluginConfig {
-  static async create({name, root = __dirname}: {name?: string, root?: string}) {
+  static async create({name, root = __dirname}: ConfigOptions) {
     const config = new this()
     await config.load({root, name})
     return config
@@ -238,7 +244,7 @@ export class PluginConfig extends ConfigBase implements IPluginConfig {
 }
 
 export class CLIConfig extends ConfigBase implements ICLIConfig {
-  static async create({engine, name, root = __dirname}: {engine: IEngine, name?: string, root?: string}) {
+  static async create({engine, name, root = __dirname}: ConfigOptions & {engine: IEngine}) {
     const config = new this(engine)
     await config.load({name, root})
     return config
@@ -285,4 +291,8 @@ async function findRootByName(name: string | undefined, root: string) {
     if (await fs.pathExists(cur)) return cur
   }
   return root
+}
+
+export function isIConfig(o: any): o is IConfig {
+  return !!o._base
 }
