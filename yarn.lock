@@ -142,26 +142,28 @@
     "@semantic-release/npm" "^2.6.1"
     semantic-release "^12.2.0"
 
-"@dxcli/dev-test@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@dxcli/dev-test/-/dev-test-0.1.2.tgz#6971411652a65e9c6da82c7411a84f191e334e56"
+"@dxcli/dev-test@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@dxcli/dev-test/-/dev-test-0.2.0.tgz#c67148036103afa4223dcbaadae998b23e286ac9"
   dependencies:
     "@dxcli/dev-nyc-config" "^0.0.3"
     "@types/ansi-styles" "^2.0.30"
     "@types/chai" "^4.1.0"
+    "@types/chai-as-promised" "^7.1.0"
     "@types/lodash" "^4.14.92"
     "@types/mocha" "^2.2.46"
     "@types/strip-ansi" "^3.0.0"
     chai "^4.1.2"
+    chai-as-promised "^7.1.1"
     lodash "^4.17.4"
     mocha-junit-reporter "^1.15.0"
     std-mocks "^1.0.1"
     strip-ansi "^4.0.0"
     ts-node "^4.1.0"
 
-"@dxcli/dev-tslint@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@dxcli/dev-tslint/-/dev-tslint-0.0.9.tgz#552b62b769ede24b30fdc3b8c04e10b1a60f027f"
+"@dxcli/dev-tslint@^0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@dxcli/dev-tslint/-/dev-tslint-0.0.12.tgz#fe00df29d715779ee729d26420f763dd735c9e97"
   dependencies:
     tslint "^5.9.1"
     tslint-xo "^0.5.0"
@@ -309,7 +311,13 @@
   version "2.0.30"
   resolved "https://registry.yarnpkg.com/@types/ansi-styles/-/ansi-styles-2.0.30.tgz#9a645299020a224afc6a8cd055195850b3c2af85"
 
-"@types/chai@^4.1.0":
+"@types/chai-as-promised@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@types/chai-as-promised/-/chai-as-promised-7.1.0.tgz#010b04cde78eacfb6e72bfddb3e58fe23c2e78b9"
+  dependencies:
+    "@types/chai" "*"
+
+"@types/chai@*", "@types/chai@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.0.tgz#d9008fa4c06f6801f93396d121f0227cd4244ac6"
 
@@ -805,6 +813,12 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
+chai-as-promised@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/chai-as-promised/-/chai-as-promised-7.1.1.tgz#08645d825deb8696ee61725dbf590c012eb00ca0"
+  dependencies:
+    check-error "^1.0.2"
+
 chai@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.1.2.tgz#0f64584ba642f0f2ace2806279f4f06ca23ad73c"
@@ -852,7 +866,7 @@ charenc@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
 
-check-error@^1.0.1:
+check-error@^1.0.1, check-error@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
 

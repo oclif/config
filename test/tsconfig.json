@@ -3,7 +3,10 @@
   "compilerOptions": {
     "rootDir": ".."
   },
+  "exclude": [
+    "../plugins/**"
+  ],
   "include": [
-    "**/*"
+    "../**/*"
   ]
 }

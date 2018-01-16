@@ -16,8 +16,8 @@
     "@dxcli/dev": "^1.1.3",
     "@dxcli/dev-nyc-config": "^0.0.3",
     "@dxcli/dev-semantic-release": "^0.0.3",
-    "@dxcli/dev-test": "^0.1.2",
-    "@dxcli/dev-tslint": "^0.0.9",
+    "@dxcli/dev-test": "^0.2.0",
+    "@dxcli/dev-tslint": "^0.0.12",
     "@heroku-cli/config-edit": "^1.0.4",
     "@types/ansi-styles": "^2.0.30",
     "@types/chai": "^4.1.0",
@@ -42,14 +42,14 @@
       "test": [
         "eslint .",
         "tsc -p test --noEmit",
-        "tslint -p test",
+        "tslint -p test --exclude \"plugins/**\"",
         "commitlint --from origin/master",
         "mocha \"test/**/*.ts\""
       ],
       "lint": [
         "eslint .",
         "tsc -p test --noEmit",
-        "tslint -p test",
+        "tslint -p test --exclude \"plugins/**\"",
         "commitlint --from origin/master"
       ]
     }
