@@ -17,7 +17,7 @@
     "@dxcli/dev-nyc-config": "^0.0.3",
     "@dxcli/dev-semantic-release": "^0.0.3",
     "@dxcli/dev-test": "^0.1.2",
-    "@dxcli/dev-tslint": "^0.0.9",
+    "@dxcli/dev-tslint": "^0.0.10",
     "@heroku-cli/config-edit": "^1.0.4",
     "@types/ansi-styles": "^2.0.30",
     "@types/chai": "^4.1.0",
