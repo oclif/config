@@ -1,16 +1,17 @@
 import {IConfig} from './config'
+import {IPlugin} from './plugin'
 
 export interface ICachedCommand {
   id?: string
-  hidden: boolean
   base: string
+  hidden: boolean
   aliases: string[]
-  // help(config: IConfig): string
-  // helpLine(config: IConfig): [string, string | undefined]
-  load(): Promise<ICommand>
+  description: string
+  usage: string
+  plugin: IPlugin
+  help: string
 }
 
 export interface ICommand extends ICachedCommand {
-  base: '@cli-engine/command@1.0.0'
   run(argv: string[], config: IConfig): Promise<void>
 }
