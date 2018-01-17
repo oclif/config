@@ -32,6 +32,7 @@ export interface IConfigBase {
   userAgent: string
   version: string
   windows: boolean
+  debug: number
 }
 
 export interface IPluginConfig extends IConfigBase {
@@ -92,7 +93,7 @@ export abstract class ConfigBase implements IConfigBase {
   userAgent: string
   commandsDir: string | undefined
   tsconfig: TSConfig | undefined
-  debug: number
+  debug: number = 0
   hooks: {[k: string]: string[]}
 
   constructor() {
