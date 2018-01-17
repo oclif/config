@@ -1,3 +1,11 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/dxcli/config/compare/6418f12d311c1986643392817d786a02e72509d9...v0.1.3) (2018-01-17)
+
+
+### Bug Fixes
+
+* set debug ([1f35564](https://github.com/dxcli/config/commit/1f35564))
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/dxcli/config/compare/f2ed14085d8b221ebcfd838c61520fe4a4366cb4...v0.1.2) (2018-01-17)
 
