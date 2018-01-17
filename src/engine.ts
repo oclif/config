@@ -1,18 +1,18 @@
-import {ICommand} from './command'
+import {ICachedCommand} from './command'
 import {IPlugin} from './plugin'
 import {ITopic} from './topic'
 
-export interface IEngine extends ICommand {
+export interface IEngine {
   readonly plugins: IPlugin[]
 
   readonly topics: ITopic[]
-  readonly commands: ICommand[]
+  readonly commands: ICachedCommand[]
   readonly commandIDs: string[]
   readonly rootTopics: ITopic[]
-  readonly rootCommands: ICommand[]
+  readonly rootCommands: ICachedCommand[]
 
-  findCommand(id: string, must: true): ICommand
-  findCommand(id: string, must?: boolean): ICommand | undefined
+  findCommand(id: string, must: true): ICachedCommand
+  findCommand(id: string, must?: boolean): ICachedCommand | undefined
 
   findTopic(id: string, must: true): ITopic
   findTopic(id: string, must?: boolean): ITopic | undefined
