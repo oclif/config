@@ -1,3 +1,11 @@
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/dxcli/config/compare/1f35564567a9507c0676076a7d34937b62ee0108...v0.1.4) (2018-01-17)
+
+
+### Bug Fixes
+
+* engine type updates ([c4e104d](https://github.com/dxcli/config/commit/c4e104d))
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/dxcli/config/compare/6418f12d311c1986643392817d786a02e72509d9...v0.1.3) (2018-01-17)
 
