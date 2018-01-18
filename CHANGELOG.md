@@ -1,3 +1,11 @@
+<a name="0.1.5"></a>
+## [0.1.5](https://github.com/dxcli/config/compare/c4e104d688ca7de531f2d38d35da8a45a88b05c5...v0.1.5) (2018-01-18)
+
+
+### Bug Fixes
+
+* add root to config ([ad1ca73](https://github.com/dxcli/config/commit/ad1ca73))
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/dxcli/config/compare/1f35564567a9507c0676076a7d34937b62ee0108...v0.1.4) (2018-01-17)
 
