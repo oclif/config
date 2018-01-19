@@ -1,3 +1,11 @@
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/dxcli/config/compare/937f136c627f8bac4e1c4dde0fac667ae8f86c84...v0.1.8) (2018-01-19)
+
+
+### Bug Fixes
+
+* simplify loading ([875eff9](https://github.com/dxcli/config/commit/875eff9))
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/dxcli/config/compare/590169baa7d6b8a5dae8e6594762cfbb857d8af8...v0.1.7) (2018-01-19)
 
