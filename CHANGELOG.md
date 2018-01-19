@@ -1,3 +1,11 @@
+<a name="0.1.15"></a>
+## [0.1.15](https://github.com/dxcli/config/compare/04b60fd01f177f9c260b839abf965e17ab908bb0...v0.1.15) (2018-01-19)
+
+
+### Bug Fixes
+
+* added hook options ([5dfdca6](https://github.com/dxcli/config/commit/5dfdca6))
+
 <a name="0.1.14"></a>
 ## [0.1.14](https://github.com/dxcli/config/compare/3ac9c6dc3a59660274cbcdf5781f4134907931e4...v0.1.14) (2018-01-19)
 
