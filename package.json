@@ -1,7 +1,7 @@
 {
   "name": "@dxcli/config",
   "description": "base config object and standard interfaces for dxcli components",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/dxcli/config/issues",
   "dependencies": {

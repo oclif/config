@@ -1,3 +1,11 @@
+<a name="0.1.16"></a>
+## [0.1.16](https://github.com/dxcli/config/compare/5dfdca64bb6fee5cbb7b1676be0e7737e7ea6172...v0.1.16) (2018-01-19)
+
+
+### Bug Fixes
+
+* do not require opts to read ([dcf4907](https://github.com/dxcli/config/commit/dcf4907))
+
 <a name="0.1.15"></a>
 ## [0.1.15](https://github.com/dxcli/config/compare/04b60fd01f177f9c260b839abf965e17ab908bb0...v0.1.15) (2018-01-19)
 
