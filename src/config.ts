@@ -254,7 +254,8 @@ export function isIConfig(o: any): o is IConfig {
   return !!o._base
 }
 
-export async function read({name, root = __dirname, baseConfig}: ConfigOptions = {}): Promise<IConfig> {
+export async function read({name, root, baseConfig}: ConfigOptions = {}): Promise<IConfig> {
+  root = root || (module.parent && module.parent.parent && module.parent.parent.filename) || __dirname
   const pkgPath = await findPkg(name, root)
   if (!pkgPath) throw new Error(`could not find package.json with ${inspect({name, root})}`)
   debug('found package.json at %s from %s', pkgPath, root)
