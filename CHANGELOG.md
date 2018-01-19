@@ -1,3 +1,11 @@
+<a name="0.1.14"></a>
+## [0.1.14](https://github.com/dxcli/config/compare/3ac9c6dc3a59660274cbcdf5781f4134907931e4...v0.1.14) (2018-01-19)
+
+
+### Bug Fixes
+
+* yarn upgrade ([04b60fd](https://github.com/dxcli/config/commit/04b60fd))
+
 <a name="0.1.13"></a>
 ## [0.1.13](https://github.com/dxcli/config/compare/84ad569ac30a3094d214b03b87f3d40e5a7aead6...v0.1.13) (2018-01-19)
 
