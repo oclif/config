@@ -1,3 +1,11 @@
+<a name="0.1.17"></a>
+## [0.1.17](https://github.com/dxcli/config/compare/dcf4907c718f2b37cbca90506c3a93e5b1bf2d11...v0.1.17) (2018-01-19)
+
+
+### Bug Fixes
+
+* default root to parent path ([48e8261](https://github.com/dxcli/config/commit/48e8261))
+
 <a name="0.1.16"></a>
 ## [0.1.16](https://github.com/dxcli/config/compare/5dfdca64bb6fee5cbb7b1676be0e7737e7ea6172...v0.1.16) (2018-01-19)
 
