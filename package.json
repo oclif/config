@@ -5,7 +5,6 @@
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/dxcli/config/issues",
   "dependencies": {
-    "cli-ux": "^2.0.21",
     "debug": "^3.1.0",
     "fs-extra": "^5.0.0",
     "load-json-file": "^4.0.0",
