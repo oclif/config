@@ -1,3 +1,11 @@
+<a name="0.1.13"></a>
+## [0.1.13](https://github.com/dxcli/config/compare/84ad569ac30a3094d214b03b87f3d40e5a7aead6...v0.1.13) (2018-01-19)
+
+
+### Bug Fixes
+
+* make compatible with [@dxcli](https://github.com/dxcli)/command ([3ac9c6d](https://github.com/dxcli/config/commit/3ac9c6d))
+
 <a name="0.1.12"></a>
 ## [0.1.12](https://github.com/dxcli/config/compare/abc374074f5c5fc63431e150526f116784e03084...v0.1.12) (2018-01-19)
 
