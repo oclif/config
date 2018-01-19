@@ -1,6 +1,6 @@
 import {ICommand} from './command'
 import {IConfig} from './config'
-import {IPluginPJSON} from './pjson'
+import {IPJSON} from './pjson'
 import {IPluginModule} from './plugin'
 
 export interface IHooks {
@@ -8,7 +8,7 @@ export interface IHooks {
   update: {}
   'plugins:parse': {
     module: IPluginModule
-    pjson: IPluginPJSON
+    pjson: IPJSON
   }
   prerun: {
     Command: ICommand

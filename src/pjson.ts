@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
-import {Package} from 'read-pkg-up'
+import {Package} from 'read-pkg'
 
-export interface IRawPJSONBase extends Package {
+export interface IRawPJSON extends Package {
   name: string
   version: string
   dxcli?: {
@@ -9,75 +9,48 @@ export interface IRawPJSONBase extends Package {
     dirname?: string
     commands?: string
     hooks?: { [name: string]: string | string[] }
+    npmRegistry?: string
     plugins?: string[] | string
     topics?: {
       [k: string]: {
         description?: string
-        subtopics?: IPJSONBase['dxcli']['topics']
+        subtopics?: IPJSON['dxcli']['topics']
         hidden?: boolean
       }
     }
   }
 }
 
-export interface IRawPluginPJSON extends IRawPJSONBase {
-  dxcli?: IRawPJSONBase['dxcli'] & {
-    type?: 'plugin'
-  }
-}
-
-export interface IRawCLIPJSON extends IRawPJSONBase {
-  dxcli: IRawPJSONBase['dxcli'] & {
-    type: 'cli'
-    npmRegistry?: string
-  }
-}
-
-export interface IPJSONBase extends IRawPJSONBase {
+export interface IPJSON extends IRawPJSON {
   name: string
   version: string
   dxcli: {
-    bin: string
-    dirname: string
+    bin?: string
+    npmRegistry?: string
+    dirname?: string
     commands?: string
     hooks: { [name: string]: string[] }
     plugins?: string[] | string
     topics: {
       [k: string]: {
         description?: string
-        subtopics?: IPJSONBase['dxcli']['topics']
+        subtopics?: IPJSON['dxcli']['topics']
         hidden?: boolean
       }
     }
   }
 }
 
-export interface IPluginPJSON extends IPJSONBase {
-  dxcli: IPJSONBase['dxcli'] & {
-    type: 'plugin'
-  }
-}
-
-export interface ICLIPJSON extends IPJSONBase {
-  dxcli: IPJSONBase['dxcli'] & {
-    type: 'cli'
-    npmRegistry?: string
-  }
-}
-
-export type IPJSON = IPluginPJSON | ICLIPJSON
-
-export function normalizePJSON(pjson: IRawCLIPJSON): ICLIPJSON
-export function normalizePJSON(pjson: IRawPluginPJSON): IPluginPJSON
-export function normalizePJSON(input: IRawPluginPJSON | IRawCLIPJSON): any {
-  const dxcli: IRawPluginPJSON['dxcli'] | IRawCLIPJSON['dxcli'] = {...(input.dxcli! || input['cli-engine'])}
-  dxcli.hooks = _.mapValues(dxcli.hooks, _.castArray)
-  dxcli.type = dxcli.type || 'plugin'
-  dxcli.bin = dxcli.bin || input.name
-  dxcli.dirname = dxcli.dirname || dxcli.bin
-  dxcli.topics = dxcli.topics || {}
+export function normalizePJSON(input: IRawPJSON): IPJSON {
+  const dxcli: IRawPJSON['dxcli'] = {...(input.dxcli! || input['cli-engine'])}
   return {
     ...input,
-    dxcli,
+    dxcli: {
+      topics: {},
+      bin: input.name,
+      dirname: dxcli.bin || input.name,
+      ...dxcli,
+      hooks: _.mapValues(dxcli.hooks, _.castArray),
+    },
   }
 }

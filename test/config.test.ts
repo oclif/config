@@ -2,13 +2,13 @@ import {describe, expect, it} from '@dxcli/dev-test'
 import * as os from 'os'
 import * as path from 'path'
 
-import {PluginConfig} from '../src'
+import * as Config from '../src'
 
 const pluginRoot = (plugin: string) => path.resolve(__dirname, '../plugins', plugin)
 
-const testPlugin = (plugin: string, description: string, fn: (config: PluginConfig) => void) => {
+const testPlugin = (plugin: string, description: string, fn: (config: Config.IConfig) => void) => {
   it(`${plugin}: ${description}`, async () => {
-    const config = await PluginConfig.create({name: plugin, root: pluginRoot(plugin)})
+    const config = await Config.read(plugin === '@heroku-cli/config-edit' ? {root: __dirname, name: plugin} : {root: pluginRoot(plugin)})
     fn(config)
   })
 }

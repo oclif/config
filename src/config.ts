@@ -2,10 +2,11 @@ import * as fs from 'fs-extra'
 import * as readJSON from 'load-json-file'
 import * as os from 'os'
 import * as path from 'path'
-import * as readPkgUp from 'read-pkg-up'
+import * as readPkg from 'read-pkg'
+import {inspect} from 'util'
 
 import {IEngine} from './engine'
-import {ICLIPJSON, IPluginPJSON, normalizePJSON} from './pjson'
+import {IPJSON, normalizePJSON} from './pjson'
 
 const _pjson = require('../package.json')
 const _base = `${_pjson.name}@${_pjson.version}`
@@ -13,7 +14,8 @@ const _base = `${_pjson.name}@${_pjson.version}`
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
 
-export interface IConfigBase {
+export interface IConfig {
+  _base: string
   root: string
   arch: string
   bin: string
@@ -26,7 +28,7 @@ export interface IConfigBase {
   home: string
   hooks: {[k: string]: string[]}
   name: string
-  pjson: IPluginPJSON | ICLIPJSON
+  pjson: IPJSON
   platform: string
   shell: string
   tsconfig: TSConfig | undefined
@@ -34,21 +36,9 @@ export interface IConfigBase {
   version: string
   windows: boolean
   debug: number
-}
-
-export interface IPluginConfig extends IConfigBase {
-  type: 'plugin'
-  pjson: IPluginPJSON
-}
-
-export interface ICLIConfig extends IConfigBase {
-  type: 'cli'
-  pjson: ICLIPJSON
-  engine: IEngine
+  engine?: IEngine
   npmRegistry: string
 }
-
-export type IConfig = IPluginConfig | ICLIConfig
 
 export interface TSConfig {
   compilerOptions: {
@@ -64,17 +54,11 @@ export interface ConfigOptions {
 
 const debug = require('debug')('@dxcli/config')
 
-export abstract class ConfigBase implements IConfigBase {
-  static tsNode: any
+export class Config {
   /**
    * registers ts-node for reading typescript source (./src) instead of compiled js files (./lib)
    * there are likely issues doing this any the tsconfig.json files are not compatible with others
    */
-  static registerTSNode() {
-    if (this.tsNode) return
-    return this.tsNode = require('ts-node').register()
-  }
-
   readonly _base = _base
   arch: string
   bin: string
@@ -96,6 +80,8 @@ export abstract class ConfigBase implements IConfigBase {
   tsconfig: TSConfig | undefined
   debug: number = 0
   hooks: {[k: string]: string[]}
+  engine?: IEngine
+  npmRegistry: string
 
   constructor() {
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
@@ -103,12 +89,9 @@ export abstract class ConfigBase implements IConfigBase {
     this.windows = this.platform === 'win32'
   }
 
-  async load({name, root}: {name?: string, root: string}) {
-    root = await findRootByName(name, root)
-    const pkg = await readPkgUp({cwd: root})
-    this.root = path.dirname(pkg.path)
-    debug('found root at', this.root)
-    this.pjson = normalizePJSON(pkg.pkg)
+  async load(root: string, pjson: readPkg.Package) {
+    this.root = root
+    this.pjson = normalizePJSON(pjson)
 
     this.name = this.pjson.name
     this.version = this.pjson.version
@@ -127,6 +110,7 @@ export abstract class ConfigBase implements IConfigBase {
     this.tsconfig = await this._tsConfig()
     this.commandsDir = await this._libToSrcPath(this.pjson.dxcli.commands)
     this.hooks = await this._hooks()
+    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.dxcli.npmRegistry || 'https://registry.yarnpkg.com'
 
     return this
   }
@@ -189,7 +173,7 @@ export abstract class ConfigBase implements IConfigBase {
       const relative = path.relative(lib, orig) // ./commands
       const out = path.join(src, relative) // ./src/commands
       debug('using ts files at', out)
-      ConfigBase.registerTSNode()
+      registerTSNode()
       // this can be a directory of commands or point to a hook file
       // if it's a directory, we check if the path exists. If so, return the path to the directory.
       // For hooks, it might point to a module, not a file. Something like "./hooks/myhook"
@@ -234,38 +218,6 @@ export abstract class ConfigBase implements IConfigBase {
   }
 }
 
-export class PluginConfig extends ConfigBase implements IPluginConfig {
-  static async create({name, root = __dirname}: ConfigOptions) {
-    const config = new this()
-    await config.load({root, name})
-    return config
-  }
-
-  readonly type: 'plugin' = 'plugin'
-  pjson: IPluginPJSON
-}
-
-export class CLIConfig extends ConfigBase implements ICLIConfig {
-  static async create({name, root = __dirname}: ConfigOptions) {
-    const config = new this()
-    await config.load({name, root})
-    return config
-  }
-
-  readonly type: 'cli' = 'cli'
-  pjson: ICLIPJSON
-  engine: IEngine
-  npmRegistry: string
-
-  async load({root, name}: {root: string, name?: string}) {
-    await super.load({root, name})
-    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.dxcli.npmRegistry || 'https://registry.yarnpkg.com'
-    return this
-  }
-}
-
-export type Config = PluginConfig | CLIConfig
-
 /**
  * find package root
  * for packages installed into node_modules this will go up directories until
@@ -273,8 +225,7 @@ export type Config = PluginConfig | CLIConfig
  *
  * This is needed because of the deduping npm does
  */
-async function findRootByName(name: string | undefined, root: string) {
-  if (!name) return root
+async function findPkg(name: string | undefined, root: string) {
   // essentially just "cd .."
   function* up(from: string) {
     while (path.dirname(from) !== from) {
@@ -284,12 +235,33 @@ async function findRootByName(name: string | undefined, root: string) {
     yield from
   }
   for (let next of up(root)) {
-    const cur = path.join(next, 'node_modules', name, 'package.json')
+    let cur
+    if (name) {
+      cur = path.join(next, 'node_modules', name, 'package.json')
+    } else {
+      cur = path.join(next, 'package.json')
+    }
     if (await fs.pathExists(cur)) return cur
   }
-  return root
 }
 
 export function isIConfig(o: any): o is IConfig {
   return !!o._base
+}
+
+export async function read({name, root = __dirname}: ConfigOptions): Promise<IConfig> {
+  const pkgPath = await findPkg(name, root)
+  if (!pkgPath) throw new Error(`could not find package.json with ${inspect({name, root})}`)
+  debug('found package.json at %s from %s', pkgPath, root)
+  const pkg = await readPkg(pkgPath)
+  const config = new Config()
+  await config.load(path.dirname(pkgPath), pkg)
+  return config
+}
+
+let tsNode = false
+function registerTSNode() {
+  if (tsNode) return
+  require('ts-node').register()
+  tsNode = true
 }
