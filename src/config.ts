@@ -246,8 +246,8 @@ export class PluginConfig extends ConfigBase implements IPluginConfig {
 }
 
 export class CLIConfig extends ConfigBase implements ICLIConfig {
-  static async create({engine, name, root = __dirname}: ConfigOptions & {engine: IEngine}) {
-    const config = new this(engine)
+  static async create({name, root = __dirname}: ConfigOptions) {
+    const config = new this()
     await config.load({name, root})
     return config
   }
@@ -256,11 +256,6 @@ export class CLIConfig extends ConfigBase implements ICLIConfig {
   pjson: ICLIPJSON
   engine: IEngine
   npmRegistry: string
-
-  constructor(engine: IEngine) {
-    super()
-    this.engine = engine
-  }
 
   async load({root, name}: {root: string, name?: string}) {
     await super.load({root, name})
