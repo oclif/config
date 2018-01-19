@@ -1,3 +1,11 @@
+<a name="0.1.9"></a>
+## [0.1.9](https://github.com/dxcli/config/compare/875eff90c2f41b87bfbab6e855af0431ed948280...v0.1.9) (2018-01-19)
+
+
+### Bug Fixes
+
+* added baseConfig ([34da228](https://github.com/dxcli/config/commit/34da228))
+
 <a name="0.1.8"></a>
 ## [0.1.8](https://github.com/dxcli/config/compare/937f136c627f8bac4e1c4dde0fac667ae8f86c84...v0.1.8) (2018-01-19)
 
