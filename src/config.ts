@@ -1,12 +1,13 @@
 import * as fs from 'fs-extra'
 import * as readJSON from 'load-json-file'
+import * as _ from 'lodash'
 import * as os from 'os'
 import * as path from 'path'
 import * as readPkg from 'read-pkg'
 import {inspect} from 'util'
 
 import {IEngine} from './engine'
-import {IPJSON, normalizePJSON} from './pjson'
+import {IPJSON} from './pjson'
 
 const _pjson = require('../package.json')
 const _base = `${_pjson.name}@${_pjson.version}`
@@ -50,6 +51,7 @@ export interface TSConfig {
 export interface ConfigOptions {
   name?: string
   root?: string
+  baseConfig?: IConfig
 }
 
 const debug = require('debug')('@dxcli/config')
@@ -89,14 +91,16 @@ export class Config {
     this.windows = this.platform === 'win32'
   }
 
-  async load(root: string, pjson: readPkg.Package) {
+  async load(root: string, pjson: readPkg.Package, baseConfig?: IConfig) {
+    const base: IConfig = baseConfig || {} as any
     this.root = root
-    this.pjson = normalizePJSON(pjson)
+    this.pjson = pjson
 
     this.name = this.pjson.name
     this.version = this.pjson.version
-    this.bin = this.pjson.dxcli.bin
-    this.dirname = this.pjson.dxcli.dirname
+    if (!this.pjson.dxcli) this.pjson.dxcli = this.pjson.dxcli || this.pjson['cli-engine'] || {}
+    this.bin = this.pjson.dxcli.bin || base.bin || this.name
+    this.dirname = this.pjson.dxcli.dirname || base.dirname || this.name
     this.userAgent = `${this.name}/${this.version} (${this.platform}-${this.arch}) node-${process.version}`
     this.shell = this._shell()
     this.debug = this._debug()
@@ -188,8 +192,9 @@ export class Config {
   }
 
   private async _hooks(): Promise<{[k: string]: string[]}> {
-    const promises = Object.entries(this.pjson.dxcli.hooks)
-      .map(([k, v]) => [k, v.map(this._libToSrcPath(v))] as [string, Promise<string>[]])
+    const promises = Object.entries(this.pjson.dxcli.hooks || {})
+      .map(([k, v]) => [k, _.castArray(v)] as [string, string[]])
+      .map(([k, v]) => [k, v.map(h => this._libToSrcPath(h))] as [string, Promise<string>[]])
     const hooks: {[k: string]: string[]} = {}
     for (let [k, v] of promises) {
       hooks[k] = await Promise.all(v)
@@ -249,13 +254,13 @@ export function isIConfig(o: any): o is IConfig {
   return !!o._base
 }
 
-export async function read({name, root = __dirname}: ConfigOptions): Promise<IConfig> {
+export async function read({name, root = __dirname, baseConfig}: ConfigOptions): Promise<IConfig> {
   const pkgPath = await findPkg(name, root)
   if (!pkgPath) throw new Error(`could not find package.json with ${inspect({name, root})}`)
   debug('found package.json at %s from %s', pkgPath, root)
   const pkg = await readPkg(pkgPath)
   const config = new Config()
-  await config.load(path.dirname(pkgPath), pkg)
+  await config.load(path.dirname(pkgPath), pkg, baseConfig)
   return config
 }
 
