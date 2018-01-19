@@ -6,13 +6,18 @@ export interface ICachedCommand {
   id: string
   hidden: boolean
   aliases: string[]
-  description: string
-  usage: string
-  plugin: IPlugin
-  help: string
-  load(): ICommand
+  description?: string
+  usage?: string
+  plugin?: IPlugin
+  help?: string
+  load(): Promise<ICommand>
 }
 
 export interface ICommand extends ICachedCommand {
-  run(argv: string[], config: IConfig): Promise<void>
+  run(argv: string[], opts?: ICommandOptions): Promise<void>
+}
+
+export interface ICommandOptions {
+  root?: string
+  config?: IConfig
 }
