@@ -10,6 +10,7 @@ export interface ICachedCommand {
   usage: string
   plugin: IPlugin
   help: string
+  load(): ICommand
 }
 
 export interface ICommand extends ICachedCommand {
