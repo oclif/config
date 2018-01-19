@@ -2,8 +2,8 @@ import {IConfig} from './config'
 import {IPlugin} from './plugin'
 
 export interface ICachedCommand {
+  _base: string
   id: string
-  base: string
   hidden: boolean
   aliases: string[]
   description: string
