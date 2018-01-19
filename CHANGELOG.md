@@ -1,3 +1,11 @@
+<a name="0.1.6"></a>
+## [0.1.6](https://github.com/dxcli/config/compare/ad1ca73e0e44eff363766ae87d6972f0910a16ba...v0.1.6) (2018-01-19)
+
+
+### Bug Fixes
+
+* remove cli-ux ([590169b](https://github.com/dxcli/config/commit/590169b))
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/dxcli/config/compare/c4e104d688ca7de531f2d38d35da8a45a88b05c5...v0.1.5) (2018-01-18)
 
