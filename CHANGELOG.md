@@ -1,3 +1,11 @@
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/dxcli/config/compare/590169baa7d6b8a5dae8e6594762cfbb857d8af8...v0.1.7) (2018-01-19)
+
+
+### Bug Fixes
+
+* do not require engine ([937f136](https://github.com/dxcli/config/commit/937f136))
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/dxcli/config/compare/ad1ca73e0e44eff363766ae87d6972f0910a16ba...v0.1.6) (2018-01-19)
 
