@@ -1,3 +1,11 @@
+<a name="0.1.10"></a>
+## [0.1.10](https://github.com/dxcli/config/compare/34da22829da621ee93741089f694f1b5956a5859...v0.1.10) (2018-01-19)
+
+
+### Bug Fixes
+
+* added load function ([0b1031a](https://github.com/dxcli/config/commit/0b1031a))
+
 <a name="0.1.9"></a>
 ## [0.1.9](https://github.com/dxcli/config/compare/875eff90c2f41b87bfbab6e855af0431ed948280...v0.1.9) (2018-01-19)
 
