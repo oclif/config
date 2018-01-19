@@ -3,8 +3,8 @@ import {IConfig} from './config'
 import {IPJSON} from './pjson'
 import {IPluginModule} from './plugin'
 
-export interface IHooks {
-  init: {}
+export interface Hooks {
+  init: {id: string}
   update: {}
   'plugins:parse': {
     module: IPluginModule
@@ -16,4 +16,8 @@ export interface IHooks {
   }
 }
 
-export type Hook<T extends {}> = (options: T & {config: IConfig}) => Promise<void>
+export interface IHookReturn {
+  exit?: number
+}
+
+export type IHook<T extends {}> = (options: T & {config: IConfig}) => Promise<IHookReturn | void>
