@@ -1,3 +1,11 @@
+<a name="0.1.12"></a>
+## [0.1.12](https://github.com/dxcli/config/compare/abc374074f5c5fc63431e150526f116784e03084...v0.1.12) (2018-01-19)
+
+
+### Bug Fixes
+
+* rename base ([84ad569](https://github.com/dxcli/config/commit/84ad569))
+
 <a name="0.1.11"></a>
 ## [0.1.11](https://github.com/dxcli/config/compare/0b1031a0283390764c2dcd8834b39c55b0e6e3aa...v0.1.11) (2018-01-19)
 
