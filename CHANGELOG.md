@@ -1,3 +1,12 @@
+<a name="0.1.21"></a>
+## [0.1.21](https://github.com/dxcli/config/compare/c3ab7a3060b82edd1c190c166bfe1cca8a6850b0...v0.1.21) (2018-01-20)
+
+
+### Bug Fixes
+
+* added command_not_found hook ([a5db89e](https://github.com/dxcli/config/commit/a5db89e))
+* use CLIConfig in hooks ([4c6862a](https://github.com/dxcli/config/commit/4c6862a))
+
 <a name="0.1.20"></a>
 ## [0.1.20](https://github.com/dxcli/config/compare/df26a0c82f88068d95569d69bf30dca5d2d3eca6...v0.1.20) (2018-01-20)
 
