@@ -1,3 +1,11 @@
+<a name="0.1.20"></a>
+## [0.1.20](https://github.com/dxcli/config/compare/df26a0c82f88068d95569d69bf30dca5d2d3eca6...v0.1.20) (2018-01-20)
+
+
+### Bug Fixes
+
+* plugin type ([c3ab7a3](https://github.com/dxcli/config/commit/c3ab7a3))
+
 <a name="0.1.19"></a>
 ## [0.1.19](https://github.com/dxcli/config/compare/e0ef0f2b85079dfac0f6f63e098eb6c0e879e53e...v0.1.19) (2018-01-20)
 
