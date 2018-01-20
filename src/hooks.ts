@@ -1,5 +1,5 @@
 import {ICommand} from './command'
-import {IConfig} from './config'
+import {ICLIConfig} from './config'
 import {IPlugin, IPluginModule} from './plugin'
 
 export interface Hooks {
@@ -20,4 +20,4 @@ export interface IHookReturn {
   exit?: number
 }
 
-export type IHook<T extends {}> = (options: T & {config: IConfig}) => Promise<IHookReturn | void>
+export type IHook<T extends {}> = (options: T & {config: ICLIConfig}) => Promise<IHookReturn | void>
