@@ -1,4 +1,5 @@
-import {ICommand} from './command'
+import {ICachedCommand, ICommand} from './command'
+import {IConfig} from './config'
 import {ITopic} from './topic'
 
 export interface IPluginModule {
@@ -12,4 +13,10 @@ export interface IPlugin {
   version: string
   type: string
   root: string
+  config: IConfig
+  module?: IPluginModule
+  commands: ICachedCommand[]
+  topics: ITopic[]
+  plugins: Plugin[]
+  hooks: {[k: string]: string[]}
 }
