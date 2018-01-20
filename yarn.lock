@@ -118,20 +118,20 @@
   dependencies:
     find-up "^2.1.0"
 
-"@dxcli/command@^0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@dxcli/command/-/command-0.1.9.tgz#257806557d6e5d0957f505533e35c7e1bfd93d7a"
+"@dxcli/command@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@dxcli/command/-/command-0.1.10.tgz#cb5805ca3fe1d7af59af653c96388c9df64f25cc"
   dependencies:
-    "@dxcli/config" "^0.1.17"
+    "@dxcli/config" "^0.1.18"
     "@dxcli/parser" "^0.0.2"
     "@dxcli/screen" "^0.0.0"
-    cli-ux "^3.1.0"
+    cli-ux "^3.1.2"
     debug "^3.1.0"
     http-call "^5.0.1"
 
-"@dxcli/config@^0.1.17":
-  version "0.1.17"
-  resolved "https://registry.yarnpkg.com/@dxcli/config/-/config-0.1.17.tgz#e077873abfa4247e2b66be4813f46eeb8ee94df9"
+"@dxcli/config@^0.1.18":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@dxcli/config/-/config-0.1.19.tgz#76883ce75a43d0c083b295e5428241896f0e5dea"
   dependencies:
     debug "^3.1.0"
     fs-extra "^5.0.0"
@@ -163,12 +163,12 @@
     "@semantic-release/npm" "^2.6.1"
     semantic-release "^12.2.0"
 
-"@dxcli/dev-test@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@dxcli/dev-test/-/dev-test-0.3.0.tgz#20966017248136830e5ab334620cf1c328f74263"
+"@dxcli/dev-test@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@dxcli/dev-test/-/dev-test-0.4.1.tgz#d3a0beea0679d5438ec681b2760e361544ee8b9b"
   dependencies:
     "@dxcli/dev-nyc-config" "^0.0.3"
-    "@dxcli/engine" "^0.0.1"
+    "@dxcli/engine" "^0.1.0"
     "@types/ansi-styles" "^2.0.30"
     "@types/chai" "^4.1.1"
     "@types/chai-as-promised" "^7.1.0"
@@ -203,28 +203,28 @@
     read-pkg-up "^3.0.0"
     supports-color "^5.1.0"
 
-"@dxcli/engine@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@dxcli/engine/-/engine-0.0.1.tgz#7ea281102ff53186836488cded490e446a61ebc2"
+"@dxcli/engine@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@dxcli/engine/-/engine-0.1.1.tgz#61ad5de695ebc46d0032480e80a03b6382168b88"
   dependencies:
-    "@dxcli/command" "^0.1.9"
-    "@dxcli/config" "^0.1.17"
-    "@dxcli/loader" "^0.0.5"
-    cli-ux "^3.1.0"
-    rxjs "^5.5.6"
+    "@dxcli/command" "^0.1.10"
+    "@dxcli/config" "^0.1.18"
+    "@dxcli/loader" "^0.1.0"
+    cli-ux "^3.1.2"
+    debug "^3.1.0"
 
-"@dxcli/loader@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@dxcli/loader/-/loader-0.0.5.tgz#60757837272c8a92b526f861f1959d0df8c9e619"
+"@dxcli/loader@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@dxcli/loader/-/loader-0.1.1.tgz#ff7c596b06dae696718b49ad5dbf3692cb171a0e"
   dependencies:
-    "@dxcli/command" "^0.1.9"
-    "@dxcli/config" "^0.1.17"
+    "@dxcli/command" "^0.1.10"
+    "@dxcli/config" "^0.1.18"
     "@dxcli/manifest-file" "^0.0.1"
     "@dxcli/parser" "^0.0.2"
     "@heroku-cli/color" "^1.1.1"
     "@heroku-cli/command" "^7.0.14"
     ansi-escapes "^3.0.0"
-    cli-ux "^3.1.0"
+    cli-ux "^3.1.2"
     debug "^3.1.0"
     fs-extra "^5.0.0"
     globby "^7.1.1"
@@ -299,8 +299,8 @@
     rimraf "^2.5.2"
 
 "@octokit/rest@^14.0.3":
-  version "14.0.3"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-14.0.3.tgz#960b6ba2ed932273978c30c6df9ec9ef0f7fbb60"
+  version "14.0.4"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-14.0.4.tgz#7bf3319221352f48a642ac523d2d36b370e17961"
   dependencies:
     before-after-hook "^1.1.0"
     debug "^3.1.0"
@@ -1028,9 +1028,9 @@ cli-ux@^2.0.21:
     supports-color "^5.1.0"
     ts-lodash "^4.0.8"
 
-cli-ux@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-3.1.0.tgz#b9a7e7a30012bfc2bb20dc322044b5c0da8493ae"
+cli-ux@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-3.1.2.tgz#4a273fbb24ad2390d653f1a12c047c4f39deb810"
   dependencies:
     "@dxcli/screen" "^0.0.0"
     "@heroku/linewrap" "^1.0.0"
@@ -1039,8 +1039,7 @@ cli-ux@^3.1.0:
     chalk "^2.3.0"
     fs-extra "^5.0.0"
     lodash "^4.17.4"
-    password-prompt "^1.0.3"
-    rxjs "^5.5.6"
+    password-prompt "^1.0.4"
     semver "^5.5.0"
     strip-ansi "^4.0.0"
     supports-color "^5.1.0"
@@ -1446,7 +1445,7 @@ doctrine@^0.7.2:
     esutils "^1.1.6"
     isarray "0.0.1"
 
-doctrine@^2.0.2:
+doctrine@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-2.1.0.tgz#5cd01fc101621b42c4cd7f5d1a66243716d3f39d"
   dependencies:
@@ -1569,8 +1568,8 @@ eslint-visitor-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
 eslint@^4.15.0:
-  version "4.15.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.15.0.tgz#89ab38c12713eec3d13afac14e4a89e75ef08145"
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-4.16.0.tgz#934ada9e98715e1d7bbfd6f6f0519ed2fab35cc1"
   dependencies:
     ajv "^5.3.0"
     babel-code-frame "^6.22.0"
@@ -1578,7 +1577,7 @@ eslint@^4.15.0:
     concat-stream "^1.6.0"
     cross-spawn "^5.1.0"
     debug "^3.1.0"
-    doctrine "^2.0.2"
+    doctrine "^2.1.0"
     eslint-scope "^3.7.1"
     eslint-visitor-keys "^1.0.0"
     espree "^3.5.2"
@@ -3466,9 +3465,9 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
 
-password-prompt@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/password-prompt/-/password-prompt-1.0.3.tgz#1478aad647c5afb65158e901bf4df0a3c367039a"
+password-prompt@^1.0.3, password-prompt@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/password-prompt/-/password-prompt-1.0.4.tgz#933bac8db3528fcb27e9fdbc0a6592adcbdb5ed9"
   dependencies:
     ansi-escapes "^3.0.0"
     cross-spawn "^5.1.0"
