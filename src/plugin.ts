@@ -17,6 +17,6 @@ export interface IPlugin {
   module?: IPluginModule
   commands: ICachedCommand[]
   topics: ITopic[]
-  plugins: Plugin[]
+  plugins: IPlugin[]
   hooks: {[k: string]: string[]}
 }
