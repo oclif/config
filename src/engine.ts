@@ -1,8 +1,10 @@
 import {ICachedCommand} from './command'
+import {ICLIConfig} from './config'
 import {IPlugin} from './plugin'
 import {ITopic} from './topic'
 
 export interface IEngine {
+  readonly config: ICLIConfig
   readonly plugins: IPlugin[]
 
   readonly topics: ITopic[]
@@ -18,4 +20,6 @@ export interface IEngine {
   findTopic(id: string, must?: boolean): ITopic | undefined
 
   runHook<T extends {}>(event: string, opts: T): Promise<void>
+
+  load(root: string): Promise<void>
 }

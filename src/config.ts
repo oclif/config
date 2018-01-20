@@ -41,6 +41,10 @@ export interface IConfig {
   npmRegistry: string
 }
 
+export interface ICLIConfig extends IConfig {
+  engine: IEngine
+}
+
 export interface TSConfig {
   compilerOptions: {
     rootDir?: string
