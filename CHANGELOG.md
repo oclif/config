@@ -1,3 +1,11 @@
+<a name="0.1.18"></a>
+## [0.1.18](https://github.com/dxcli/config/compare/48e82615a3bf91f6881db17dac361ea1f3cdb375...v0.1.18) (2018-01-20)
+
+
+### Bug Fixes
+
+* add engine properties ([9ef015d](https://github.com/dxcli/config/commit/9ef015d))
+
 <a name="0.1.17"></a>
 ## [0.1.17](https://github.com/dxcli/config/compare/dcf4907c718f2b37cbca90506c3a93e5b1bf2d11...v0.1.17) (2018-01-19)
 
