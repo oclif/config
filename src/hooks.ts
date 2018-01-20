@@ -5,6 +5,7 @@ import {IPlugin, IPluginModule} from './plugin'
 export interface Hooks {
   init: {id: string}
   update: {}
+  'command_not_found': {id: string},
   'plugins:parse': {
     module: IPluginModule
     pjson: IPlugin
