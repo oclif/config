@@ -1,3 +1,11 @@
+<a name="0.1.23"></a>
+## [0.1.23](https://github.com/dxcli/config/compare/3e51df796048bffe8dd37f2bee664267d3497e1a...v0.1.23) (2018-01-25)
+
+
+### Bug Fixes
+
+* ran generator ([e7359f3](https://github.com/dxcli/config/commit/e7359f3))
+
 <a name="0.1.22"></a>
 ## [0.1.22](https://github.com/dxcli/config/compare/4c6862a1d29ae9af826fcdbd18cf9461833db57e...v0.1.22) (2018-01-25)
 
