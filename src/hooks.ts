@@ -16,8 +16,4 @@ export interface Hooks {
   }
 }
 
-export interface IHookReturn {
-  exit?: number
-}
-
-export type IHook<T extends {}> = (options: T & {config: ICLIConfig}) => Promise<IHookReturn | void>
+export type IHook<T extends {}> = (options: T & {config: ICLIConfig}) => any
