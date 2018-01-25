@@ -1,3 +1,11 @@
+<a name="0.1.24"></a>
+## [0.1.24](https://github.com/dxcli/config/compare/e7359f353f3a3f0a5bc478e4ca84355826226377...v0.1.24) (2018-01-25)
+
+
+### Bug Fixes
+
+* use rootDirs not rootDir ([dcba41b](https://github.com/dxcli/config/commit/dcba41b))
+
 <a name="0.1.23"></a>
 ## [0.1.23](https://github.com/dxcli/config/compare/3e51df796048bffe8dd37f2bee664267d3497e1a...v0.1.23) (2018-01-25)
 
