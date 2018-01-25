@@ -23,7 +23,7 @@ describe('PluginConfig', () => {
       configDir: path.join('/my/home/.config/heroku-cli-status'),
       errlog: path.join('/my/home/Library/Caches/heroku-cli-status/error.log'),
       dataDir: path.join('/my/home/.local/share/heroku-cli-status'),
-      commandsDir: path.join(pluginRoot('heroku-cli-status'), 'src/commands'),
+      commandsDir: path.join(pluginRoot('heroku-cli-status'), 'lib/commands'),
       home: path.join('/my/home'),
     })
   })
@@ -39,7 +39,7 @@ describe('PluginConfig', () => {
       configDir: path.join('/my/home/.config/heroku-cli-status'),
       errlog: path.join('/my/home/.cache/heroku-cli-status/error.log'),
       dataDir: path.join('/my/home/.local/share/heroku-cli-status'),
-      commandsDir: path.join(pluginRoot('heroku-cli-status'), 'src/commands'),
+      commandsDir: path.join(pluginRoot('heroku-cli-status'), 'lib/commands'),
       home: path.join('/my/home'),
     })
   })
@@ -55,7 +55,7 @@ describe('PluginConfig', () => {
       configDir: path.join('/my/home/localappdata/heroku-cli-status'),
       errlog: path.join('/my/home/localappdata/heroku-cli-status/error.log'),
       dataDir: path.join('/my/home/localappdata/heroku-cli-status'),
-      commandsDir: path.join(pluginRoot('heroku-cli-status'), 'src/commands'),
+      commandsDir: path.join(pluginRoot('heroku-cli-status'), 'lib/commands'),
       home: path.join('/my/home'),
     })
   })

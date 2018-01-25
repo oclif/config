@@ -47,7 +47,7 @@ export interface ICLIConfig extends IConfig {
 
 export interface TSConfig {
   compilerOptions: {
-    rootDir?: string
+    rootDirs?: string[]
     outDir?: string
   }
 }
@@ -172,8 +172,9 @@ export class Config {
     if (!orig) return
     orig = path.join(this.root, orig)
     if (!this.tsconfig) return orig
-    let {rootDir, outDir} = this.tsconfig.compilerOptions
-    if (!rootDir || !outDir) return orig
+    let {rootDirs, outDir} = this.tsconfig.compilerOptions
+    if (!rootDirs || !rootDirs.length || !outDir) return orig
+    let rootDir = rootDirs[0]
     try {
       // rewrite path from ./lib/foo to ./src/foo
       const lib = path.join(this.root, outDir) // ./lib
