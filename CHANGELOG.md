@@ -1,3 +1,11 @@
+<a name="0.1.22"></a>
+## [0.1.22](https://github.com/dxcli/config/compare/4c6862a1d29ae9af826fcdbd18cf9461833db57e...v0.1.22) (2018-01-25)
+
+
+### Bug Fixes
+
+* remove hook return ([3e51df7](https://github.com/dxcli/config/commit/3e51df7))
+
 <a name="0.1.21"></a>
 ## [0.1.21](https://github.com/dxcli/config/compare/c3ab7a3060b82edd1c190c166bfe1cca8a6850b0...v0.1.21) (2018-01-20)
 
