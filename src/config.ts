@@ -221,9 +221,12 @@ export class Config {
 
   private _debug(): number {
     try {
-      let debug = require('debug')(this.bin).enabled || this.scopedEnvVarTrue('DEBUG')
-      return debug ? 1 : 0
-    } catch { return 0 }
+      const {enabled} = require('debug')(this.bin)
+      if (enabled) return 1
+      if (this.scopedEnvVarTrue('DEBUG')) return 1
+      return 0
+    // tslint:disable-next-line
+    } catch (err) { return 0 }
   }
 }
 
