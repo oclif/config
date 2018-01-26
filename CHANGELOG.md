@@ -1,3 +1,11 @@
+<a name="0.1.26"></a>
+## [0.1.26](https://github.com/dxcli/config/compare/10fde6fa379d922b0b80a5555cc8fa8944fe9553...v0.1.26) (2018-01-26)
+
+
+### Bug Fixes
+
+* make tag optional ([bf61f99](https://github.com/dxcli/config/commit/bf61f99))
+
 <a name="0.1.25"></a>
 ## [0.1.25](https://github.com/dxcli/config/compare/dcba41b9f76aab4411e09ca49a0e48cd31997bd5...v0.1.25) (2018-01-26)
 
