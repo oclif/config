@@ -369,14 +369,14 @@ export function isIConfig(o: any): o is IConfig {
 /**
  * reads a plugin/CLI's config
  */
-export async function read({name, root, baseConfig}: ConfigOptions = {}): Promise<IConfig> {
-  root = root || (module.parent && module.parent.parent && module.parent.parent.filename) || __dirname
-  const pkgPath = await findPkg(name, root)
-  if (!pkgPath) throw new Error(`could not find package.json with ${inspect({name, root})}`)
+export async function read(opts: ConfigOptions = {}): Promise<IConfig> {
+  let root = opts.root || (module.parent && module.parent.parent && module.parent.parent.filename) || __dirname
+  const pkgPath = await findPkg(opts.name, root)
+  if (!pkgPath) throw new Error(`could not find package.json with ${inspect(opts)}`)
   debug('found package.json at %s from %s', pkgPath, root)
   const pkg = await readPkg(pkgPath)
   const config = new Config()
-  await config.load(path.dirname(pkgPath), pkg, baseConfig)
+  await config.load(path.dirname(pkgPath), pkg, opts.baseConfig)
   return config
 }
 
