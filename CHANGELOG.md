@@ -1,3 +1,11 @@
+<a name="0.1.25"></a>
+## [0.1.25](https://github.com/dxcli/config/compare/dcba41b9f76aab4411e09ca49a0e48cd31997bd5...v0.1.25) (2018-01-26)
+
+
+### Bug Fixes
+
+* added plugin attributes ([10fde6f](https://github.com/dxcli/config/commit/10fde6f))
+
 <a name="0.1.24"></a>
 ## [0.1.24](https://github.com/dxcli/config/compare/e7359f353f3a3f0a5bc478e4ca84355826226377...v0.1.24) (2018-01-25)
 
