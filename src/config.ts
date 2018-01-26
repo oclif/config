@@ -16,29 +16,125 @@ export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | '
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
 
 export interface IConfig {
+  /**
+   * @dxcli/config version
+   */
   _base: string
+  /**
+   * base path of root plugin
+   */
   root: string
-  arch: string
+  /**
+   * process.arch
+   */
+  arch: ArchTypes
+  /**
+   * bin name of CLI command
+   */
   bin: string
+  /**
+   * cache directory to use for CLI
+   *
+   * example ~/Library/Caches/mycli or ~/.cache/mycli
+   */
   cacheDir: string
+  /**
+   * full path to command dir of plugin
+   *
+   * if there are typescript commands, this will point to the typescript files if they are on disk for development
+   */
   commandsDir: string | undefined
+  /**
+   * if plugins points to a module this is the full path to that module
+   *
+   * for dynamic plugin loading
+   */
   pluginsModule: string | undefined
+  /**
+   * config directory to use for CLI
+   *
+   * example: ~/.config/mycli
+   */
   configDir: string
+  /**
+   * data directory to use for CLI
+   *
+   * example: ~/.local/share/mycli
+   */
   dataDir: string
+  /**
+   * base dirname to use in cacheDir/configDir/dataDir
+   */
   dirname: string
+  /**
+   * points to a file that should be appended to for error logs
+   *
+   * example: ~/Library/Caches/mycli/error.log
+   */
   errlog: string
+  /**
+   * path to home directory
+   *
+   * example: /home/myuser
+   */
   home: string
+  /**
+   * normalized full paths to hooks
+   *
+   * points to typescript files if available
+   */
   hooks: {[k: string]: string[]}
+  /**
+   * CLI name from package.json
+   */
   name: string
+  /**
+   * full package.json
+   *
+   * parsed with read-pkg
+   */
   pjson: IPJSON
-  platform: string
+  /**
+   * process.platform
+   */
+  platform: PlatformTypes
+  /**
+   * active shell
+   */
   shell: string
+  /**
+   * parsed tsconfig.json
+   */
   tsconfig: TSConfig | undefined
+  /**
+   * user agent to use for http calls
+   *
+   * example: mycli/1.2.3 (darwin-x64) node-9.0.0
+   */
   userAgent: string
+  /**
+   * cli version from package.json
+   *
+   * example: 1.2.3
+   */
   version: string
+  /**
+   * if windows
+   */
   windows: boolean
+  /**
+   * debugging level
+   *
+   * set by ${BIN}_DEBUG or DEBUG=$BIN
+   */
   debug: number
+  /**
+   * active @dxcli/engine
+   */
   engine?: IEngine
+  /**
+   * npm registry to use for installing plugins
+   */
   npmRegistry: string
 }
 
@@ -61,13 +157,13 @@ export interface ConfigOptions {
 
 const debug = require('debug')('@dxcli/config')
 
-export class Config {
+export class Config implements IConfig {
   /**
    * registers ts-node for reading typescript source (./src) instead of compiled js files (./lib)
    * there are likely issues doing this any the tsconfig.json files are not compatible with others
    */
   readonly _base = _base
-  arch: string
+  arch: ArchTypes
   bin: string
   cacheDir: string
   configDir: string
@@ -77,7 +173,7 @@ export class Config {
   home: string
   name: string
   pjson: any
-  platform: string
+  platform: PlatformTypes
   root: string
   shell: string
   version: string
