@@ -1,4 +1,4 @@
-import {expect, fancy} from 'fancy-mocha'
+import {expect, fancy} from 'fancy-test'
 import * as os from 'os'
 import * as path from 'path'
 
@@ -12,13 +12,13 @@ const testPlugin = (plugin: string) => async () => {
 }
 
 describe('PluginConfig', () => {
-  fancy()
+  fancy
   .env({}, {clear: true})
-  .mock(os, 'homedir', () => path.join('/my/home'))
-  .mock(os, 'platform', () => 'darwin')
-  .add(testPlugin('heroku-cli-status'))
+  .stub(os, 'homedir', () => path.join('/my/home'))
+  .stub(os, 'platform', () => 'darwin')
+  .add('config', testPlugin('heroku-cli-status'))
   .end('darwin', ({config}) => {
-    expect(config).to.include({
+    expect(config.config).to.include({
       cacheDir: path.join('/my/home/Library/Caches/heroku-cli-status'),
       configDir: path.join('/my/home/.config/heroku-cli-status'),
       errlog: path.join('/my/home/Library/Caches/heroku-cli-status/error.log'),
@@ -28,13 +28,13 @@ describe('PluginConfig', () => {
     })
   })
 
-  fancy()
+  fancy
   .env({}, {clear: true})
-  .mock(os, 'homedir', () => path.join('/my/home'))
-  .mock(os, 'platform', () => 'linux')
-  .add(testPlugin('heroku-cli-status'))
+  .stub(os, 'homedir', () => path.join('/my/home'))
+  .stub(os, 'platform', () => 'linux')
+  .add('config', testPlugin('heroku-cli-status'))
   .end('linux', ({config}) => {
-    expect(config).to.include({
+    expect(config.config).to.include({
       cacheDir: path.join('/my/home/.cache/heroku-cli-status'),
       configDir: path.join('/my/home/.config/heroku-cli-status'),
       errlog: path.join('/my/home/.cache/heroku-cli-status/error.log'),
@@ -44,13 +44,13 @@ describe('PluginConfig', () => {
     })
   })
 
-  fancy()
+  fancy
   .env({LOCALAPPDATA: '/my/home/localappdata'}, {clear: true})
-  .mock(os, 'homedir', () => path.join('/my/home'))
-  .mock(os, 'platform', () => 'win32')
-  .add(testPlugin('heroku-cli-status'))
+  .stub(os, 'homedir', () => path.join('/my/home'))
+  .stub(os, 'platform', () => 'win32')
+  .add('config', testPlugin('heroku-cli-status'))
   .end('win32', ({config}) => {
-    expect(config).to.include({
+    expect(config.config).to.include({
       cacheDir: path.join('/my/home/localappdata/heroku-cli-status'),
       configDir: path.join('/my/home/localappdata/heroku-cli-status'),
       errlog: path.join('/my/home/localappdata/heroku-cli-status/error.log'),
@@ -60,18 +60,18 @@ describe('PluginConfig', () => {
     })
   })
 
-  fancy()
-  .add(testPlugin('heroku-run'))
+  fancy
+  .add('config', testPlugin('heroku-run'))
   .end('heroku-run has properties', ({config}) => {
-    expect(config).to.include({
+    expect(config.config).to.include({
       commandsDir: undefined
     })
   })
 
-  fancy()
-  .add(testPlugin('@heroku-cli/config-edit'))
-  .end('@heroku-cli/config-edit has properties', ({config}) => {
-    expect(config).to.include({
+  fancy
+  .add('plugin', testPlugin('@heroku-cli/config-edit'))
+  .end('@heroku-cli/config-edit has properties', ({plugin}) => {
+    expect(plugin.config).to.include({
       name: '@heroku-cli/config-edit',
       commandsDir: path.join(__dirname, '../node_modules/@heroku-cli/config-edit/lib/commands'),
     })

@@ -13,6 +13,7 @@ export interface IPlugin {
   version: string
   type: string
   root: string
+  tag: string
   config: IConfig
   module?: IPluginModule
   commands: ICachedCommand[]

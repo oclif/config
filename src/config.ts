@@ -22,6 +22,7 @@ export interface IConfig {
   bin: string
   cacheDir: string
   commandsDir: string | undefined
+  pluginsModule: string | undefined
   configDir: string
   dataDir: string
   dirname: string
@@ -83,6 +84,7 @@ export class Config {
   windows: boolean
   userAgent: string
   commandsDir: string | undefined
+  pluginsModule: string | undefined
   tsconfig: TSConfig | undefined
   debug: number = 0
   hooks: {[k: string]: string[]}
@@ -118,6 +120,9 @@ export class Config {
     this.tsconfig = await this._tsConfig()
     this.commandsDir = await this._libToSrcPath(this.pjson.dxcli.commands)
     this.hooks = await this._hooks()
+    if (typeof this.pjson.dxcli.plugins === 'string') {
+      this.pluginsModule = await this._libToSrcPath(this.pjson.dxcli.plugins)
+    }
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.dxcli.npmRegistry || 'https://registry.yarnpkg.com'
 
     return this
