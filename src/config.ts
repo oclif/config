@@ -359,10 +359,16 @@ async function findPkg(name: string | undefined, root: string) {
   }
 }
 
+/**
+ * returns true if config is instantiated and not ConfigOptions
+ */
 export function isIConfig(o: any): o is IConfig {
   return !!o._base
 }
 
+/**
+ * reads a plugin/CLI's config
+ */
 export async function read({name, root, baseConfig}: ConfigOptions = {}): Promise<IConfig> {
   root = root || (module.parent && module.parent.parent && module.parent.parent.filename) || __dirname
   const pkgPath = await findPkg(name, root)
