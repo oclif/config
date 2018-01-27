@@ -118,19 +118,19 @@
   dependencies:
     find-up "^2.1.0"
 
-"@dxcli/command@^0.1.16":
-  version "0.1.17"
-  resolved "https://registry.yarnpkg.com/@dxcli/command/-/command-0.1.17.tgz#5437fe8ca459a2c7598fe207c3e287a473355a4f"
+"@dxcli/command@^0.1.13", "@dxcli/command@^0.1.18":
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/@dxcli/command/-/command-0.1.18.tgz#922115807bd6c954577d1f8119e1f89c9428089d"
   dependencies:
-    "@dxcli/config" "^0.1.24"
+    "@dxcli/config" "^0.1.26"
     "@dxcli/parser" "^0.0.5"
-    cli-ux "^3.1.5"
+    cli-ux "^3.1.6"
     debug "^3.1.0"
     tslib "^1.9.0"
 
-"@dxcli/config@^0.1.24":
-  version "0.1.24"
-  resolved "https://registry.yarnpkg.com/@dxcli/config/-/config-0.1.24.tgz#fc6d14f7c91b742bf3d0ca7c2974565a959471ae"
+"@dxcli/config@^0.1.22", "@dxcli/config@^0.1.26":
+  version "0.1.26"
+  resolved "https://registry.yarnpkg.com/@dxcli/config/-/config-0.1.26.tgz#36458424cb8cc9c1499659bbff3676fa7b0292da"
   dependencies:
     debug "^3.1.0"
     fs-extra "^5.0.0"
@@ -162,30 +162,61 @@
     "@semantic-release/npm" "^2.6.4"
     semantic-release "^12.2.2"
 
-"@dxcli/dev-tslint@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@dxcli/dev-tslint/-/dev-tslint-0.0.16.tgz#84aa077d5f0c92f770b2b7eb091588c8553b4c9f"
+"@dxcli/dev-tslint@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@dxcli/dev-tslint/-/dev-tslint-0.0.17.tgz#f20767b72188a0695e4b34ba50976e11502d3891"
   dependencies:
     tslint "^5.9.1"
     tslint-xo "^0.5.0"
 
-"@dxcli/engine@^0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@dxcli/engine/-/engine-0.1.9.tgz#6179b1ac925d0f04cd143a9696cccdc52e38ed01"
+"@dxcli/dev@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@dxcli/dev/-/dev-2.0.2.tgz#849c030a9509353f83e8d41de1cc63edbb988b27"
   dependencies:
-    "@dxcli/command" "^0.1.16"
-    "@dxcli/config" "^0.1.24"
-    "@dxcli/loader" "^0.2.0"
-    cli-ux "^3.1.5"
+    "@dxcli/dev-nyc-config" "^0.0.3"
+    "@dxcli/dev-semantic-release" "^0.1.0"
+    "@dxcli/dev-tslint" "^0.0.17"
+    "@dxcli/engine" "^0.1.11"
+    "@dxcli/version" "^0.1.5"
+    "@types/ansi-styles" "^2.0.30"
+    "@types/chai" "^4.1.2"
+    "@types/lodash" "^4.14.97"
+    "@types/mocha" "^2.2.47"
+    "@types/nock" "^9.1.2"
+    "@types/node" "^9.4.0"
+    "@types/node-notifier" "^0.0.28"
+    "@types/read-pkg" "^3.0.0"
+    "@types/strip-ansi" "^3.0.0"
+    "@types/supports-color" "^3.1.0"
+    chai "^4.1.2"
+    eslint "^4.16.0"
+    eslint-config-dxcli "^1.1.4"
+    lodash "^4.17.4"
+    mocha "^5.0.0"
+    mocha-junit-reporter "^1.17.0"
+    nps "^5.7.1"
+    nps-utils "^1.5.0"
+    nyc "^11.4.1"
+    ts-node "^4.1.0"
+    typescript "^2.6.2"
+
+"@dxcli/engine@^0.1.11", "@dxcli/engine@^0.1.12":
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/@dxcli/engine/-/engine-0.1.12.tgz#a2572ce83d0ff10e47cc545d3b2ad77eef7132fa"
+  dependencies:
+    "@dxcli/command" "^0.1.18"
+    "@dxcli/config" "^0.1.26"
+    "@dxcli/loader" "^0.2.5"
+    cli-ux "^3.2.1"
     debug "^3.1.0"
 
-"@dxcli/loader@^0.2.0":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@dxcli/loader/-/loader-0.2.2.tgz#e124e97ca73252f11ebf673a2b6a75bd63d842bd"
+"@dxcli/loader@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@dxcli/loader/-/loader-0.2.5.tgz#a7180fe54c3796f4c03758871bb896e77a2a0945"
   dependencies:
-    "@dxcli/config" "^0.1.24"
+    "@dxcli/config" "^0.1.26"
     "@dxcli/manifest-file" "^0.0.4"
-    cli-ux "^3.1.5"
+    cli-ux "^3.2.0"
     debug "^3.1.0"
     globby "^7.1.1"
     lodash "^4.17.4"
@@ -211,6 +242,14 @@
 "@dxcli/screen@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@dxcli/screen/-/screen-0.0.1.tgz#9af4e8d0e5a9475e9e4b5f2da775b0447ff72fc2"
+
+"@dxcli/version@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@dxcli/version/-/version-0.1.5.tgz#4542e8e97fb2efeb19b4694d88c0730d5b97c7dd"
+  dependencies:
+    "@dxcli/command" "^0.1.13"
+    "@dxcli/config" "^0.1.22"
+    cli-ux "^3.1.5"
 
 "@heroku-cli/color@^1.0.4", "@heroku-cli/color@^1.1.1":
   version "1.1.1"
@@ -292,15 +331,15 @@
   resolved "https://registry.yarnpkg.com/@semantic-release/error/-/error-2.1.0.tgz#44771f676f5b148da309111285a97901aa95a6e0"
 
 "@semantic-release/git@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@semantic-release/git/-/git-2.0.2.tgz#00f82f338999820cf54beb8e9e3acdd5b160f571"
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@semantic-release/git/-/git-2.0.3.tgz#4348a525ec6dfeb9c43ab4ee8d06813583d05644"
   dependencies:
     "@semantic-release/error" "^2.1.0"
     debug "^3.1.0"
     dir-glob "^2.0.0"
     execa "^0.9.0"
     fs-extra "^5.0.0"
-    git-url-parse "^7.0.1"
+    git-url-parse "^8.0.0"
     lodash "^4.17.4"
     micromatch "^3.1.4"
     p-locate "^2.0.0"
@@ -360,45 +399,19 @@
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.2.tgz#f1af664769cfb50af805431c407425ed619daa21"
 
-"@types/fs-extra@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-4.0.0.tgz#1dd742ad5c9bce308f7a52d02ebc01421bc9102f"
-  dependencies:
-    "@types/node" "*"
-
 "@types/fs-extra@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-5.0.0.tgz#d3e225b35eb5c6d3a5a782c28219df365c781413"
   dependencies:
     "@types/node" "*"
 
-"@types/handlebars@4.0.31":
-  version "4.0.31"
-  resolved "https://registry.yarnpkg.com/@types/handlebars/-/handlebars-4.0.31.tgz#a7fba66fafe42713aee88eeca8db91192efe6e72"
-
-"@types/highlight.js@9.1.8":
-  version "9.1.8"
-  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.1.8.tgz#d227f18bcb8f3f187e16965f2444859a04689758"
-
 "@types/load-json-file@^2.0.7":
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/@types/load-json-file/-/load-json-file-2.0.7.tgz#c887826f5230b7507d5230994d26315c6776be06"
 
-"@types/lodash@4.14.74":
-  version "4.14.74"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.74.tgz#ac3bd8db988e7f7038e5d22bd76a7ba13f876168"
-
-"@types/lodash@^4.14.96":
-  version "4.14.96"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.96.tgz#49a402bb6984af7dd9a48cea3781744a3774bff1"
-
-"@types/marked@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-0.3.0.tgz#583c223dd33385a1dda01aaf77b0cd0411c4b524"
-
-"@types/minimatch@2.0.29":
-  version "2.0.29"
-  resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-2.0.29.tgz#5002e14f75e2d71e564281df0431c8c1b4a2a36a"
+"@types/lodash@^4.14.97":
+  version "4.14.97"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.97.tgz#7262d6d5fc5e87cdb3f68eb33accd4024f2b211e"
 
 "@types/mocha@^2.2.47":
   version "2.2.47"
@@ -410,9 +423,19 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^9.3.0":
+"@types/node-notifier@^0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/node-notifier/-/node-notifier-0.0.28.tgz#86ba3d3aa8d918352cc3191d88de328b20dc93c1"
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.3.0.tgz#3a129cda7c4e5df2409702626892cb4b96546dd5"
+
+"@types/node@^9.4.0":
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.0.tgz#b85a0bcf1e1cc84eb4901b7e96966aedc6f078d1"
 
 "@types/normalize-package-data@*":
   version "2.4.0"
@@ -424,11 +447,9 @@
   dependencies:
     "@types/normalize-package-data" "*"
 
-"@types/shelljs@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@types/shelljs/-/shelljs-0.7.0.tgz#229c157c6bc1e67d6b990e6c5e18dbd2ff58cff0"
-  dependencies:
-    "@types/node" "*"
+"@types/strip-ansi@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@types/strip-ansi/-/strip-ansi-3.0.0.tgz#9b63d453a6b54aa849182207711a08be8eea48ae"
 
 "@types/strip-bom@^3.0.0":
   version "3.0.0"
@@ -437,6 +458,10 @@
 "@types/strip-json-comments@0.0.30":
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
+
+"@types/supports-color@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@types/supports-color/-/supports-color-3.1.0.tgz#3584b6b54f45333e988da2c29e6797eff5a20f8c"
 
 JSONStream@^1.0.4:
   version "1.3.2"
@@ -1012,9 +1037,9 @@ cli-ux@^2.0.21:
     supports-color "^5.1.0"
     ts-lodash "^4.0.8"
 
-cli-ux@^3.1.5:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-3.1.6.tgz#e1190fcc429ae6a101dbaf24640027485b9b3506"
+cli-ux@^3.1.5, cli-ux@^3.1.6, cli-ux@^3.2.0, cli-ux@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-3.2.1.tgz#1fa07b7f8f1861d7d7099133ab414c4d6f1fb438"
   dependencies:
     "@dxcli/screen" "^0.0.1"
     "@heroku/linewrap" "^1.0.0"
@@ -1023,6 +1048,7 @@ cli-ux@^3.1.5:
     chalk "^2.3.0"
     fs-extra "^5.0.0"
     lodash "^4.17.4"
+    node-notifier "^5.2.1"
     password-prompt "^1.0.4"
     semver "^5.5.0"
     strip-ansi "^4.0.0"
@@ -1839,9 +1865,9 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
-fancy-test@^0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-0.3.7.tgz#e124ac886328329dfc4cdba893456b9e5cecfbab"
+fancy-test@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-0.5.4.tgz#1c12e5b6c0f2bf94bc1c041dfabea0f39dc4577d"
   dependencies:
     lodash "^4.17.4"
     stdout-stderr "^0.1.4"
@@ -2013,14 +2039,6 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
-fs-extra@^4.0.0:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
-  dependencies:
-    graceful-fs "^4.1.2"
-    jsonfile "^4.0.0"
-    universalify "^0.1.0"
-
 fs-extra@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
@@ -2111,6 +2129,12 @@ git-up@^2.0.0:
 git-url-parse@^7.0.1:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-7.0.2.tgz#75fc7ae08e5daa90edc59043cdfa8da57c5a8715"
+  dependencies:
+    git-up "^2.0.0"
+
+git-url-parse@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-8.0.0.tgz#249430c84e6b11ebae630136f50d7993eb03e211"
   dependencies:
     git-up "^2.0.0"
 
@@ -2230,7 +2254,11 @@ growl@1.10.3:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.3.tgz#1926ba90cf3edfe2adb4927f5880bc22c66c790f"
 
-handlebars@^4.0.2, handlebars@^4.0.3, handlebars@^4.0.6:
+growly@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
+
+handlebars@^4.0.2, handlebars@^4.0.3:
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.11.tgz#630a35dfe0294bc281edae6ffc5d329fc7982dcc"
   dependencies:
@@ -2321,10 +2349,6 @@ heroku-client@3.0.6:
   dependencies:
     is-retry-allowed "^1.0.0"
     tunnel-agent "^0.6.0"
-
-highlight.js@^9.0.0:
-  version "9.12.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
 
 hoek@4.x.x:
   version "4.2.0"
@@ -3014,7 +3038,7 @@ lodash@4.17.2:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
-lodash@^4.0.0, lodash@^4.13.1, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1:
+lodash@^4.0.0, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3078,7 +3102,7 @@ marked-terminal@^2.0.0:
     lodash.assign "^4.2.0"
     node-emoji "^1.4.1"
 
-marked@^0.3.5, marked@^0.3.9:
+marked@^0.3.9:
   version "0.3.12"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.12.tgz#7cf25ff2252632f3fe2406bde258e94eee927519"
 
@@ -3185,7 +3209,7 @@ mimic-fn@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-1.1.0.tgz#e667783d92e89dbd342818b5230b9d62a672ad18"
 
-"minimatch@2 || 3", minimatch@^3.0.0, minimatch@^3.0.2, minimatch@^3.0.4:
+"minimatch@2 || 3", minimatch@^3.0.2, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   dependencies:
@@ -3309,6 +3333,15 @@ node-emoji@^1.4.1:
   resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.8.1.tgz#6eec6bfb07421e2148c75c6bba72421f8530a826"
   dependencies:
     lodash.toarray "^4.4.0"
+
+node-notifier@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/node-notifier/-/node-notifier-5.2.1.tgz#fa313dd08f5517db0e2502e5758d664ac69f9dea"
+  dependencies:
+    growly "^1.3.0"
+    semver "^5.4.1"
+    shellwords "^0.1.1"
+    which "^1.3.0"
 
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4, "normalize-package-data@~1.0.1 || ^2.0.0":
   version "2.4.0"
@@ -4107,19 +4140,13 @@ rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-rxjs@^5.5.6:
-  version "5.5.6"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
-  dependencies:
-    symbol-observable "1.0.1"
-
 safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
 semantic-release@^12.2.2:
-  version "12.2.4"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-12.2.4.tgz#cbcf0842ab65a4da1908f48e05a4d895c58d539d"
+  version "12.2.5"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-12.2.5.tgz#595cdffc4226a1974c3257052b6ee259c2353568"
   dependencies:
     "@semantic-release/commit-analyzer" "^5.0.0"
     "@semantic-release/error" "^2.1.0"
@@ -4209,13 +4236,9 @@ shelljs@0.7.6:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-shelljs@^0.7.0:
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.8.tgz#decbcf874b0d1e5fb72e14b164a9683048e9acb3"
-  dependencies:
-    glob "^7.0.0"
-    interpret "^1.0.0"
-    rechoir "^0.6.2"
+shellwords@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
 
 signal-exit@^3.0.0, signal-exit@^3.0.1, signal-exit@^3.0.2:
   version "3.0.2"
@@ -4547,10 +4570,6 @@ supports-color@^5.1.0:
   dependencies:
     has-flag "^2.0.0"
 
-symbol-observable@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
-
 table@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.2.tgz#a33447375391e766ad34d3486e6e2aedc84d2e36"
@@ -4784,36 +4803,6 @@ type-detect@^4.0.0, type-detect@^4.0.3:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
-
-typedoc-default-themes@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.5.0.tgz#6dc2433e78ed8bea8e887a3acde2f31785bd6227"
-
-typedoc@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.9.0.tgz#159bff7c7784ce5b91d86f3e4cc8928e62040957"
-  dependencies:
-    "@types/fs-extra" "4.0.0"
-    "@types/handlebars" "4.0.31"
-    "@types/highlight.js" "9.1.8"
-    "@types/lodash" "4.14.74"
-    "@types/marked" "0.3.0"
-    "@types/minimatch" "2.0.29"
-    "@types/shelljs" "0.7.0"
-    fs-extra "^4.0.0"
-    handlebars "^4.0.6"
-    highlight.js "^9.0.0"
-    lodash "^4.13.1"
-    marked "^0.3.5"
-    minimatch "^3.0.0"
-    progress "^2.0.0"
-    shelljs "^0.7.0"
-    typedoc-default-themes "^0.5.0"
-    typescript "2.4.1"
-
-typescript@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.4.1.tgz#c3ccb16ddaa0b2314de031e7e6fee89e5ba346bc"
 
 typescript@^2.6.2:
   version "2.6.2"
