@@ -255,9 +255,8 @@ export class Config implements IConfig {
   private async _tsConfig(): Promise<TSConfig | undefined> {
     try {
       const tsconfigPath = path.join(this.root, 'tsconfig.json')
-      const tsconfig = await readJSON(path.join(this.root, 'tsconfig.json'))
+      const tsconfig = await readJSON(tsconfigPath)
       if (!tsconfig || !tsconfig.compilerOptions) return
-      debug('tsconfig.json found at', tsconfigPath)
       return tsconfig
     } catch (err) {
       if (err.code !== 'ENOENT') throw err
@@ -373,7 +372,7 @@ export async function read(opts: ConfigOptions = {}): Promise<IConfig> {
   let root = opts.root || (module.parent && module.parent.parent && module.parent.parent.filename) || __dirname
   const pkgPath = await findPkg(opts.name, root)
   if (!pkgPath) throw new Error(`could not find package.json with ${inspect(opts)}`)
-  debug('found package.json at %s from %s', pkgPath, root)
+  debug('reading plugin %s', path.dirname(pkgPath))
   const pkg = await readPkg(pkgPath)
   const config = new Config()
   await config.load(path.dirname(pkgPath), pkg, opts.baseConfig)
