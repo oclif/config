@@ -1,3 +1,12 @@
+<a name="0.1.31"></a>
+## [0.1.31](https://github.com/dxcli/config/compare/4b04c5bc1f461a6b05318ef7d648b48eed1ced39...v0.1.31) (2018-01-28)
+
+
+### Bug Fixes
+
+* move TS loading to loader ([abe2e56](https://github.com/dxcli/config/commit/abe2e56))
+* updated dev deps ([ca632a8](https://github.com/dxcli/config/commit/ca632a8))
+
 <a name="0.1.30"></a>
 ## [0.1.30](https://github.com/dxcli/config/compare/309482eabb1073f793a403d2b3bdc02133149fad...v0.1.30) (2018-01-28)
 
