@@ -1,5 +1,4 @@
 import {IConfig} from './config'
-import {IPlugin} from './plugin'
 
 export interface ICachedCommand {
   _base: string
@@ -8,7 +7,13 @@ export interface ICachedCommand {
   aliases: string[]
   description?: string
   usage?: string
-  plugin?: IPlugin
+  plugin?: {
+    name: string
+    version: string
+    type: string
+    root: string
+    tag?: string
+  }
   help?: string
   load(): Promise<ICommand>
 }
