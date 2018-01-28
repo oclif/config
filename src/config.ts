@@ -40,16 +40,30 @@ export interface IConfig {
   cacheDir: string
   /**
    * full path to command dir of plugin
-   *
-   * if there are typescript commands, this will point to the typescript files if they are on disk for development
    */
   commandsDir: string | undefined
+  /**
+   * full path to command dir of plugin's typescript files for development
+   */
+  commandsDirTS?: string
+  /**
+   * normalized full paths to hooks
+   */
+  hooks: {[k: string]: string[]}
+  /**
+   * normalized full paths to typescript hooks
+   */
+  hooksTS?: {[k: string]: string[]}
   /**
    * if plugins points to a module this is the full path to that module
    *
    * for dynamic plugin loading
    */
   pluginsModule: string | undefined
+  /**
+   * if plugins points to a module this is the full path to that module's typescript
+   */
+  pluginsModuleTS: string | undefined
   /**
    * config directory to use for CLI
    *
@@ -78,12 +92,6 @@ export interface IConfig {
    * example: /home/myuser
    */
   home: string
-  /**
-   * normalized full paths to hooks
-   *
-   * points to typescript files if available
-   */
-  hooks: {[k: string]: string[]}
   /**
    * CLI name from package.json
    */
@@ -180,10 +188,13 @@ export class Config implements IConfig {
   windows: boolean
   userAgent: string
   commandsDir: string | undefined
+  commandsDirTS: string | undefined
   pluginsModule: string | undefined
+  pluginsModuleTS: string | undefined
   tsconfig: TSConfig | undefined
   debug: number = 0
   hooks: {[k: string]: string[]}
+  hooksTS?: {[k: string]: string[]}
   engine?: IEngine
   npmRegistry: string
 
@@ -214,10 +225,13 @@ export class Config implements IConfig {
     this.errlog = path.join(this.cacheDir, 'error.log')
 
     this.tsconfig = await this._tsConfig()
-    this.commandsDir = await this._libToSrcPath(this.pjson.dxcli.commands)
-    this.hooks = await this._hooks()
+    this.commandsDir = path.join(this.root, this.pjson.dxcli.commands)
+    this.commandsDirTS = await this._tsPath(this.pjson.dxcli.commands)
+    this.hooks = _.mapValues(this.pjson.dxcli.hooks || {}, h => _.castArray(h).map(h => path.join(this.root, h)))
+    this.hooksTS = await this._hooks()
     if (typeof this.pjson.dxcli.plugins === 'string') {
-      this.pluginsModule = await this._libToSrcPath(this.pjson.dxcli.plugins)
+      this.pluginsModule = path.join(this.root, this.pjson.dxcli.plugins)
+      this.pluginsModuleTS = await this._tsPath(this.pjson.dxcli.plugins)
     }
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.dxcli.npmRegistry || 'https://registry.yarnpkg.com'
 
@@ -268,12 +282,12 @@ export class Config implements IConfig {
    * this is for developing typescript plugins/CLIs
    * if there is a tsconfig and the original sources exist, it attempts to require ts-
    */
-  private async _libToSrcPath(orig: string): Promise<string | undefined> {
+  private async _tsPath(orig: string): Promise<string | undefined> {
     if (!orig) return
     orig = path.join(this.root, orig)
-    if (!this.tsconfig) return orig
+    if (!this.tsconfig) return
     let {rootDirs, outDir} = this.tsconfig.compilerOptions
-    if (!rootDirs || !rootDirs.length || !outDir) return orig
+    if (!rootDirs || !rootDirs.length || !outDir) return
     let rootDir = rootDirs[0]
     try {
       // rewrite path from ./lib/foo to ./src/foo
@@ -281,8 +295,6 @@ export class Config implements IConfig {
       const src = path.join(this.root, rootDir) // ./src
       const relative = path.relative(lib, orig) // ./commands
       const out = path.join(src, relative) // ./src/commands
-      debug('using ts files at', out)
-      registerTSNode()
       // this can be a directory of commands or point to a hook file
       // if it's a directory, we check if the path exists. If so, return the path to the directory.
       // For hooks, it might point to a module, not a file. Something like "./hooks/myhook"
@@ -292,17 +304,20 @@ export class Config implements IConfig {
       return out
     } catch (err) {
       debug(err)
-      return orig
+      return
     }
   }
 
-  private async _hooks(): Promise<{[k: string]: string[]}> {
-    const promises = Object.entries(this.pjson.dxcli.hooks || {})
-      .map(([k, v]) => [k, _.castArray(v)] as [string, string[]])
-      .map(([k, v]) => [k, v.map(h => this._libToSrcPath(h))] as [string, Promise<string>[]])
+  private async _hooks(): Promise<{[k: string]: string[]} | undefined> {
     const hooks: {[k: string]: string[]} = {}
-    for (let [k, v] of promises) {
-      hooks[k] = await Promise.all(v)
+    if (_.isEmpty(this.pjson.dxcli.hooks)) return
+    for (let [k, h] of Object.entries(this.pjson.dxcli.hooks)) {
+      hooks[k] = []
+      for (let m of _.castArray(h)) {
+        const ts = await this._tsPath(m)
+        if (!ts) return
+        hooks[k].push(ts)
+      }
     }
     return hooks
   }
@@ -377,11 +392,4 @@ export async function read(opts: ConfigOptions = {}): Promise<IConfig> {
   const config = new Config()
   await config.load(path.dirname(pkgPath), pkg, opts.baseConfig)
   return config
-}
-
-let tsNode = false
-function registerTSNode() {
-  if (tsNode) return
-  require('ts-node').register()
-  tsNode = true
 }
