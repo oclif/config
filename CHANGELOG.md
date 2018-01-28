@@ -1,3 +1,11 @@
+<a name="0.1.32"></a>
+## [0.1.32](https://github.com/dxcli/config/compare/ca632a8735758c47ad9d89cf70058ba40506fb3c...v0.1.32) (2018-01-28)
+
+
+### Bug Fixes
+
+* TS loading improvements ([fcae462](https://github.com/dxcli/config/commit/fcae462))
+
 <a name="0.1.31"></a>
 ## [0.1.31](https://github.com/dxcli/config/compare/4b04c5bc1f461a6b05318ef7d648b48eed1ced39...v0.1.31) (2018-01-28)
 
