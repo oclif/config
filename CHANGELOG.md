@@ -1,3 +1,11 @@
+<a name="0.1.27"></a>
+## [0.1.27](https://github.com/dxcli/config/compare/bf61f99dcd9b7ad32e58517946cd6093e0ac597e...v0.1.27) (2018-01-28)
+
+
+### Bug Fixes
+
+* add convertToCached ([08edbb4](https://github.com/dxcli/config/commit/08edbb4))
+
 <a name="0.1.26"></a>
 ## [0.1.26](https://github.com/dxcli/config/compare/10fde6fa379d922b0b80a5555cc8fa8944fe9553...v0.1.26) (2018-01-26)
 
