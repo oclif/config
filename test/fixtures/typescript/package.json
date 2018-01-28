@@ -1,0 +1,11 @@
+{
+  "name": "ts-plugin",
+  "private": true,
+  "dxcli": {
+    "plugins": "./lib/plugins",
+    "commands": "./lib/commands",
+    "hooks": {
+      "init": "./lib/hooks/init"
+    }
+  }
+}

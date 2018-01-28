@@ -270,6 +270,9 @@ export class Config implements IConfig {
 
   private async _tsConfig(): Promise<TSConfig | undefined> {
     try {
+      // ignore if no .git as it's likely not in dev mode
+      if (!await fs.pathExists(path.join(this.root, '.git'))) return
+
       const tsconfigPath = path.join(this.root, 'tsconfig.json')
       const tsconfig = await readJSON(tsconfigPath)
       if (!tsconfig || !tsconfig.compilerOptions) return
@@ -285,9 +288,8 @@ export class Config implements IConfig {
    * if there is a tsconfig and the original sources exist, it attempts to require ts-
    */
   private async _tsPath(orig: string): Promise<string | undefined> {
-    if (!orig) return
+    if (!orig || !this.tsconfig) return
     orig = path.join(this.root, orig)
-    if (!this.tsconfig) return
     let {rootDirs, outDir} = this.tsconfig.compilerOptions
     if (!rootDirs || !rootDirs.length || !outDir) return
     let rootDir = rootDirs[0]
@@ -302,7 +304,7 @@ export class Config implements IConfig {
       // For hooks, it might point to a module, not a file. Something like "./hooks/myhook"
       // That file doesn't exist, and the real file is "./hooks/myhook.ts"
       // In that case we attempt to resolve to the filename. If it fails it will revert back to the lib path
-      if (!await fs.pathExists(out)) return require.resolve(out)
+      if (await fs.pathExists(out) || await fs.pathExists(out + '.ts')) return out
       return out
     } catch (err) {
       debug(err)
