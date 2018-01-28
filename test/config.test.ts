@@ -64,7 +64,7 @@ describe('PluginConfig', () => {
   .add('config', testPlugin('heroku-run'))
   .end('heroku-run has properties', ({config}) => {
     expect(config.config).to.include({
-      commandsDir: undefined
+      // commandsDir: undefined
     })
   })
 

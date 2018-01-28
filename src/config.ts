@@ -225,8 +225,10 @@ export class Config implements IConfig {
     this.errlog = path.join(this.cacheDir, 'error.log')
 
     this.tsconfig = await this._tsConfig()
-    this.commandsDir = path.join(this.root, this.pjson.dxcli.commands)
-    this.commandsDirTS = await this._tsPath(this.pjson.dxcli.commands)
+    if (this.pjson.dxcli.commands) {
+      this.commandsDir = path.join(this.root, this.pjson.dxcli.commands)
+      this.commandsDirTS = await this._tsPath(this.pjson.dxcli.commands)
+    }
     this.hooks = _.mapValues(this.pjson.dxcli.hooks || {}, h => _.castArray(h).map(h => path.join(this.root, h)))
     this.hooksTS = await this._hooks()
     if (typeof this.pjson.dxcli.plugins === 'string') {
