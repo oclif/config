@@ -16,7 +16,7 @@
     "@dxcli/dev": "^2.0.12",
     "@dxcli/engine": "^0.1.12",
     "@dxcli/semantic-release": "^0.3.3",
-    "@dxcli/tslint": "^0.0.24",
+    "@dxcli/tslint": "^0.1.0",
     "@heroku-cli/config-edit": "^1.0.4",
     "@types/fs-extra": "^5.0.0",
     "@types/load-json-file": "^2.0.7",
