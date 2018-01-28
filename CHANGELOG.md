@@ -1,3 +1,11 @@
+<a name="0.1.33"></a>
+## [0.1.33](https://github.com/dxcli/config/compare/37829b6881fdd2f7f7dd822edcdbd437ae5cafeb...v0.1.33) (2018-01-28)
+
+
+### Bug Fixes
+
+* added extra help properties ([39effe2](https://github.com/dxcli/config/commit/39effe2))
+
 <a name="0.1.32"></a>
 ## [0.1.32](https://github.com/dxcli/config/compare/ca632a8735758c47ad9d89cf70058ba40506fb3c...v0.1.32) (2018-01-28)
 
