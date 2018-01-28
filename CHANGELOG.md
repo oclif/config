@@ -1,3 +1,11 @@
+<a name="0.1.30"></a>
+## [0.1.30](https://github.com/dxcli/config/compare/309482eabb1073f793a403d2b3bdc02133149fad...v0.1.30) (2018-01-28)
+
+
+### Bug Fixes
+
+* use pluginName instead ([4b04c5b](https://github.com/dxcli/config/commit/4b04c5b))
+
 <a name="0.1.29"></a>
 ## [0.1.29](https://github.com/dxcli/config/compare/22193c79b8914fc47aed289b32526969d228427d...v0.1.29) (2018-01-28)
 
