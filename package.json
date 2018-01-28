@@ -12,9 +12,9 @@
     "read-pkg": "^3.0.0"
   },
   "devDependencies": {
-    "@dxcli/config": "^0.1.28",
-    "@dxcli/dev": "^2.0.14",
-    "@dxcli/engine": "^0.1.14",
+    "@dxcli/config": "^0.1.30",
+    "@dxcli/dev": "^2.0.15",
+    "@dxcli/engine": "^0.1.15",
     "@dxcli/semantic-release": "^0.3.3",
     "@dxcli/tslint": "^0.1.2",
     "@heroku-cli/config-edit": "^1.0.4",
