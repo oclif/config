@@ -7,13 +7,7 @@ export interface ICachedCommand {
   aliases: string[]
   description?: string
   usage?: string
-  plugin?: {
-    name: string
-    version: string
-    type: string
-    root: string
-    tag?: string
-  }
+  pluginName?: string
   help?: string
   load(): Promise<ICommand>
 }
