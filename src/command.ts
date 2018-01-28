@@ -15,6 +15,7 @@ export interface ICachedCommand {
 
 export interface ICommand extends ICachedCommand {
   run(argv: string[], opts?: ICommandOptions): Promise<void>
+  convertToCached(): ICachedCommand
 }
 
 export interface ICommandOptions {
