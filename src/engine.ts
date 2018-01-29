@@ -1,5 +1,5 @@
 import {ICachedCommand} from './command'
-import {ICLIConfig} from './config'
+import {ICLIConfig, IConfig} from './config'
 import {IPlugin} from './plugin'
 import {ITopic} from './topic'
 
@@ -21,5 +21,5 @@ export interface IEngine {
 
   runHook<T extends {}>(event: string, opts: T): Promise<void>
 
-  load(root: string): Promise<void>
+  load(config: IConfig): Promise<void>
 }
