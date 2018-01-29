@@ -1,3 +1,11 @@
+<a name="0.1.37"></a>
+## [0.1.37](https://github.com/dxcli/config/compare/155cb837f04861f3b2a454d5aaab009d7e5e1516...v0.1.37) (2018-01-29)
+
+
+### Bug Fixes
+
+* have engine take config instead of root ([23e3516](https://github.com/dxcli/config/commit/23e3516))
+
 <a name="0.1.36"></a>
 ## [0.1.36](https://github.com/dxcli/config/compare/7e41f3579d1fa8b79d8ec7ddb9e613e62ce65959...v0.1.36) (2018-01-29)
 
