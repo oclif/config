@@ -144,6 +144,11 @@ export interface IConfig {
    * npm registry to use for installing plugins
    */
   npmRegistry: string
+
+  /**
+   * a Heroku pre-dxcli plugin
+   */
+  legacy: boolean
 }
 
 export interface ICLIConfig extends IConfig {
@@ -197,6 +202,7 @@ export class Config implements IConfig {
   hooksTS?: {[k: string]: string[]}
   engine?: IEngine
   npmRegistry: string
+  legacy = false
 
   constructor() {
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
@@ -211,7 +217,10 @@ export class Config implements IConfig {
 
     this.name = this.pjson.name
     this.version = this.pjson.version
-    if (!this.pjson.dxcli) this.pjson.dxcli = this.pjson.dxcli || this.pjson['cli-engine'] || {}
+    if (!this.pjson.dxcli) {
+      this.legacy = true
+      this.pjson.dxcli = this.pjson['cli-engine'] || {}
+    }
     this.bin = this.pjson.dxcli.bin || base.bin || this.name
     this.dirname = this.pjson.dxcli.dirname || base.dirname || this.name
     this.userAgent = `${this.name}/${this.version} (${this.platform}-${this.arch}) node-${process.version}`
