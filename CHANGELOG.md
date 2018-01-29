@@ -1,3 +1,11 @@
+<a name="0.1.34"></a>
+## [0.1.34](https://github.com/dxcli/config/compare/39effe2d16c46c113e6cff3fcc33bad3094bfba9...v0.1.34) (2018-01-29)
+
+
+### Bug Fixes
+
+* add a legacy flag ([4281658](https://github.com/dxcli/config/commit/4281658))
+
 <a name="0.1.33"></a>
 ## [0.1.33](https://github.com/dxcli/config/compare/37829b6881fdd2f7f7dd822edcdbd437ae5cafeb...v0.1.33) (2018-01-28)
 
