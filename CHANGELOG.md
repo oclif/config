@@ -1,3 +1,11 @@
+<a name="0.1.35"></a>
+## [0.1.35](https://github.com/dxcli/config/compare/4281658713fdcd584c657d8fa81ef51c0b563ab7...v0.1.35) (2018-01-29)
+
+
+### Bug Fixes
+
+* remove plugin module ([7e41f35](https://github.com/dxcli/config/commit/7e41f35))
+
 <a name="0.1.34"></a>
 ## [0.1.34](https://github.com/dxcli/config/compare/39effe2d16c46c113e6cff3fcc33bad3094bfba9...v0.1.34) (2018-01-29)
 
