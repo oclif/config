@@ -1,12 +1,6 @@
-import {ICachedCommand, ICommand} from './command'
+import {ICachedCommand} from './command'
 import {IConfig} from './config'
 import {ITopic} from './topic'
-
-export interface IPluginModule {
-  commands: ICommand[]
-  topic?: ITopic
-  topics: ITopic[]
-}
 
 export interface IPlugin {
   name: string
@@ -15,7 +9,6 @@ export interface IPlugin {
   root: string
   tag?: string
   config: IConfig
-  module?: IPluginModule
   commands: ICachedCommand[]
   topics: ITopic[]
   plugins: IPlugin[]
