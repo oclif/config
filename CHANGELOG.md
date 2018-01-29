@@ -1,3 +1,11 @@
+<a name="0.1.36"></a>
+## [0.1.36](https://github.com/dxcli/config/compare/7e41f3579d1fa8b79d8ec7ddb9e613e62ce65959...v0.1.36) (2018-01-29)
+
+
+### Bug Fixes
+
+* add topics ([155cb83](https://github.com/dxcli/config/commit/155cb83))
+
 <a name="0.1.35"></a>
 ## [0.1.35](https://github.com/dxcli/config/compare/4281658713fdcd584c657d8fa81ef51c0b563ab7...v0.1.35) (2018-01-29)
 
