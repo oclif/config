@@ -8,6 +8,7 @@ import {inspect} from 'util'
 
 import {IEngine} from './engine'
 import {IPJSON} from './pjson'
+import {ITopic} from './topic'
 
 const _pjson = require('../package.json')
 const _base = `${_pjson.name}@${_pjson.version}`
@@ -149,6 +150,11 @@ export interface IConfig {
    * a Heroku pre-dxcli plugin
    */
   legacy: boolean
+
+  /**
+   * list of topics
+   */
+  topics: ITopic[]
 }
 
 export interface ICLIConfig extends IConfig {
@@ -203,6 +209,7 @@ export class Config implements IConfig {
   engine?: IEngine
   npmRegistry: string
   legacy = false
+  topics: ITopic[]
 
   constructor() {
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
@@ -245,6 +252,7 @@ export class Config implements IConfig {
       this.pluginsModuleTS = await this._tsPath(this.pjson.dxcli.plugins)
     }
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.dxcli.npmRegistry || 'https://registry.yarnpkg.com'
+    this.topics = topicsToArray(this.pjson.dxcli.topics || {})
 
     return this
   }
@@ -263,6 +271,9 @@ export class Config implements IConfig {
       .map(p => p.replace(/-/g, '_'))
       .join('_')
       .toUpperCase()
+  }
+
+  protected _topics() {
   }
 
   private dir(category: 'cache' | 'data' | 'config'): string {
@@ -405,4 +416,15 @@ export async function read(opts: ConfigOptions = {}): Promise<IConfig> {
   const config = new Config()
   await config.load(path.dirname(pkgPath), pkg, opts.baseConfig)
   return config
+}
+
+function topicsToArray(input: any, base?: string): ITopic[] {
+  if (!input) return []
+  base = base ? `${base}:` : ''
+  if (Array.isArray(input)) {
+    return input.concat(_.flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
+  }
+  return _.flatMap(Object.keys(input), k => {
+    return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
+  })
 }
