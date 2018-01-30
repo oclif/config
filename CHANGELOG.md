@@ -1,3 +1,12 @@
+<a name="0.1.39"></a>
+## [0.1.39](https://github.com/dxcli/config/compare/4353260d5bffcb1a56047c6dc1515182f4113b69...v0.1.39) (2018-01-30)
+
+
+### Bug Fixes
+
+* new help properties ([ccefcc1](https://github.com/dxcli/config/commit/ccefcc1))
+* yarn.lock ([c07c7cb](https://github.com/dxcli/config/commit/c07c7cb))
+
 <a name="0.1.38"></a>
 ## [0.1.38](https://github.com/dxcli/config/compare/23e351699ccdaaf6c681adfdbcf80480b92d30a7...v0.1.38) (2018-01-29)
 
