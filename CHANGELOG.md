@@ -1,3 +1,11 @@
+<a name="0.1.40"></a>
+## [0.1.40](https://github.com/dxcli/config/compare/c07c7cbadf9e91477f17ff657326cac7892f1794...v0.1.40) (2018-01-30)
+
+
+### Bug Fixes
+
+* assume engine is always on config ([8d02f30](https://github.com/dxcli/config/commit/8d02f30))
+
 <a name="0.1.39"></a>
 ## [0.1.39](https://github.com/dxcli/config/compare/4353260d5bffcb1a56047c6dc1515182f4113b69...v0.1.39) (2018-01-30)
 
