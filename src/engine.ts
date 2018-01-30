@@ -1,10 +1,10 @@
 import {ICachedCommand} from './command'
-import {ICLIConfig, IConfig} from './config'
+import {IConfig} from './config'
 import {IPlugin} from './plugin'
 import {ITopic} from './topic'
 
 export interface IEngine {
-  readonly config: ICLIConfig
+  readonly config: IConfig
   readonly plugins: IPlugin[]
 
   readonly topics: ITopic[]

@@ -140,7 +140,7 @@ export interface IConfig {
   /**
    * active @dxcli/engine
    */
-  engine?: IEngine
+  engine: IEngine
   /**
    * npm registry to use for installing plugins
    */
@@ -155,10 +155,6 @@ export interface IConfig {
    * list of topics
    */
   topics: ITopic[]
-}
-
-export interface ICLIConfig extends IConfig {
-  engine: IEngine
 }
 
 export interface TSConfig {
@@ -206,7 +202,7 @@ export class Config implements IConfig {
   debug: number = 0
   hooks: {[k: string]: string[]}
   hooksTS?: {[k: string]: string[]}
-  engine?: IEngine
+  engine: IEngine
   npmRegistry: string
   legacy = false
   topics: ITopic[]

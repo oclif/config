@@ -1,5 +1,5 @@
 import {ICommand} from './command'
-import {ICLIConfig} from './config'
+import {IConfig} from './config'
 import {IPlugin} from './plugin'
 
 export interface Hooks {
@@ -15,4 +15,4 @@ export interface Hooks {
   }
 }
 
-export type IHook<T extends {}> = (options: T & {config: ICLIConfig}) => any
+export type IHook<T extends {}> = (options: T & {config: IConfig}) => any
