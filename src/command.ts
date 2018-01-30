@@ -7,9 +7,10 @@ export interface ICachedCommand {
   hidden: boolean
   aliases: string[]
   description?: string
-  usage?: string
+  title?: string
+  usage?: string | string[]
+  examples?: string[]
   pluginName?: string
-  help?: string
   flags: {[name: string]: ICachedFlag}
   args: ICachedArg[]
   load(): Promise<ICommand>
