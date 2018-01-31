@@ -11,6 +11,8 @@ export interface IPJSON extends Package {
     hooks: { [name: string]: string[] }
     plugins?: string[] | string
     devPlugins?: string[]
+    title?: string
+    description?: string
     topics: {
       [k: string]: {
         description?: string
