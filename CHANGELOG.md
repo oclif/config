@@ -1,3 +1,11 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/anycli/config/compare/ddfe0820820162a770c5d995077cf709047e57b9...v0.2.2) (2018-01-31)
+
+
+### Bug Fixes
+
+* typescript 2.7 ([582a9d8](https://github.com/anycli/config/commit/582a9d8))
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/anycli/config/compare/cc4ce54f6e6b8d56d67404a20bc2d3efca9978c1...v0.2.1) (2018-01-31)
 
