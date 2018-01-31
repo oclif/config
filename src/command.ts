@@ -22,13 +22,13 @@ export interface IConvertToCachedOptions {
 }
 
 export interface ICommand extends ICachedCommand {
-  run(argv: string[], opts?: ICommandOptions): Promise<void>
+  run(argv: string[], opts?: Partial<ICommandOptions>): Promise<void>
   convertToCached(opts?: IConvertToCachedOptions): ICachedCommand
 }
 
 export interface ICommandOptions {
   root?: string
-  config?: IConfig
+  config: IConfig
 }
 
 export interface ICachedArg {
