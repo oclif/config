@@ -179,33 +179,33 @@ export class Config implements IConfig {
    */
   readonly _base = _base
   arch: ArchTypes
-  bin: string
-  cacheDir: string
-  configDir: string
-  dataDir: string
-  dirname: string
-  errlog: string
-  home: string
-  name: string
+  bin!: string
+  cacheDir!: string
+  configDir!: string
+  dataDir!: string
+  dirname!: string
+  errlog!: string
+  home!: string
+  name!: string
   pjson: any
   platform: PlatformTypes
-  root: string
-  shell: string
-  version: string
+  root!: string
+  shell!: string
+  version!: string
   windows: boolean
-  userAgent: string
+  userAgent!: string
   commandsDir: string | undefined
   commandsDirTS: string | undefined
   pluginsModule: string | undefined
   pluginsModuleTS: string | undefined
   tsconfig: TSConfig | undefined
   debug: number = 0
-  hooks: {[k: string]: string[]}
+  hooks!: {[k: string]: string[]}
   hooksTS?: {[k: string]: string[]}
-  engine: IEngine
-  npmRegistry: string
+  engine!: IEngine
+  npmRegistry!: string
   legacy = false
-  topics: ITopic[]
+  topics!: ITopic[]
 
   constructor() {
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
@@ -334,7 +334,7 @@ export class Config implements IConfig {
     for (let [k, h] of Object.entries(this.pjson.anycli.hooks)) {
       hooks[k] = []
       for (let m of _.castArray(h)) {
-        const ts = await this._tsPath(m)
+        const ts = await this._tsPath(m as string)
         if (!ts) return
         hooks[k].push(ts)
       }
