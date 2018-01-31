@@ -1,3 +1,11 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/anycli/config/compare/582a9d895b5a5f98ce176bad03358c0ac53e35db...v0.2.3) (2018-01-31)
+
+
+### Bug Fixes
+
+* make config required in constructor only ([78124f7](https://github.com/anycli/config/commit/78124f7))
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/anycli/config/compare/ddfe0820820162a770c5d995077cf709047e57b9...v0.2.2) (2018-01-31)
 
