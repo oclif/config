@@ -1,3 +1,11 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/anycli/config/compare/461cbe2cb6b6fee96db6ab5dc15d64f6ca747d80...v0.2.0) (2018-01-31)
+
+
+### Features
+
+* added devPlugins ([cc4ce54](https://github.com/anycli/config/commit/cc4ce54))
+
 <a name="0.1.41"></a>
 ## [0.1.41](https://github.com/anycli/config/compare/72eb874ea199daa1ead7286d9dcc5e7613e333af...v0.1.41) (2018-01-31)
 
