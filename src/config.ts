@@ -18,7 +18,7 @@ export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 
 
 export interface IConfig {
   /**
-   * @dxcli/config version
+   * @anycli/config version
    */
   _base: string
   /**
@@ -138,7 +138,7 @@ export interface IConfig {
    */
   debug: number
   /**
-   * active @dxcli/engine
+   * active @anycli/engine
    */
   engine: IEngine
   /**
@@ -147,7 +147,7 @@ export interface IConfig {
   npmRegistry: string
 
   /**
-   * a Heroku pre-dxcli plugin
+   * a Heroku pre-anycli plugin
    */
   legacy: boolean
 
@@ -170,7 +170,7 @@ export interface ConfigOptions {
   baseConfig?: IConfig
 }
 
-const debug = require('debug')('@dxcli/config')
+const debug = require('debug')('@anycli/config')
 
 export class Config implements IConfig {
   /**
@@ -220,12 +220,12 @@ export class Config implements IConfig {
 
     this.name = this.pjson.name
     this.version = this.pjson.version
-    if (!this.pjson.dxcli) {
+    if (!this.pjson.anycli) {
       this.legacy = true
-      this.pjson.dxcli = this.pjson['cli-engine'] || {}
+      this.pjson.anycli = this.pjson['cli-engine'] || {}
     }
-    this.bin = this.pjson.dxcli.bin || base.bin || this.name
-    this.dirname = this.pjson.dxcli.dirname || base.dirname || this.name
+    this.bin = this.pjson.anycli.bin || base.bin || this.name
+    this.dirname = this.pjson.anycli.dirname || base.dirname || this.name
     this.userAgent = `${this.name}/${this.version} (${this.platform}-${this.arch}) node-${process.version}`
     this.shell = this._shell()
     this.debug = this._debug()
@@ -237,18 +237,18 @@ export class Config implements IConfig {
     this.errlog = path.join(this.cacheDir, 'error.log')
 
     this.tsconfig = await this._tsConfig()
-    if (this.pjson.dxcli.commands) {
-      this.commandsDir = path.join(this.root, this.pjson.dxcli.commands)
-      this.commandsDirTS = await this._tsPath(this.pjson.dxcli.commands)
+    if (this.pjson.anycli.commands) {
+      this.commandsDir = path.join(this.root, this.pjson.anycli.commands)
+      this.commandsDirTS = await this._tsPath(this.pjson.anycli.commands)
     }
-    this.hooks = _.mapValues(this.pjson.dxcli.hooks || {}, h => _.castArray(h).map(h => path.join(this.root, h)))
+    this.hooks = _.mapValues(this.pjson.anycli.hooks || {}, h => _.castArray(h).map(h => path.join(this.root, h)))
     this.hooksTS = await this._hooks()
-    if (typeof this.pjson.dxcli.plugins === 'string') {
-      this.pluginsModule = path.join(this.root, this.pjson.dxcli.plugins)
-      this.pluginsModuleTS = await this._tsPath(this.pjson.dxcli.plugins)
+    if (typeof this.pjson.anycli.plugins === 'string') {
+      this.pluginsModule = path.join(this.root, this.pjson.anycli.plugins)
+      this.pluginsModuleTS = await this._tsPath(this.pjson.anycli.plugins)
     }
-    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.dxcli.npmRegistry || 'https://registry.yarnpkg.com'
-    this.topics = topicsToArray(this.pjson.dxcli.topics || {})
+    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
+    this.topics = topicsToArray(this.pjson.anycli.topics || {})
 
     return this
   }
@@ -330,8 +330,8 @@ export class Config implements IConfig {
 
   private async _hooks(): Promise<{[k: string]: string[]} | undefined> {
     const hooks: {[k: string]: string[]} = {}
-    if (_.isEmpty(this.pjson.dxcli.hooks)) return
-    for (let [k, h] of Object.entries(this.pjson.dxcli.hooks)) {
+    if (_.isEmpty(this.pjson.anycli.hooks)) return
+    for (let [k, h] of Object.entries(this.pjson.anycli.hooks)) {
       hooks[k] = []
       for (let m of _.castArray(h)) {
         const ts = await this._tsPath(m)

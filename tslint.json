@@ -1,5 +1,5 @@
 {
-  "extends": "@dxcli/tslint",
+  "extends": "@anycli/tslint",
   "linterOptions": {
     "exclude": [
       "test/fixtures/**"

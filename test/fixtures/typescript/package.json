@@ -1,7 +1,7 @@
 {
   "name": "ts-plugin",
   "private": true,
-  "dxcli": {
+  "anycli": {
     "plugins": "./lib/plugins",
     "commands": "./lib/commands",
     "hooks": {

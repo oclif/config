@@ -3,7 +3,7 @@ import {Package} from 'read-pkg'
 export interface IPJSON extends Package {
   name: string
   version: string
-  dxcli: {
+  anycli: {
     bin?: string
     npmRegistry?: string
     dirname?: string
@@ -13,7 +13,7 @@ export interface IPJSON extends Package {
     topics: {
       [k: string]: {
         description?: string
-        subtopics?: IPJSON['dxcli']['topics']
+        subtopics?: IPJSON['anycli']['topics']
         hidden?: boolean
       }
     }
