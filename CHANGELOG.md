@@ -1,3 +1,11 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/anycli/config/compare/cc4ce54f6e6b8d56d67404a20bc2d3efca9978c1...v0.2.1) (2018-01-31)
+
+
+### Bug Fixes
+
+* add title + description to pjson ([ddfe082](https://github.com/anycli/config/commit/ddfe082))
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/anycli/config/compare/461cbe2cb6b6fee96db6ab5dc15d64f6ca747d80...v0.2.0) (2018-01-31)
 
