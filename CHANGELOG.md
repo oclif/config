@@ -1,3 +1,11 @@
+<a name="0.1.41"></a>
+## [0.1.41](https://github.com/anycli/config/compare/72eb874ea199daa1ead7286d9dcc5e7613e333af...v0.1.41) (2018-01-31)
+
+
+### Bug Fixes
+
+* testing release ([461cbe2](https://github.com/anycli/config/commit/461cbe2))
+
 <a name="0.1.40"></a>
 ## [0.1.40](https://github.com/dxcli/config/compare/c07c7cbadf9e91477f17ff657326cac7892f1794...v0.1.40) (2018-01-30)
 
