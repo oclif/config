@@ -10,6 +10,7 @@ export interface IPJSON extends Package {
     commands?: string
     hooks: { [name: string]: string[] }
     plugins?: string[] | string
+    devPlugins?: string[]
     topics: {
       [k: string]: {
         description?: string
