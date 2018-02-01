@@ -1,3 +1,11 @@
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/anycli/config/compare/f83696dad08f34cb6d8f1cb2c7030428d71094c3...v0.2.6) (2018-02-01)
+
+
+### Bug Fixes
+
+* set flags/args to parser types ([f2344a8](https://github.com/anycli/config/commit/f2344a8))
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/anycli/config/compare/171f36cd86f3283d38830d45619eb131fccf3b47...v0.2.5) (2018-02-01)
 
