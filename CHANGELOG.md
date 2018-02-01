@@ -1,3 +1,11 @@
+<a name="0.2.11"></a>
+## [0.2.11](https://github.com/anycli/config/compare/9b2e1b0319e72e04d64b9b2676ecc789adbc6519...v0.2.11) (2018-02-01)
+
+
+### Bug Fixes
+
+* add getPluginCommands and read tsconfig when no .git ([623204e](https://github.com/anycli/config/commit/623204e))
+
 <a name="0.2.10"></a>
 ## [0.2.10](https://github.com/anycli/config/compare/ca0bd58f9cbb0979f52f172b5f73f2275a7ee961...v0.2.10) (2018-02-01)
 
