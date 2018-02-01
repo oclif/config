@@ -3,7 +3,7 @@ import * as Parser from '@anycli/parser'
 import {IConfig} from './config'
 import {IPlugin} from './plugin'
 
-export interface ICachedCommand {
+export interface ICommandBase {
   _base: string
   id: string
   hidden: boolean
@@ -13,19 +13,22 @@ export interface ICachedCommand {
   usage?: string | string[]
   examples?: string[]
   pluginName?: string
+}
+
+export interface ICachedCommand extends ICommandBase {
   flags: {[name: string]: ICachedFlag}
   args: ICachedArg[]
   load(): Promise<ICommand>
 }
 
 export interface IConvertToCachedOptions {
-  flags?: Parser.flags.Input<any>
-  args?: Parser.args.Input
   id?: string
   plugin?: IPlugin
 }
 
-export interface ICommand extends ICachedCommand {
+export interface ICommand extends ICommandBase {
+  flags?: Parser.flags.Input<any>
+  args?: Parser.args.Input
   run(argv: string[], opts?: Partial<ICommandOptions>): Promise<void>
   convertToCached(opts?: IConvertToCachedOptions): ICachedCommand
 }
