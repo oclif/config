@@ -1,3 +1,12 @@
+<a name="0.2.7"></a>
+## [0.2.7](https://github.com/anycli/config/compare/f2344a8a43797c57c708949d1540d8ffc4b4827f...v0.2.7) (2018-02-01)
+
+
+### Bug Fixes
+
+* added default and options ([3d2ccad](https://github.com/anycli/config/commit/3d2ccad))
+* updated parser ([c0ab463](https://github.com/anycli/config/commit/c0ab463))
+
 <a name="0.2.6"></a>
 ## [0.2.6](https://github.com/anycli/config/compare/f83696dad08f34cb6d8f1cb2c7030428d71094c3...v0.2.6) (2018-02-01)
 
