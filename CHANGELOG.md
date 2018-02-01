@@ -1,3 +1,11 @@
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/anycli/config/compare/78124f79744379e135ed89bb0d3817a4e0625a75...v0.2.4) (2018-02-01)
+
+
+### Bug Fixes
+
+* added pluginScope ([171f36c](https://github.com/anycli/config/commit/171f36c))
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/anycli/config/compare/582a9d895b5a5f98ce176bad03358c0ac53e35db...v0.2.3) (2018-01-31)
 
