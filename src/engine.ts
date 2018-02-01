@@ -22,4 +22,6 @@ export interface IEngine {
   runHook<T extends {}>(event: string, opts: T): Promise<void>
 
   load(config: IConfig): Promise<void>
+
+  getPluginCommands(plugin: IPlugin): Promise<ICachedCommand[]>
 }

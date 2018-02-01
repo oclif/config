@@ -286,8 +286,8 @@ export class Config implements IConfig {
 
   private async _tsConfig(): Promise<TSConfig | undefined> {
     try {
-      // ignore if no .git as it's likely not in dev mode
-      if (!await fs.pathExists(path.join(this.root, '.git'))) return
+      // // ignore if no .git as it's likely not in dev mode
+      // if (!await fs.pathExists(path.join(this.root, '.git'))) return
 
       const tsconfigPath = path.join(this.root, 'tsconfig.json')
       const tsconfig = await readJSON(tsconfigPath)
