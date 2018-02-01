@@ -6,6 +6,7 @@ export interface IPJSON extends Package {
   anycli: {
     bin?: string
     npmRegistry?: string
+    pluginScope?: string
     dirname?: string
     commands?: string
     hooks: { [name: string]: string[] }
