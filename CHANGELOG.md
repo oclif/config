@@ -1,3 +1,11 @@
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/anycli/config/compare/171f36cd86f3283d38830d45619eb131fccf3b47...v0.2.5) (2018-02-01)
+
+
+### Bug Fixes
+
+* add helpValue to flag ([f83696d](https://github.com/anycli/config/commit/f83696d))
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/anycli/config/compare/78124f79744379e135ed89bb0d3817a4e0625a75...v0.2.4) (2018-02-01)
 
