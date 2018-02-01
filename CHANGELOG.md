@@ -1,3 +1,11 @@
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/anycli/config/compare/2517177579e8a9034a5ea0cc8e860192e9a3423d...v0.2.9) (2018-02-01)
+
+
+### Bug Fixes
+
+* add constructor to icommand ([ca0bd58](https://github.com/anycli/config/commit/ca0bd58))
+
 <a name="0.2.8"></a>
 ## [0.2.8](https://github.com/anycli/config/compare/c0ab4630926ed8c12d53489d9b2f8a80e09e9406...v0.2.8) (2018-02-01)
 
