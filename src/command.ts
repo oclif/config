@@ -26,9 +26,10 @@ export interface IConvertToCachedOptions {
   plugin?: IPlugin
 }
 
-export interface ICommand extends ICommandBase {
+export interface ICommand<T = any> extends ICommandBase {
   flags?: Parser.flags.Input<any>
   args?: Parser.args.Input
+  new (argv: string[], opts: ICommandOptions): T
   run(argv: string[], opts?: Partial<ICommandOptions>): Promise<void>
   convertToCached(opts?: IConvertToCachedOptions): ICachedCommand
 }
