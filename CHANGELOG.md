@@ -1,3 +1,11 @@
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/anycli/config/compare/c0ab4630926ed8c12d53489d9b2f8a80e09e9406...v0.2.8) (2018-02-01)
+
+
+### Bug Fixes
+
+* fixed typing on command args/flags ([2517177](https://github.com/anycli/config/commit/2517177))
+
 <a name="0.2.7"></a>
 ## [0.2.7](https://github.com/anycli/config/compare/f2344a8a43797c57c708949d1540d8ffc4b4827f...v0.2.7) (2018-02-01)
 
