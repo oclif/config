@@ -40,6 +40,8 @@ export interface ICachedArg {
   description?: string
   required?: boolean
   hidden?: boolean
+  default?: string
+  options?: string[]
 }
 
 export interface ICachedBooleanFlag {
@@ -59,6 +61,8 @@ export interface ICachedOptionFlag {
   hidden?: boolean
   description?: string
   helpValue?: string
+  default?: string
+  options?: string[]
 }
 
 export type ICachedFlag = ICachedBooleanFlag | ICachedOptionFlag
