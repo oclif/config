@@ -1,3 +1,5 @@
+import * as Parser from '@anycli/parser'
+
 import {IConfig} from './config'
 import {IPlugin} from './plugin'
 
@@ -17,6 +19,8 @@ export interface ICachedCommand {
 }
 
 export interface IConvertToCachedOptions {
+  flags?: Parser.flags.Input<any>
+  args?: Parser.args.Input
   id?: string
   plugin?: IPlugin
 }
