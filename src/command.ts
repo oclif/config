@@ -54,6 +54,7 @@ export interface ICachedOptionFlag {
   char?: string
   hidden?: boolean
   description?: string
+  helpValue?: string
 }
 
 export type ICachedFlag = ICachedBooleanFlag | ICachedOptionFlag
