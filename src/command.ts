@@ -12,6 +12,7 @@ export interface ICommandBase {
   usage?: string | string[]
   examples?: string[]
   pluginName?: string
+  type?: string
 }
 
 export interface ICachedCommand extends ICommandBase {
