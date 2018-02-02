@@ -13,6 +13,7 @@ export interface IPlugin {
   topics: ITopic[]
   plugins: IPlugin[]
   hooks: {[k: string]: string[]}
+  valid: boolean
 }
 
 export interface IPluginManifest {
