@@ -1,3 +1,11 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/anycli/config/compare/57a85d7fbb1104f6f785ed0c1f1744ec4341339a...v0.3.1) (2018-02-02)
+
+
+### Bug Fixes
+
+* add type to command ([554947d](https://github.com/anycli/config/commit/554947d))
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/anycli/config/compare/623204ebf443bf0e60a9b80a2eaf631519154cb6...v0.3.0) (2018-02-02)
 
