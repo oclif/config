@@ -1,3 +1,11 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/anycli/config/compare/623204ebf443bf0e60a9b80a2eaf631519154cb6...v0.3.0) (2018-02-02)
+
+
+### Features
+
+* added loadPlugin ([57a85d7](https://github.com/anycli/config/commit/57a85d7))
+
 <a name="0.2.11"></a>
 ## [0.2.11](https://github.com/anycli/config/compare/9b2e1b0319e72e04d64b9b2676ecc789adbc6519...v0.2.11) (2018-02-01)
 
