@@ -9,8 +9,13 @@ export interface IPlugin {
   root: string
   tag?: string
   config: IConfig
-  commands: ICachedCommand[]
+  manifest: IPluginManifest
   topics: ITopic[]
   plugins: IPlugin[]
   hooks: {[k: string]: string[]}
+}
+
+export interface IPluginManifest {
+  version: string
+  commands: ICachedCommand[]
 }

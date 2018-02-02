@@ -3,6 +3,16 @@ import {IConfig} from './config'
 import {IPlugin} from './plugin'
 import {ITopic} from './topic'
 
+export interface LoadPluginOptions {
+  type: 'core' | 'user' | 'link' | 'dev'
+  root?: string
+  name?: string
+  config?: IConfig
+  tag?: string
+  useCache?: boolean
+  loadDevPlugins?: boolean
+}
+
 export interface IEngine {
   readonly config: IConfig
   readonly plugins: IPlugin[]
@@ -23,5 +33,5 @@ export interface IEngine {
 
   load(config: IConfig): Promise<void>
 
-  getPluginCommands(plugin: IPlugin): Promise<ICachedCommand[]>
+  loadPlugin(opts: LoadPluginOptions): Promise<IPlugin>
 }

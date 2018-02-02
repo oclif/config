@@ -1,7 +1,6 @@
 import * as Parser from '@anycli/parser'
 
 import {IConfig} from './config'
-import {IPlugin} from './plugin'
 
 export interface ICommandBase {
   _base: string
@@ -23,7 +22,7 @@ export interface ICachedCommand extends ICommandBase {
 
 export interface IConvertToCachedOptions {
   id?: string
-  plugin?: IPlugin
+  pluginName?: string
 }
 
 export interface ICommand<T = any> extends ICommandBase {
