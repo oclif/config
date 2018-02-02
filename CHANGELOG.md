@@ -1,3 +1,11 @@
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/anycli/config/compare/554947d2b8e9e0d908e5cee9480a4c4f928e8ee6...v0.3.2) (2018-02-02)
+
+
+### Bug Fixes
+
+* added plugin attribute to icommand ([709921b](https://github.com/anycli/config/commit/709921b))
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/anycli/config/compare/57a85d7fbb1104f6f785ed0c1f1744ec4341339a...v0.3.1) (2018-02-02)
 
