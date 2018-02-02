@@ -1,3 +1,13 @@
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/anycli/config/compare/709921b96a11cb624d5ed6b4113eb9bf08be4fb7...v0.3.3) (2018-02-02)
+
+
+### Bug Fixes
+
+* add valid boolean ([5b9dd05](https://github.com/anycli/config/commit/5b9dd05))
+* add valid boolean ([b5fac60](https://github.com/anycli/config/commit/b5fac60))
+* reduce dependencies needed in dev ([567d46b](https://github.com/anycli/config/commit/567d46b))
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/anycli/config/compare/554947d2b8e9e0d908e5cee9480a4c4f928e8ee6...v0.3.2) (2018-02-02)
 
