@@ -1,6 +1,7 @@
 import * as Parser from '@anycli/parser'
 
 import {IConfig} from './config'
+import {IPlugin} from './plugin'
 
 export interface ICommandBase {
   _base: string
@@ -27,6 +28,7 @@ export interface IConvertToCachedOptions {
 }
 
 export interface ICommand<T = any> extends ICommandBase {
+  plugin?: IPlugin
   flags?: Parser.flags.Input<any>
   args?: Parser.args.Input
   new (argv: string[], opts: ICommandOptions): T
