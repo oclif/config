@@ -1,6 +1,0 @@
-[submodule "plugins/heroku-run"]
-	path = plugins/heroku-run
-	url = https://github.com/heroku/heroku-run
-[submodule "plugins/heroku-cli-status"]
-	path = plugins/heroku-cli-status
-	url = https://github.com/heroku/heroku-cli-status

@@ -1,8 +1,8 @@
-import Command from '@anycli/command'
-import cli from 'cli-ux'
+// import Command from '@anycli/command'
+// import cli from 'cli-ux'
 
-export default class extends Command {
+export default class {
   async run() {
-    cli.log('it works!')
+    console.log('it works!')
   }
 }
