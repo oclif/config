@@ -4,6 +4,7 @@ export interface IPJSON extends Package {
   name: string
   version: string
   anycli: {
+    schema?: number
     bin?: string
     npmRegistry?: string
     pluginScope?: string
