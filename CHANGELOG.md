@@ -1,3 +1,11 @@
+<a name="1.0.8"></a>
+## [1.0.8](https://github.com/anycli/config/compare/cec67ea6805e373d4f9241fffb0036a9a6fea118...v1.0.8) (2018-02-03)
+
+
+### Bug Fixes
+
+* fixed tsPath when no tsconfig ([8cf8808](https://github.com/anycli/config/commit/8cf8808))
+
 <a name="1.0.7"></a>
 ## [1.0.7](https://github.com/anycli/config/compare/da123a76a92740bd6ff9ce9d24712be99b3a38b6...v1.0.7) (2018-02-03)
 
