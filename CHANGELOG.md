@@ -1,3 +1,11 @@
+<a name="1.0.16"></a>
+## [1.0.16](https://github.com/anycli/config/compare/9a6e1d5d0979a7acbd12894b666d2da61c93e975...v1.0.16) (2018-02-03)
+
+
+### Bug Fixes
+
+* added tag ([c0c8309](https://github.com/anycli/config/commit/c0c8309))
+
 <a name="1.0.15"></a>
 ## [1.0.15](https://github.com/anycli/config/compare/6b9e4481fd1f7432805408b551f8b108361c6443...v1.0.15) (2018-02-03)
 
