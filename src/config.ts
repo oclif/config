@@ -13,6 +13,7 @@ export type Options = Plugin.Options | string | IConfig | undefined
 const debug = require('debug')('@anycli/config')
 
 export interface IConfig extends Plugin.IPlugin {
+  pjson: PJSON.CLI
   /**
    * process.arch
    */
@@ -83,7 +84,7 @@ export interface IConfig extends Plugin.IPlugin {
    * npm registry to use for installing plugins
    */
   npmRegistry: string
-  userPJSON?: PJSON
+  userPJSON?: PJSON.User
 
   runCommand(id: string, argv?: string[]): Promise<void>
 }
@@ -103,7 +104,8 @@ export class Config extends Plugin.Plugin implements IConfig {
   userAgent: string
   debug: number = 0
   npmRegistry: string
-  userPJSON?: PJSON
+  pjson!: PJSON.CLI
+  userPJSON?: PJSON.User
 
   constructor(opts: Plugin.Options) {
     super(opts)
@@ -127,7 +129,7 @@ export class Config extends Plugin.Plugin implements IConfig {
 
     try {
       const devPlugins = this.pjson.anycli.devPlugins
-      if (devPlugins) this.loadPlugins(...devPlugins)
+      if (devPlugins) this.loadPlugins(this.root, devPlugins)
     } catch (err) {
       cli.warn(err)
     }
@@ -136,7 +138,7 @@ export class Config extends Plugin.Plugin implements IConfig {
       const userPJSONPath = path.join(this.dataDir, 'package.json')
       const pjson = this.userPJSON = readPkg.sync(userPJSONPath) as any
       if (!pjson.anycli) pjson.anycli = {schema: 1}
-      this.loadPlugins(...pjson.anycli.plugins)
+      this.loadPlugins(userPJSONPath, pjson.anycli.plugins)
     } catch (err) {
       if (err.code !== 'ENOENT') cli.warn(err)
     }

@@ -6,7 +6,10 @@ import * as path from 'path'
 import * as readPkg from 'read-pkg'
 import {inspect} from 'util'
 
-import * as Config from '.'
+import {Command} from './command'
+import {Manifest} from './manifest'
+import {PJSON} from './pjson'
+import {Topic} from './topic'
 import {tsPath} from './ts_node'
 import {undefault} from './util'
 
@@ -38,7 +41,7 @@ export interface IPlugin {
    *
    * parsed with read-pkg
    */
-  pjson: Config.PJSON
+  pjson: PJSON.Plugin | PJSON.CLI
   /**
    * used to tell the user how the plugin was installed
    * examples: core, link, user, dev
@@ -62,31 +65,31 @@ export interface IPlugin {
    */
   valid: boolean
 
-  readonly commands: Config.Command.Plugin[]
+  readonly commands: Command.Plugin[]
   readonly commandIDs: string[]
-  readonly topics: Config.Topic[]
-  findCommand(id: string, opts: {must: true}): Config.Command.Plugin
-  findCommand(id: string, opts?: {must: boolean}): Config.Command.Plugin | undefined
-  findTopic(id: string, opts: {must: true}): Config.Topic
-  findTopic(id: string, opts?: {must: boolean}): Config.Topic | undefined
+  readonly topics: Topic[]
+  findCommand(id: string, opts: {must: true}): Command.Plugin
+  findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
+  findTopic(id: string, opts: {must: true}): Topic
+  findTopic(id: string, opts?: {must: boolean}): Topic | undefined
   runHook<T extends {}>(event: string, opts?: T): Promise<void>
 }
 
 const debug = require('debug')('@anycli/config')
 const _pjson = require('../package.json')
 
-const loadedPlugins: {[name: string]: Plugin} = {}
-
 export class Plugin implements IPlugin {
+  static loadedPlugins: {[name: string]: Plugin} = {}
+
   _base = `${_pjson.name}@${_pjson.version}`
   name!: string
   version!: string
-  pjson!: Config.PJSON
+  pjson!: PJSON.Plugin
   type: string
   root!: string
   tag?: string
-  manifest!: Config.Manifest
-  _topics!: Config.Topic[]
+  manifest!: Manifest
+  _topics!: Topic[]
   plugins: IPlugin[] = []
   hooks!: {[k: string]: string[]}
   valid!: boolean
@@ -97,8 +100,8 @@ export class Plugin implements IPlugin {
     this.type = opts.type || 'core'
     const root = findRoot(opts.name, opts.root)
     if (!root) throw new Error(`could not find package.json with ${inspect(opts)}`)
-    if (loadedPlugins[root]) return loadedPlugins[root]
-    loadedPlugins[root] = this
+    if (Plugin.loadedPlugins[root]) return Plugin.loadedPlugins[root]
+    Plugin.loadedPlugins[root] = this
     this.root = root
     debug('reading plugin %s', root)
     this.pjson = readPkg.sync(path.join(root, 'package.json')) as any
@@ -113,7 +116,7 @@ export class Plugin implements IPlugin {
     this.hooks = _.mapValues(this.pjson.anycli.hooks || {}, _.castArray)
 
     this.manifest = this._manifest()
-    this.loadPlugins(...this.pjson.anycli.plugins || [])
+    this.loadPlugins(this.root, this.pjson.anycli.plugins || [])
   }
 
   get commandsDir() {
@@ -145,9 +148,9 @@ export class Plugin implements IPlugin {
     return commands
   }
 
-  findCommand(id: string, opts: {must: true}): Config.Command.Plugin
-  findCommand(id: string, opts?: {must: boolean}): Config.Command.Plugin | undefined
-  findCommand(id: string, opts: {must?: boolean} = {}): Config.Command.Plugin | undefined {
+  findCommand(id: string, opts: {must: true}): Command.Plugin
+  findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
+  findCommand(id: string, opts: {must?: boolean} = {}): Command.Plugin | undefined {
     let command = this.manifest.commands[id]
     if (command) return {...command, load: () => this._findCommand(id)}
     for (let plugin of this.plugins) {
@@ -157,7 +160,7 @@ export class Plugin implements IPlugin {
     if (opts.must) throw new Error(`command ${id} not found`)
   }
 
-  _findCommand(id: string): Config.Command.Class {
+  _findCommand(id: string): Command.Class {
     const search = (cmd: any) => {
       if (_.isFunction(cmd.run)) return cmd
       return Object.values(cmd).find((cmd: any) => _.isFunction(cmd.run))
@@ -169,8 +172,8 @@ export class Plugin implements IPlugin {
     return cmd
   }
 
-  findTopic(id: string, opts: {must: true}): Config.Topic
-  findTopic(id: string, opts?: {must: boolean}): Config.Topic | undefined
+  findTopic(id: string, opts: {must: true}): Topic
+  findTopic(id: string, opts?: {must: boolean}): Topic | undefined
   findTopic(name: string, opts: {must?: boolean} = {}) {
     let topic = this.topics.find(t => t.name === name)
     if (topic) return topic
@@ -203,11 +206,11 @@ export class Plugin implements IPlugin {
   // findTopic(id: string, opts: {must: true}): ITopic
   // findTopic(id: string, opts?: {must: boolean}): ITopic | undefined
 
-  protected _manifest(): Config.Manifest {
+  protected _manifest(): Manifest {
     const readManifest = () => {
       try {
         const p = path.join(this.root, '.anycli.manifest.json')
-        const manifest: Config.Manifest = loadJSON.sync(p)
+        const manifest: Manifest = loadJSON.sync(p)
         if (manifest.version !== this.version) {
           cli.warn(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
         } else {
@@ -222,19 +225,25 @@ export class Plugin implements IPlugin {
       let manifest = readManifest()
       if (manifest) return manifest
     }
-    if (this.commandsDir) return Config.Manifest.build(this.version, this.commandsDir, id => this._findCommand(id))
+    if (this.commandsDir) return Manifest.build(this.version, this.commandsDir, id => this._findCommand(id))
     return {version: this.version, commands: {}}
   }
 
-  protected loadPlugins(...plugins: Config.PJSON.Plugin[]) {
+  protected loadPlugins(root: string, plugins: (string | PJSON.Plugin)[]) {
     if (!plugins.length) return
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
     for (let plugin of plugins || []) {
       try {
-        let opts: Options = {type: this.type, root: this.root}
-        if (typeof plugin === 'string') opts.name = plugin
-        else opts = {...opts, ...plugin}
+        let opts: Options = {type: this.type, root}
+        if (typeof plugin === 'string') {
+          opts.name = plugin
+        } else {
+          opts.name = plugin.name || opts.name
+          opts.type = plugin.type || opts.type
+          opts.tag = plugin.tag || opts.tag
+          opts.root = plugin.root || opts.root
+        }
         this.plugins.push(new Plugin(opts))
       } catch (err) {
         cli.warn(err)
@@ -244,7 +253,7 @@ export class Plugin implements IPlugin {
   }
 }
 
-function topicsToArray(input: any, base?: string): Config.Topic[] {
+function topicsToArray(input: any, base?: string): Topic[] {
   if (!input) return []
   base = base ? `${base}:` : ''
   if (Array.isArray(input)) {

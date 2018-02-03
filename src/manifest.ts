@@ -3,17 +3,17 @@ import * as globby from 'globby'
 import * as _ from 'lodash'
 import * as path from 'path'
 
-import * as Config from '.'
+import {Command} from './command'
 
 export interface Manifest {
   version: string
-  commands: {[id: string]: Config.Command}
+  commands: {[id: string]: Command}
 }
 
 const debug = require('debug')('@anycli/config')
 
 export namespace Manifest {
-  export type FindCommandCB = (id: string) => Config.Command.Class
+  export type FindCommandCB = (id: string) => Command.Class
 
   export function build(version: string, dir: string, findCommand: FindCommandCB): Manifest {
     debug(`loading IDs from ${dir}`)
@@ -27,7 +27,7 @@ export namespace Manifest {
     debug('found ids', ids)
     let commands = ids.map(id => {
       try {
-        return [id, Config.Command.toCached(findCommand(id))]
+        return [id, Command.toCached(findCommand(id))]
       } catch (err) {
         cli.warn(err)
       }
