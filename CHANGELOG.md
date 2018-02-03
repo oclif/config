@@ -1,3 +1,11 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/anycli/config/compare/003c74fbcbd13a592293831dabfa7f470e8ba16a...v1.0.1) (2018-02-03)
+
+
+### Bug Fixes
+
+* no longer need tslib here ([ad1c60b](https://github.com/anycli/config/commit/ad1c60b))
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/anycli/config/compare/709921b96a11cb624d5ed6b4113eb9bf08be4fb7...v0.3.3) (2018-02-02)
 
