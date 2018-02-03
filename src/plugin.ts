@@ -94,6 +94,7 @@ export class Plugin implements IPlugin {
   hooks!: {[k: string]: string[]}
   valid!: boolean
   ignoreManifest: boolean
+  alreadyLoaded = false
 
   constructor(opts: Options) {
     this.ignoreManifest = !!opts.ignoreManifest
@@ -101,7 +102,10 @@ export class Plugin implements IPlugin {
     this.tag = opts.tag
     const root = findRoot(opts.name, opts.root)
     if (!root) throw new Error(`could not find package.json with ${inspect(opts)}`)
-    if (Plugin.loadedPlugins[root]) return Plugin.loadedPlugins[root]
+    if (Plugin.loadedPlugins[root]) {
+      this.alreadyLoaded = true
+      return Plugin.loadedPlugins[root]
+    }
     Plugin.loadedPlugins[root] = this
     this.root = root
     debug('reading plugin %s', root)

@@ -90,25 +90,26 @@ export interface IConfig extends Plugin.IPlugin {
 }
 
 export class Config extends Plugin.Plugin implements IConfig {
-  arch: ArchTypes
-  bin: string
-  cacheDir: string
-  configDir: string
-  dataDir: string
-  dirname: string
-  errlog: string
-  home: string
-  platform: PlatformTypes
-  shell: string
-  windows: boolean
-  userAgent: string
+  arch!: ArchTypes
+  bin!: string
+  cacheDir!: string
+  configDir!: string
+  dataDir!: string
+  dirname!: string
+  errlog!: string
+  home!: string
+  platform!: PlatformTypes
+  shell!: string
+  windows!: boolean
+  userAgent!: string
   debug: number = 0
-  npmRegistry: string
+  npmRegistry!: string
   pjson!: PJSON.CLI
   userPJSON?: PJSON.User
 
   constructor(opts: Plugin.Options) {
     super(opts)
+    if (this.alreadyLoaded) return
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
