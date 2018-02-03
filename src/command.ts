@@ -12,7 +12,7 @@ export interface Command {
   usage?: string | string[]
   examples?: string[]
   type?: string
-  flags: {[name: string]: Command.Flag.Boolean | Command.Flag.Option}
+  flags: {[name: string]: Command.Flag}
   args: {
     name: string
     description?: string
@@ -24,6 +24,8 @@ export interface Command {
 }
 
 export namespace Command {
+  export type Flag = Flag.Boolean | Flag.Option
+
   export namespace Flag {
     export interface Boolean {
       type: 'boolean'
