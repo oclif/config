@@ -1,3 +1,12 @@
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/anycli/config/compare/ed4c718eb06e01399fc8c3b1fde03c4d2b63cb15...v1.0.4) (2018-02-03)
+
+
+### Bug Fixes
+
+* simplified constructor ([42ce9a2](https://github.com/anycli/config/commit/42ce9a2))
+* simplified constructor ([7203d82](https://github.com/anycli/config/commit/7203d82))
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/anycli/config/compare/63011e58f1bd45f5e08de6cbf03cad5135705b76...v1.0.3) (2018-02-03)
 
