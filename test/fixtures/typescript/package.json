@@ -2,7 +2,6 @@
   "name": "ts-plugin",
   "private": true,
   "anycli": {
-    "plugins": "./lib/plugins",
     "commands": "./lib/commands",
     "hooks": {
       "init": "./lib/hooks/init"

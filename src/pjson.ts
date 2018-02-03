@@ -1,6 +1,6 @@
 import {Package} from 'read-pkg'
 
-export interface IPJSON extends Package {
+export interface PJSON extends Package {
   name: string
   version: string
   anycli: {
@@ -11,16 +11,27 @@ export interface IPJSON extends Package {
     dirname?: string
     commands?: string
     hooks: { [name: string]: string[] }
-    plugins?: string[] | string
-    devPlugins?: string[]
+    plugins?: PJSON.Plugin[]
+    devPlugins?: PJSON.Plugin[]
     title?: string
     description?: string
     topics: {
       [k: string]: {
         description?: string
-        subtopics?: IPJSON['anycli']['topics']
+        subtopics?: PJSON['anycli']['topics']
         hidden?: boolean
       }
     }
+  }
+}
+
+export namespace PJSON {
+  export type Plugin = string | {
+    type: 'user'
+    name: string
+    tag?: string
+  } | {
+    type: 'link'
+    root: string
   }
 }

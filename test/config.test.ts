@@ -9,7 +9,7 @@ describe('PluginConfig', () => {
   .env({}, {clear: true})
   .stub(os, 'homedir', () => path.join('/my/home'))
   .stub(os, 'platform', () => 'darwin')
-  .add('config', Config.read)
+  .add('config', () => Config.load())
   .end('darwin', ({config}) => {
     expect(config).to.include({
       cacheDir: path.join('/my/home/Library/Caches/@anycli/config'),
@@ -24,7 +24,7 @@ describe('PluginConfig', () => {
   .env({}, {clear: true})
   .stub(os, 'homedir', () => path.join('/my/home'))
   .stub(os, 'platform', () => 'linux')
-  .add('config', Config.read)
+  .add('config', () => Config.load())
   .end('linux', ({config}) => {
     expect(config).to.include({
       cacheDir: path.join('/my/home/.cache/@anycli/config'),
@@ -39,7 +39,7 @@ describe('PluginConfig', () => {
   .env({LOCALAPPDATA: '/my/home/localappdata'}, {clear: true})
   .stub(os, 'homedir', () => path.join('/my/home'))
   .stub(os, 'platform', () => 'win32')
-  .add('config', Config.read)
+  .add('config', () => Config.load())
   .end('win32', ({config}) => {
     expect(config).to.include({
       cacheDir: path.join('/my/home/localappdata/@anycli/config'),

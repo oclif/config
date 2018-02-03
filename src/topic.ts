@@ -1,4 +1,4 @@
-export interface ITopic {
+export interface Topic {
   name: string
   description?: string
   hidden?: boolean

@@ -1,30 +1,15 @@
-import * as fs from 'fs-extra'
-import * as readJSON from 'load-json-file'
-import * as _ from 'lodash'
 import * as os from 'os'
 import * as path from 'path'
-import * as readPkg from 'read-pkg'
-import {inspect} from 'util'
 
-import {IEngine} from './engine'
-import {IPJSON} from './pjson'
-import {ITopic} from './topic'
-
-const _pjson = require('../package.json')
-const _base = `${_pjson.name}@${_pjson.version}`
+import * as Plugin from './plugin'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
+export type Options = Plugin.Options | string | IConfig
 
-export interface IConfig {
-  /**
-   * @anycli/config version
-   */
-  _base: string
-  /**
-   * base path of root plugin
-   */
-  root: string
+const debug = require('debug')('@anycli/config')
+
+export interface IConfig extends Plugin.IPlugin {
   /**
    * process.arch
    */
@@ -39,32 +24,6 @@ export interface IConfig {
    * example ~/Library/Caches/mycli or ~/.cache/mycli
    */
   cacheDir: string
-  /**
-   * full path to command dir of plugin
-   */
-  commandsDir: string | undefined
-  /**
-   * full path to command dir of plugin's typescript files for development
-   */
-  commandsDirTS?: string
-  /**
-   * normalized full paths to hooks
-   */
-  hooks: {[k: string]: string[]}
-  /**
-   * normalized full paths to typescript hooks
-   */
-  hooksTS?: {[k: string]: string[]}
-  /**
-   * if plugins points to a module this is the full path to that module
-   *
-   * for dynamic plugin loading
-   */
-  pluginsModule: string | undefined
-  /**
-   * if plugins points to a module this is the full path to that module's typescript
-   */
-  pluginsModuleTS: string | undefined
   /**
    * config directory to use for CLI
    *
@@ -94,16 +53,6 @@ export interface IConfig {
    */
   home: string
   /**
-   * CLI name from package.json
-   */
-  name: string
-  /**
-   * full package.json
-   *
-   * parsed with read-pkg
-   */
-  pjson: IPJSON
-  /**
    * process.platform
    */
   platform: PlatformTypes
@@ -112,21 +61,11 @@ export interface IConfig {
    */
   shell: string
   /**
-   * parsed tsconfig.json
-   */
-  tsconfig: TSConfig | undefined
-  /**
    * user agent to use for http calls
    *
    * example: mycli/1.2.3 (darwin-x64) node-9.0.0
    */
   userAgent: string
-  /**
-   * cli version from package.json
-   *
-   * example: 1.2.3
-   */
-  version: string
   /**
    * if windows
    */
@@ -138,94 +77,39 @@ export interface IConfig {
    */
   debug: number
   /**
-   * active @anycli/engine
-   */
-  engine: IEngine
-  /**
    * npm registry to use for installing plugins
    */
   npmRegistry: string
 
-  /**
-   * a Heroku pre-anycli plugin
-   */
-  legacy: boolean
-
-  /**
-   * list of topics
-   */
-  topics: ITopic[]
+  runCommand(id: string, argv?: string[]): Promise<void>
 }
 
-export interface TSConfig {
-  compilerOptions: {
-    rootDirs?: string[]
-    outDir?: string
-  }
-}
-
-export interface ConfigOptions {
-  name?: string
-  root?: string
-  baseConfig?: IConfig
-}
-
-const debug = require('debug')('@anycli/config')
-
-export class Config implements IConfig {
-  /**
-   * registers ts-node for reading typescript source (./src) instead of compiled js files (./lib)
-   * there are likely issues doing this any the tsconfig.json files are not compatible with others
-   */
-  readonly _base = _base
+export class Config extends Plugin.Plugin implements IConfig {
   arch: ArchTypes
-  bin!: string
-  cacheDir!: string
-  configDir!: string
-  dataDir!: string
-  dirname!: string
-  errlog!: string
-  home!: string
-  name!: string
-  pjson: any
+  bin: string
+  cacheDir: string
+  configDir: string
+  dataDir: string
+  dirname: string
+  errlog: string
+  home: string
   platform: PlatformTypes
-  root!: string
-  shell!: string
-  version!: string
+  shell: string
   windows: boolean
-  userAgent!: string
-  commandsDir: string | undefined
-  commandsDirTS: string | undefined
-  pluginsModule: string | undefined
-  pluginsModuleTS: string | undefined
-  tsconfig: TSConfig | undefined
+  userAgent: string
   debug: number = 0
-  hooks!: {[k: string]: string[]}
-  hooksTS?: {[k: string]: string[]}
-  engine!: IEngine
-  npmRegistry!: string
-  legacy = false
-  topics!: ITopic[]
+  npmRegistry: string
 
-  constructor() {
+  constructor(opts: Plugin.Options) {
+    super(opts)
+
+    this.loadPlugins(true)
+
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
     this.windows = this.platform === 'win32'
-  }
-
-  async load(root: string, pjson: readPkg.Package, baseConfig?: IConfig) {
-    const base: IConfig = baseConfig || {} as any
-    this.root = root
-    this.pjson = pjson
-
-    this.name = this.pjson.name
-    this.version = this.pjson.version
-    if (!this.pjson.anycli) {
-      this.legacy = true
-      this.pjson.anycli = this.pjson['cli-engine'] || {}
-    }
-    this.bin = this.pjson.anycli.bin || base.bin || this.name
-    this.dirname = this.pjson.anycli.dirname || base.dirname || this.name
+    this.bin = this.pjson.anycli.bin || this.name
+    this.dirname = this.pjson.anycli.dirname || this.name
     this.userAgent = `${this.name}/${this.version} (${this.platform}-${this.arch}) node-${process.version}`
     this.shell = this._shell()
     this.debug = this._debug()
@@ -236,21 +120,20 @@ export class Config implements IConfig {
     this.dataDir = this.scopedEnvVar('DATA_DIR') || this.dir('data')
     this.errlog = path.join(this.cacheDir, 'error.log')
 
-    this.tsconfig = await this._tsConfig()
-    if (this.pjson.anycli.commands) {
-      this.commandsDir = path.join(this.root, this.pjson.anycli.commands)
-      this.commandsDirTS = await this._tsPath(this.pjson.anycli.commands)
-    }
-    this.hooks = _.mapValues(this.pjson.anycli.hooks || {}, h => _.castArray(h).map(h => path.join(this.root, h)))
-    this.hooksTS = await this._hooks()
-    if (typeof this.pjson.anycli.plugins === 'string') {
-      this.pluginsModule = path.join(this.root, this.pjson.anycli.plugins)
-      this.pluginsModuleTS = await this._tsPath(this.pjson.anycli.plugins)
-    }
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
-    this.topics = topicsToArray(this.pjson.anycli.topics || {})
+    debug('config done')
+  }
 
-    return this
+  async runHook<T extends {}>(event: string, opts?: T) {
+    debug('start %s hook', event)
+    await super.runHook(event, {...opts || {}, config: this})
+    debug('done %s hook', event)
+  }
+
+  async runCommand(id: string, argv: string[] = []) {
+    debug('runCommand %s %o', id, argv)
+    const cmd = this.findCommand(id, {must: true}).load()
+    await cmd.run(argv, this)
   }
 
   scopedEnvVar(k: string) {
@@ -269,80 +152,19 @@ export class Config implements IConfig {
       .toUpperCase()
   }
 
-  protected _topics() {
-  }
-
-  private dir(category: 'cache' | 'data' | 'config'): string {
+  protected dir(category: 'cache' | 'data' | 'config'): string {
     const base = process.env[`XDG_${category.toUpperCase()}_HOME`]
       || (this.windows && process.env.LOCALAPPDATA)
       || path.join(this.home, category === 'data' ? '.local/share' : '.' + category)
     return path.join(base, this.dirname)
   }
 
-  private windowsHome() { return this.windowsHomedriveHome() || this.windowsUserprofileHome() }
-  private windowsHomedriveHome() { return (process.env.HOMEDRIVE && process.env.HOMEPATH && path.join(process.env.HOMEDRIVE!, process.env.HOMEPATH!)) }
-  private windowsUserprofileHome() { return process.env.USERPROFILE }
-  private macosCacheDir(): string | undefined { return this.platform === 'darwin' && path.join(this.home, 'Library', 'Caches', this.dirname) || undefined }
+  protected windowsHome() { return this.windowsHomedriveHome() || this.windowsUserprofileHome() }
+  protected windowsHomedriveHome() { return (process.env.HOMEDRIVE && process.env.HOMEPATH && path.join(process.env.HOMEDRIVE!, process.env.HOMEPATH!)) }
+  protected windowsUserprofileHome() { return process.env.USERPROFILE }
+  protected macosCacheDir(): string | undefined { return this.platform === 'darwin' && path.join(this.home, 'Library', 'Caches', this.dirname) || undefined }
 
-  private async _tsConfig(): Promise<TSConfig | undefined> {
-    try {
-      // // ignore if no .git as it's likely not in dev mode
-      // if (!await fs.pathExists(path.join(this.root, '.git'))) return
-
-      const tsconfigPath = path.join(this.root, 'tsconfig.json')
-      const tsconfig = await readJSON(tsconfigPath)
-      if (!tsconfig || !tsconfig.compilerOptions) return
-      return tsconfig
-    } catch (err) {
-      if (err.code !== 'ENOENT') throw err
-    }
-  }
-
-  /**
-   * convert a path from the compiled ./lib files to the ./src typescript source
-   * this is for developing typescript plugins/CLIs
-   * if there is a tsconfig and the original sources exist, it attempts to require ts-
-   */
-  private async _tsPath(orig: string): Promise<string | undefined> {
-    if (!orig || !this.tsconfig) return
-    orig = path.join(this.root, orig)
-    let {rootDirs, outDir} = this.tsconfig.compilerOptions
-    if (!rootDirs || !rootDirs.length || !outDir) return
-    let rootDir = rootDirs[0]
-    try {
-      // rewrite path from ./lib/foo to ./src/foo
-      const lib = path.join(this.root, outDir) // ./lib
-      const src = path.join(this.root, rootDir) // ./src
-      const relative = path.relative(lib, orig) // ./commands
-      const out = path.join(src, relative) // ./src/commands
-      // this can be a directory of commands or point to a hook file
-      // if it's a directory, we check if the path exists. If so, return the path to the directory.
-      // For hooks, it might point to a module, not a file. Something like "./hooks/myhook"
-      // That file doesn't exist, and the real file is "./hooks/myhook.ts"
-      // In that case we attempt to resolve to the filename. If it fails it will revert back to the lib path
-      if (await fs.pathExists(out) || await fs.pathExists(out + '.ts')) return out
-      return out
-    } catch (err) {
-      debug(err)
-      return
-    }
-  }
-
-  private async _hooks(): Promise<{[k: string]: string[]} | undefined> {
-    const hooks: {[k: string]: string[]} = {}
-    if (_.isEmpty(this.pjson.anycli.hooks)) return
-    for (let [k, h] of Object.entries(this.pjson.anycli.hooks)) {
-      hooks[k] = []
-      for (let m of _.castArray(h)) {
-        const ts = await this._tsPath(m as string)
-        if (!ts) return
-        hooks[k].push(ts)
-      }
-    }
-    return hooks
-  }
-
-  private _shell(): string {
+  protected _shell(): string {
     let shellPath
     const {SHELL, COMSPEC} = process.env
     if (SHELL) {
@@ -355,7 +177,7 @@ export class Config implements IConfig {
     return shellPath[shellPath.length - 1]
   }
 
-  private _debug(): number {
+  protected _debug(): number {
     try {
       const {enabled} = require('debug')(this.bin)
       if (enabled) return 1
@@ -366,61 +188,12 @@ export class Config implements IConfig {
   }
 }
 
-/**
- * find package root
- * for packages installed into node_modules this will go up directories until
- * it finds a node_modules directory with the plugin installed into it
- *
- * This is needed because of the deduping npm does
- */
-async function findPkg(name: string | undefined, root: string) {
-  // essentially just "cd .."
-  function* up(from: string) {
-    while (path.dirname(from) !== from) {
-      yield from
-      from = path.dirname(from)
-    }
-    yield from
-  }
-  for (let next of up(root)) {
-    let cur
-    if (name) {
-      cur = path.join(next, 'node_modules', name, 'package.json')
-    } else {
-      cur = path.join(next, 'package.json')
-    }
-    if (await fs.pathExists(cur)) return cur
-  }
+export function load(opts: Options = (module.parent && module.parent.filename) || __dirname) {
+  if (typeof opts === 'string') opts = {root: opts}
+  if (isConfig(opts)) return opts
+  return new Config(opts)
 }
 
-/**
- * returns true if config is instantiated and not ConfigOptions
- */
-export function isIConfig(o: any): o is IConfig {
-  return !!o._base
-}
-
-/**
- * reads a plugin/CLI's config
- */
-export async function read(opts: ConfigOptions = {}): Promise<IConfig> {
-  let root = opts.root || (module.parent && module.parent.parent && module.parent.parent.filename) || __dirname
-  const pkgPath = await findPkg(opts.name, root)
-  if (!pkgPath) throw new Error(`could not find package.json with ${inspect(opts)}`)
-  debug('reading plugin %s', path.dirname(pkgPath))
-  const pkg = await readPkg(pkgPath)
-  const config = new Config()
-  await config.load(path.dirname(pkgPath), pkg, opts.baseConfig)
-  return config
-}
-
-function topicsToArray(input: any, base?: string): ITopic[] {
-  if (!input) return []
-  base = base ? `${base}:` : ''
-  if (Array.isArray(input)) {
-    return input.concat(_.flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
-  }
-  return _.flatMap(Object.keys(input), k => {
-    return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
-  })
+function isConfig(o: any): o is IConfig {
+  return o && !!o._base
 }

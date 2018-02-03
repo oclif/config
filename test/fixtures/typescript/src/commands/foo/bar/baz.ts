@@ -1,8 +1,5 @@
-// import Command from '@anycli/command'
-// import cli from 'cli-ux'
-
-export default class {
-  async run() {
+export class Command {
+  static run() {
     console.log('it works!')
   }
 }

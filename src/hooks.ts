@@ -1,18 +1,16 @@
-import {ICommand} from './command'
-import {IConfig} from './config'
-import {IPlugin} from './plugin'
+import * as Config from '.'
 
 export interface Hooks {
   init: {id: string}
   update: {}
   'command_not_found': {id: string},
   'plugins:parse': {
-    pjson: IPlugin
+    pjson: Config.IPlugin
   }
   prerun: {
-    Command: ICommand
+    Command: Config.Command.Full
     argv: string[]
   }
 }
 
-export type IHook<T extends {}> = (options: T & {config: IConfig}) => any
+export type Hook<K extends keyof Hooks> = (options: Hooks[K] & {config: Config.IConfig}) => any
