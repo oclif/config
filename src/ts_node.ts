@@ -70,7 +70,7 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
   try {
     registerTSNode(root)
     const tsconfig = tsconfigs[root]
-    if (!tsconfig) return
+    if (!tsconfig) return orig
     const {rootDirs, outDir} = tsconfig.compilerOptions
     const rootDir = (rootDirs || [])[0]
     if (!rootDir || !outDir) return orig
