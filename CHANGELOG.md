@@ -1,3 +1,11 @@
+<a name="1.0.6"></a>
+## [1.0.6](https://github.com/anycli/config/compare/087771f2565357079300cb75202a6440bfbc4d49...v1.0.6) (2018-02-03)
+
+
+### Bug Fixes
+
+* fixed module.parent ([da123a7](https://github.com/anycli/config/commit/da123a7))
+
 <a name="1.0.5"></a>
 ## [1.0.5](https://github.com/anycli/config/compare/42ce9a24b907922d75fa1c5588b0424d95bbdfca...v1.0.5) (2018-02-03)
 
