@@ -1,11 +1,13 @@
-import {expect, fancy} from 'fancy-test'
 import * as os from 'os'
 import * as path from 'path'
 
 import * as Config from '../src'
 
+import {expect, fancy} from './test'
+
 describe('PluginConfig', () => {
   fancy
+  .resetConfig()
   .env({}, {clear: true})
   .stub(os, 'homedir', () => path.join('/my/home'))
   .stub(os, 'platform', () => 'darwin')
@@ -21,6 +23,7 @@ describe('PluginConfig', () => {
   })
 
   fancy
+  .resetConfig()
   .env({}, {clear: true})
   .stub(os, 'homedir', () => path.join('/my/home'))
   .stub(os, 'platform', () => 'linux')
@@ -36,6 +39,7 @@ describe('PluginConfig', () => {
   })
 
   fancy
+  .resetConfig()
   .env({LOCALAPPDATA: '/my/home/localappdata'}, {clear: true})
   .stub(os, 'homedir', () => path.join('/my/home'))
   .stub(os, 'platform', () => 'win32')
