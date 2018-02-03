@@ -1,3 +1,11 @@
+<a name="1.0.9"></a>
+## [1.0.9](https://github.com/anycli/config/compare/8cf88080bda2445eaacd9058fb5b2f08992b8b96...v1.0.9) (2018-02-03)
+
+
+### Bug Fixes
+
+* add ignoreManifest flag ([0988509](https://github.com/anycli/config/commit/0988509))
+
 <a name="1.0.8"></a>
 ## [1.0.8](https://github.com/anycli/config/compare/cec67ea6805e373d4f9241fffb0036a9a6fea118...v1.0.8) (2018-02-03)
 
