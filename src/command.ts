@@ -61,7 +61,7 @@ export namespace Command {
     plugin?: Config.IPlugin
     flags?: Parser.flags.Input<any>
     args?: Parser.args.Input
-    new<T>(argv: string[], config?: Config.Options): T
+    new<T>(config: Config.IConfig): T
     run(argv: string[], config?: Config.Options): Promise<any>
   }
 
