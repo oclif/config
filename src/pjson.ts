@@ -11,8 +11,8 @@ export interface PJSON extends Package {
     dirname?: string
     commands?: string
     hooks?: { [name: string]: string[] }
-    plugins?: PJSON.Plugin[]
-    devPlugins?: PJSON.Plugin[]
+    plugins?: (string | PJSON.Plugin)[]
+    devPlugins?: (string | PJSON.Plugin)[]
     title?: string
     description?: string
     topics?: {
@@ -26,13 +26,15 @@ export interface PJSON extends Package {
 }
 
 export namespace PJSON {
-  export type Plugin = string | {
-    type: 'user'
-    name: string
-    tag?: string
-  } | {
-    name: string
+  export type Plugin = User | Link
+  export interface User {
+    type: 'user',
+    name: string,
+    tag?: string,
+  }
+  export interface Link {
     type: 'link'
+    name: string
     root: string
   }
 }
