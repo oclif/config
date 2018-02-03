@@ -1,3 +1,11 @@
+<a name="1.0.10"></a>
+## [1.0.10](https://github.com/anycli/config/compare/098850980824d851d951756d4803a378367cce1f...v1.0.10) (2018-02-03)
+
+
+### Bug Fixes
+
+* add command/topic getters ([92a8316](https://github.com/anycli/config/commit/92a8316))
+
 <a name="1.0.9"></a>
 ## [1.0.9](https://github.com/anycli/config/compare/8cf88080bda2445eaacd9058fb5b2f08992b8b96...v1.0.9) (2018-02-03)
 
