@@ -1,3 +1,11 @@
+<a name="1.0.14"></a>
+## [1.0.14](https://github.com/anycli/config/compare/e479049efdf8e592eced0b33ac92250a0894dbee...v1.0.14) (2018-02-03)
+
+
+### Bug Fixes
+
+* add name to link plugins ([6b9e448](https://github.com/anycli/config/commit/6b9e448))
+
 <a name="1.0.13"></a>
 ## [1.0.13](https://github.com/anycli/config/compare/9165aba3a500d5329c867154156321c21afc62a7...v1.0.13) (2018-02-03)
 
