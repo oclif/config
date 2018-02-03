@@ -31,6 +31,7 @@ export namespace PJSON {
     name: string
     tag?: string
   } | {
+    name: string
     type: 'link'
     root: string
   }
