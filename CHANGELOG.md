@@ -1,3 +1,11 @@
+<a name="1.0.11"></a>
+## [1.0.11](https://github.com/anycli/config/compare/92a83167ce447dc7ed42e7f308ae8a435e9473b6...v1.0.11) (2018-02-03)
+
+
+### Bug Fixes
+
+* read user plugins ([39a534f](https://github.com/anycli/config/commit/39a534f))
+
 <a name="1.0.10"></a>
 ## [1.0.10](https://github.com/anycli/config/compare/098850980824d851d951756d4803a378367cce1f...v1.0.10) (2018-02-03)
 
