@@ -15,6 +15,7 @@ export interface Options {
   name?: string
   type?: string
   tag?: string
+  ignoreManifest?: boolean
 }
 
 export interface IPlugin {
@@ -88,8 +89,10 @@ export class Plugin implements IPlugin {
   plugins: IPlugin[] = []
   hooks!: {[k: string]: string[]}
   valid!: boolean
+  ignoreManifest: boolean
 
   constructor(opts: Options) {
+    this.ignoreManifest = !!opts.ignoreManifest
     this.type = opts.type || 'core'
     const root = findRoot(opts.name, opts.root)
     if (!root) throw new Error(`could not find package.json with ${inspect(opts)}`)
@@ -190,17 +193,23 @@ export class Plugin implements IPlugin {
   // findTopic(id: string, opts?: {must: boolean}): ITopic | undefined
 
   protected _manifest(): Config.Manifest {
-    try {
-      const p = path.join(this.root, '.anycli.manifest.json')
-      const manifest: Config.Manifest = loadJSON.sync(p)
-      if (manifest.version !== this.version) {
-        cli.warn(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
-      } else {
-        debug('using manifest from', p)
-        return manifest
+    const readManifest = () => {
+      try {
+        const p = path.join(this.root, '.anycli.manifest.json')
+        const manifest: Config.Manifest = loadJSON.sync(p)
+        if (manifest.version !== this.version) {
+          cli.warn(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
+        } else {
+          debug('using manifest from', p)
+          return manifest
+        }
+      } catch (err) {
+        if (err.code !== 'ENOENT') cli.warn(err)
       }
-    } catch (err) {
-      if (err.code !== 'ENOENT') cli.warn(err)
+    }
+    if (!this.ignoreManifest) {
+      let manifest = readManifest()
+      if (manifest) return manifest
     }
     if (this.commandsDir) return Config.Manifest.build(this.version, this.commandsDir, id => this._findCommand(id))
     return {version: this.version, commands: {}}
