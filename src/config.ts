@@ -1,6 +1,9 @@
+import cli from 'cli-ux'
 import * as os from 'os'
 import * as path from 'path'
+import * as readPkg from 'read-pkg'
 
+import {PJSON} from './pjson'
 import * as Plugin from './plugin'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
@@ -80,6 +83,7 @@ export interface IConfig extends Plugin.IPlugin {
    * npm registry to use for installing plugins
    */
   npmRegistry: string
+  userPJSON?: PJSON
 
   runCommand(id: string, argv?: string[]): Promise<void>
 }
@@ -99,11 +103,10 @@ export class Config extends Plugin.Plugin implements IConfig {
   userAgent: string
   debug: number = 0
   npmRegistry: string
+  userPJSON?: PJSON
 
   constructor(opts: Plugin.Options) {
     super(opts)
-
-    this.loadPlugins(true)
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
@@ -121,6 +124,23 @@ export class Config extends Plugin.Plugin implements IConfig {
     this.errlog = path.join(this.cacheDir, 'error.log')
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
+
+    try {
+      const devPlugins = this.pjson.anycli.devPlugins
+      if (devPlugins) this.loadPlugins(...devPlugins)
+    } catch (err) {
+      cli.warn(err)
+    }
+
+    try {
+      const userPJSONPath = path.join(this.dataDir, 'package.json')
+      const pjson = this.userPJSON = readPkg.sync(userPJSONPath) as any
+      if (!pjson.anycli) pjson.anycli = {schema: 1}
+      this.loadPlugins(...pjson.anycli.plugins)
+    } catch (err) {
+      if (err.code !== 'ENOENT') cli.warn(err)
+    }
+
     debug('config done')
   }
 

@@ -10,12 +10,12 @@ export interface PJSON extends Package {
     pluginScope?: string
     dirname?: string
     commands?: string
-    hooks: { [name: string]: string[] }
+    hooks?: { [name: string]: string[] }
     plugins?: PJSON.Plugin[]
     devPlugins?: PJSON.Plugin[]
     title?: string
     description?: string
-    topics: {
+    topics?: {
       [k: string]: {
         description?: string
         subtopics?: PJSON['anycli']['topics']

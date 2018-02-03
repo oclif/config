@@ -113,7 +113,7 @@ export class Plugin implements IPlugin {
     this.hooks = _.mapValues(this.pjson.anycli.hooks || {}, _.castArray)
 
     this.manifest = this._manifest()
-    this.loadPlugins()
+    this.loadPlugins(...this.pjson.anycli.plugins || [])
   }
 
   get commandsDir() {
@@ -226,10 +226,10 @@ export class Plugin implements IPlugin {
     return {version: this.version, commands: {}}
   }
 
-  protected loadPlugins(dev = false) {
-    const plugins = this.pjson.anycli[dev ? 'devPlugins' : 'plugins']
+  protected loadPlugins(...plugins: Config.PJSON.Plugin[]) {
+    if (!plugins.length) return
     if (!plugins || !plugins.length) return
-    debug(`loading ${dev ? 'dev ' : ''}plugins`, plugins)
+    debug('loading plugins', plugins)
     for (let plugin of plugins || []) {
       try {
         let opts: Options = {type: this.type, root: this.root}
