@@ -1,3 +1,11 @@
+<a name="1.0.7"></a>
+## [1.0.7](https://github.com/anycli/config/compare/da123a76a92740bd6ff9ce9d24712be99b3a38b6...v1.0.7) (2018-02-03)
+
+
+### Bug Fixes
+
+* move up config require just in case ([cec67ea](https://github.com/anycli/config/commit/cec67ea))
+
 <a name="1.0.6"></a>
 ## [1.0.6](https://github.com/anycli/config/compare/087771f2565357079300cb75202a6440bfbc4d49...v1.0.6) (2018-02-03)
 
