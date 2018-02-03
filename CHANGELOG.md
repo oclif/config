@@ -1,3 +1,11 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/anycli/config/compare/157fd437cac2c56236f15e770d212d133d022c94...v1.1.0) (2018-02-03)
+
+
+### Features
+
+* added init and prerun hooks ([cf9fe20](https://github.com/anycli/config/commit/cf9fe20))
+
 <a name="1.0.20"></a>
 ## [1.0.20](https://github.com/anycli/config/compare/7c21e7e688e2e735a19955bf3b792b6a175536d8...v1.0.20) (2018-02-03)
 
