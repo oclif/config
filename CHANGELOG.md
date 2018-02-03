@@ -1,3 +1,11 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/anycli/config/compare/aa67851770431cc8220b4ce00f3625ba7bf66c75...v1.1.2) (2018-02-03)
+
+
+### Bug Fixes
+
+* use argv for init ([78ace1b](https://github.com/anycli/config/commit/78ace1b))
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/anycli/config/compare/cf9fe2048d009cb8c1d298267a39a7e8cae52067...v1.1.1) (2018-02-03)
 
