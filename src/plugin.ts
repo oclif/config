@@ -62,8 +62,9 @@ export interface IPlugin {
    */
   valid: boolean
 
-  allCommands(): Config.Command.Plugin[]
-  allTopics(): Config.Topic[]
+  readonly commands: Config.Command.Plugin[]
+  readonly commandIDs: string[]
+  readonly topics: Config.Topic[]
   findCommand(id: string, opts: {must: true}): Config.Command.Plugin
   findCommand(id: string, opts?: {must: boolean}): Config.Command.Plugin | undefined
   findTopic(id: string, opts: {must: true}): Config.Topic
@@ -85,7 +86,7 @@ export class Plugin implements IPlugin {
   root!: string
   tag?: string
   manifest!: Config.Manifest
-  topics!: Config.Topic[]
+  _topics!: Config.Topic[]
   plugins: IPlugin[] = []
   hooks!: {[k: string]: string[]}
   valid!: boolean
@@ -108,7 +109,7 @@ export class Plugin implements IPlugin {
     }
     this.valid = this.pjson.anycli.schema === 1
 
-    this.topics = topicsToArray(this.pjson.anycli.topics || {})
+    this._topics = topicsToArray(this.pjson.anycli.topics || {})
     this.hooks = _.mapValues(this.pjson.anycli.hooks || {}, _.castArray)
 
     this.manifest = this._manifest()
@@ -119,19 +120,27 @@ export class Plugin implements IPlugin {
     return tsPath(this.root, this.pjson.anycli.commands)
   }
 
-  allTopics() {
-    let topics = [...this.topics]
+  get topics() {
+    let topics = [...this._topics]
     for (let plugin of this.plugins) {
-      topics = [...topics, ...plugin.allTopics()]
+      topics = [...topics, ...plugin.topics]
     }
     return topics
   }
 
-  allCommands() {
+  get commands() {
     let commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this._findCommand(id)}))
     for (let plugin of this.plugins) {
-      commands = [...commands, ...plugin.allCommands()]
+      commands = [...commands, ...plugin.commands]
+    }
+    return commands
+  }
+
+  get commandIDs() {
+    let commands = Object.keys(this.manifest.commands)
+    for (let plugin of this.plugins) {
+      commands = [...commands, ...plugin.commandIDs]
     }
     return commands
   }
@@ -176,7 +185,9 @@ export class Plugin implements IPlugin {
     const promises = (this.hooks[event] || [])
     .map(async hook => {
       try {
-        await undefault(require(tsPath(this.root, hook)))(opts)
+        const p = tsPath(this.root, hook)
+        debug('hook', event, p)
+        await undefault(require(p))(opts)
       } catch (err) {
         if (err.code === 'EEXIT') throw err
         cli.warn(err)
