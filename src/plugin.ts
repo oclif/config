@@ -191,10 +191,14 @@ export class Plugin implements IPlugin {
 
   protected _manifest(): Config.Manifest {
     try {
-      const manifest: Config.Manifest = loadJSON.sync(path.join(this.root, '.anycli.manifest.json'))
+      const p = path.join(this.root, '.anycli.manifest.json')
+      const manifest: Config.Manifest = loadJSON.sync(p)
       if (manifest.version !== this.version) {
         cli.warn(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
-      } else return manifest
+      } else {
+        debug('using manifest from', p)
+        return manifest
+      }
     } catch (err) {
       if (err.code !== 'ENOENT') cli.warn(err)
     }
