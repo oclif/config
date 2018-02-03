@@ -1,3 +1,11 @@
+<a name="1.0.19"></a>
+## [1.0.19](https://github.com/anycli/config/compare/14be9311c845e53153c1319accfffdd4ace3558f...v1.0.19) (2018-02-03)
+
+
+### Bug Fixes
+
+* fixed already loaded flag ([a617ab1](https://github.com/anycli/config/commit/a617ab1))
+
 <a name="1.0.18"></a>
 ## [1.0.18](https://github.com/anycli/config/compare/35897b079d42cf307a131ab9d53f7b3ebf7015af...v1.0.18) (2018-02-03)
 
