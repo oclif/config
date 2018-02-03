@@ -1,3 +1,11 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/anycli/config/compare/cf9fe2048d009cb8c1d298267a39a7e8cae52067...v1.1.1) (2018-02-03)
+
+
+### Bug Fixes
+
+* let command call the init hook ([aa67851](https://github.com/anycli/config/commit/aa67851))
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/anycli/config/compare/157fd437cac2c56236f15e770d212d133d022c94...v1.1.0) (2018-02-03)
 
