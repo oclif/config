@@ -28,7 +28,7 @@ describe('typescript', () => {
   withConfig
   .stdout()
   .it('runs init hook', async ctx => {
-    await ctx.config.runHook('init', {id: 'foo'})
+    await ctx.config.runHook('init', {argv: ['foo']})
     expect(ctx.stdout).to.equal('running ts init hook\n')
   })
 })
