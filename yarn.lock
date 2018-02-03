@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@anycli/parser@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@anycli/parser/-/parser-3.2.1.tgz#89fe1c37f8792d6c1cba7d1c4ec2fb42b290ce05"
+"@anycli/parser@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@anycli/parser/-/parser-3.2.2.tgz#ee2616e889e7dd78bc269638b7eee3f3096e2c91"
   dependencies:
     "@anycli/screen" "^0.0.3"
     chalk "^2.3.0"
@@ -614,9 +614,9 @@ extract-stack@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/extract-stack/-/extract-stack-1.0.0.tgz#b97acaf9441eea2332529624b732fc5a1c8165fa"
 
-fancy-test@^0.6.8:
-  version "0.6.8"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-0.6.8.tgz#8f5f335783e8f54bd6261ba1d09b83826333ad11"
+fancy-test@^0.6.10:
+  version "0.6.10"
+  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-0.6.10.tgz#39001bcb117b7067c851dc58da6236a08a49e267"
   dependencies:
     lodash "^4.17.4"
     stdout-stderr "^0.1.6"
