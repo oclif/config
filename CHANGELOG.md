@@ -1,3 +1,11 @@
+<a name="1.0.5"></a>
+## [1.0.5](https://github.com/anycli/config/compare/42ce9a24b907922d75fa1c5588b0424d95bbdfca...v1.0.5) (2018-02-03)
+
+
+### Bug Fixes
+
+* actually we need argv in ctor ([087771f](https://github.com/anycli/config/commit/087771f))
+
 <a name="1.0.4"></a>
 ## [1.0.4](https://github.com/anycli/config/compare/ed4c718eb06e01399fc8c3b1fde03c4d2b63cb15...v1.0.4) (2018-02-03)
 
