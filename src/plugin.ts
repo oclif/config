@@ -98,6 +98,7 @@ export class Plugin implements IPlugin {
   constructor(opts: Options) {
     this.ignoreManifest = !!opts.ignoreManifest
     this.type = opts.type || 'core'
+    this.tag = opts.tag
     const root = findRoot(opts.name, opts.root)
     if (!root) throw new Error(`could not find package.json with ${inspect(opts)}`)
     if (Plugin.loadedPlugins[root]) return Plugin.loadedPlugins[root]
