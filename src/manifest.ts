@@ -13,7 +13,7 @@ export interface Manifest {
 const debug = require('debug')('@anycli/config')
 
 export namespace Manifest {
-  export type FindCommandCB = (id: string) => Config.Command.Full
+  export type FindCommandCB = (id: string) => Config.Command.Class
 
   export function build(version: string, dir: string, findCommand: FindCommandCB): Manifest {
     debug(`loading IDs from ${dir}`)

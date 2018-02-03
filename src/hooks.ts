@@ -8,7 +8,7 @@ export interface Hooks {
     pjson: Config.IPlugin
   }
   prerun: {
-    Command: Config.Command.Full
+    Command: Config.Command.Class
     argv: string[]
   }
 }

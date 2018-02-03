@@ -59,19 +59,23 @@ export namespace Command {
     examples?: string[]
   }
 
-  export interface Full extends Base {
+  export interface Class extends Base {
     plugin?: Config.IPlugin
     flags?: Parser.flags.Input<any>
     args?: Parser.args.Input
-    new<T>(argv: string[], config?: Config.Options): T
+    new(argv: string[], config?: Config.Options): Instance
     run(argv: string[], config?: Config.Options): Promise<any>
   }
 
-  export interface Plugin extends Command {
-    load(): Full
+  export interface Instance {
+    _run(argv: string[]): Promise<any>
   }
 
-  export function toCached(c: Full): Command {
+  export interface Plugin extends Command {
+    load(): Class
+  }
+
+  export function toCached(c: Class): Command {
     return {
       title: c.title,
       id: c.id,

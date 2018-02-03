@@ -157,7 +157,7 @@ export class Plugin implements IPlugin {
     if (opts.must) throw new Error(`command ${id} not found`)
   }
 
-  _findCommand(id: string): Config.Command.Full {
+  _findCommand(id: string): Config.Command.Class {
     const search = (cmd: any) => {
       if (_.isFunction(cmd.run)) return cmd
       return Object.values(cmd).find((cmd: any) => _.isFunction(cmd.run))
