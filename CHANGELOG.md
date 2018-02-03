@@ -1,3 +1,11 @@
+<a name="1.0.18"></a>
+## [1.0.18](https://github.com/anycli/config/compare/35897b079d42cf307a131ab9d53f7b3ebf7015af...v1.0.18) (2018-02-03)
+
+
+### Bug Fixes
+
+* updated parser ([14be931](https://github.com/anycli/config/commit/14be931))
+
 <a name="1.0.17"></a>
 ## [1.0.17](https://github.com/anycli/config/compare/c0c83096944a5538738557a0535a47023ba32b99...v1.0.17) (2018-02-03)
 
