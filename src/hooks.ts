@@ -1,7 +1,7 @@
 import * as Config from '.'
 
 export interface Hooks {
-  init: {id: string}
+  init: {argv: string[]}
   prerun: {
     Command: Config.Command.Class
     argv: string[]
