@@ -3,7 +3,7 @@ import * as Config from '.'
 export interface Hooks {
   init: {argv: string[]}
   prerun: {
-    command: Config.Command
+    Command: Config.Command.Class
     argv: string[]
   }
   update: {}

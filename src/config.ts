@@ -156,9 +156,9 @@ export class Config extends Plugin.Plugin implements IConfig {
 
   async runCommand(id: string, argv: string[] = []) {
     debug('runCommand %s %o', id, argv)
-    const command = this.findCommand(id, {must: true})
-    await this.runHook('prerun', {command, argv})
-    await command.load().run(argv, this)
+    const command = this.findCommand(id, {must: true}).load()
+    await this.runHook('prerun', {Command: command, argv})
+    await command.run(argv, this)
   }
 
   scopedEnvVar(k: string) {

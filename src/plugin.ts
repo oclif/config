@@ -175,6 +175,7 @@ export class Plugin implements IPlugin {
     debug('require', p)
     const cmd = search(require(p))
     cmd.id = id
+    cmd.plugin = this
     return cmd
   }
 
