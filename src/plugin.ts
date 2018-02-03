@@ -103,7 +103,7 @@ export class Plugin implements IPlugin {
     const root = findRoot(opts.name, opts.root)
     if (!root) throw new Error(`could not find package.json with ${inspect(opts)}`)
     if (Plugin.loadedPlugins[root]) {
-      this.alreadyLoaded = true
+      Plugin.loadedPlugins[root].alreadyLoaded = true
       return Plugin.loadedPlugins[root]
     }
     Plugin.loadedPlugins[root] = this
