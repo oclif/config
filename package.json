@@ -1,7 +1,7 @@
 {
   "name": "@anycli/config",
   "description": "base config object and standard interfaces for anycli components",
-  "version": "0.3.3",
+  "version": "1.0.0",
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/anycli/config/issues",
   "dependencies": {

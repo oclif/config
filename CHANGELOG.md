@@ -1,3 +1,22 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/anycli/config/compare/567d46b2c0b1a42901cfd26957d3a99a2d2b1bec...v1.0.0) (2018-02-03)
+
+
+### Bug Fixes
+
+* add schema ([6083c8e](https://github.com/anycli/config/commit/6083c8e))
+
+
+### Features
+
+* move engine logic into config ([003c74f](https://github.com/anycli/config/commit/003c74f))
+
+
+### BREAKING CHANGES
+
+* this is a big refactor that consolidates the code from @anycli/config
+and @anycli/engine
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/anycli/config/compare/709921b96a11cb624d5ed6b4113eb9bf08be4fb7...v0.3.3) (2018-02-02)
 
