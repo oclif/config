@@ -5,7 +5,7 @@ import * as Plugin from './plugin'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
-export type Options = Plugin.Options | string | IConfig
+export type Options = Plugin.Options | string | IConfig | undefined
 
 const debug = require('debug')('@anycli/config')
 
