@@ -188,7 +188,7 @@ export class Config extends Plugin.Plugin implements IConfig {
   }
 }
 
-export function load(opts: Options = (module.parent && module.parent.filename) || __dirname) {
+export function load(opts: Options = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
   if (typeof opts === 'string') opts = {root: opts}
   if (isConfig(opts)) return opts
   return new Config(opts)

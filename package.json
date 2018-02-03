@@ -15,8 +15,8 @@
     "read-pkg": "^3.0.0"
   },
   "devDependencies": {
-    "@anycli/parser": "^3.0.4",
-    "@anycli/tslint": "^0.2.3",
+    "@anycli/parser": "^3.2.1",
+    "@anycli/tslint": "^0.2.5",
     "@types/chai": "^4.1.2",
     "@types/fs-extra": "^5.0.0",
     "@types/globby": "^6.1.0",
@@ -29,9 +29,9 @@
     "@types/read-pkg": "^3.0.0",
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
-    "eslint": "^4.16.0",
+    "eslint": "^4.17.0",
     "eslint-config-anycli": "^1.3.2",
-    "fancy-test": "^0.6.6",
+    "fancy-test": "^0.6.8",
     "mocha": "^5.0.0",
     "ts-node": "^4.1.0",
     "typescript": "^2.7.1"
