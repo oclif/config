@@ -1,3 +1,12 @@
+<a name="1.0.15"></a>
+## [1.0.15](https://github.com/anycli/config/compare/6b9e4481fd1f7432805408b551f8b108361c6443...v1.0.15) (2018-02-03)
+
+
+### Bug Fixes
+
+* add interfaces for plugin types ([9af2a66](https://github.com/anycli/config/commit/9af2a66))
+* improve plugin typing ([9a6e1d5](https://github.com/anycli/config/commit/9a6e1d5))
+
 <a name="1.0.14"></a>
 ## [1.0.14](https://github.com/anycli/config/compare/e479049efdf8e592eced0b33ac92250a0894dbee...v1.0.14) (2018-02-03)
 
