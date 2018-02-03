@@ -1,3 +1,11 @@
+<a name="1.0.12"></a>
+## [1.0.12](https://github.com/anycli/config/compare/39a534fc1748f38ecc75dc28672174b3745911f5...v1.0.12) (2018-02-03)
+
+
+### Bug Fixes
+
+* add Flag ([9165aba](https://github.com/anycli/config/commit/9165aba))
+
 <a name="1.0.11"></a>
 ## [1.0.11](https://github.com/anycli/config/compare/92a83167ce447dc7ed42e7f308ae8a435e9473b6...v1.0.11) (2018-02-03)
 
