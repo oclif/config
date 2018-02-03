@@ -3,6 +3,7 @@ import * as os from 'os'
 import * as path from 'path'
 import * as readPkg from 'read-pkg'
 
+import {Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'
 
@@ -147,15 +148,17 @@ export class Config extends Plugin.Plugin implements IConfig {
     debug('config done')
   }
 
-  async runHook<T extends {}>(event: string, opts?: T) {
+  async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     debug('start %s hook', event)
-    await super.runHook(event, {...opts || {}, config: this})
+    await super.runHook<T, K>(event, {...opts || {} as any, config: this})
     debug('done %s hook', event)
   }
 
   async runCommand(id: string, argv: string[] = []) {
+    await this.runHook('init', {id})
     debug('runCommand %s %o', id, argv)
     const cmd = this.findCommand(id, {must: true}).load()
+    await this.runHook('prerun', {Command: cmd, argv})
     await cmd.run(argv, this)
   }
 

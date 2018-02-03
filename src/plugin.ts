@@ -7,11 +7,11 @@ import * as readPkg from 'read-pkg'
 import {inspect} from 'util'
 
 import {Command} from './command'
+import {Hooks} from './hooks'
 import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {undefault} from './util'
 
 export interface Options {
   root: string
@@ -72,7 +72,7 @@ export interface IPlugin {
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
   findTopic(id: string, opts: {must: true}): Topic
   findTopic(id: string, opts?: {must: boolean}): Topic | undefined
-  runHook<T extends {}>(event: string, opts?: T): Promise<void>
+  runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]): Promise<void>
 }
 
 const debug = require('debug')('@anycli/config')
@@ -168,6 +168,7 @@ export class Plugin implements IPlugin {
   _findCommand(id: string): Command.Class {
     const search = (cmd: any) => {
       if (_.isFunction(cmd.run)) return cmd
+      if (cmd.default && cmd.default.run) return cmd.default
       return Object.values(cmd).find((cmd: any) => _.isFunction(cmd.run))
     }
     const p = require.resolve(path.join(this.commandsDir!, ...id.split(':')))
@@ -189,13 +190,19 @@ export class Plugin implements IPlugin {
     if (opts.must) throw new Error(`topic ${name} not found`)
   }
 
-  async runHook<T extends {}>(event: string, opts?: T) {
+  async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     const promises = (this.hooks[event] || [])
     .map(async hook => {
       try {
         const p = tsPath(this.root, hook)
         debug('hook', event, p)
-        await undefault(require(p))(opts)
+        const search = (m: any) => {
+          if (_.isFunction(m)) return m
+          if (m.default && _.isFunction(m.default)) return m.default
+          return Object.values(m).find((m: any) => _.isFunction(m))
+        }
+
+        await search(require(p))(opts)
       } catch (err) {
         if (err.code === 'EEXIT') throw err
         cli.warn(err)

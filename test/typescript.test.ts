@@ -1,7 +1,8 @@
-import {expect, fancy} from 'fancy-test'
 import * as path from 'path'
 
 import * as Config from '../src'
+
+import {expect, fancy} from './test'
 
 const root = path.resolve(__dirname, 'fixtures/typescript')
 const p = (p: string) => path.join(root, p)
@@ -19,8 +20,8 @@ describe('typescript', () => {
 
   withConfig
   .stdout()
-  .it('runs ts command', async ctx => {
-    ctx.config.runCommand('foo:bar:baz')
-    expect(ctx.stdout).to.equal('it works!\n')
+  .it('runs ts command init, and prerun hooks', async ctx => {
+    await ctx.config.runCommand('foo:bar:baz')
+    expect(ctx.stdout).to.equal('running ts init hook\nrunning ts prerun hook\nit works!\n')
   })
 })
