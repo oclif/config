@@ -1,3 +1,11 @@
+<a name="1.0.17"></a>
+## [1.0.17](https://github.com/anycli/config/compare/c0c83096944a5538738557a0535a47023ba32b99...v1.0.17) (2018-02-03)
+
+
+### Bug Fixes
+
+* skip loading plugin if already loaded ([35897b0](https://github.com/anycli/config/commit/35897b0))
+
 <a name="1.0.16"></a>
 ## [1.0.16](https://github.com/anycli/config/compare/9a6e1d5d0979a7acbd12894b666d2da61c93e975...v1.0.16) (2018-02-03)
 
