@@ -20,8 +20,15 @@ describe('typescript', () => {
 
   withConfig
   .stdout()
-  .it('runs ts command init, and prerun hooks', async ctx => {
+  .it('runs ts command and prerun hooks', async ctx => {
     await ctx.config.runCommand('foo:bar:baz')
-    expect(ctx.stdout).to.equal('running ts init hook\nrunning ts prerun hook\nit works!\n')
+    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\n')
+  })
+
+  withConfig
+  .stdout()
+  .it('runs init hook', async ctx => {
+    await ctx.config.runHook('init', {id: 'foo'})
+    expect(ctx.stdout).to.equal('running ts init hook\n')
   })
 })

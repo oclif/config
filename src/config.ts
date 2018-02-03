@@ -155,7 +155,6 @@ export class Config extends Plugin.Plugin implements IConfig {
   }
 
   async runCommand(id: string, argv: string[] = []) {
-    await this.runHook('init', {id})
     debug('runCommand %s %o', id, argv)
     const cmd = this.findCommand(id, {must: true}).load()
     await this.runHook('prerun', {Command: cmd, argv})
