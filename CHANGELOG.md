@@ -1,3 +1,11 @@
+<a name="1.0.20"></a>
+## [1.0.20](https://github.com/anycli/config/compare/7c21e7e688e2e735a19955bf3b792b6a175536d8...v1.0.20) (2018-02-03)
+
+
+### Bug Fixes
+
+* rename scope ([157fd43](https://github.com/anycli/config/commit/157fd43))
+
 <a name="1.0.19"></a>
 ## [1.0.19](https://github.com/anycli/config/compare/14be9311c845e53153c1319accfffdd4ace3558f...v1.0.19) (2018-02-03)
 
