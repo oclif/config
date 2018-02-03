@@ -34,7 +34,7 @@ export namespace PJSON {
       schema?: number
       bin?: string
       npmRegistry?: string
-      pluginScope?: string
+      scope?: string
       dirname?: string
     }
   }
