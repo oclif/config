@@ -1,3 +1,11 @@
+<a name="1.0.13"></a>
+## [1.0.13](https://github.com/anycli/config/compare/9165aba3a500d5329c867154156321c21afc62a7...v1.0.13) (2018-02-03)
+
+
+### Bug Fixes
+
+* add instance ([e479049](https://github.com/anycli/config/commit/e479049))
+
 <a name="1.0.12"></a>
 ## [1.0.12](https://github.com/anycli/config/compare/39a534fc1748f38ecc75dc28672174b3745911f5...v1.0.12) (2018-02-03)
 
