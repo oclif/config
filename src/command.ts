@@ -1,7 +1,7 @@
 import * as Parser from '@anycli/parser'
-import * as _ from 'lodash'
 
 import * as Config from '.'
+import {mapValues} from './util'
 
 export interface Command {
   id: string
@@ -83,7 +83,7 @@ export namespace Command {
       usage: c.usage,
       hidden: c.hidden,
       aliases: c.aliases || [],
-      flags: _.mapValues(c.flags || {}, (flag, name) => {
+      flags: mapValues(c.flags || {}, (flag, name) => {
         if (flag.type === 'boolean') {
           return {
             name,
@@ -103,7 +103,7 @@ export namespace Command {
           required: flag.required,
           helpValue: flag.helpValue,
           options: flag.options,
-          default: _.isFunction(flag.default) ? flag.default({options: {}, flags: {}}) : flag.default,
+          default: typeof flag.default === 'function' ? flag.default({options: {}, flags: {}}) : flag.default,
         }
       }),
       args: c.args ? c.args.map(a => ({
@@ -111,7 +111,7 @@ export namespace Command {
         description: a.description,
         required: a.required,
         options: a.options,
-        default: _.isFunction(a.default) ? a.default({}) : a.default,
+        default: typeof a.default === 'function' ? a.default({}) : a.default,
         hidden: a.hidden,
       })) : {} as Command['args'],
     }

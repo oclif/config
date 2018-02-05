@@ -1,4 +1,3 @@
-import cli from 'cli-ux'
 import * as os from 'os'
 import * as path from 'path'
 import * as readPkg from 'read-pkg'
@@ -133,7 +132,7 @@ export class Config extends Plugin.Plugin implements IConfig {
       const devPlugins = this.pjson.anycli.devPlugins
       if (devPlugins) this.loadPlugins(this.root, devPlugins)
     } catch (err) {
-      cli.warn(err)
+      process.emitWarning(err)
     }
 
     try {
@@ -142,7 +141,7 @@ export class Config extends Plugin.Plugin implements IConfig {
       if (!pjson.anycli) pjson.anycli = {schema: 1}
       this.loadPlugins(userPJSONPath, pjson.anycli.plugins)
     } catch (err) {
-      if (err.code !== 'ENOENT') cli.warn(err)
+      if (err.code !== 'ENOENT') process.emitWarning(err)
     }
 
     debug('config done')

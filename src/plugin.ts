@@ -1,7 +1,5 @@
-import cli from 'cli-ux'
 import * as fs from 'fs-extra'
 import * as loadJSON from 'load-json-file'
-import * as _ from 'lodash'
 import * as path from 'path'
 import * as readPkg from 'read-pkg'
 import {inspect} from 'util'
@@ -12,6 +10,7 @@ import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
+import {flatMap, mapValues} from './util'
 
 export interface Options {
   root: string
@@ -118,7 +117,7 @@ export class Plugin implements IPlugin {
     this.valid = this.pjson.anycli.schema === 1
 
     this._topics = topicsToArray(this.pjson.anycli.topics || {})
-    this.hooks = _.mapValues(this.pjson.anycli.hooks || {}, _.castArray)
+    this.hooks = mapValues(this.pjson.anycli.hooks || {}, i => Array.isArray(i) ? i : [i])
 
     this.manifest = this._manifest()
     this.loadPlugins(this.root, this.pjson.anycli.plugins || [])
@@ -167,9 +166,9 @@ export class Plugin implements IPlugin {
 
   _findCommand(id: string): Command.Class {
     const search = (cmd: any) => {
-      if (_.isFunction(cmd.run)) return cmd
+      if (typeof cmd.run === 'function') return cmd
       if (cmd.default && cmd.default.run) return cmd.default
-      return Object.values(cmd).find((cmd: any) => _.isFunction(cmd.run))
+      return Object.values(cmd).find((cmd: any) => typeof cmd.run === 'function')
     }
     const p = require.resolve(path.join(this.commandsDir!, ...id.split(':')))
     debug('require', p)
@@ -198,15 +197,15 @@ export class Plugin implements IPlugin {
         const p = tsPath(this.root, hook)
         debug('hook', event, p)
         const search = (m: any) => {
-          if (_.isFunction(m)) return m
-          if (m.default && _.isFunction(m.default)) return m.default
-          return Object.values(m).find((m: any) => _.isFunction(m))
+          if (typeof m === 'function') return m
+          if (m.default && typeof m.default === 'function') return m.default
+          return Object.values(m).find((m: any) => typeof m === 'function')
         }
 
         await search(require(p))(opts)
       } catch (err) {
         if (err.code === 'EEXIT') throw err
-        cli.warn(err)
+        process.emitWarning(err)
       }
     })
     promises.push(...this.plugins.map(p => p.runHook(event, opts)))
@@ -225,13 +224,13 @@ export class Plugin implements IPlugin {
         const p = path.join(this.root, '.anycli.manifest.json')
         const manifest: Manifest = loadJSON.sync(p)
         if (manifest.version !== this.version) {
-          cli.warn(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
+          process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
         } else {
           debug('using manifest from', p)
           return manifest
         }
       } catch (err) {
-        if (err.code !== 'ENOENT') cli.warn(err)
+        if (err.code !== 'ENOENT') process.emitWarning(err)
       }
     }
     if (!this.ignoreManifest) {
@@ -259,7 +258,7 @@ export class Plugin implements IPlugin {
         }
         this.plugins.push(new Plugin(opts))
       } catch (err) {
-        cli.warn(err)
+        process.emitWarning(err)
       }
     }
     return plugins
@@ -270,9 +269,9 @@ function topicsToArray(input: any, base?: string): Topic[] {
   if (!input) return []
   base = base ? `${base}:` : ''
   if (Array.isArray(input)) {
-    return input.concat(_.flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
+    return input.concat(flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
   }
-  return _.flatMap(Object.keys(input), k => {
+  return flatMap(Object.keys(input), k => {
     return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
   })
 }
