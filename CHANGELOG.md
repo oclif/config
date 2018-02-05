@@ -1,3 +1,11 @@
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/anycli/config/compare/a436947f7dd537282934b1398b952102762fb1de...v1.1.8) (2018-02-05)
+
+
+### Bug Fixes
+
+* rethrow cli-ux errors ([23c3d2f](https://github.com/anycli/config/commit/23c3d2f))
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/anycli/config/compare/6ce0cdd5fcb876c4f2cb869b350f499784494d5d...v1.1.7) (2018-02-05)
 
