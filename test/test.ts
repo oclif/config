@@ -1,4 +1,4 @@
-import {expect, fancy as base, FancyTypes, NockScope} from 'fancy-test'
+import {expect, fancy as base, FancyTypes} from 'fancy-test'
 
 import * as Config from '../src'
 
@@ -13,5 +13,4 @@ export const fancy = base
 export {
   expect,
   FancyTypes,
-  NockScope,
 }

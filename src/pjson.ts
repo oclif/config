@@ -1,6 +1,5 @@
-import {Package} from 'read-pkg'
-
 export interface PJSON {
+  [k: string]: any
   dependencies?: {[name: string]: string}
   anycli: {
     schema?: number
@@ -8,7 +7,7 @@ export interface PJSON {
 }
 
 export namespace PJSON {
-  export interface Plugin extends PJSON, Package {
+  export interface Plugin extends PJSON {
     name: string
     version: string
     anycli: PJSON['anycli'] & {

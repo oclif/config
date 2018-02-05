@@ -1,7 +1,8 @@
-import * as fs from 'fs-extra'
-import * as loadJSON from 'load-json-file'
+import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
+
+import {loadJSONSync} from './util'
 
 const tsconfigs: {[root: string]: TSConfig} = {}
 const rootDirs: string[] = []
@@ -49,7 +50,7 @@ function loadTSConfig(root: string): TSConfig | undefined {
     // if (!await fs.pathExists(path.join(this.root, '.git'))) return
 
     const tsconfigPath = path.join(root, 'tsconfig.json')
-    const tsconfig = loadJSON.sync(tsconfigPath)
+    const tsconfig = loadJSONSync(tsconfigPath)
     if (!tsconfig || !tsconfig.compilerOptions) return
     return tsconfig
   } catch (err) {
@@ -84,7 +85,7 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     // For hooks, it might point to a module, not a file. Something like "./hooks/myhook"
     // That file doesn't exist, and the real file is "./hooks/myhook.ts"
     // In that case we attempt to resolve to the filename. If it fails it will revert back to the lib path
-    if (fs.pathExistsSync(out) || fs.pathExistsSync(out + '.ts')) return out
+    if (fs.existsSync(out) || fs.existsSync(out + '.ts')) return out
     else return orig
   } catch (err) {
     debug(err)

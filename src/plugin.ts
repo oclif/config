@@ -1,7 +1,5 @@
-import * as fs from 'fs-extra'
-import * as loadJSON from 'load-json-file'
+import * as fs from 'fs'
 import * as path from 'path'
-import * as readPkg from 'read-pkg'
 import {inspect} from 'util'
 
 import {Command} from './command'
@@ -10,7 +8,7 @@ import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {flatMap, mapValues} from './util'
+import {flatMap, loadJSONSync, mapValues} from './util'
 
 export interface Options {
   root: string
@@ -108,7 +106,7 @@ export class Plugin implements IPlugin {
     Plugin.loadedPlugins[root] = this
     this.root = root
     debug('reading plugin %s', root)
-    this.pjson = readPkg.sync(path.join(root, 'package.json')) as any
+    this.pjson = loadJSONSync(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
     this.version = this.pjson.version
     if (!this.pjson.anycli) {
@@ -222,7 +220,7 @@ export class Plugin implements IPlugin {
     const readManifest = () => {
       try {
         const p = path.join(this.root, '.anycli.manifest.json')
-        const manifest: Manifest = loadJSON.sync(p)
+        const manifest: Manifest = loadJSONSync(p)
         if (manifest.version !== this.version) {
           process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
         } else {
@@ -299,6 +297,6 @@ function findRoot(name: string | undefined, root: string) {
     } else {
       cur = path.join(next, 'package.json')
     }
-    if (fs.pathExistsSync(cur)) return path.dirname(cur)
+    if (fs.existsSync(cur)) return path.dirname(cur)
   }
 }

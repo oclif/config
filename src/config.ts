@@ -1,10 +1,10 @@
 import * as os from 'os'
 import * as path from 'path'
-import * as readPkg from 'read-pkg'
 
 import {Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'
+import {loadJSONSync} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
@@ -137,7 +137,7 @@ export class Config extends Plugin.Plugin implements IConfig {
 
     try {
       const userPJSONPath = path.join(this.dataDir, 'package.json')
-      const pjson = this.userPJSON = readPkg.sync(userPJSONPath) as any
+      const pjson = this.userPJSON = loadJSONSync(userPJSONPath)
       if (!pjson.anycli) pjson.anycli = {schema: 1}
       this.loadPlugins(userPJSONPath, pjson.anycli.plugins)
     } catch (err) {
