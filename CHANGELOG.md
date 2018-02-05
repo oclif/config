@@ -1,3 +1,11 @@
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/anycli/config/compare/14dcaa52767d9b76e391b702072c832af902afec...v1.1.6) (2018-02-05)
+
+
+### Bug Fixes
+
+* allow custom hooks ([6ce0cdd](https://github.com/anycli/config/commit/6ce0cdd))
+
 <a name="1.1.5"></a>
 ## [1.1.5](https://github.com/anycli/config/compare/177bf45cdce6c80ee72a6d8853ad0af358802879...v1.1.5) (2018-02-05)
 
