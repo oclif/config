@@ -17,4 +17,12 @@ export interface Hooks {
   }
 }
 
-export type Hook<K extends keyof Hooks> = (options: Hooks[K] & {config: Config.IConfig}) => any
+export type Hook<K extends keyof Hooks> = (this: Hook.Context, options: Hooks[K] & {config: Config.IConfig}) => any
+
+export namespace Hook {
+  export interface Context {
+    exit(code?: number): void
+    error(message: string | Error, options?: {exit?: number}): void
+    log(message?: any): void
+  }
+}

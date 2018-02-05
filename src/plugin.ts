@@ -4,7 +4,8 @@ import {inspect} from 'util'
 
 import {Command} from './command'
 import Debug from './debug'
-import {Hooks} from './hooks'
+import {ExitError} from './errors'
+import {Hook, Hooks} from './hooks'
 import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
@@ -190,18 +191,29 @@ export class Plugin implements IPlugin {
   }
 
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
+    const context: Hook.Context = {
+      exit(code) {
+        throw new ExitError(code)
+      },
+      log(message) {
+        process.stdout.write((message || '') + '\n')
+      },
+      error(message, options = {}) {
+        throw new ExitError(message, options.exit)
+      },
+    }
     const promises = (this.hooks[event] || [])
     .map(async hook => {
       try {
         const p = tsPath(this.root, hook)
         debug('hook', event, p)
-        const search = (m: any) => {
+        const search = (m: any): Hook<K> => {
           if (typeof m === 'function') return m
           if (m.default && typeof m.default === 'function') return m.default
-          return Object.values(m).find((m: any) => typeof m === 'function')
+          return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
         }
 
-        await search(require(p))(opts)
+        await search(require(p)).call(context, opts)
       } catch (err) {
         if (err && err['cli-ux'] && err['cli-ux'].exit !== undefined) throw err
         process.emitWarning(err)
