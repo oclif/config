@@ -1,3 +1,11 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/anycli/config/compare/23c3d2f063ecbe3d34ee56b5063d8298a2a53349...v1.2.0) (2018-02-05)
+
+
+### Features
+
+* add hook context ([c287a0e](https://github.com/anycli/config/commit/c287a0e))
+
 <a name="1.1.8"></a>
 ## [1.1.8](https://github.com/anycli/config/compare/a436947f7dd537282934b1398b952102762fb1de...v1.1.8) (2018-02-05)
 
