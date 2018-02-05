@@ -24,7 +24,7 @@ export class CLIError extends Error {
 
   render() {
     let cli
-    try { cli = require('cli-ux') } catch {}
+    try { cli = require('cli-ux').cli } catch {}
     if (cli) return cli.error(this)
     let red: typeof Chalk.red = ((s: string) => s) as any
     try {red = require('chalk').red} catch {}
