@@ -195,8 +195,9 @@ export class Plugin implements IPlugin {
       exit(code) {
         throw new ExitError(code)
       },
-      log(message) {
-        process.stdout.write((message || '') + '\n')
+      log(message: any = '') {
+        message = typeof message === 'string' ? message : inspect(message)
+        process.stdout.write(message + '\n')
       },
       error(message, options: {exit?: number} = {}) {
         throw new CLIError(message, options)
