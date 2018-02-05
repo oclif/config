@@ -1,3 +1,11 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/anycli/config/compare/c287a0ea59fa9c7d37d1490dfa36e252cf367c92...v1.2.1) (2018-02-05)
+
+
+### Bug Fixes
+
+* add exit code to error ([4297d2a](https://github.com/anycli/config/commit/4297d2a))
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/anycli/config/compare/23c3d2f063ecbe3d34ee56b5063d8298a2a53349...v1.2.0) (2018-02-05)
 
