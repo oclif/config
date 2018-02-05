@@ -557,9 +557,9 @@ external-editor@^2.0.4:
     iconv-lite "^0.4.17"
     tmp "^0.0.33"
 
-fancy-test@^0.6.10:
-  version "0.6.10"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-0.6.10.tgz#39001bcb117b7067c851dc58da6236a08a49e267"
+fancy-test@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-1.0.0.tgz#116082e880c3ee486da58ff81bd7ce1eeb3b69b3"
   dependencies:
     lodash "^4.17.4"
     stdout-stderr "^0.1.6"
