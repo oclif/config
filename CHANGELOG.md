@@ -1,3 +1,16 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/anycli/config/compare/7049d277225408dc81b0633d7c4cbeca13965bf2...v1.3.0) (2018-02-05)
+
+
+### Bug Fixes
+
+* add tslint ignore ([20f2c72](https://github.com/anycli/config/commit/20f2c72))
+
+
+### Features
+
+* added error rendering ([2550854](https://github.com/anycli/config/commit/2550854))
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/anycli/config/compare/0464eed05da94f69d210fd6b8d67f35616e5ef22...v1.2.3) (2018-02-05)
 
