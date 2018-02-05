@@ -1,3 +1,11 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/anycli/config/compare/7dbb4c961d47f219501fd867fe05c78292bfa73a...v1.1.4) (2018-02-05)
+
+
+### Bug Fixes
+
+* make dependencies optional ([177bf45](https://github.com/anycli/config/commit/177bf45))
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/anycli/config/compare/29af655382106ac3cb7f7457a6ae84e1f78c709a...v1.1.3) (2018-02-05)
 
