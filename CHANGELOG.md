@@ -1,3 +1,12 @@
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/anycli/config/compare/0464eed05da94f69d210fd6b8d67f35616e5ef22...v1.2.3) (2018-02-05)
+
+
+### Bug Fixes
+
+* fixed ExitError ([7049d27](https://github.com/anycli/config/commit/7049d27))
+* fixed ExitError ([c0e94ba](https://github.com/anycli/config/commit/c0e94ba))
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/anycli/config/compare/4297d2a41f6a9581c9183f662ce5f89602822cf4...v1.2.2) (2018-02-05)
 
