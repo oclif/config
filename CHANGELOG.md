@@ -1,3 +1,11 @@
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/anycli/config/compare/29af655382106ac3cb7f7457a6ae84e1f78c709a...v1.1.3) (2018-02-05)
+
+
+### Bug Fixes
+
+* remove cli-ux and lodash from deps ([7dbb4c9](https://github.com/anycli/config/commit/7dbb4c9))
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/anycli/config/compare/aa67851770431cc8220b4ce00f3625ba7bf66c75...v1.1.2) (2018-02-03)
 
