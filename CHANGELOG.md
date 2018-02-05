@@ -1,3 +1,11 @@
+<a name="1.3.4"></a>
+## [1.3.4](https://github.com/anycli/config/compare/2389fe555f24f2bd1a902be3185e7ec4f0379495...v1.3.4) (2018-02-05)
+
+
+### Bug Fixes
+
+* inspect log input ([3de1e0d](https://github.com/anycli/config/commit/3de1e0d))
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/anycli/config/compare/ee7aef4a4080c9b8983ba322e03db5a0a09135ea...v1.3.3) (2018-02-05)
 
