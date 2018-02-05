@@ -150,7 +150,7 @@ export class Config extends Plugin.Plugin implements IConfig {
 
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     debug('start %s hook', event)
-    await super.runHook<T, K>(event, {...opts || {} as any, config: this})
+    await super.runHook<T, K>(event, {...opts as any || {}, config: this})
     debug('done %s hook', event)
   }
 
