@@ -15,7 +15,13 @@ export namespace Manifest {
   export type FindCommandCB = (id: string) => Command.Class
 
   export function build(version: string, dir: string, findCommand: FindCommandCB): Manifest {
-    const globby: typeof Globby = require('globby')
+    let globby: typeof Globby
+    try {
+      globby = require('globby')
+    } catch {
+      debug('not loading plugins, globby not found')
+      return {} as any
+    }
     debug(`loading IDs from ${dir}`)
     const ids = globby.sync(['**/*.+(js|ts)', '!**/*.+(d.ts|test.ts|test.js)'], {cwd: dir})
     .map(file => {
