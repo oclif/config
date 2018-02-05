@@ -17,7 +17,7 @@ export class ExitError extends Error {
     if (error instanceof Error) {
       return addExitCode(error as any)
     }
-    super(error || `${exitCode}: ${exitCode}`)
+    super(error || `EEXIT: ${exitCode}`)
     addExitCode(this)
     this.code = 'EEXIT'
   }
