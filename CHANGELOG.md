@@ -1,3 +1,11 @@
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/anycli/config/compare/6ce0cdd5fcb876c4f2cb869b350f499784494d5d...v1.1.7) (2018-02-05)
+
+
+### Bug Fixes
+
+* optionally include id on init ([a436947](https://github.com/anycli/config/commit/a436947))
+
 <a name="1.1.6"></a>
 ## [1.1.6](https://github.com/anycli/config/compare/14dcaa52767d9b76e391b702072c832af902afec...v1.1.6) (2018-02-05)
 
