@@ -1,3 +1,11 @@
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/anycli/config/compare/ee7aef4a4080c9b8983ba322e03db5a0a09135ea...v1.3.3) (2018-02-05)
+
+
+### Bug Fixes
+
+* fixed passing error to cli-ux ([2389fe5](https://github.com/anycli/config/commit/2389fe5))
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/anycli/config/compare/5dc1d5ed9a430f5cebc2ff1987757c04c0c3ae39...v1.3.2) (2018-02-05)
 
