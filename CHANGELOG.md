@@ -1,3 +1,11 @@
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/anycli/config/compare/20f2c72ff7ceb342213a66fc0e7809447e2371a3...v1.3.1) (2018-02-05)
+
+
+### Bug Fixes
+
+* improve error handling ([5dc1d5e](https://github.com/anycli/config/commit/5dc1d5e))
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/anycli/config/compare/7049d277225408dc81b0633d7c4cbeca13965bf2...v1.3.0) (2018-02-05)
 
