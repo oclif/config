@@ -2,6 +2,7 @@ import * as os from 'os'
 import * as path from 'path'
 
 import Debug from './debug'
+import {CLIError} from './errors'
 import {Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'
@@ -156,7 +157,9 @@ export class Config extends Plugin.Plugin implements IConfig {
 
   async runCommand(id: string, argv: string[] = []) {
     debug('runCommand %s %o', id, argv)
-    const command = this.findCommand(id, {must: true}).load()
+    const c = this.findCommand(id)
+    if (!c) throw new CLIError(`command ${id} not found`)
+    const command = c.load()
     await this.runHook('prerun', {Command: command, argv})
     await command.run(argv, this)
   }

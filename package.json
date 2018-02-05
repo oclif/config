@@ -4,14 +4,19 @@
   "version": "1.2.3",
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/anycli/config/issues",
-  "dependencies": {},
+  "dependencies": {
+    "indent-string": "^3.2.0",
+    "wrap-ansi": "^3.0.1"
+  },
   "devDependencies": {
     "@anycli/parser": "^3.2.4",
     "@anycli/tslint": "^0.2.5",
     "@types/chai": "^4.1.2",
     "@types/globby": "^6.1.0",
+    "@types/indent-string": "^3.0.0",
     "@types/mocha": "^2.2.48",
     "@types/node": "^9.4.0",
+    "@types/wrap-ansi": "^2.0.14",
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
     "debug": "^3.1.0",
