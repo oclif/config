@@ -9,15 +9,16 @@ export class ExitError extends Error {
       exitCode = error
       error = undefined
     }
-    const addCode = (error: ExitError) => {
+    const addExitCode = (error: ExitError) => {
       error['cli-ux'] = error['cli-ux'] || {}
       error['cli-ux'].exit = exitCode
       return error
     }
     if (error instanceof Error) {
-      return addCode(error as any)
+      return addExitCode(error as any)
     }
     super(error || `${exitCode}: ${status}`)
+    addExitCode(this)
     this.code = 'EEXIT'
   }
 }
