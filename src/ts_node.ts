@@ -2,13 +2,14 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
 
+import Debug from './debug'
 import {loadJSONSync} from './util'
 
 const tsconfigs: {[root: string]: TSConfig} = {}
 const rootDirs: string[] = []
 const typeRoots = [`${__dirname}/../node_modules/@types`]
 
-const debug = require('debug')('@anycli/config')
+const debug = Debug()
 
 export interface TSConfig {
   compilerOptions: {

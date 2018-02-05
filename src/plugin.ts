@@ -3,6 +3,7 @@ import * as path from 'path'
 import {inspect} from 'util'
 
 import {Command} from './command'
+import Debug from './debug'
 import {Hooks} from './hooks'
 import {Manifest} from './manifest'
 import {PJSON} from './pjson'
@@ -72,7 +73,7 @@ export interface IPlugin {
   runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]): Promise<void>
 }
 
-const debug = require('debug')('@anycli/config')
+const debug = Debug()
 const _pjson = require('../package.json')
 
 export class Plugin implements IPlugin {

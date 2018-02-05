@@ -1,6 +1,7 @@
 import * as os from 'os'
 import * as path from 'path'
 
+import Debug from './debug'
 import {Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'
@@ -10,7 +11,7 @@ export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | '
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
 export type Options = Plugin.Options | string | IConfig | undefined
 
-const debug = require('debug')('@anycli/config')
+const debug = Debug()
 
 export interface IConfig extends Plugin.IPlugin {
   pjson: PJSON.CLI
@@ -202,13 +203,12 @@ export class Config extends Plugin.Plugin implements IConfig {
   }
 
   protected _debug(): number {
+    if (this.scopedEnvVarTrue('DEBUG')) return 1
     try {
       const {enabled} = require('debug')(this.bin)
       if (enabled) return 1
-      if (this.scopedEnvVarTrue('DEBUG')) return 1
-      return 0
-    // tslint:disable-next-line
-    } catch (err) { return 0 }
+    } catch {}
+    return 0
   }
 }
 

@@ -2,13 +2,14 @@ import * as Globby from 'globby'
 import * as path from 'path'
 
 import {Command} from './command'
+import Debug from './debug'
 
 export interface Manifest {
   version: string
   commands: {[id: string]: Command}
 }
 
-const debug = require('debug')('@anycli/config')
+const debug = Debug()
 
 export namespace Manifest {
   export type FindCommandCB = (id: string) => Command.Class
