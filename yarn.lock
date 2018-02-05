@@ -2,16 +2,9 @@
 # yarn lockfile v1
 
 
-"@anycli/parser@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@anycli/parser/-/parser-3.2.3.tgz#cbc2c25e21b8b7e127986a5287596a7c0aaffe2d"
-  dependencies:
-    "@anycli/screen" "^0.0.3"
-    lodash "^4.17.4"
-
-"@anycli/screen@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@anycli/screen/-/screen-0.0.3.tgz#f0afd970c3ed725702948a45a874ede1fdd9362e"
+"@anycli/parser@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@anycli/parser/-/parser-3.2.4.tgz#30297ac2fa225b37efaab5c0062bf189988b3ce8"
 
 "@anycli/tslint@^0.2.5":
   version "0.2.5"

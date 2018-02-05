@@ -203,7 +203,7 @@ export class Plugin implements IPlugin {
 
         await search(require(p))(opts)
       } catch (err) {
-        if (err.code === 'EEXIT') throw err
+        if (err && err['cli-ux'] && err['cli-ux'].exit !== undefined) throw err
         process.emitWarning(err)
       }
     })
