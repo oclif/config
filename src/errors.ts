@@ -7,7 +7,20 @@ import * as Wrap from 'wrap-ansi'
 import {errtermwidth} from './screen'
 
 export class CLIError extends Error {
-  'cli-ux' = {}
+  'cli-ux': any
+  code!: string
+
+  constructor(error: string | Error, options: {code?: string, exit?: number} = {}) {
+    const addExitCode = (error: ExitError) => {
+      error['cli-ux'] = error['cli-ux'] || {}
+      error['cli-ux'].exit = options.exit === undefined ? 1 : options.exit
+      return error
+    }
+    if (error instanceof Error) return addExitCode(error as any)
+    super(error)
+    addExitCode(this)
+    this.code = options.code as any
+  }
 
   render() {
     let cli
@@ -34,23 +47,9 @@ export class ExitError extends CLIError {
   'cli-ux': {
     exit: number
   }
-  code?: string
+  code = 'EEXIT'
 
-  constructor(error?: string | Error | number, exitCode = 0) {
-    if (typeof error === 'number') {
-      exitCode = error
-      error = undefined
-    }
-    const addExitCode = (error: ExitError) => {
-      error['cli-ux'] = error['cli-ux'] || {}
-      error['cli-ux'].exit = exitCode
-      return error
-    }
-    if (error instanceof Error) {
-      return addExitCode(error as any)
-    }
-    super(error || `EEXIT: ${exitCode}`)
-    addExitCode(this)
-    this.code = 'EEXIT'
+  constructor(exitCode = 0) {
+    super(`EEXIT: ${exitCode}`, {exit: exitCode})
   }
 }

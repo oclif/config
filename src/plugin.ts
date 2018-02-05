@@ -4,7 +4,7 @@ import {inspect} from 'util'
 
 import {Command} from './command'
 import Debug from './debug'
-import {ExitError} from './errors'
+import {CLIError, ExitError} from './errors'
 import {Hook, Hooks} from './hooks'
 import {Manifest} from './manifest'
 import {PJSON} from './pjson'
@@ -198,8 +198,8 @@ export class Plugin implements IPlugin {
       log(message) {
         process.stdout.write((message || '') + '\n')
       },
-      error(message, options = {}) {
-        throw new ExitError(message, options.exit)
+      error(message, options: {exit?: number} = {}) {
+        throw new CLIError(message, options)
       },
     }
     const promises = (this.hooks[event] || [])
@@ -215,7 +215,7 @@ export class Plugin implements IPlugin {
 
         await search(require(p)).call(context, opts)
       } catch (err) {
-        if (err && err['cli-ux'] && err['cli-ux'].exit !== undefined) throw err
+        if (err && err['cli-ux'] && err['cli-ux']) throw err
         process.emitWarning(err)
       }
     })
