@@ -2,7 +2,10 @@ import * as Config from '.'
 
 export interface Hooks {
   [event: string]: object
-  init: {argv: string[]}
+  init: {
+    id: string | undefined,
+    argv: string[],
+  }
   prerun: {
     Command: Config.Command.Class
     argv: string[]
