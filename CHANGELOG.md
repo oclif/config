@@ -1,3 +1,11 @@
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/anycli/config/compare/5dc1d5ed9a430f5cebc2ff1987757c04c0c3ae39...v1.3.2) (2018-02-05)
+
+
+### Bug Fixes
+
+* hide globby error ([ee7aef4](https://github.com/anycli/config/commit/ee7aef4))
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/anycli/config/compare/20f2c72ff7ceb342213a66fc0e7809447e2371a3...v1.3.1) (2018-02-05)
 
