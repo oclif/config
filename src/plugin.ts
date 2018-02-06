@@ -217,7 +217,7 @@ export class Plugin implements IPlugin {
       globby = require('globby')
     } catch {
       debug('not loading plugins, globby not found')
-      return {} as any
+      return []
     }
     debug(`loading IDs from ${this.commandsDir}`)
     const ids = globby.sync(['**/*.+(js|ts)', '!**/*.+(d.ts|test.ts|test.js)'], {cwd: this.commandsDir})
