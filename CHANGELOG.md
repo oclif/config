@@ -1,3 +1,11 @@
+<a name="1.3.5"></a>
+## [1.3.5](https://github.com/anycli/config/compare/3de1e0db9a793cf56337d281bc12432e56926e5c...v1.3.5) (2018-02-06)
+
+
+### Bug Fixes
+
+* fixed valid flag ([9385f54](https://github.com/anycli/config/commit/9385f54))
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/anycli/config/compare/2389fe555f24f2bd1a902be3185e7ec4f0379495...v1.3.4) (2018-02-05)
 
