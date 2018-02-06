@@ -39,6 +39,7 @@ function registerTSNode(root: string) {
     compilerOptions: {
       target: tsconfig.compilerOptions.target || 'es2017',
       module: 'commonjs',
+      sourceMap: true,
       rootDirs,
       typeRoots,
     }

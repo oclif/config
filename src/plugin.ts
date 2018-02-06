@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import * as Globby from 'globby'
 import * as path from 'path'
 import {inspect} from 'util'
 
@@ -10,7 +11,7 @@ import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {flatMap, loadJSONSync, mapValues} from './util'
+import {compact, flatMap, loadJSONSync, mapValues} from './util'
 
 export interface Options {
   root: string
@@ -93,6 +94,7 @@ export class Plugin implements IPlugin {
   hooks!: {[k: string]: string[]}
   valid = false
   alreadyLoaded = false
+  protected warned = false
 
   constructor(opts: Options) {
     this.type = opts.type || 'core'
@@ -136,7 +138,7 @@ export class Plugin implements IPlugin {
 
   get commands() {
     let commands = Object.entries(this.manifest.commands)
-    .map(([id, c]) => ({...c, load: () => this._findCommand(id)}))
+    .map(([id, c]) => ({...c, load: () => this._findCommand(id, {must: true})}))
     for (let plugin of this.plugins) {
       commands = [...commands, ...plugin.commands]
     }
@@ -155,26 +157,12 @@ export class Plugin implements IPlugin {
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
   findCommand(id: string, opts: {must?: boolean} = {}): Command.Plugin | undefined {
     let command = this.manifest.commands[id]
-    if (command) return {...command, load: () => this._findCommand(id)}
+    if (command) return {...command, load: () => this._findCommand(id, {must: true})}
     for (let plugin of this.plugins) {
       let command = plugin.findCommand(id)
       if (command) return command
     }
     if (opts.must) throw new Error(`command ${id} not found`)
-  }
-
-  _findCommand(id: string): Command.Class {
-    const search = (cmd: any) => {
-      if (typeof cmd.run === 'function') return cmd
-      if (cmd.default && cmd.default.run) return cmd.default
-      return Object.values(cmd).find((cmd: any) => typeof cmd.run === 'function')
-    }
-    const p = require.resolve(path.join(this.commandsDir!, ...id.split(':')))
-    debug('require', p)
-    const cmd = search(require(p))
-    cmd.id = id
-    cmd.plugin = this
-    return cmd
   }
 
   findTopic(id: string, opts: {must: true}): Topic
@@ -216,11 +204,62 @@ export class Plugin implements IPlugin {
         await search(require(p)).call(context, opts)
       } catch (err) {
         if (err && err['cli-ux'] && err['cli-ux']) throw err
-        process.emitWarning(err)
+        this.warn(err, `runHook ${event}`)
       }
     })
     promises.push(...this.plugins.map(p => p.runHook(event, opts)))
     await Promise.all(promises)
+  }
+
+  protected get _commandIDs(): string[] {
+    if (!this.commandsDir) return []
+    let globby: typeof Globby
+    try {
+      globby = require('globby')
+    } catch {
+      debug('not loading plugins, globby not found')
+      return {} as any
+    }
+    debug(`loading IDs from ${this.commandsDir}`)
+    const ids = globby.sync(['**/*.+(js|ts)', '!**/*.+(d.ts|test.ts|test.js)'], {cwd: this.commandsDir})
+    .map(file => {
+      const p = path.parse(file)
+      const topics = p.dir.split('/')
+      let command = p.name !== 'index' && p.name
+      return [...topics, command].filter(f => f).join(':')
+    })
+    debug('found ids', ids)
+    return ids
+  }
+
+  protected _findCommand(id: string, opts: {must: true}): Command.Class
+  protected _findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
+  protected _findCommand(id: string, opts: {must?: boolean} = {}): Command.Class | undefined {
+    const fetch = () => {
+      if (!this.commandsDir) return
+      const search = (cmd: any) => {
+        if (typeof cmd.run === 'function') return cmd
+        if (cmd.default && cmd.default.run) return cmd.default
+        return Object.values(cmd).find((cmd: any) => typeof cmd.run === 'function')
+      }
+      const p = require.resolve(path.join(this.commandsDir, ...id.split(':')))
+      debug('require', p)
+      let m
+      try {
+        m = require(p)
+      } catch (err) {
+        if (err.code === 'MODULE_NOT_FOUND') return
+        throw err
+      }
+      const cmd = search(m)
+      if (!cmd) return
+      cmd.id = id
+      cmd.plugin = this
+      return cmd
+    }
+    const cmd = fetch()
+    if (!cmd && opts.must) throw new Error(`command ${id} not found`)
+    return cmd
   }
 
   protected _manifest(ignoreManifest: boolean): Manifest {
@@ -235,15 +274,27 @@ export class Plugin implements IPlugin {
           return manifest
         }
       } catch (err) {
-        if (err.code !== 'ENOENT') process.emitWarning(err)
+        if (err.code !== 'ENOENT') this.warn(err, 'readManifest')
       }
     }
     if (!ignoreManifest) {
       let manifest = readManifest()
       if (manifest) return manifest
     }
-    if (this.commandsDir) return Manifest.build(this.version, this.commandsDir, id => this._findCommand(id))
-    return {version: this.version, commands: {}}
+
+    return {
+      version: this.version,
+      commands: this._commandIDs.map(id => {
+        try {
+          return [id, Command.toCached(this._findCommand(id, {must: true}))]
+        } catch (err) { this.warn(err, 'toCached') }
+      })
+      .filter((f): f is [string, Command] => !!f)
+      .reduce((commands, [id, c]) => {
+        commands[id] = c
+        return commands
+      }, {} as {[k: string]: Command})
+    }
   }
 
   protected loadPlugins(root: string, plugins: (string | PJSON.Plugin)[]) {
@@ -262,11 +313,16 @@ export class Plugin implements IPlugin {
           opts.root = plugin.root || opts.root
         }
         this.plugins.push(new Plugin(opts))
-      } catch (err) {
-        process.emitWarning(err)
-      }
+      } catch (err) { this.warn(err, 'loadPlugins') }
     }
     return plugins
+  }
+
+  protected warn(err: any, scope?: string) {
+    if (this.warned) return
+    err.name = `${err.name} Plugin: ${this.name}`
+    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`]).join('\n')
+    process.emitWarning(err)
   }
 }
 

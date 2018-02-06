@@ -19,3 +19,7 @@ export function loadJSONSync(path: string): any {
   if (loadJSON) return loadJSON.sync(path)
   return JSON.parse(fs.readFileSync(path, 'utf8'))
 }
+
+export function compact<T>(a: (T | undefined)[]): T[] {
+  return a.filter((a): a is T => !!a)
+}
