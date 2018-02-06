@@ -1,3 +1,11 @@
+<a name="1.3.18"></a>
+## [1.3.18](https://github.com/anycli/config/compare/7aed2616863fcb6c612130493d880b2fd1305617...v1.3.18) (2018-02-06)
+
+
+### Bug Fixes
+
+* export LoadOptions ([08abfca](https://github.com/anycli/config/commit/08abfca))
+
 <a name="1.3.17"></a>
 ## [1.3.17](https://github.com/anycli/config/compare/621cac8060951cc492f54155e616d0198b52787c...v1.3.17) (2018-02-06)
 
