@@ -122,6 +122,7 @@ export class Plugin implements IPlugin {
 
     this.manifest = this._manifest(!!opts.ignoreManifest)
     this.loadPlugins(this.root, this.pjson.anycli.plugins || [])
+    this.addMissingTopics()
   }
 
   get commandsDir() {
@@ -131,6 +132,13 @@ export class Plugin implements IPlugin {
   get topics() {
     let topics = [...this._topics]
     for (let plugin of this.plugins) {
+      for (let topic of plugin.topics) {
+        let existing = topics.find(t => t.name === t.name)
+        if (existing) {
+          existing.description = topic.description || existing.description
+          existing.hidden = topic.hidden === undefined ? existing.hidden : topic.hidden
+        } else topics.push(topic)
+      }
       topics = [...topics, ...plugin.topics]
     }
     return topics
@@ -322,6 +330,15 @@ export class Plugin implements IPlugin {
     err.name = `${err.name} Plugin: ${this.name}`
     err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`]).join('\n')
     process.emitWarning(err)
+  }
+
+  protected addMissingTopics() {
+    for (let c of this.commands.filter(c => !c.hidden)) {
+      let name = c.id.split(':').slice(0, -1).join(':')
+      if (name && !this._topics.find(t => t.name === name)) {
+        this._topics.push({name})
+      }
+    }
   }
 }
 
