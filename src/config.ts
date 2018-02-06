@@ -10,7 +10,10 @@ import {loadJSONSync} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
-export type Options = Plugin.Options | string | IConfig | undefined
+export interface Options extends Plugin.Options {
+  devPlugins?: boolean
+  userPlugins?: boolean
+}
 
 const debug = Debug()
 
@@ -109,7 +112,7 @@ export class Config extends Plugin.Plugin implements IConfig {
   pjson!: PJSON.CLI
   userPJSON?: PJSON.User
 
-  constructor(opts: Plugin.Options) {
+  constructor(opts: Options) {
     super(opts)
     if (this.alreadyLoaded) return
 
@@ -130,20 +133,24 @@ export class Config extends Plugin.Plugin implements IConfig {
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
 
-    try {
-      const devPlugins = this.pjson.anycli.devPlugins
-      if (devPlugins) this.loadPlugins(this.root, devPlugins)
-    } catch (err) {
-      process.emitWarning(err)
+    if (opts.devPlugins !== false) {
+      try {
+        const devPlugins = this.pjson.anycli.devPlugins
+        if (devPlugins) this.loadPlugins(this.root, devPlugins)
+      } catch (err) {
+        process.emitWarning(err)
+      }
     }
 
-    try {
-      const userPJSONPath = path.join(this.dataDir, 'package.json')
-      const pjson = this.userPJSON = loadJSONSync(userPJSONPath)
-      if (!pjson.anycli) pjson.anycli = {schema: 1}
-      this.loadPlugins(userPJSONPath, pjson.anycli.plugins)
-    } catch (err) {
-      if (err.code !== 'ENOENT') process.emitWarning(err)
+    if (opts.userPlugins !== false) {
+      try {
+        const userPJSONPath = path.join(this.dataDir, 'package.json')
+        const pjson = this.userPJSON = loadJSONSync(userPJSONPath)
+        if (!pjson.anycli) pjson.anycli = {schema: 1}
+        this.loadPlugins(userPJSONPath, pjson.anycli.plugins)
+      } catch (err) {
+        if (err.code !== 'ENOENT') process.emitWarning(err)
+      }
     }
 
     debug('config done')
@@ -214,8 +221,8 @@ export class Config extends Plugin.Plugin implements IConfig {
     return 0
   }
 }
-
-export function load(opts: Options = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
+export type LoadOptions = Options | string | IConfig | undefined
+export function load(opts: LoadOptions = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
   if (typeof opts === 'string') opts = {root: opts}
   if (isConfig(opts)) return opts
   return new Config(opts)
