@@ -1,3 +1,11 @@
+<a name="1.3.16"></a>
+## [1.3.16](https://github.com/anycli/config/compare/a662a738823b5f4269c3176505054a7705bc6722...v1.3.16) (2018-02-06)
+
+
+### Bug Fixes
+
+* added flags for dev + user plugins ([621cac8](https://github.com/anycli/config/commit/621cac8))
+
 <a name="1.3.15"></a>
 ## [1.3.15](https://github.com/anycli/config/compare/f6d9be9ef586c8111da0b0ba73174eed7cfd95d4...v1.3.15) (2018-02-06)
 
