@@ -1,3 +1,11 @@
+<a name="1.3.19"></a>
+## [1.3.19](https://github.com/anycli/config/compare/08abfcae735c5448917969b0b8e6425355614394...v1.3.19) (2018-02-06)
+
+
+### Bug Fixes
+
+* use LoadOptions ([4c066f3](https://github.com/anycli/config/commit/4c066f3))
+
 <a name="1.3.18"></a>
 ## [1.3.18](https://github.com/anycli/config/compare/7aed2616863fcb6c612130493d880b2fd1305617...v1.3.18) (2018-02-06)
 
