@@ -1,7 +1,7 @@
 // tslint:disable no-implicit-dependencies
 try { require('fs-extra-debug') } catch {}
 
-export {IConfig, Config, Options, load} from './config'
+export {IConfig, Config, Options, load, LoadOptions} from './config'
 export {Command} from './command'
 export {Hook, Hooks} from './hooks'
 export {Manifest} from './manifest'
