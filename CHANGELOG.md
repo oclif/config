@@ -1,3 +1,11 @@
+<a name="1.3.13"></a>
+## [1.3.13](https://github.com/anycli/config/compare/5597c083fbbf50d280cfa2d1ef88f8a3060d9f22...v1.3.13) (2018-02-06)
+
+
+### Bug Fixes
+
+* remove title in favor of description ([26f5dc3](https://github.com/anycli/config/commit/26f5dc3))
+
 <a name="1.3.12"></a>
 ## [1.3.12](https://github.com/anycli/config/compare/dde0f0937b406b080425aeed1850b5724c6a0cdf...v1.3.12) (2018-02-06)
 
