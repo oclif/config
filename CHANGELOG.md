@@ -1,3 +1,11 @@
+<a name="1.3.10"></a>
+## [1.3.10](https://github.com/anycli/config/compare/41bb4b521fdf37d2a3340f6e13320795558bdeef...v1.3.10) (2018-02-06)
+
+
+### Bug Fixes
+
+* fixed error propagation ([2cbeaf9](https://github.com/anycli/config/commit/2cbeaf9))
+
 <a name="1.3.9"></a>
 ## [1.3.9](https://github.com/anycli/config/compare/d23cd49f4d05c1dc41cd245325881985056fac26...v1.3.9) (2018-02-06)
 
