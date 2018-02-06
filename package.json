@@ -5,11 +5,11 @@
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/anycli/config/issues",
   "dependencies": {
-    "@anycli/errors": "^0.1.0",
     "indent-string": "^3.2.0",
     "wrap-ansi": "^3.0.1"
   },
   "devDependencies": {
+    "@anycli/errors": "^0.1.0",
     "@anycli/parser": "^3.2.5",
     "@anycli/tslint": "^0.2.6",
     "@types/chai": "^4.1.2",
