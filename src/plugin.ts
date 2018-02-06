@@ -91,12 +91,10 @@ export class Plugin implements IPlugin {
   _topics!: Topic[]
   plugins: IPlugin[] = []
   hooks!: {[k: string]: string[]}
-  valid!: boolean
-  ignoreManifest: boolean
+  valid = false
   alreadyLoaded = false
 
   constructor(opts: Options) {
-    this.ignoreManifest = !!opts.ignoreManifest
     this.type = opts.type || 'core'
     this.tag = opts.tag
     const root = findRoot(opts.name, opts.root)
@@ -111,15 +109,16 @@ export class Plugin implements IPlugin {
     this.pjson = loadJSONSync(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
     this.version = this.pjson.version
-    if (!this.pjson.anycli) {
+    if (this.pjson.anycli) {
+      this.valid = true
+    } else {
       this.pjson.anycli = this.pjson['cli-engine'] || {}
     }
-    this.valid = this.pjson.anycli.schema === 1
 
     this._topics = topicsToArray(this.pjson.anycli.topics || {})
     this.hooks = mapValues(this.pjson.anycli.hooks || {}, i => Array.isArray(i) ? i : [i])
 
-    this.manifest = this._manifest()
+    this.manifest = this._manifest(!!opts.ignoreManifest)
     this.loadPlugins(this.root, this.pjson.anycli.plugins || [])
   }
 
@@ -224,13 +223,7 @@ export class Plugin implements IPlugin {
     await Promise.all(promises)
   }
 
-  // findCommand(id: string, opts?: {must: boolean}): ICommand | undefined
-  // findManifestCommand(id: string, opts: {must: true}): IManifestCommand
-  // findManifestCommand(id: string, opts?: {must: boolean}): IManifestCommand | undefined
-  // findTopic(id: string, opts: {must: true}): ITopic
-  // findTopic(id: string, opts?: {must: boolean}): ITopic | undefined
-
-  protected _manifest(): Manifest {
+  protected _manifest(ignoreManifest: boolean): Manifest {
     const readManifest = () => {
       try {
         const p = path.join(this.root, '.anycli.manifest.json')
@@ -245,7 +238,7 @@ export class Plugin implements IPlugin {
         if (err.code !== 'ENOENT') process.emitWarning(err)
       }
     }
-    if (!this.ignoreManifest) {
+    if (!ignoreManifest) {
       let manifest = readManifest()
       if (manifest) return manifest
     }
