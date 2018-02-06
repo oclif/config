@@ -1,3 +1,11 @@
+<a name="1.3.12"></a>
+## [1.3.12](https://github.com/anycli/config/compare/dde0f0937b406b080425aeed1850b5724c6a0cdf...v1.3.12) (2018-02-06)
+
+
+### Bug Fixes
+
+* add pluginName ([5597c08](https://github.com/anycli/config/commit/5597c08))
+
 <a name="1.3.11"></a>
 ## [1.3.11](https://github.com/anycli/config/compare/2cbeaf92fdc86e4106105f1949e2611b0961d19c...v1.3.11) (2018-02-06)
 
