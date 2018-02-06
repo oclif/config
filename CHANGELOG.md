@@ -1,3 +1,12 @@
+<a name="1.3.23"></a>
+## [1.3.23](https://github.com/anycli/config/compare/4b075269c2e38b48abceddfa2d7071f73f54ff1d...v1.3.23) (2018-02-06)
+
+
+### Bug Fixes
+
+* uniq commandIDs ([c31d9a7](https://github.com/anycli/config/commit/c31d9a7))
+* uniq commandIDs ([b145673](https://github.com/anycli/config/commit/b145673))
+
 <a name="1.3.22"></a>
 ## [1.3.22](https://github.com/anycli/config/compare/fb639fd513772eb80a8ca934764c3e3b750aa110...v1.3.22) (2018-02-06)
 
