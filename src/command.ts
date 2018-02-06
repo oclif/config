@@ -62,8 +62,8 @@ export namespace Command {
     plugin?: Config.IPlugin
     flags?: Parser.flags.Input<any>
     args?: Parser.args.Input
-    new(argv: string[], config?: Config.Options): Instance
-    run(argv: string[], config?: Config.Options): Promise<any>
+    new(argv: string[], config?: Config.LoadOptions): Instance
+    run(argv: string[], config?: Config.LoadOptions): Promise<any>
   }
 
   export interface Instance {
