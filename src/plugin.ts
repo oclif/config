@@ -202,7 +202,7 @@ export class Plugin implements IPlugin {
 
         await search(require(p)).call(context, opts)
       } catch (err) {
-        if (err && err['cli-ux'] && err['cli-ux']) throw err
+        if (err && err.anycli && err.anycli.exit !== undefined) throw err
         this.warn(err, `runHook ${event}`)
       }
     })
