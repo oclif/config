@@ -136,7 +136,7 @@ export class Config extends Plugin.Plugin implements IConfig {
     if (opts.devPlugins !== false) {
       try {
         const devPlugins = this.pjson.anycli.devPlugins
-        if (devPlugins) this.loadPlugins(this.root, devPlugins)
+        if (devPlugins) this.loadPlugins(this.root, 'dev', devPlugins)
       } catch (err) {
         process.emitWarning(err)
       }
@@ -147,7 +147,7 @@ export class Config extends Plugin.Plugin implements IConfig {
         const userPJSONPath = path.join(this.dataDir, 'package.json')
         const pjson = this.userPJSON = loadJSONSync(userPJSONPath)
         if (!pjson.anycli) pjson.anycli = {schema: 1}
-        this.loadPlugins(userPJSONPath, pjson.anycli.plugins)
+        this.loadPlugins(userPJSONPath, 'user', pjson.anycli.plugins)
       } catch (err) {
         if (err.code !== 'ENOENT') process.emitWarning(err)
       }

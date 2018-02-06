@@ -121,7 +121,7 @@ export class Plugin implements IPlugin {
     this.hooks = mapValues(this.pjson.anycli.hooks || {}, i => Array.isArray(i) ? i : [i])
 
     this.manifest = this._manifest(!!opts.ignoreManifest)
-    this.loadPlugins(this.root, this.pjson.anycli.plugins || [])
+    this.loadPlugins(this.root, this.type, this.pjson.anycli.plugins || [])
     this.addMissingTopics()
   }
 
@@ -304,18 +304,17 @@ export class Plugin implements IPlugin {
     }
   }
 
-  protected loadPlugins(root: string, plugins: (string | PJSON.Plugin)[]) {
+  protected loadPlugins(root: string, type: string, plugins: (string | PJSON.Plugin)[]) {
     if (!plugins.length) return
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
     for (let plugin of plugins || []) {
       try {
-        let opts: Options = {type: this.type, root}
+        let opts: Options = {type, root}
         if (typeof plugin === 'string') {
           opts.name = plugin
         } else {
           opts.name = plugin.name || opts.name
-          opts.type = plugin.type || opts.type
           opts.tag = plugin.tag || opts.tag
           opts.root = plugin.root || opts.root
         }
