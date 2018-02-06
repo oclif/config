@@ -162,7 +162,7 @@ export class Plugin implements IPlugin {
       let command = plugin.findCommand(id)
       if (command) return command
     }
-    if (opts.must) throw new Error(`command ${id} not found`)
+    if (opts.must) throw new CLIError(`command ${id} not found`)
   }
 
   findTopic(id: string, opts: {must: true}): Topic
@@ -258,7 +258,7 @@ export class Plugin implements IPlugin {
       return cmd
     }
     const cmd = fetch()
-    if (!cmd && opts.must) throw new Error(`command ${id} not found`)
+    if (!cmd && opts.must) throw new CLIError(`command ${id} not found`)
     return cmd
   }
 
