@@ -1,3 +1,12 @@
+<a name="1.3.9"></a>
+## [1.3.9](https://github.com/anycli/config/compare/d23cd49f4d05c1dc41cd245325881985056fac26...v1.3.9) (2018-02-06)
+
+
+### Bug Fixes
+
+* move [@anycli](https://github.com/anycli)/errors to dev deps ([41bb4b5](https://github.com/anycli/config/commit/41bb4b5))
+* move [@anycli](https://github.com/anycli)/errors to dev deps ([34cd88a](https://github.com/anycli/config/commit/34cd88a))
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/anycli/config/compare/735667ccec345fd046427343321b7053b4c88870...v1.3.7) (2018-02-06)
 
