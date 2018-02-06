@@ -1,3 +1,11 @@
+<a name="1.3.21"></a>
+## [1.3.21](https://github.com/anycli/config/compare/1ece4fb325622ca723e593e9be48f7b97a9105cb...v1.3.21) (2018-02-06)
+
+
+### Bug Fixes
+
+* fixed bugs with topic parsing ([fb639fd](https://github.com/anycli/config/commit/fb639fd))
+
 <a name="1.3.20"></a>
 ## [1.3.20](https://github.com/anycli/config/compare/4c066f378e6c822934e461fe5a035126cfe5fc99...v1.3.20) (2018-02-06)
 
