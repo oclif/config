@@ -1,3 +1,11 @@
+<a name="1.3.22"></a>
+## [1.3.22](https://github.com/anycli/config/compare/fb639fd513772eb80a8ca934764c3e3b750aa110...v1.3.22) (2018-02-06)
+
+
+### Bug Fixes
+
+* export arg type ([4b07526](https://github.com/anycli/config/commit/4b07526))
+
 <a name="1.3.21"></a>
 ## [1.3.21](https://github.com/anycli/config/compare/1ece4fb325622ca723e593e9be48f7b97a9105cb...v1.3.21) (2018-02-06)
 
