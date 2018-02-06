@@ -12,6 +12,7 @@ export interface Command {
   usage?: string | string[]
   examples?: string[]
   type?: string
+  pluginName?: string
   flags: {[name: string]: Command.Flag}
   args: {
     name: string
@@ -81,6 +82,7 @@ export namespace Command {
       id: c.id,
       description: c.description,
       usage: c.usage,
+      pluginName: c.plugin && c.plugin.name,
       hidden: c.hidden,
       aliases: c.aliases || [],
       flags: mapValues(c.flags || {}, (flag, name) => {
