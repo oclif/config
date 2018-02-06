@@ -1,8 +1,8 @@
+import {CLIError} from '@anycli/errors'
 import * as os from 'os'
 import * as path from 'path'
 
 import Debug from './debug'
-import {CLIError} from './errors'
 import {Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'

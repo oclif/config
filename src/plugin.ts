@@ -1,3 +1,4 @@
+import {error, exit, warn} from '@anycli/errors'
 import * as fs from 'fs'
 import * as Globby from 'globby'
 import * as path from 'path'
@@ -5,7 +6,6 @@ import {inspect} from 'util'
 
 import {Command} from './command'
 import Debug from './debug'
-import {CLIError, ExitError} from './errors'
 import {Hook, Hooks} from './hooks'
 import {Manifest} from './manifest'
 import {PJSON} from './pjson'
@@ -162,7 +162,7 @@ export class Plugin implements IPlugin {
       let command = plugin.findCommand(id)
       if (command) return command
     }
-    if (opts.must) throw new CLIError(`command ${id} not found`)
+    if (opts.must) error(`command ${id} not found`)
   }
 
   findTopic(id: string, opts: {must: true}): Topic
@@ -179,16 +179,15 @@ export class Plugin implements IPlugin {
 
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     const context: Hook.Context = {
-      exit(code) {
-        throw new ExitError(code)
-      },
+      exit(code = 0) { exit(code) },
       log(message: any = '') {
         message = typeof message === 'string' ? message : inspect(message)
         process.stdout.write(message + '\n')
       },
-      error(message, options: {exit?: number} = {}) {
-        throw new CLIError(message, options)
+      error(message, options: {code?: string, exit?: number} = {}) {
+        error(message, options)
       },
+      warn(message: string) { warn(message) },
     }
     const promises = (this.hooks[event] || [])
     .map(async hook => {
@@ -258,7 +257,7 @@ export class Plugin implements IPlugin {
       return cmd
     }
     const cmd = fetch()
-    if (!cmd && opts.must) throw new CLIError(`command ${id} not found`)
+    if (!cmd && opts.must) error(`command ${id} not found`)
     return cmd
   }
 

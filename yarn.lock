@@ -2,13 +2,23 @@
 # yarn lockfile v1
 
 
-"@anycli/parser@^3.2.4":
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/@anycli/parser/-/parser-3.2.4.tgz#30297ac2fa225b37efaab5c0062bf189988b3ce8"
+"@anycli/errors@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@anycli/errors/-/errors-0.1.0.tgz#438e029ab5f2834f22089ebe5ef098741301e5ab"
+  dependencies:
+    clean-stack "^1.3.0"
+    fs-extra "^5.0.0"
+    indent-string "^3.2.0"
+    strip-ansi "^4.0.0"
+    wrap-ansi "^3.0.1"
 
-"@anycli/tslint@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@anycli/tslint/-/tslint-0.2.5.tgz#63feeb981b11f36326e0cb745c62f51d55c2ed67"
+"@anycli/parser@^3.2.5":
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/@anycli/parser/-/parser-3.2.5.tgz#d0e7ddb14945cb84377fa69095009ca6005e6b6d"
+
+"@anycli/tslint@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@anycli/tslint/-/tslint-0.2.6.tgz#4251f4cb3744dc577309b4351d2c2e8b65072de2"
   dependencies:
     tslint "^5.9.1"
     tslint-xo "^0.6.0"
@@ -183,6 +193,10 @@ check-error@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
 
+clean-stack@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.3.0.tgz#9e821501ae979986c46b1d66d2d432db2fd4ae31"
+
 color-convert@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"
@@ -283,6 +297,14 @@ fancy-test@^1.0.1:
     lodash "^4.17.4"
     stdout-stderr "^0.1.6"
 
+fs-extra@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
@@ -312,6 +334,10 @@ globby@^7.1.1:
     ignore "^3.3.5"
     pify "^3.0.0"
     slash "^1.0.0"
+
+graceful-fs@^4.1.2, graceful-fs@^4.1.6:
+  version "4.1.11"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
 growl@1.10.3:
   version "1.10.3"
@@ -384,6 +410,12 @@ js-yaml@^3.7.0:
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
+
+jsonfile@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
 
 lodash@^4.17.4, lodash@^4.5.1:
   version "4.17.4"
@@ -661,6 +693,10 @@ type-detect@^4.0.0:
 typescript@^2.7.1:
   version "2.7.1"
   resolved "https://registry.npmjs.org/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
+
+universalify@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.1.tgz#fa71badd4437af4c148841e3b3b165f9e9e590b7"
 
 v8flags@^3.0.0:
   version "3.0.1"
