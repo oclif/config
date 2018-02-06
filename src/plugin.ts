@@ -11,7 +11,7 @@ import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {compact, flatMap, loadJSONSync, mapValues} from './util'
+import {compact, flatMap, loadJSONSync, mapValues, uniq} from './util'
 
 export interface Options {
   root: string
@@ -107,7 +107,7 @@ export class Plugin implements IPlugin {
     }
     Plugin.loadedPlugins[root] = this
     this.root = root
-    debug('reading plugin %s', root)
+    debug('reading %s plugin %s', this.type, root)
     this.pjson = loadJSONSync(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
     this.version = this.pjson.version
@@ -158,7 +158,7 @@ export class Plugin implements IPlugin {
     for (let plugin of this.plugins) {
       commands = [...commands, ...plugin.commandIDs]
     }
-    return commands
+    return uniq(commands)
   }
 
   findCommand(id: string, opts: {must: true}): Command.Plugin

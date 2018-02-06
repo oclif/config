@@ -23,3 +23,7 @@ export function loadJSONSync(path: string): any {
 export function compact<T>(a: (T | undefined)[]): T[] {
   return a.filter((a): a is T => !!a)
 }
+
+export function uniq<T>(arr: T[]): T[] {
+  return arr.filter(a => arr.includes(a))
+}
