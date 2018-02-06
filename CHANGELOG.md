@@ -1,3 +1,11 @@
+<a name="1.3.20"></a>
+## [1.3.20](https://github.com/anycli/config/compare/4c066f378e6c822934e461fe5a035126cfe5fc99...v1.3.20) (2018-02-06)
+
+
+### Bug Fixes
+
+* set pluginType ([1ece4fb](https://github.com/anycli/config/commit/1ece4fb))
+
 <a name="1.3.19"></a>
 ## [1.3.19](https://github.com/anycli/config/compare/08abfcae735c5448917969b0b8e6425355614394...v1.3.19) (2018-02-06)
 
