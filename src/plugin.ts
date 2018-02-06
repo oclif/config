@@ -133,10 +133,10 @@ export class Plugin implements IPlugin {
     let topics = [...this._topics]
     for (let plugin of this.plugins) {
       for (let topic of plugin.topics) {
-        let existing = topics.find(t => t.name === t.name)
+        let existing = topics.find(t => t.name === topic.name)
         if (existing) {
           existing.description = topic.description || existing.description
-          existing.hidden = topic.hidden === undefined ? existing.hidden : topic.hidden
+          existing.hidden = existing.hidden || topic.hidden
         } else topics.push(topic)
       }
       topics = [...topics, ...plugin.topics]
@@ -333,9 +333,13 @@ export class Plugin implements IPlugin {
 
   protected addMissingTopics() {
     for (let c of this.commands.filter(c => !c.hidden)) {
-      let name = c.id.split(':').slice(0, -1).join(':')
-      if (name && !this._topics.find(t => t.name === name)) {
-        this._topics.push({name})
+      let parts = c.id.split(':')
+      while (parts.length) {
+        let name = parts.join(':')
+        if (name && !this._topics.find(t => t.name === name)) {
+          this._topics.push({name})
+        }
+        parts.pop()
       }
     }
   }
