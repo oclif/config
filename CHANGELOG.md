@@ -1,3 +1,11 @@
+<a name="1.3.6"></a>
+## [1.3.6](https://github.com/anycli/config/compare/9385f545ea7f8e00ba530a09a83276e8f399f5d2...v1.3.6) (2018-02-06)
+
+
+### Bug Fixes
+
+* make plugin more easily extendable ([735667c](https://github.com/anycli/config/commit/735667c))
+
 <a name="1.3.5"></a>
 ## [1.3.5](https://github.com/anycli/config/compare/3de1e0db9a793cf56337d281bc12432e56926e5c...v1.3.5) (2018-02-06)
 
