@@ -1,3 +1,11 @@
+<a name="1.3.11"></a>
+## [1.3.11](https://github.com/anycli/config/compare/2cbeaf92fdc86e4106105f1949e2611b0961d19c...v1.3.11) (2018-02-06)
+
+
+### Bug Fixes
+
+* fix return when no globby ([dde0f09](https://github.com/anycli/config/commit/dde0f09))
+
 <a name="1.3.10"></a>
 ## [1.3.10](https://github.com/anycli/config/compare/41bb4b521fdf37d2a3340f6e13320795558bdeef...v1.3.10) (2018-02-06)
 
