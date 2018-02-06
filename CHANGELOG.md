@@ -1,3 +1,11 @@
+<a name="1.3.8"></a>
+## [1.3.8](https://github.com/anycli/config/compare/ef0a6ac5d70ffb5f41bcc3d9b069a9d8d74c02ef...v1.3.8) (2018-02-06)
+
+
+### Bug Fixes
+
+* use [@anycli](https://github.com/anycli)/errors ([d23cd49](https://github.com/anycli/config/commit/d23cd49))
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/anycli/config/compare/735667ccec345fd046427343321b7053b4c88870...v1.3.7) (2018-02-06)
 
