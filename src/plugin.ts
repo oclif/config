@@ -247,7 +247,7 @@ export class Plugin implements IPlugin {
       try {
         m = require(p)
       } catch (err) {
-        if (err.code === 'MODULE_NOT_FOUND') return
+        if (!opts.must && err.code === 'MODULE_NOT_FOUND') return
         throw err
       }
       const cmd = search(m)
