@@ -1,3 +1,11 @@
+<a name="1.3.17"></a>
+## [1.3.17](https://github.com/anycli/config/compare/621cac8060951cc492f54155e616d0198b52787c...v1.3.17) (2018-02-06)
+
+
+### Bug Fixes
+
+* add missing topics ([7aed261](https://github.com/anycli/config/commit/7aed261))
+
 <a name="1.3.16"></a>
 ## [1.3.16](https://github.com/anycli/config/compare/a662a738823b5f4269c3176505054a7705bc6722...v1.3.16) (2018-02-06)
 
