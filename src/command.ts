@@ -8,7 +8,6 @@ export interface Command {
   hidden: boolean
   aliases: string[]
   description?: string
-  title?: string
   usage?: string | string[]
   examples?: string[]
   type?: string
@@ -55,7 +54,6 @@ export namespace Command {
     hidden: boolean
     aliases: string[]
     description?: string
-    title?: string
     usage?: string | string[]
     examples?: string[]
   }
@@ -78,7 +76,6 @@ export namespace Command {
 
   export function toCached(c: Class): Command {
     return {
-      title: c.title,
       id: c.id,
       description: c.description,
       usage: c.usage,
