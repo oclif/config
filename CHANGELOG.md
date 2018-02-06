@@ -1,3 +1,11 @@
+<a name="1.3.15"></a>
+## [1.3.15](https://github.com/anycli/config/compare/f6d9be9ef586c8111da0b0ba73174eed7cfd95d4...v1.3.15) (2018-02-06)
+
+
+### Bug Fixes
+
+* raise errors if must is set ([a662a73](https://github.com/anycli/config/commit/a662a73))
+
 <a name="1.3.14"></a>
 ## [1.3.14](https://github.com/anycli/config/compare/26f5dc39d6964b271231105c98b4c09284ab51d7...v1.3.14) (2018-02-06)
 
