@@ -1,3 +1,11 @@
+<a name="1.3.14"></a>
+## [1.3.14](https://github.com/anycli/config/compare/26f5dc39d6964b271231105c98b4c09284ab51d7...v1.3.14) (2018-02-06)
+
+
+### Bug Fixes
+
+* added examples to cache ([f6d9be9](https://github.com/anycli/config/commit/f6d9be9))
+
 <a name="1.3.13"></a>
 ## [1.3.13](https://github.com/anycli/config/compare/5597c083fbbf50d280cfa2d1ef88f8a3060d9f22...v1.3.13) (2018-02-06)
 
