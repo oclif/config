@@ -14,17 +14,19 @@ export interface Command {
   pluginName?: string
   pluginType?: string
   flags: {[name: string]: Command.Flag}
-  args: {
+  args: Command.Arg[]
+}
+
+export namespace Command {
+  export interface Arg {
     name: string
     description?: string
     required?: boolean
     hidden?: boolean
     default?: string
     options?: string[]
-  }[]
-}
+  }
 
-export namespace Command {
   export type Flag = Flag.Boolean | Flag.Option
 
   export namespace Flag {
