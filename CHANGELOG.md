@@ -1,3 +1,11 @@
+<a name="1.3.7"></a>
+## [1.3.7](https://github.com/anycli/config/compare/735667ccec345fd046427343321b7053b4c88870...v1.3.7) (2018-02-06)
+
+
+### Bug Fixes
+
+* use CLIError when command is not found ([ef0a6ac](https://github.com/anycli/config/commit/ef0a6ac))
+
 <a name="1.3.6"></a>
 ## [1.3.6](https://github.com/anycli/config/compare/9385f545ea7f8e00ba530a09a83276e8f399f5d2...v1.3.6) (2018-02-06)
 
