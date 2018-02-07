@@ -1,3 +1,11 @@
+<a name="1.3.41"></a>
+## [1.3.41](https://github.com/anycli/config/compare/2ecba48bc82e558b140a9aacaebd54d3fa9f5f05...v1.3.41) (2018-02-07)
+
+
+### Bug Fixes
+
+* ensure config gets sent ([1bd765f](https://github.com/anycli/config/commit/1bd765f))
+
 <a name="1.3.40"></a>
 ## [1.3.40](https://github.com/anycli/config/compare/c97877a8c0696c5160c052fb651f117adceb1b55...v1.3.40) (2018-02-07)
 
