@@ -1,3 +1,11 @@
+<a name="1.3.34"></a>
+## [1.3.34](https://github.com/anycli/config/compare/a559ee2b3116fd3e2eb5ccf77904a1009c20a280...v1.3.34) (2018-02-07)
+
+
+### Bug Fixes
+
+* force set plugin ([0f0de6c](https://github.com/anycli/config/commit/0f0de6c))
+
 <a name="1.3.33"></a>
 ## [1.3.33](https://github.com/anycli/config/compare/cb0fc8f3fe65a1444bc30b31fdbc2dc64edd7fa0...v1.3.33) (2018-02-07)
 
