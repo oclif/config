@@ -6,7 +6,7 @@
   "bugs": "https://github.com/anycli/config/issues",
   "dependencies": {},
   "devDependencies": {
-    "@anycli/errors": "^0.2.1",
+    "@anycli/errors": "^0.2.2",
     "@anycli/parser": "^3.2.6",
     "@anycli/tslint": "^0.2.7",
     "@types/chai": "^4.1.2",
