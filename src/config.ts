@@ -267,7 +267,7 @@ export class Config implements IConfig {
   findCommand(id: string, opts: {must: true}): Command.Plugin
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
   findCommand(id: string, opts: {must?: boolean} = {}): Command.Plugin | undefined {
-    let command = this.commands.find(c => c.id === id)
+    let command = this.commands.find(c => c.id === id || c.aliases.includes(id))
     if (command) return command
     if (opts.must) error(`command ${id} not found`)
   }
