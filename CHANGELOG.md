@@ -1,3 +1,11 @@
+<a name="1.3.36"></a>
+## [1.3.36](https://github.com/anycli/config/compare/b0bdf148b070ff08ef3c639c1044bef103942c14...v1.3.36) (2018-02-07)
+
+
+### Bug Fixes
+
+* triggering release ([b59f755](https://github.com/anycli/config/commit/b59f755))
+
 <a name="1.3.34"></a>
 ## [1.3.34](https://github.com/anycli/config/compare/a559ee2b3116fd3e2eb5ccf77904a1009c20a280...v1.3.34) (2018-02-07)
 
