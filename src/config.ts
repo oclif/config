@@ -160,6 +160,10 @@ export class Config implements IConfig {
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
 
+    if (this.pjson.anycli.plugins) {
+      this.loadPlugins(this.root, 'core', this.pjson.anycli.plugins)
+    }
+
     if (opts.devPlugins !== false) {
       try {
         const devPlugins = this.pjson.anycli.devPlugins
