@@ -66,6 +66,7 @@ export interface IPlugin {
 
   findCommand(id: string, opts: {must: true}): Command.Class
   findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
+  load(): Promise<void>
 }
 
 const debug = Debug()
