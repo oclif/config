@@ -285,7 +285,7 @@ export class Config implements IConfig {
   get topics(): Topic[] {
     let topics: Topic[] = []
     for (let plugin of this.plugins) {
-      for (let topic of plugin.topics) {
+      for (let topic of compact(plugin.topics)) {
         let existing = topics.find(t => t.name === topic.name)
         if (existing) {
           existing.description = topic.description || existing.description
