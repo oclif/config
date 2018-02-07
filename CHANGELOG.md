@@ -1,3 +1,11 @@
+<a name="1.3.24"></a>
+## [1.3.24](https://github.com/anycli/config/compare/c31d9a73428e6386a4b0e3e848ba97b0dfc5dc85...v1.3.24) (2018-02-07)
+
+
+### Bug Fixes
+
+* ignore version mismatch when publishing ([9a3e71b](https://github.com/anycli/config/commit/9a3e71b))
+
 <a name="1.3.23"></a>
 ## [1.3.23](https://github.com/anycli/config/compare/4b075269c2e38b48abceddfa2d7071f73f54ff1d...v1.3.23) (2018-02-06)
 
