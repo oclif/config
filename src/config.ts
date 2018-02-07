@@ -259,7 +259,7 @@ export class Config implements IConfig {
 
   scopedEnvVarKey(k: string) {
     return [this.bin, k]
-      .map(p => p.replace(/-/g, '_'))
+      .map(p => p.replace(/@/g, '').replace(/[-\/]/g, '_'))
       .join('_')
       .toUpperCase()
   }
