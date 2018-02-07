@@ -65,7 +65,7 @@ export namespace Command {
     plugin?: Config.IPlugin
     flags?: Parser.flags.Input<any>
     args?: Parser.args.Input
-    new(argv: string[], config?: Config.LoadOptions): Instance
+    new(argv: string[], config: Config.IConfig): Instance
     run(argv: string[], config?: Config.LoadOptions): Promise<any>
   }
 
