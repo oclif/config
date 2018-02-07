@@ -1,3 +1,11 @@
+<a name="1.3.30"></a>
+## [1.3.30](https://github.com/anycli/config/compare/c09c2811d2120e542bc660c68690bb0e81cf0903...v1.3.30) (2018-02-07)
+
+
+### Bug Fixes
+
+* build topics dynamically ([8418ace](https://github.com/anycli/config/commit/8418ace))
+
 <a name="1.3.29"></a>
 ## [1.3.29](https://github.com/anycli/config/compare/aa75c497c1991bb330014f6688ef3cafe52b4f02...v1.3.29) (2018-02-07)
 
