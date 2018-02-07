@@ -10,7 +10,7 @@ import {PJSON} from './pjson'
 import * as Plugin from './plugin'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {compact, flatMap, loadJSONSync} from './util'
+import {compact, flatMap, loadJSONSync, uniq} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
@@ -22,6 +22,8 @@ export interface Options extends Plugin.Options {
 const debug = Debug()
 
 export interface IConfig {
+  name: string
+  version: string
   pjson: PJSON.CLI
   /**
    * process.arch
@@ -261,7 +263,7 @@ export class Config implements IConfig {
   }
 
   get commands(): Command.Plugin[] { return flatMap(this.plugins, p => p.commands) }
-  get commandIDs() { return this.commands.map(c => c.id) }
+  get commandIDs() { return uniq(this.commands.map(c => c.id)) }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
     const base = process.env[`XDG_${category.toUpperCase()}_HOME`]
