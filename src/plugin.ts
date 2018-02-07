@@ -274,7 +274,7 @@ export class Plugin implements IPlugin {
       try {
         const p = path.join(this.root, '.anycli.manifest.json')
         const manifest: Manifest = loadJSONSync(p)
-        if (manifest.version !== this.version) {
+        if (!process.env.ANYCLI_NEXT_VERSION && manifest.version !== this.version) {
           process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
         } else {
           debug('using manifest from', p)
