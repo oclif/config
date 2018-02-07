@@ -1,3 +1,11 @@
+<a name="1.3.33"></a>
+## [1.3.33](https://github.com/anycli/config/compare/cb0fc8f3fe65a1444bc30b31fdbc2dc64edd7fa0...v1.3.33) (2018-02-07)
+
+
+### Bug Fixes
+
+* allow finding root with name ([a559ee2](https://github.com/anycli/config/commit/a559ee2))
+
 <a name="1.3.32"></a>
 ## [1.3.32](https://github.com/anycli/config/compare/7aa541642eb415e2c8b97decbce15813a4fbf5e8...v1.3.32) (2018-02-07)
 
