@@ -13,7 +13,7 @@ const withConfig = fancy
 describe('typescript', () => {
   withConfig
   .it('has commandsDir', ({config}) => {
-    expect(config).to.deep.include({
+    expect(config.plugins[0]).to.deep.include({
       commandsDir: p('src/commands'),
     })
   })

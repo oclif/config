@@ -5,7 +5,6 @@ import * as Config from '../src'
 export const fancy = base
 .register('resetConfig', () => ({
   run(ctx: {config: Config.IConfig}) {
-    Config.Plugin.loadedPlugins = {}
     delete ctx.config
   }
 }))

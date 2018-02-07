@@ -44,7 +44,7 @@ export namespace PJSON {
       plugins?: (string | PluginTypes.User | PluginTypes.Link)[] }
   }
 
-  export type PluginTypes = PluginTypes.User | PluginTypes.Link
+  export type PluginTypes = PluginTypes.User | PluginTypes.Link | {root: string}
   export namespace PluginTypes {
     export interface User {
       type: 'user',

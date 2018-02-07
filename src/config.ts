@@ -1,12 +1,16 @@
-import {CLIError} from '@anycli/errors'
+import {CLIError, error, exit, warn} from '@anycli/errors'
 import * as os from 'os'
 import * as path from 'path'
+import {inspect} from 'util'
 
+import {Command} from './command'
 import Debug from './debug'
-import {Hooks} from './hooks'
+import {Hook, Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'
-import {loadJSONSync} from './util'
+import {Topic} from './topic'
+import {tsPath} from './ts_node'
+import {compact, loadJSONSync} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
@@ -17,7 +21,7 @@ export interface Options extends Plugin.Options {
 
 const debug = Debug()
 
-export interface IConfig extends Plugin.IPlugin {
+export interface IConfig {
   pjson: PJSON.CLI
   /**
    * process.arch
@@ -90,31 +94,51 @@ export interface IConfig extends Plugin.IPlugin {
    */
   npmRegistry: string
   userPJSON?: PJSON.User
+  plugins: Plugin.IPlugin[]
 
   runCommand(id: string, argv?: string[]): Promise<void>
+  runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]): Promise<void>
+  findCommand(id: string, opts: {must: true}): Command.Plugin
+  findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
+  findTopic(id: string, opts: {must: true}): Topic
+  findTopic(id: string, opts?: {must: boolean}): Topic | undefined
 }
 
-export class Config extends Plugin.Plugin implements IConfig {
-  arch!: ArchTypes
-  bin!: string
-  cacheDir!: string
-  configDir!: string
-  dataDir!: string
-  dirname!: string
-  errlog!: string
-  home!: string
-  platform!: PlatformTypes
-  shell!: string
-  windows!: boolean
-  userAgent!: string
+const _pjson = require('../package.json')
+
+export class Config implements IConfig {
+  _base = `${_pjson.name}@${_pjson.version}`
+  name: string
+  version: string
+  root: string
+  arch: ArchTypes
+  bin: string
+  cacheDir: string
+  configDir: string
+  dataDir: string
+  dirname: string
+  errlog: string
+  home: string
+  platform: PlatformTypes
+  shell: string
+  windows: boolean
+  userAgent: string
   debug: number = 0
-  npmRegistry!: string
-  pjson!: PJSON.CLI
+  npmRegistry: string
+  pjson: PJSON.CLI
   userPJSON?: PJSON.User
+  plugins: Plugin.IPlugin[] = []
+  commands: Command.Plugin[] = []
+  topics: Topic[] = []
+  protected warned = false
 
   constructor(opts: Options) {
-    super(opts)
-    if (this.alreadyLoaded) return
+    this.loadPlugins(opts.root, 'core', [{root: opts.root}], {must: true})
+    const plugin = this.plugins[0]
+    this.root = plugin.root
+    this.pjson = plugin.pjson
+    this.name = this.pjson.name
+    this.version = this.pjson.version
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
@@ -153,12 +177,44 @@ export class Config extends Plugin.Plugin implements IConfig {
       }
     }
 
+    this.addMissingTopics()
+
     debug('config done')
   }
 
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     debug('start %s hook', event)
-    await super.runHook<T, K>(event, {...opts as any || {}, config: this})
+    const context: Hook.Context = {
+      exit(code = 0) { exit(code) },
+      log(message: any = '') {
+        message = typeof message === 'string' ? message : inspect(message)
+        process.stdout.write(message + '\n')
+      },
+      error(message, options: {code?: string, exit?: number} = {}) {
+        error(message, options)
+      },
+      warn(message: string) { warn(message) },
+    }
+    const promises = this.plugins.map(p => {
+      return Promise.all((p.hooks[event] || [])
+      .map(async hook => {
+        try {
+          const p = tsPath(this.root, hook)
+          debug('hook', event, p)
+          const search = (m: any): Hook<K> => {
+            if (typeof m === 'function') return m
+            if (m.default && typeof m.default === 'function') return m.default
+            return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
+          }
+
+          await search(require(p)).call(context, opts)
+        } catch (err) {
+          if (err && err.anycli && err.anycli.exit !== undefined) throw err
+          this.warn(err, `runHook ${event}`)
+        }
+      }))
+    })
+    await Promise.all(promises)
     debug('done %s hook', event)
   }
 
@@ -185,6 +241,26 @@ export class Config extends Plugin.Plugin implements IConfig {
       .map(p => p.replace(/-/g, '_'))
       .join('_')
       .toUpperCase()
+  }
+
+  findCommand(id: string, opts: {must: true}): Command.Plugin
+  findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
+  findCommand(id: string, opts: {must?: boolean} = {}): Command.Plugin | undefined {
+    for (let plugin of this.plugins) {
+      let command = plugin.commands.find(c => c.id === id)
+      if (command) {
+        return {...command, load: () => plugin.findCommand(id, {must: true})}
+      }
+    }
+    if (opts.must) error(`command ${id} not found`)
+  }
+
+  findTopic(id: string, opts: {must: true}): Topic
+  findTopic(id: string, opts?: {must: boolean}): Topic | undefined
+  findTopic(name: string, opts: {must?: boolean} = {}) {
+    let topic = this.topics.find(t => t.name === name)
+    if (topic) return topic
+    if (opts.must) throw new Error(`topic ${name} not found`)
   }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
@@ -219,6 +295,56 @@ export class Config extends Plugin.Plugin implements IConfig {
       if (enabled) return 1
     } catch {}
     return 0
+  }
+  protected loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], options: {must?: boolean} = {}) {
+    if (!plugins.length) return
+    if (!plugins || !plugins.length) return
+    debug('loading plugins', plugins)
+    for (let plugin of plugins || []) {
+      try {
+        let opts: Options = {type, root}
+        if (typeof plugin === 'string') {
+          opts.name = plugin
+        } else {
+          opts.name = plugin.name || opts.name
+          opts.tag = plugin.tag || opts.tag
+          opts.root = plugin.root || opts.root
+        }
+        let instance = new Plugin.Plugin(opts)
+        this.plugins.push(instance)
+        this.commands.push(...instance.commands)
+        for (let topic of instance.topics) {
+          let existing = this.topics.find(t => t.name === topic.name)
+          if (existing) {
+            existing.description = topic.description || existing.description
+            existing.hidden = existing.hidden || topic.hidden
+          } else this.topics.push(topic)
+        }
+      } catch (err) {
+        if (options.must) throw err
+        this.warn(err, 'loadPlugins')
+      }
+    }
+  }
+
+  protected addMissingTopics() {
+    for (let c of this.commands.filter(c => !c.hidden)) {
+      let parts = c.id.split(':')
+      while (parts.length) {
+        let name = parts.join(':')
+        if (name && !this.topics.find(t => t.name === name)) {
+          this.topics.push({name})
+        }
+        parts.pop()
+      }
+    }
+  }
+
+  protected warn(err: any, scope?: string) {
+    if (this.warned) return
+    err.name = `${err.name} Plugin: ${this.name}`
+    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`]).join('\n')
+    process.emitWarning(err)
   }
 }
 export type LoadOptions = Options | string | IConfig | undefined
