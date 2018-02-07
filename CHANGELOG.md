@@ -1,3 +1,11 @@
+<a name="1.3.44"></a>
+## [1.3.44](https://github.com/anycli/config/compare/43cc3d96e6fa03afbfbfc9f6f739dd4538049958...v1.3.44) (2018-02-07)
+
+
+### Bug Fixes
+
+* remove undefined topics ([1070e57](https://github.com/anycli/config/commit/1070e57))
+
 <a name="1.3.43"></a>
 ## [1.3.43](https://github.com/anycli/config/compare/2ef62cc057982c106bf9ecbe5406b95a09fb7ebf...v1.3.43) (2018-02-07)
 
