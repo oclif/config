@@ -98,6 +98,7 @@ export interface IConfig {
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[]
   readonly commands: Command.Plugin[]
+  readonly topics: Topic[]
   readonly commandIDs: string[]
 
   runCommand(id: string, argv?: string[]): Promise<void>
@@ -132,7 +133,6 @@ export class Config implements IConfig {
   pjson: PJSON.CLI
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[] = []
-  topics: Topic[] = []
   protected warned = false
 
   constructor(opts: Options) {
@@ -179,8 +179,6 @@ export class Config implements IConfig {
         if (err.code !== 'ENOENT') process.emitWarning(err)
       }
     }
-
-    this.addMissingTopics()
 
     debug('config done')
   }
@@ -264,6 +262,30 @@ export class Config implements IConfig {
 
   get commands(): Command.Plugin[] { return flatMap(this.plugins, p => p.commands) }
   get commandIDs() { return uniq(this.commands.map(c => c.id)) }
+  get topics(): Topic[] {
+    let topics: Topic[] = []
+    for (let plugin of this.plugins) {
+      for (let topic of plugin.topics) {
+        let existing = topics.find(t => t.name === topic.name)
+        if (existing) {
+          existing.description = topic.description || existing.description
+          existing.hidden = existing.hidden || topic.hidden
+        } else topics.push(topic)
+      }
+    }
+    // add missing topics
+    for (let c of this.commands.filter(c => !c.hidden)) {
+      let parts = c.id.split(':')
+      while (parts.length) {
+        let name = parts.join(':')
+        if (name && !topics.find(t => t.name === name)) {
+          topics.push({name})
+        }
+        parts.pop()
+      }
+    }
+    return topics
+  }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
     const base = process.env[`XDG_${category.toUpperCase()}_HOME`]
@@ -314,29 +336,9 @@ export class Config implements IConfig {
         }
         let instance = new Plugin.Plugin(opts)
         this.plugins.push(instance)
-        for (let topic of instance.topics) {
-          let existing = this.topics.find(t => t.name === topic.name)
-          if (existing) {
-            existing.description = topic.description || existing.description
-            existing.hidden = existing.hidden || topic.hidden
-          } else this.topics.push(topic)
-        }
       } catch (err) {
         if (options.must) throw err
         this.warn(err, 'loadPlugins')
-      }
-    }
-  }
-
-  protected addMissingTopics() {
-    for (let c of this.commands.filter(c => !c.hidden)) {
-      let parts = c.id.split(':')
-      while (parts.length) {
-        let name = parts.join(':')
-        if (name && !this.topics.find(t => t.name === name)) {
-          this.topics.push({name})
-        }
-        parts.pop()
       }
     }
   }
