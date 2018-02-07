@@ -1,3 +1,12 @@
+<a name="1.3.42"></a>
+## [1.3.42](https://github.com/anycli/config/compare/1bd765f5d522b9a4fd2e67fb51043ae93264f402...v1.3.42) (2018-02-07)
+
+
+### Bug Fixes
+
+* updated errors ([2ef62cc](https://github.com/anycli/config/commit/2ef62cc))
+* use command_not_found hook ([d4c71f7](https://github.com/anycli/config/commit/d4c71f7))
+
 <a name="1.3.41"></a>
 ## [1.3.41](https://github.com/anycli/config/compare/2ecba48bc82e558b140a9aacaebd54d3fa9f5f05...v1.3.41) (2018-02-07)
 
