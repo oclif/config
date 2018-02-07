@@ -209,7 +209,7 @@ export class Config implements IConfig {
             return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
           }
 
-          await search(require(p)).call(context, opts)
+          await search(require(p)).call(context, {...opts as any, config: this})
         } catch (err) {
           if (err && err.anycli && err.anycli.exit !== undefined) throw err
           this.warn(err, `runHook ${event}`)
