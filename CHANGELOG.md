@@ -1,3 +1,11 @@
+<a name="1.3.28"></a>
+## [1.3.28](https://github.com/anycli/config/compare/1eb04178043fb02d1db5d2e0e78ad8bbf23ee0df...v1.3.28) (2018-02-07)
+
+
+### Bug Fixes
+
+* allow legacy converter to set commands ([aa75c49](https://github.com/anycli/config/commit/aa75c49))
+
 <a name="1.3.27"></a>
 ## [1.3.27](https://github.com/anycli/config/compare/a806741dee59ee016d1b91321eee88eb611a9f8a...v1.3.27) (2018-02-07)
 
