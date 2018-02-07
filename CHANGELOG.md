@@ -1,3 +1,11 @@
+<a name="1.3.25"></a>
+## [1.3.25](https://github.com/anycli/config/compare/9a3e71bdb41a653db0e92b5eb166e16339beffca...v1.3.25) (2018-02-07)
+
+
+### Bug Fixes
+
+* merge plugin properties ([b5c2553](https://github.com/anycli/config/commit/b5c2553))
+
 <a name="1.3.24"></a>
 ## [1.3.24](https://github.com/anycli/config/compare/c31d9a73428e6386a4b0e3e848ba97b0dfc5dc85...v1.3.24) (2018-02-07)
 
