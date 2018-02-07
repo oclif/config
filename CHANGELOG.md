@@ -1,3 +1,11 @@
+<a name="1.3.29"></a>
+## [1.3.29](https://github.com/anycli/config/compare/aa75c497c1991bb330014f6688ef3cafe52b4f02...v1.3.29) (2018-02-07)
+
+
+### Bug Fixes
+
+* add props to config ([c09c281](https://github.com/anycli/config/commit/c09c281))
+
 <a name="1.3.28"></a>
 ## [1.3.28](https://github.com/anycli/config/compare/1eb04178043fb02d1db5d2e0e78ad8bbf23ee0df...v1.3.28) (2018-02-07)
 
