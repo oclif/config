@@ -10,7 +10,7 @@ import {PJSON} from './pjson'
 import * as Plugin from './plugin'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {compact, loadJSONSync} from './util'
+import {compact, flatMap, loadJSONSync} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
@@ -95,7 +95,7 @@ export interface IConfig {
   npmRegistry: string
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[]
-  commands: Command.Plugin[]
+  readonly commands: Command.Plugin[]
   readonly commandIDs: string[]
 
   runCommand(id: string, argv?: string[]): Promise<void>
@@ -130,7 +130,6 @@ export class Config implements IConfig {
   pjson: PJSON.CLI
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[] = []
-  commands: Command.Plugin[] = []
   topics: Topic[] = []
   protected warned = false
 
@@ -248,12 +247,8 @@ export class Config implements IConfig {
   findCommand(id: string, opts: {must: true}): Command.Plugin
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
   findCommand(id: string, opts: {must?: boolean} = {}): Command.Plugin | undefined {
-    for (let plugin of this.plugins) {
-      let command = plugin.commands.find(c => c.id === id)
-      if (command) {
-        return {...command, load: () => plugin.findCommand(id, {must: true})}
-      }
-    }
+    let command = this.commands.find(c => c.id === id)
+    if (command) return command
     if (opts.must) error(`command ${id} not found`)
   }
 
@@ -265,6 +260,7 @@ export class Config implements IConfig {
     if (opts.must) throw new Error(`topic ${name} not found`)
   }
 
+  get commands(): Command.Plugin[] { return flatMap(this.plugins, p => p.commands) }
   get commandIDs() { return this.commands.map(c => c.id) }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
@@ -316,7 +312,6 @@ export class Config implements IConfig {
         }
         let instance = new Plugin.Plugin(opts)
         this.plugins.push(instance)
-        this.commands.push(...instance.commands)
         for (let topic of instance.topics) {
           let existing = this.topics.find(t => t.name === topic.name)
           if (existing) {
