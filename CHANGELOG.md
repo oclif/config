@@ -1,3 +1,11 @@
+<a name="1.3.40"></a>
+## [1.3.40](https://github.com/anycli/config/compare/c97877a8c0696c5160c052fb651f117adceb1b55...v1.3.40) (2018-02-07)
+
+
+### Bug Fixes
+
+* added load function ([2ecba48](https://github.com/anycli/config/commit/2ecba48))
+
 <a name="1.3.39"></a>
 ## [1.3.39](https://github.com/anycli/config/compare/7091b4d555b99a63cb542d222968b933be600a57...v1.3.39) (2018-02-07)
 
