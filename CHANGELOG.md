@@ -1,3 +1,11 @@
+<a name="1.3.37"></a>
+## [1.3.37](https://github.com/anycli/config/compare/b59f755f34d01984737dbcfc765ebb946bf4cc31...v1.3.37) (2018-02-07)
+
+
+### Bug Fixes
+
+* fixed skipping of ts-node ([62658b3](https://github.com/anycli/config/commit/62658b3))
+
 <a name="1.3.36"></a>
 ## [1.3.36](https://github.com/anycli/config/compare/b0bdf148b070ff08ef3c639c1044bef103942c14...v1.3.36) (2018-02-07)
 
