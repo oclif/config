@@ -86,7 +86,7 @@ export namespace Command {
       pluginType: plugin.type,
       hidden: c.hidden,
       aliases: c.aliases || [],
-      examples: c.examples,
+      examples: c.examples || (c as any).example,
       flags: mapValues(c.flags || {}, (flag, name) => {
         if (flag.type === 'boolean') {
           return {
