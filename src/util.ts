@@ -14,9 +14,9 @@ export function mapValues<T extends object, TResult>(obj: {[P in keyof T]: T[P]}
 }
 
 export function loadJSONSync(path: string): any {
-  let loadJSON
-  try { loadJSON = require('load-json-file') } catch {}
-  if (loadJSON) return loadJSON.sync(path)
+  // let loadJSON
+  // try { loadJSON = require('load-json-file') } catch {}
+  // if (loadJSON) return loadJSON.sync(path)
   return JSON.parse(fs.readFileSync(path, 'utf8'))
 }
 
