@@ -1,3 +1,11 @@
+<a name="1.3.27"></a>
+## [1.3.27](https://github.com/anycli/config/compare/a806741dee59ee016d1b91321eee88eb611a9f8a...v1.3.27) (2018-02-07)
+
+
+### Bug Fixes
+
+* add config to hook opts ([1eb0417](https://github.com/anycli/config/commit/1eb0417))
+
 <a name="1.3.26"></a>
 ## [1.3.26](https://github.com/anycli/config/compare/b5c2553d6d22d2aeaa9ccc02e0805c0a61aa61b4...v1.3.26) (2018-02-07)
 
