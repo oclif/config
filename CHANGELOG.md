@@ -1,3 +1,11 @@
+<a name="1.3.45"></a>
+## [1.3.45](https://github.com/anycli/config/compare/1070e57a3dd2cb7171044f8bd872b012ffce3fdc...v1.3.45) (2018-02-07)
+
+
+### Bug Fixes
+
+* enable aliases ([96d4fc4](https://github.com/anycli/config/commit/96d4fc4))
+
 <a name="1.3.44"></a>
 ## [1.3.44](https://github.com/anycli/config/compare/43cc3d96e6fa03afbfbfc9f6f739dd4538049958...v1.3.44) (2018-02-07)
 
