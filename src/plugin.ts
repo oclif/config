@@ -63,7 +63,7 @@ export interface IPlugin {
   commands: Command.Plugin[]
   hooks: {[k: string]: string[]}
   readonly commandIDs: string[]
-  topics: Topic[]
+  readonly topics: Topic[]
 
   findCommand(id: string, opts: {must: true}): Command.Class
   findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
@@ -82,7 +82,6 @@ export class Plugin implements IPlugin {
   root: string
   tag?: string
   manifest: Manifest
-  topics: Topic[]
   commands: Command.Plugin[]
   hooks: {[k: string]: string[]}
   valid = false
@@ -110,13 +109,14 @@ export class Plugin implements IPlugin {
       this.pjson.anycli = this.pjson['cli-engine'] || {}
     }
 
-    this.topics = topicsToArray(this.pjson.anycli.topics || {})
     this.hooks = mapValues(this.pjson.anycli.hooks || {}, i => Array.isArray(i) ? i : [i])
 
     this.manifest = this._manifest(!!opts.ignoreManifest)
     this.commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this.findCommand(id, {must: true})}))
   }
+
+  get topics(): Topic[] { return topicsToArray(this.pjson.anycli.topics || {}) }
 
   get commandsDir() { return tsPath(this.root, this.pjson.anycli.commands) }
   get commandIDs() {
