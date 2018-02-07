@@ -162,12 +162,12 @@ export class Config implements IConfig {
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
 
-    debug('config done')
     await Promise.all([
       this.loadCorePlugins(),
       this.loadUserPlugins(),
       this.loadDevPlugins(),
     ])
+    debug('config done')
   }
 
   async loadCorePlugins() {
