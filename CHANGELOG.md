@@ -1,3 +1,11 @@
+<a name="1.3.38"></a>
+## [1.3.38](https://github.com/anycli/config/compare/62658b3f7c4ab205e280bde867797886be25b7ab...v1.3.38) (2018-02-07)
+
+
+### Performance Improvements
+
+* use fs instead of load-json-file ([7091b4d](https://github.com/anycli/config/commit/7091b4d))
+
 <a name="1.3.37"></a>
 ## [1.3.37](https://github.com/anycli/config/compare/b59f755f34d01984737dbcfc765ebb946bf4cc31...v1.3.37) (2018-02-07)
 
