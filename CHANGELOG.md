@@ -1,3 +1,11 @@
+<a name="1.3.39"></a>
+## [1.3.39](https://github.com/anycli/config/compare/7091b4d555b99a63cb542d222968b933be600a57...v1.3.39) (2018-02-07)
+
+
+### Bug Fixes
+
+* async ([c97877a](https://github.com/anycli/config/commit/c97877a))
+
 <a name="1.3.38"></a>
 ## [1.3.38](https://github.com/anycli/config/compare/62658b3f7c4ab205e280bde867797886be25b7ab...v1.3.38) (2018-02-07)
 
