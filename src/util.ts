@@ -20,6 +20,22 @@ export function loadJSONSync(path: string): any {
   return JSON.parse(fs.readFileSync(path, 'utf8'))
 }
 
+export function exists(path: string): Promise<boolean> {
+  return new Promise(resolve => fs.exists(path, resolve))
+}
+
+export function loadJSON(path: string): Promise<any> {
+  // let loadJSON
+  // try { loadJSON = require('load-json-file') } catch {}
+  // if (loadJSON) return loadJSON.sync(path)
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, 'utf8', (err, d) => {
+      if (err) reject(err)
+      else resolve(JSON.parse(d))
+    })
+  })
+}
+
 export function compact<T>(a: (T | undefined)[]): T[] {
   return a.filter((a): a is T => !!a)
 }

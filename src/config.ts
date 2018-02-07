@@ -10,7 +10,7 @@ import {PJSON} from './pjson'
 import * as Plugin from './plugin'
 import {Topic} from './topic'
 import {tsPath} from './ts_node'
-import {compact, flatMap, loadJSONSync, uniq} from './util'
+import {compact, flatMap, loadJSON, uniq} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
@@ -113,30 +113,32 @@ const _pjson = require('../package.json')
 
 export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
-  name: string
-  version: string
-  root: string
-  arch: ArchTypes
-  bin: string
-  cacheDir: string
-  configDir: string
-  dataDir: string
-  dirname: string
-  errlog: string
-  home: string
-  platform: PlatformTypes
-  shell: string
-  windows: boolean
-  userAgent: string
+  name!: string
+  version!: string
+  root!: string
+  arch!: ArchTypes
+  bin!: string
+  cacheDir!: string
+  configDir!: string
+  dataDir!: string
+  dirname!: string
+  errlog!: string
+  home!: string
+  platform!: PlatformTypes
+  shell!: string
+  windows!: boolean
+  userAgent!: string
   debug: number = 0
-  npmRegistry: string
-  pjson: PJSON.CLI
+  npmRegistry!: string
+  pjson!: PJSON.CLI
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[] = []
   protected warned = false
 
-  constructor(opts: Options) {
-    this.loadPlugins(opts.root, 'core', [{root: opts.root}], {must: true})
+  constructor(public options: Options) {}
+
+  async load() {
+    await this.loadPlugins(this.options.root, 'core', [{root: this.options.root}], {must: true})
     const plugin = this.plugins[0]
     this.root = plugin.root
     this.pjson = plugin.pjson
@@ -160,31 +162,42 @@ export class Config implements IConfig {
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
 
-    if (this.pjson.anycli.plugins) {
-      this.loadPlugins(this.root, 'core', this.pjson.anycli.plugins)
-    }
+    debug('config done')
+    await Promise.all([
+      this.loadCorePlugins(),
+      this.loadUserPlugins(),
+      this.loadDevPlugins(),
+    ])
+  }
 
-    if (opts.devPlugins !== false) {
+  async loadCorePlugins() {
+    if (this.pjson.anycli.plugins) {
+      await this.loadPlugins(this.root, 'core', this.pjson.anycli.plugins)
+    }
+  }
+
+  async loadDevPlugins() {
+    if (this.options.devPlugins !== false) {
       try {
         const devPlugins = this.pjson.anycli.devPlugins
-        if (devPlugins) this.loadPlugins(this.root, 'dev', devPlugins)
+        if (devPlugins) await this.loadPlugins(this.root, 'dev', devPlugins)
       } catch (err) {
         process.emitWarning(err)
       }
     }
+  }
 
-    if (opts.userPlugins !== false) {
+  async loadUserPlugins() {
+    if (this.options.userPlugins !== false) {
       try {
         const userPJSONPath = path.join(this.dataDir, 'package.json')
-        const pjson = this.userPJSON = loadJSONSync(userPJSONPath)
+        const pjson = this.userPJSON = await loadJSON(userPJSONPath)
         if (!pjson.anycli) pjson.anycli = {schema: 1}
-        this.loadPlugins(userPJSONPath, 'user', pjson.anycli.plugins)
+        await this.loadPlugins(userPJSONPath, 'user', pjson.anycli.plugins)
       } catch (err) {
         if (err.code !== 'ENOENT') process.emitWarning(err)
       }
     }
-
-    debug('config done')
   }
 
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
@@ -324,11 +337,11 @@ export class Config implements IConfig {
     } catch {}
     return 0
   }
-  protected loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], options: {must?: boolean} = {}) {
+  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], options: {must?: boolean} = {}) {
     if (!plugins.length) return
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
-    for (let plugin of plugins || []) {
+    await Promise.all((plugins || []).map(async plugin => {
       try {
         let opts: Options = {type, root}
         if (typeof plugin === 'string') {
@@ -339,12 +352,13 @@ export class Config implements IConfig {
           opts.root = plugin.root || opts.root
         }
         let instance = new Plugin.Plugin(opts)
+        await instance.load()
         this.plugins.push(instance)
       } catch (err) {
         if (options.must) throw err
         this.warn(err, 'loadPlugins')
       }
-    }
+    }))
   }
 
   protected warn(err: any, scope?: string) {
@@ -355,10 +369,12 @@ export class Config implements IConfig {
   }
 }
 export type LoadOptions = Options | string | IConfig | undefined
-export function load(opts: LoadOptions = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
+export async function load(opts: LoadOptions = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
   if (typeof opts === 'string') opts = {root: opts}
   if (isConfig(opts)) return opts
-  return new Config(opts)
+  let config = new Config(opts)
+  await config.load()
+  return config
 }
 
 function isConfig(o: any): o is IConfig {
