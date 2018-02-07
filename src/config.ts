@@ -200,15 +200,15 @@ export class Config implements IConfig {
       return Promise.all((p.hooks[event] || [])
       .map(async hook => {
         try {
-          const p = tsPath(this.root, hook)
-          debug('hook', event, p)
+          const f = tsPath(p.root, hook)
+          debug('hook', event, f)
           const search = (m: any): Hook<K> => {
             if (typeof m === 'function') return m
             if (m.default && typeof m.default === 'function') return m.default
             return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
           }
 
-          await search(require(p)).call(context, {...opts as any, config: this})
+          await search(require(f)).call(context, {...opts as any, config: this})
         } catch (err) {
           if (err && err.anycli && err.anycli.exit !== undefined) throw err
           this.warn(err, `runHook ${event}`)
