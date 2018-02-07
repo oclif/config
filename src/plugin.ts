@@ -244,9 +244,14 @@ function findRoot(name: string | undefined, root: string) {
     let cur
     if (name) {
       cur = path.join(next, 'node_modules', name, 'package.json')
+      if (fs.existsSync(cur)) return path.dirname(cur)
+      try {
+        let pkg = loadJSONSync(path.join(next, 'package.json'))
+        if (pkg.name === name) return next
+      } catch {}
     } else {
       cur = path.join(next, 'package.json')
+      if (fs.existsSync(cur)) return path.dirname(cur)
     }
-    if (fs.existsSync(cur)) return path.dirname(cur)
   }
 }
