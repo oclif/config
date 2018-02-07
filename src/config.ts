@@ -95,6 +95,8 @@ export interface IConfig {
   npmRegistry: string
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[]
+  commands: Command.Plugin[]
+  readonly commandIDs: string[]
 
   runCommand(id: string, argv?: string[]): Promise<void>
   runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]): Promise<void>
@@ -262,6 +264,8 @@ export class Config implements IConfig {
     if (topic) return topic
     if (opts.must) throw new Error(`topic ${name} not found`)
   }
+
+  get commandIDs() { return this.commands.map(c => c.id) }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
     const base = process.env[`XDG_${category.toUpperCase()}_HOME`]
