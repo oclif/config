@@ -194,7 +194,7 @@ export class Plugin implements IPlugin {
       version: this.version,
       commands: this.commandIDs.map(id => {
         try {
-          return [id, Command.toCached(this.findCommand(id, {must: true}))]
+          return [id, Command.toCached(this.findCommand(id, {must: true}), this)]
         } catch (err) { this.warn(err, 'toCached') }
       })
       .filter((f): f is [string, Command] => !!f)
