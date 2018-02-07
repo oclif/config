@@ -1,3 +1,11 @@
+<a name="1.3.43"></a>
+## [1.3.43](https://github.com/anycli/config/compare/2ef62cc057982c106bf9ecbe5406b95a09fb7ebf...v1.3.43) (2018-02-07)
+
+
+### Bug Fixes
+
+* make scoped package scopes friendlier ([43cc3d9](https://github.com/anycli/config/commit/43cc3d9))
+
 <a name="1.3.42"></a>
 ## [1.3.42](https://github.com/anycli/config/compare/1bd765f5d522b9a4fd2e67fb51043ae93264f402...v1.3.42) (2018-02-07)
 
