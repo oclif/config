@@ -1,3 +1,11 @@
+<a name="1.3.32"></a>
+## [1.3.32](https://github.com/anycli/config/compare/7aa541642eb415e2c8b97decbce15813a4fbf5e8...v1.3.32) (2018-02-07)
+
+
+### Bug Fixes
+
+* fixed core plugins ([cb0fc8f](https://github.com/anycli/config/commit/cb0fc8f))
+
 <a name="1.3.31"></a>
 ## [1.3.31](https://github.com/anycli/config/compare/8418aced04910f260ccae33c97035c02d9b3750a...v1.3.31) (2018-02-07)
 
