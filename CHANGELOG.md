@@ -1,3 +1,11 @@
+<a name="1.3.31"></a>
+## [1.3.31](https://github.com/anycli/config/compare/8418aced04910f260ccae33c97035c02d9b3750a...v1.3.31) (2018-02-07)
+
+
+### Bug Fixes
+
+* fixed hooks ([7aa5416](https://github.com/anycli/config/commit/7aa5416))
+
 <a name="1.3.30"></a>
 ## [1.3.30](https://github.com/anycli/config/compare/c09c2811d2120e542bc660c68690bb0e81cf0903...v1.3.30) (2018-02-07)
 
