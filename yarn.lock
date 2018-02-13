@@ -12,9 +12,9 @@
     strip-ansi "^4.0.0"
     wrap-ansi "^3.0.1"
 
-"@oclif/parser@^3.2.7":
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.2.7.tgz#c1c53f3b5f959bea2c449328a6498fb195e7d567"
+"@oclif/parser@^3.2.8":
+  version "3.2.8"
+  resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.2.8.tgz#2b2e35b5c075d200d70950923acd64e258c5ae1d"
 
 "@oclif/tslint@^0.2.7":
   version "0.2.9"
