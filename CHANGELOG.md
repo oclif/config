@@ -1,3 +1,11 @@
+<a name="1.3.50"></a>
+## [1.3.50](https://github.com/oclif/config/compare/b1dce6a871306c587f2d29d86c8b1519c382bea5...v1.3.50) (2018-02-13)
+
+
+### Bug Fixes
+
+* added scopedEnvVar* to iconfig ([718bdeb](https://github.com/oclif/config/commit/718bdeb))
+
 <a name="1.3.49"></a>
 ## [1.3.49](https://github.com/oclif/config/compare/fa1e8dd7c5f0e26b4a6530207064d6eb5faef7e9...v1.3.49) (2018-02-13)
 
