@@ -1,3 +1,11 @@
+<a name="1.3.51"></a>
+## [1.3.51](https://github.com/oclif/config/compare/718bdeb215e1d59361997f9b18e76ef36f75bdd1...v1.3.51) (2018-02-13)
+
+
+### Bug Fixes
+
+* split on - when checking version ([699b922](https://github.com/oclif/config/commit/699b922))
+
 <a name="1.3.50"></a>
 ## [1.3.50](https://github.com/oclif/config/compare/b1dce6a871306c587f2d29d86c8b1519c382bea5...v1.3.50) (2018-02-13)
 
