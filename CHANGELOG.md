@@ -1,3 +1,12 @@
+<a name="1.3.47"></a>
+## [1.3.47](https://github.com/oclif/config/compare/v1.3.46...v1.3.47) (2018-02-13)
+
+
+### Bug Fixes
+
+* anycli rename ([62bbafb](https://github.com/oclif/config/commit/62bbafb))
+* rename to oclif ([5167c40](https://github.com/oclif/config/commit/5167c40))
+
 <a name="1.3.45"></a>
 ## [1.3.45](https://github.com/anycli/config/compare/1070e57a3dd2cb7171044f8bd872b012ffce3fdc...v1.3.45) (2018-02-07)
 
