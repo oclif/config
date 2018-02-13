@@ -107,6 +107,9 @@ export interface IConfig {
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
   findTopic(id: string, opts: {must: true}): Topic
   findTopic(id: string, opts?: {must: boolean}): Topic | undefined
+  scopedEnvVar(key: string): string | undefined
+  scopedEnvVarKey(key: string): string
+  scopedEnvVarTrue(key: string): boolean
 }
 
 const _pjson = require('../package.json')
