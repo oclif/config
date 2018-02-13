@@ -1,4 +1,4 @@
-import {CLIError, error, exit, warn} from '@anycli/errors'
+import {CLIError, error, exit, warn} from '@oclif/errors'
 import * as os from 'os'
 import * as path from 'path'
 import {inspect} from 'util'
@@ -148,8 +148,8 @@ export class Config implements IConfig {
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
     this.windows = this.platform === 'win32'
-    this.bin = this.pjson.anycli.bin || this.name
-    this.dirname = this.pjson.anycli.dirname || this.name
+    this.bin = this.pjson.oclif.bin || this.name
+    this.dirname = this.pjson.oclif.dirname || this.name
     this.userAgent = `${this.name}/${this.version} (${this.platform}-${this.arch}) node-${process.version}`
     this.shell = this._shell()
     this.debug = this._debug()
@@ -160,7 +160,7 @@ export class Config implements IConfig {
     this.dataDir = this.scopedEnvVar('DATA_DIR') || this.dir('data')
     this.errlog = path.join(this.cacheDir, 'error.log')
 
-    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.anycli.npmRegistry || 'https://registry.yarnpkg.com'
+    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.oclif.npmRegistry || 'https://registry.yarnpkg.com'
 
     await Promise.all([
       this.loadCorePlugins(),
@@ -171,15 +171,15 @@ export class Config implements IConfig {
   }
 
   async loadCorePlugins() {
-    if (this.pjson.anycli.plugins) {
-      await this.loadPlugins(this.root, 'core', this.pjson.anycli.plugins)
+    if (this.pjson.oclif.plugins) {
+      await this.loadPlugins(this.root, 'core', this.pjson.oclif.plugins)
     }
   }
 
   async loadDevPlugins() {
     if (this.options.devPlugins !== false) {
       try {
-        const devPlugins = this.pjson.anycli.devPlugins
+        const devPlugins = this.pjson.oclif.devPlugins
         if (devPlugins) await this.loadPlugins(this.root, 'dev', devPlugins)
       } catch (err) {
         process.emitWarning(err)
@@ -192,8 +192,8 @@ export class Config implements IConfig {
       try {
         const userPJSONPath = path.join(this.dataDir, 'package.json')
         const pjson = this.userPJSON = await loadJSON(userPJSONPath)
-        if (!pjson.anycli) pjson.anycli = {schema: 1}
-        await this.loadPlugins(userPJSONPath, 'user', pjson.anycli.plugins)
+        if (!pjson.oclif) pjson.oclif = {schema: 1}
+        await this.loadPlugins(userPJSONPath, 'user', pjson.oclif.plugins)
       } catch (err) {
         if (err.code !== 'ENOENT') process.emitWarning(err)
       }
@@ -227,7 +227,7 @@ export class Config implements IConfig {
 
           await search(require(f)).call(context, {...opts as any, config: this})
         } catch (err) {
-          if (err && err.anycli && err.anycli.exit !== undefined) throw err
+          if (err && err.oclif && err.oclif.exit !== undefined) throw err
           this.warn(err, `runHook ${event}`)
         }
       }))

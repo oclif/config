@@ -1,7 +1,7 @@
 {
   "name": "ts-plugin",
   "private": true,
-  "anycli": {
+  "oclif": {
     "commands": "./lib/commands",
     "hooks": {
       "init": "./lib/hooks/init",

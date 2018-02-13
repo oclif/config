@@ -12,7 +12,7 @@ function displayWarnings() {
 
 export default (...scope: string[]) => {
   if (!debug) return (..._: any[]) => {}
-  const d = debug(['@anycli/config', ...scope].join(':'))
+  const d = debug(['@oclif/config', ...scope].join(':'))
   if (d.enabled) displayWarnings()
   return (...args: any[]) => d(...args)
 }

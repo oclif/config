@@ -1,7 +1,7 @@
 export interface PJSON {
   [k: string]: any
   dependencies?: {[name: string]: string}
-  anycli: {
+  oclif: {
     schema?: number
   }
 }
@@ -10,7 +10,7 @@ export namespace PJSON {
   export interface Plugin extends PJSON {
     name: string
     version: string
-    anycli: PJSON['anycli'] & {
+    oclif: PJSON['oclif'] & {
       schema?: number
       title?: string
       description?: string
@@ -21,7 +21,7 @@ export namespace PJSON {
       topics?: {
         [k: string]: {
           description?: string
-          subtopics?: Plugin['anycli']['topics']
+          subtopics?: Plugin['oclif']['topics']
           hidden?: boolean
         }
       }
@@ -29,7 +29,7 @@ export namespace PJSON {
   }
 
   export interface CLI extends Plugin {
-    anycli: Plugin['anycli'] & {
+    oclif: Plugin['oclif'] & {
       schema?: number
       bin?: string
       npmRegistry?: string
@@ -40,7 +40,7 @@ export namespace PJSON {
 
   export interface User extends PJSON {
     private?: boolean
-    anycli: PJSON['anycli'] & {
+    oclif: PJSON['oclif'] & {
       plugins?: (string | PluginTypes.User | PluginTypes.Link)[] }
   }
 

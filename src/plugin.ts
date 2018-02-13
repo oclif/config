@@ -1,4 +1,4 @@
-import {error} from '@anycli/errors'
+import {error} from '@oclif/errors'
 import * as Globby from 'globby'
 import * as path from 'path'
 import {inspect} from 'util'
@@ -21,7 +21,7 @@ export interface Options {
 
 export interface IPlugin {
   /**
-   * @anycli/config version
+   * @oclif/config version
    */
   _base: string
   /**
@@ -100,22 +100,22 @@ export class Plugin implements IPlugin {
     this.pjson = await loadJSON(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
     this.version = this.pjson.version
-    if (this.pjson.anycli) {
+    if (this.pjson.oclif) {
       this.valid = true
     } else {
-      this.pjson.anycli = this.pjson['cli-engine'] || {}
+      this.pjson.oclif = this.pjson['cli-engine'] || {}
     }
 
-    this.hooks = mapValues(this.pjson.anycli.hooks || {}, i => Array.isArray(i) ? i : [i])
+    this.hooks = mapValues(this.pjson.oclif.hooks || {}, i => Array.isArray(i) ? i : [i])
 
     this.manifest = await this._manifest(!!this.options.ignoreManifest)
     this.commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this.findCommand(id, {must: true})}))
   }
 
-  get topics(): Topic[] { return topicsToArray(this.pjson.anycli.topics || {}) }
+  get topics(): Topic[] { return topicsToArray(this.pjson.oclif.topics || {}) }
 
-  get commandsDir() { return tsPath(this.root, this.pjson.anycli.commands) }
+  get commandsDir() { return tsPath(this.root, this.pjson.oclif.commands) }
   get commandIDs() {
     if (!this.commandsDir) return []
     let globby: typeof Globby
@@ -170,7 +170,7 @@ export class Plugin implements IPlugin {
   protected async _manifest(ignoreManifest: boolean): Promise<Manifest> {
     const readManifest = async () => {
       try {
-        const p = path.join(this.root, '.anycli.manifest.json')
+        const p = path.join(this.root, '.oclif.manifest.json')
         const manifest: Manifest = await loadJSON(p)
         if (!process.env.ANYCLI_NEXT_VERSION && manifest.version !== this.version) {
           process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)

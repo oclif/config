@@ -14,10 +14,10 @@ describe('PluginConfig', () => {
   .add('config', () => Config.load())
   .end('darwin', ({config}) => {
     expect(config).to.include({
-      cacheDir: path.join('/my/home/Library/Caches/@anycli/config'),
-      configDir: path.join('/my/home/.config/@anycli/config'),
-      errlog: path.join('/my/home/Library/Caches/@anycli/config/error.log'),
-      dataDir: path.join('/my/home/.local/share/@anycli/config'),
+      cacheDir: path.join('/my/home/Library/Caches/@oclif/config'),
+      configDir: path.join('/my/home/.config/@oclif/config'),
+      errlog: path.join('/my/home/Library/Caches/@oclif/config/error.log'),
+      dataDir: path.join('/my/home/.local/share/@oclif/config'),
       home: path.join('/my/home'),
     })
   })
@@ -30,10 +30,10 @@ describe('PluginConfig', () => {
   .add('config', () => Config.load())
   .end('linux', ({config}) => {
     expect(config).to.include({
-      cacheDir: path.join('/my/home/.cache/@anycli/config'),
-      configDir: path.join('/my/home/.config/@anycli/config'),
-      errlog: path.join('/my/home/.cache/@anycli/config/error.log'),
-      dataDir: path.join('/my/home/.local/share/@anycli/config'),
+      cacheDir: path.join('/my/home/.cache/@oclif/config'),
+      configDir: path.join('/my/home/.config/@oclif/config'),
+      errlog: path.join('/my/home/.cache/@oclif/config/error.log'),
+      dataDir: path.join('/my/home/.local/share/@oclif/config'),
       home: path.join('/my/home'),
     })
   })
@@ -46,10 +46,10 @@ describe('PluginConfig', () => {
   .add('config', () => Config.load())
   .end('win32', ({config}) => {
     expect(config).to.include({
-      cacheDir: path.join('/my/home/localappdata/@anycli/config'),
-      configDir: path.join('/my/home/localappdata/@anycli/config'),
-      errlog: path.join('/my/home/localappdata/@anycli/config/error.log'),
-      dataDir: path.join('/my/home/localappdata/@anycli/config'),
+      cacheDir: path.join('/my/home/localappdata/@oclif/config'),
+      configDir: path.join('/my/home/localappdata/@oclif/config'),
+      errlog: path.join('/my/home/localappdata/@oclif/config/error.log'),
+      dataDir: path.join('/my/home/localappdata/@oclif/config'),
       home: path.join('/my/home'),
     })
   })
