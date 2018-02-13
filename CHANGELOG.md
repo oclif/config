@@ -1,3 +1,11 @@
+<a name="1.3.48"></a>
+## [1.3.48](https://github.com/oclif/config/compare/5167c40a976d97894c5ba3c7e731b26b2393ffd6...v1.3.48) (2018-02-13)
+
+
+### Bug Fixes
+
+* updated globby ([fa1e8dd](https://github.com/oclif/config/commit/fa1e8dd))
+
 <a name="1.3.47"></a>
 ## [1.3.47](https://github.com/oclif/config/compare/v1.3.46...v1.3.47) (2018-02-13)
 
