@@ -1,3 +1,11 @@
+<a name="1.3.49"></a>
+## [1.3.49](https://github.com/oclif/config/compare/fa1e8dd7c5f0e26b4a6530207064d6eb5faef7e9...v1.3.49) (2018-02-13)
+
+
+### Bug Fixes
+
+* updated tslint ([b1dce6a](https://github.com/oclif/config/commit/b1dce6a))
+
 <a name="1.3.48"></a>
 ## [1.3.48](https://github.com/oclif/config/compare/5167c40a976d97894c5ba3c7e731b26b2393ffd6...v1.3.48) (2018-02-13)
 
