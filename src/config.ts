@@ -153,7 +153,7 @@ export class Config implements IConfig {
     this.windows = this.platform === 'win32'
     this.bin = this.pjson.oclif.bin || this.name
     this.dirname = this.pjson.oclif.dirname || this.name
-    this.userAgent = `${this.name}/${this.version} (${this.platform}-${this.arch}) node-${process.version}`
+    this.userAgent = `${this.name}/${this.version} ${this.platform}-${this.arch} node-${process.version}`
     this.shell = this._shell()
     this.debug = this._debug()
 
