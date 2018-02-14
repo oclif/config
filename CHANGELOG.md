@@ -1,3 +1,11 @@
+<a name="1.3.52"></a>
+## [1.3.52](https://github.com/oclif/config/compare/699b92296d34d93e4ab0b9bffefab4afb6ce36ef...v1.3.52) (2018-02-14)
+
+
+### Bug Fixes
+
+* remove parens around platform/arch ([d3f78ba](https://github.com/oclif/config/commit/d3f78ba))
+
 <a name="1.3.51"></a>
 ## [1.3.51](https://github.com/oclif/config/compare/718bdeb215e1d59361997f9b18e76ef36f75bdd1...v1.3.51) (2018-02-13)
 
