@@ -6,9 +6,9 @@
   "bugs": "https://github.com/oclif/config/issues",
   "dependencies": {},
   "devDependencies": {
-    "@oclif/errors": "^1.0.1",
+    "@oclif/errors": "^1.0.2",
     "@oclif/parser": "^3.2.9",
-    "@oclif/tslint": "^1.0.1",
+    "@oclif/tslint": "^1.0.2",
     "@types/chai": "^4.1.2",
     "@types/globby": "^6.1.0",
     "@types/indent-string": "^3.0.0",
