@@ -77,13 +77,13 @@ export namespace Command {
     load(): Class
   }
 
-  export function toCached(c: Class, plugin: Config.Plugin): Command {
+  export function toCached(c: Class, plugin?: Config.Plugin): Command {
     return {
       id: c.id,
       description: c.description,
       usage: c.usage,
-      pluginName: plugin.name,
-      pluginType: plugin.type,
+      pluginName: plugin && plugin.name,
+      pluginType: plugin && plugin.type,
       hidden: c.hidden,
       aliases: c.aliases || [],
       examples: c.examples || (c as any).example,
