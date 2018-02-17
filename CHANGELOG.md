@@ -1,3 +1,11 @@
+<a name="1.3.53"></a>
+## [1.3.53](https://github.com/oclif/config/compare/d3f78ba1419d2bf1a1e614ffc479adc4e6d042ce...v1.3.53) (2018-02-17)
+
+
+### Bug Fixes
+
+* make plugin optional for single-command support ([9086435](https://github.com/oclif/config/commit/9086435))
+
 <a name="1.3.52"></a>
 ## [1.3.52](https://github.com/oclif/config/compare/699b92296d34d93e4ab0b9bffefab4afb6ce36ef...v1.3.52) (2018-02-14)
 
