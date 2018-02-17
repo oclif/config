@@ -1,3 +1,11 @@
+<a name="1.3.56"></a>
+## [1.3.56](https://github.com/oclif/config/compare/285836e80b021bb1c34c82d63fa1bb877bb4c56f...v1.3.56) (2018-02-17)
+
+
+### Bug Fixes
+
+* fixed uniq ([0682c7a](https://github.com/oclif/config/commit/0682c7a))
+
 <a name="1.3.55"></a>
 ## [1.3.55](https://github.com/oclif/config/compare/de8d3f2d6b189a07f83f18fbe380db51768e68db...v1.3.55) (2018-02-17)
 
