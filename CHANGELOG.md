@@ -1,3 +1,11 @@
+<a name="1.3.54"></a>
+## [1.3.54](https://github.com/oclif/config/compare/90864357c3e4c0fbf7ea8d1ce9225ad3784c04a6...v1.3.54) (2018-02-17)
+
+
+### Bug Fixes
+
+* default args to [] ([de8d3f2](https://github.com/oclif/config/commit/de8d3f2))
+
 <a name="1.3.53"></a>
 ## [1.3.53](https://github.com/oclif/config/compare/d3f78ba1419d2bf1a1e614ffc479adc4e6d042ce...v1.3.53) (2018-02-17)
 
