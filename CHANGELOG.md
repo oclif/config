@@ -1,3 +1,11 @@
+<a name="1.3.57"></a>
+## [1.3.57](https://github.com/oclif/config/compare/0682c7a2b19b8f9faa472e09ad75fba90903e16c...v1.3.57) (2018-02-17)
+
+
+### Bug Fixes
+
+* add description to command topics ([684c214](https://github.com/oclif/config/commit/684c214))
+
 <a name="1.3.56"></a>
 ## [1.3.56](https://github.com/oclif/config/compare/285836e80b021bb1c34c82d63fa1bb877bb4c56f...v1.3.56) (2018-02-17)
 
