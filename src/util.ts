@@ -41,5 +41,7 @@ export function compact<T>(a: (T | undefined)[]): T[] {
 }
 
 export function uniq<T>(arr: T[]): T[] {
-  return arr.filter((a, i) => arr.findIndex(b => b === a) === i)
+  return arr.filter((a, i) => {
+    return !arr.find((b, j) => j > i && b === a)
+  })
 }
