@@ -302,7 +302,7 @@ export class Config implements IConfig {
       while (parts.length) {
         let name = parts.join(':')
         if (name && !topics.find(t => t.name === name)) {
-          topics.push({name})
+          topics.push({name, description: c.description})
         }
         parts.pop()
       }
