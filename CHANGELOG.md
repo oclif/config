@@ -1,3 +1,11 @@
+<a name="1.3.55"></a>
+## [1.3.55](https://github.com/oclif/config/compare/de8d3f2d6b189a07f83f18fbe380db51768e68db...v1.3.55) (2018-02-17)
+
+
+### Bug Fixes
+
+* typescript 2.7.2 ([285836e](https://github.com/oclif/config/commit/285836e))
+
 <a name="1.3.54"></a>
 ## [1.3.54](https://github.com/oclif/config/compare/90864357c3e4c0fbf7ea8d1ce9225ad3784c04a6...v1.3.54) (2018-02-17)
 
