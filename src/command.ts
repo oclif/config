@@ -117,7 +117,7 @@ export namespace Command {
         options: a.options,
         default: typeof a.default === 'function' ? a.default({}) : a.default,
         hidden: a.hidden,
-      })) : {} as Command['args'],
+      })) : [],
     }
   }
 }
