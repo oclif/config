@@ -1,3 +1,11 @@
+<a name="1.3.58"></a>
+## [1.3.58](https://github.com/oclif/config/compare/684c2147ee00b0faa6968b4fe6a7a30418d06f42...v1.3.58) (2018-02-28)
+
+
+### Bug Fixes
+
+* updated ts-node ([dc94ff9](https://github.com/oclif/config/commit/dc94ff9))
+
 <a name="1.3.57"></a>
 ## [1.3.57](https://github.com/oclif/config/compare/0682c7a2b19b8f9faa472e09ad75fba90903e16c...v1.3.57) (2018-02-17)
 
