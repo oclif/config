@@ -33,7 +33,7 @@ function registerTSNode(root: string) {
     rootDirs.push(`${root}/src`)
   }
   tsNode.register({
-    project: false,
+    skipProject: true,
     // cache: false,
     // typeCheck: true,
     compilerOptions: {
