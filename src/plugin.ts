@@ -16,7 +16,8 @@ export interface Options {
   name?: string
   type?: string
   tag?: string
-  ignoreManifest?: boolean
+  ignoreManifest?: boolean,
+  errorOnManifestCreate?: boolean
 }
 
 export interface IPlugin {
@@ -108,7 +109,7 @@ export class Plugin implements IPlugin {
 
     this.hooks = mapValues(this.pjson.oclif.hooks || {}, i => Array.isArray(i) ? i : [i])
 
-    this.manifest = await this._manifest(!!this.options.ignoreManifest)
+    this.manifest = await this._manifest(!!this.options.ignoreManifest, !!this.options.errorOnManifestCreate)
     this.commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this.findCommand(id, {must: true})}))
   }
@@ -167,7 +168,7 @@ export class Plugin implements IPlugin {
     return cmd
   }
 
-  protected async _manifest(ignoreManifest: boolean): Promise<Manifest> {
+  protected async _manifest(ignoreManifest: boolean, errorOnManifestCreate: boolean = false): Promise<Manifest> {
     const readManifest = async () => {
       try {
         const p = path.join(this.root, '.oclif.manifest.json')
@@ -192,7 +193,11 @@ export class Plugin implements IPlugin {
       commands: this.commandIDs.map(id => {
         try {
           return [id, Command.toCached(this.findCommand(id, {must: true}), this)]
-        } catch (err) { this.warn(err, 'toCached') }
+        } catch (err) {
+          const scope = 'toCached'
+          if (!errorOnManifestCreate) this.warn(err, scope)
+          else throw this.addErrorScope(err, scope)
+        }
       })
       .filter((f): f is [string, Command] => !!f)
       .reduce((commands, [id, c]) => {
@@ -204,9 +209,13 @@ export class Plugin implements IPlugin {
 
   protected warn(err: any, scope?: string) {
     if (this.warned) return
+    process.emitWarning(this.addErrorScope(err, scope))
+  }
+
+  private addErrorScope(err: any, scope?: string) {
     err.name = `${err.name} Plugin: ${this.name}`
     err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`]).join('\n')
-    process.emitWarning(err)
+    return err
   }
 }
 
