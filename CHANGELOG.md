@@ -1,3 +1,11 @@
+<a name="1.3.59"></a>
+## [1.3.59](https://github.com/oclif/config/compare/dc94ff9ee3e898f7a0e722600ec94853f2675879...v1.3.59) (2018-03-15)
+
+
+### Bug Fixes
+
+* add an option to throw instead or warn on manifest create ([573c26e](https://github.com/oclif/config/commit/573c26e))
+
 <a name="1.3.58"></a>
 ## [1.3.58](https://github.com/oclif/config/compare/684c2147ee00b0faa6968b4fe6a7a30418d06f42...v1.3.58) (2018-02-28)
 
