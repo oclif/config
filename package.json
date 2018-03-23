@@ -14,7 +14,7 @@
     "@types/indent-string": "^3.0.0",
     "@types/mocha": "^2.2.48",
     "@types/node": "^9.4.6",
-    "@types/wrap-ansi": "^2.0.14",
+    "@types/wrap-ansi": "^3.0.0",
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
     "debug": "^3.1.0",
