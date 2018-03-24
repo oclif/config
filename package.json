@@ -4,7 +4,9 @@
   "version": "1.3.59",
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/oclif/config/issues",
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^3.1.0"
+  },
   "devDependencies": {
     "@oclif/errors": "^1.0.2",
     "@oclif/parser": "^3.2.9",
@@ -17,7 +19,6 @@
     "@types/wrap-ansi": "^3.0.0",
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
-    "debug": "^3.1.0",
     "fancy-test": "^1.0.1",
     "globby": "^8.0.1",
     "mocha": "^5.0.5",
