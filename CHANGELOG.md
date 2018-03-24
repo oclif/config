@@ -1,3 +1,11 @@
+<a name="1.3.61"></a>
+## [1.3.61](https://github.com/oclif/config/compare/ff29737a1990fa22e9783eb8fc7664b1f0c48f4a...v1.3.61) (2018-03-24)
+
+
+### Bug Fixes
+
+* minor debug edit ([fe14ba0](https://github.com/oclif/config/commit/fe14ba0))
+
 <a name="1.3.60"></a>
 ## [1.3.60](https://github.com/oclif/config/compare/b15a35124ea9176dc81bec34d0f44045d5d06735...v1.3.60) (2018-03-24)
 
