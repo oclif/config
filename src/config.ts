@@ -236,7 +236,7 @@ export class Config implements IConfig {
       }))
     })
     await Promise.all(promises)
-    debug('done %s hook', event)
+    debug('%s hook done', event)
   }
 
   async runCommand(id: string, argv: string[] = []) {
