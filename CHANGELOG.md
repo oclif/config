@@ -1,3 +1,11 @@
+<a name="1.3.60"></a>
+## [1.3.60](https://github.com/oclif/config/compare/b15a35124ea9176dc81bec34d0f44045d5d06735...v1.3.60) (2018-03-24)
+
+
+### Bug Fixes
+
+* move debug to dependencies ([ff29737](https://github.com/oclif/config/commit/ff29737))
+
 <a name="1.3.59"></a>
 ## [1.3.59](https://github.com/oclif/config/compare/dc94ff9ee3e898f7a0e722600ec94853f2675879...v1.3.59) (2018-03-15)
 
