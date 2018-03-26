@@ -1,3 +1,11 @@
+<a name="1.3.62"></a>
+## [1.3.62](https://github.com/oclif/config/compare/v1.3.61...v1.3.62) (2018-03-26)
+
+
+### Bug Fixes
+
+* add config to hook context ([f06fa67](https://github.com/oclif/config/commit/f06fa67))
+
 <a name="1.3.61"></a>
 ## [1.3.61](https://github.com/oclif/config/compare/ff29737a1990fa22e9783eb8fc7664b1f0c48f4a...v1.3.61) (2018-03-24)
 
