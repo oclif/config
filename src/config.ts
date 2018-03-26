@@ -206,6 +206,7 @@ export class Config implements IConfig {
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     debug('start %s hook', event)
     const context: Hook.Context = {
+      config: this,
       exit(code = 0) { exit(code) },
       log(message: any = '') {
         message = typeof message === 'string' ? message : inspect(message)
