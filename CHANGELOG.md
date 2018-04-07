@@ -1,3 +1,11 @@
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/oclif/config/compare/v1.3.68...v1.4.0) (2018-04-07)
+
+
+### Features
+
+* added s3 template strings ([220580a](https://github.com/oclif/config/commit/220580a))
+
 <a name="1.3.68"></a>
 ## [1.3.68](https://github.com/oclif/config/compare/v1.3.67...v1.3.68) (2018-04-07)
 
