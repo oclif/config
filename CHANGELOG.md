@@ -1,3 +1,11 @@
+<a name="1.3.68"></a>
+## [1.3.68](https://github.com/oclif/config/compare/v1.3.67...v1.3.68) (2018-04-07)
+
+
+### Bug Fixes
+
+* new update options ([9451c87](https://github.com/oclif/config/commit/9451c87))
+
 <a name="1.3.67"></a>
 ## [1.3.67](https://github.com/oclif/config/compare/v1.3.66...v1.3.67) (2018-04-07)
 
