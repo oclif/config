@@ -26,6 +26,7 @@ export interface IConfig {
   version: string
   channel?: string
   pjson: PJSON.CLI
+  root: string
   /**
    * process.arch
    */
