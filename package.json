@@ -1,7 +1,7 @@
 {
   "name": "@oclif/config",
   "description": "base config object and standard interfaces for oclif components",
-  "version": "1.3.62",
+  "version": "1.3.63",
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/oclif/config/issues",
   "dependencies": {

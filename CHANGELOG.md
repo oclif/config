@@ -1,3 +1,11 @@
+<a name="1.3.63"></a>
+## [1.3.63](https://github.com/oclif/config/compare/v1.3.62...v1.3.63) (2018-04-07)
+
+
+### Bug Fixes
+
+* windows dirname paths ([8fdc599](https://github.com/oclif/config/commit/8fdc599))
+
 <a name="1.3.62"></a>
 ## [1.3.62](https://github.com/oclif/config/compare/v1.3.61...v1.3.62) (2018-03-26)
 
