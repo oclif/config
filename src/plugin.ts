@@ -108,6 +108,16 @@ export class Plugin implements IPlugin {
     }
 
     this.hooks = mapValues(this.pjson.oclif.hooks || {}, i => Array.isArray(i) ? i : [i])
+    this.pjson.oclif.update = this.pjson.oclif.update || {}
+    this.pjson.oclif.update.node = this.pjson.oclif.update.node || {}
+    const s3 = this.pjson.oclif.update.s3 = this.pjson.oclif.update.s3 || {}
+    s3.templates = {
+      platformTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>',
+      vanillaTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>',
+      platformManifest: '<%- name %>/channels/<%- channel %>/<%- platform %>-<%- arch %>',
+      vanillaManifest: '<%- name %>/channels/<%- channel %>/version',
+      ...s3.templates,
+    }
 
     this.manifest = await this._manifest(!!this.options.ignoreManifest, !!this.options.errorOnManifestCreate)
     this.commands = Object.entries(this.manifest.commands)

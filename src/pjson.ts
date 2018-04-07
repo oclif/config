@@ -19,21 +19,26 @@ export namespace PJSON {
       commands?: string
       plugins?: string[]
       devPlugins?: string[]
-      update?: {
-        autoupdate?: boolean | {
+      update: {
+        autoupdate?: {
           rollout?: number
           debounce?: number
         }
-        node?: {
+        node: {
           version?: string
           targets?: string[]
         }
-        s3?: {
+        s3: {
           bucket?: string
-          prefix?: string
           host?: string
           xz?: boolean
           gz?: boolean
+          templates: {
+            platformTarball: string
+            vanillaTarball: string
+            platformManifest: string
+            vanillaManifest: string
+          }
         }
         // github?: {}
       }
