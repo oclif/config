@@ -46,10 +46,10 @@ describe('PluginConfig', () => {
   .add('config', () => Config.load())
   .end('win32', ({config}) => {
     expect(config).to.include({
-      cacheDir: path.join('/my/home/localappdata/@oclif/config'),
-      configDir: path.join('/my/home/localappdata/@oclif/config'),
-      errlog: path.join('/my/home/localappdata/@oclif/config/error.log'),
-      dataDir: path.join('/my/home/localappdata/@oclif/config'),
+      cacheDir: path.join('/my/home/localappdata/@oclif\\config'),
+      configDir: path.join('/my/home/localappdata/@oclif\\config'),
+      errlog: path.join('/my/home/localappdata/@oclif\\config/error.log'),
+      dataDir: path.join('/my/home/localappdata/@oclif\\config'),
       home: path.join('/my/home'),
     })
   })
