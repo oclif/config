@@ -1,3 +1,11 @@
+<a name="1.3.66"></a>
+## [1.3.66](https://github.com/oclif/config/compare/v1.3.65...v1.3.66) (2018-04-07)
+
+
+### Bug Fixes
+
+* added props for updater ([6c11c6f](https://github.com/oclif/config/commit/6c11c6f))
+
 <a name="1.3.65"></a>
 ## [1.3.65](https://github.com/oclif/config/compare/v1.3.64...v1.3.65) (2018-04-07)
 
