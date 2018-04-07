@@ -18,6 +18,7 @@ export namespace PJSON {
       commands?: string
       plugins?: string[]
       devPlugins?: string[]
+      autoupdate?: 'github' | 's3'
       targets?: string[]
       s3Host?: string
       s3Bucket?: string
