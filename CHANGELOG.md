@@ -1,3 +1,11 @@
+<a name="1.3.67"></a>
+## [1.3.67](https://github.com/oclif/config/compare/v1.3.66...v1.3.67) (2018-04-07)
+
+
+### Bug Fixes
+
+* added autoupdate field ([63b92a2](https://github.com/oclif/config/commit/63b92a2))
+
 <a name="1.3.66"></a>
 ## [1.3.66](https://github.com/oclif/config/compare/v1.3.65...v1.3.66) (2018-04-07)
 
