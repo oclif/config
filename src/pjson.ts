@@ -18,6 +18,10 @@ export namespace PJSON {
       commands?: string
       plugins?: string[]
       devPlugins?: string[]
+      targets?: string[]
+      s3Host?: string
+      s3Bucket?: string
+      s3Prefix?: string
       topics?: {
         [k: string]: {
           description?: string
