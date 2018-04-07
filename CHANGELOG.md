@@ -1,3 +1,11 @@
+<a name="1.3.64"></a>
+## [1.3.64](https://github.com/oclif/config/compare/v1.3.63...v1.3.64) (2018-04-07)
+
+
+### Bug Fixes
+
+* added channel ([2d0d2c3](https://github.com/oclif/config/commit/2d0d2c3))
+
 <a name="1.3.63"></a>
 ## [1.3.63](https://github.com/oclif/config/compare/v1.3.62...v1.3.63) (2018-04-07)
 
