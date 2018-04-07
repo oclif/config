@@ -10,6 +10,7 @@ export namespace PJSON {
   export interface Plugin extends PJSON {
     name: string
     version: string
+    channel?: string
     oclif: PJSON['oclif'] & {
       schema?: number
       title?: string
@@ -18,11 +19,24 @@ export namespace PJSON {
       commands?: string
       plugins?: string[]
       devPlugins?: string[]
-      autoupdate?: 'github' | 's3'
-      targets?: string[]
-      s3Host?: string
-      s3Bucket?: string
-      s3Prefix?: string
+      update?: {
+        autoupdate?: boolean | {
+          rollout?: number
+          debounce?: number
+        }
+        node?: {
+          version?: string
+          targets?: string[]
+        }
+        s3?: {
+          bucket?: string
+          prefix?: string
+          host?: string
+          xz?: boolean
+          gz?: boolean
+        }
+        // github?: {}
+      }
       topics?: {
         [k: string]: {
           description?: string
