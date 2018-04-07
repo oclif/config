@@ -1,3 +1,11 @@
+<a name="1.3.65"></a>
+## [1.3.65](https://github.com/oclif/config/compare/v1.3.64...v1.3.65) (2018-04-07)
+
+
+### Bug Fixes
+
+* add root to IConfig ([a7ffb8a](https://github.com/oclif/config/commit/a7ffb8a))
+
 <a name="1.3.64"></a>
 ## [1.3.64](https://github.com/oclif/config/compare/v1.3.63...v1.3.64) (2018-04-07)
 
