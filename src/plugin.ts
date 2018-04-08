@@ -134,7 +134,7 @@ export class Plugin implements IPlugin {
       let command = p.name !== 'index' && p.name
       return [...topics, command].filter(f => f).join(':')
     })
-    debug('found ids', ids)
+    debug('found commands', ids)
     return ids
   }
 
