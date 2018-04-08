@@ -1,3 +1,11 @@
+<a name="1.4.4"></a>
+## [1.4.4](https://github.com/oclif/config/compare/v1.4.3...v1.4.4) (2018-04-08)
+
+
+### Bug Fixes
+
+* use dirname for s3 path ([69d5e2d](https://github.com/oclif/config/commit/69d5e2d))
+
 <a name="1.4.3"></a>
 ## [1.4.3](https://github.com/oclif/config/compare/v1.4.2...v1.4.3) (2018-04-08)
 
