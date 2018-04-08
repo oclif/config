@@ -170,6 +170,19 @@ export class Config implements IConfig {
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.oclif.npmRegistry || 'https://registry.yarnpkg.com'
 
+    this.pjson.oclif.update = this.pjson.oclif.update || {}
+    this.pjson.oclif.update.node = this.pjson.oclif.update.node || {}
+    const s3 = this.pjson.oclif.update.s3 = this.pjson.oclif.update.s3 || {}
+    s3.bucket = this.scopedEnvVar('S3_BUCKET') || s3.bucket
+    if (s3.bucket && !s3.host) s3.host = `https://${s3.bucket}.s3.amazonaws.com`
+    s3.templates = {
+      platformTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>',
+      vanillaTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>',
+      platformManifest: '<%- name %>/channels/<%- channel %>/<%- platform %>-<%- arch %>',
+      vanillaManifest: '<%- name %>/channels/<%- channel %>/version',
+      ...s3.templates,
+    }
+
     await Promise.all([
       this.loadCorePlugins(),
       this.loadUserPlugins(),
