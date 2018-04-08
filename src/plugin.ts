@@ -111,6 +111,7 @@ export class Plugin implements IPlugin {
     this.pjson.oclif.update = this.pjson.oclif.update || {}
     this.pjson.oclif.update.node = this.pjson.oclif.update.node || {}
     const s3 = this.pjson.oclif.update.s3 = this.pjson.oclif.update.s3 || {}
+    if (s3.bucket && !s3.host) s3.host = `https://${s3.bucket}.s3.amazonaws.com`
     s3.templates = {
       platformTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>',
       vanillaTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>',
