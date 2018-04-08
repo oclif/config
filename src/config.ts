@@ -176,8 +176,8 @@ export class Config implements IConfig {
     s3.bucket = this.scopedEnvVar('S3_BUCKET') || s3.bucket
     if (s3.bucket && !s3.host) s3.host = `https://${s3.bucket}.s3.amazonaws.com`
     s3.templates = {
-      platformTarball: '<%- name %>/channels/<%- channel %>/<%- dirname %>-v<%- version %>/<%- dirname %>-v<%- version %>-<%- platform %>-<%- arch %>',
-      vanillaTarball: '<%- name %>/channels/<%- channel %>/<%- dirname %>-v<%- version %>/<%- dirname %>-v<%- version %>',
+      platformTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>',
+      vanillaTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>',
       platformManifest: '<%- name %>/channels/<%- channel %>/<%- platform %>-<%- arch %>',
       vanillaManifest: '<%- name %>/channels/<%- channel %>/version',
       ...s3.templates,
