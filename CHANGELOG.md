@@ -1,3 +1,12 @@
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/oclif/config/compare/v1.4.0...v1.4.1) (2018-04-08)
+
+
+### Bug Fixes
+
+* improve mismatch version warning ([8a670bd](https://github.com/oclif/config/commit/8a670bd))
+* set s3Host automatically ([29503dd](https://github.com/oclif/config/commit/29503dd))
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/oclif/config/compare/v1.3.68...v1.4.0) (2018-04-07)
 
