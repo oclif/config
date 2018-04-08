@@ -1,3 +1,11 @@
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/oclif/config/compare/v1.4.2...v1.4.3) (2018-04-08)
+
+
+### Bug Fixes
+
+* minor debug edit ([807e47e](https://github.com/oclif/config/commit/807e47e))
+
 <a name="1.4.2"></a>
 ## [1.4.2](https://github.com/oclif/config/compare/v1.4.1...v1.4.2) (2018-04-08)
 
