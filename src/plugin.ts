@@ -184,7 +184,7 @@ export class Plugin implements IPlugin {
         const p = path.join(this.root, '.oclif.manifest.json')
         const manifest: Manifest = await loadJSON(p)
         if (!process.env.OCLIF_NEXT_VERSION && manifest.version.split('-')[0] !== this.version.split('-')[0]) {
-          process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}`)
+          process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}\nThis usually means you have an .oclif.manifest.json file that should be deleted in development. This file should be automatically generated when publishing.`)
         } else {
           debug('using manifest from', p)
           return manifest
