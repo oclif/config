@@ -1,3 +1,11 @@
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/oclif/config/compare/v1.4.1...v1.4.2) (2018-04-08)
+
+
+### Bug Fixes
+
+* add S3_BUCKET env var ([8fa37ed](https://github.com/oclif/config/commit/8fa37ed))
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/oclif/config/compare/v1.4.0...v1.4.1) (2018-04-08)
 
