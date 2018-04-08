@@ -1,3 +1,11 @@
+<a name="1.4.5"></a>
+## [1.4.5](https://github.com/oclif/config/compare/v1.4.4...v1.4.5) (2018-04-08)
+
+
+### Bug Fixes
+
+* revert dirname change ([f9ec517](https://github.com/oclif/config/commit/f9ec517))
+
 <a name="1.4.4"></a>
 ## [1.4.4](https://github.com/oclif/config/compare/v1.4.3...v1.4.4) (2018-04-08)
 
