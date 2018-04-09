@@ -1,3 +1,11 @@
+<a name="1.4.6"></a>
+## [1.4.6](https://github.com/oclif/config/compare/v1.4.5...v1.4.6) (2018-04-09)
+
+
+### Bug Fixes
+
+* added binPath ([f1d5a7f](https://github.com/oclif/config/commit/f1d5a7f))
+
 <a name="1.4.5"></a>
 ## [1.4.5](https://github.com/oclif/config/compare/v1.4.4...v1.4.5) (2018-04-08)
 
