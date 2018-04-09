@@ -24,7 +24,7 @@ const debug = Debug()
 export interface IConfig {
   name: string
   version: string
-  channel?: string
+  channel: string
   pjson: PJSON.CLI
   root: string
   /**
@@ -121,7 +121,7 @@ export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
   name!: string
   version!: string
-  channel?: string
+  channel!: string
   root!: string
   arch!: ArchTypes
   bin!: string
