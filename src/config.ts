@@ -186,10 +186,10 @@ export class Config implements IConfig {
     s3.templates = {
       platformBaseDir: '<%- bin %>',
       vanillaBaseDir: '<%- bin %>',
-      platformTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>',
-      vanillaTarball: '<%- name %>/channels/<%- channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>',
-      platformManifest: '<%- name %>/channels/<%- channel %>/<%- platform %>-<%- arch %>',
-      vanillaManifest: '<%- name %>/channels/<%- channel %>/version',
+      platformTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>",
+      vanillaTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>",
+      platformManifest: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- platform %>-<%- arch %>",
+      vanillaManifest: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/version",
       ...s3.templates,
     }
 
