@@ -117,6 +117,11 @@ export interface IConfig {
 
 const _pjson = require('../package.json')
 
+function channelFromVersion(version: string) {
+  const m = version.match(/[^-]+(?:-([^.]+))?/)
+  return (m && m[1]) || 'stable'
+}
+
 export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
   name!: string
@@ -152,8 +157,7 @@ export class Config implements IConfig {
     this.pjson = plugin.pjson
     this.name = this.pjson.name
     this.version = this.pjson.version || '0.0.0'
-    const [, versionSuffix] = this.version.split('-')
-    this.channel = (versionSuffix || '').split('.')[0] || 'stable'
+    this.channel = channelFromVersion(this.version)
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
