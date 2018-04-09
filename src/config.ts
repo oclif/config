@@ -99,6 +99,7 @@ export interface IConfig {
   npmRegistry: string
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[]
+  binPath?: string
   readonly commands: Command.Plugin[]
   readonly topics: Topic[]
   readonly commandIDs: string[]
@@ -139,6 +140,7 @@ export class Config implements IConfig {
   pjson!: PJSON.CLI
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[] = []
+  binPath?: string
   protected warned = false
 
   constructor(public options: Options) {}
@@ -167,6 +169,7 @@ export class Config implements IConfig {
     this.configDir = this.scopedEnvVar('CONFIG_DIR') || this.dir('config')
     this.dataDir = this.scopedEnvVar('DATA_DIR') || this.dir('data')
     this.errlog = path.join(this.cacheDir, 'error.log')
+    this.binPath = this.scopedEnvVar('BINPATH')
 
     this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.oclif.npmRegistry || 'https://registry.yarnpkg.com'
 
