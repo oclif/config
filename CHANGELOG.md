@@ -1,3 +1,11 @@
+<a name="1.4.11"></a>
+## [1.4.11](https://github.com/oclif/config/compare/v1.4.10...v1.4.11) (2018-04-09)
+
+
+### Bug Fixes
+
+* plugin is always set ([5611b63](https://github.com/oclif/config/commit/5611b63))
+
 <a name="1.4.10"></a>
 ## [1.4.10](https://github.com/oclif/config/compare/v1.4.9...v1.4.10) (2018-04-09)
 
