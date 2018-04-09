@@ -31,14 +31,18 @@ describe('PluginConfig', () => {
     }
     checkTemplate('platformBaseDir', 'oclif-cli')
     checkTemplate('vanillaBaseDir', 'oclif-cli')
-    checkTemplate('platformTarball', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0-darwin-x64')
+    checkTemplate('versionedPlatformTarball', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0-darwin-x64')
+    checkTemplate('platformTarball', '@oclif/config/oclif-cli-darwin-x64')
     checkTemplate('platformManifest', '@oclif/config/darwin-x64')
     checkTemplate('vanillaManifest', '@oclif/config/version')
-    checkTemplate('vanillaTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('platformTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta-darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('versionedVanillaTarball', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0')
+    checkTemplate('vanillaTarball', '@oclif/config/oclif-cli')
+    checkTemplate('versionedPlatformTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta-darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('platformTarball', '@oclif/config/channels/beta/oclif-cli-darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
     checkTemplate('platformManifest', '@oclif/config/channels/beta/darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
     checkTemplate('vanillaManifest', '@oclif/config/channels/beta/version', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('vanillaTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('versionedVanillaTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('vanillaTarball', '@oclif/config/channels/beta/oclif-cli', {version: '2.0.0-beta', channel: 'beta'})
   })
 
   fancy

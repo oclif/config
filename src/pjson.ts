@@ -33,6 +33,8 @@ export namespace PJSON {
           xz?: boolean
           gz?: boolean
           templates: {
+            versionedPlatformTarball: string
+            versionedVanillaTarball: string
             platformTarball: string
             vanillaTarball: string
             platformManifest: string

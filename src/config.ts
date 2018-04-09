@@ -186,8 +186,10 @@ export class Config implements IConfig {
     s3.templates = {
       platformBaseDir: '<%- bin %>',
       vanillaBaseDir: '<%- bin %>',
-      platformTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>",
-      vanillaTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>",
+      versionedPlatformTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %>",
+      platformTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-<%- platform %>-<%- arch %>",
+      versionedVanillaTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>",
+      vanillaTarball: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>",
       platformManifest: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- platform %>-<%- arch %>",
       vanillaManifest: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/version",
       ...s3.templates,
