@@ -37,6 +37,8 @@ export namespace PJSON {
             vanillaTarball: string
             platformManifest: string
             vanillaManifest: string
+            platformBaseDir: string
+            vanillaBaseDir: string
           }
         }
         // github?: {}
