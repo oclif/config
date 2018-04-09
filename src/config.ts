@@ -152,7 +152,8 @@ export class Config implements IConfig {
     this.pjson = plugin.pjson
     this.name = this.pjson.name
     this.version = this.pjson.version
-    this.channel = this.pjson.channel
+    const [, versionSuffix] = this.version.split('-')
+    this.channel = versionSuffix.split('.')[0] || 'stable'
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any

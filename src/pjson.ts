@@ -10,7 +10,6 @@ export namespace PJSON {
   export interface Plugin extends PJSON {
     name: string
     version: string
-    channel?: string
     oclif: PJSON['oclif'] & {
       schema?: number
       title?: string
