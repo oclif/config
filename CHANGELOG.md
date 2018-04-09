@@ -1,3 +1,11 @@
+<a name="1.4.9"></a>
+## [1.4.9](https://github.com/oclif/config/compare/v1.4.8...v1.4.9) (2018-04-09)
+
+
+### Bug Fixes
+
+* channel parsing ([0aa73ba](https://github.com/oclif/config/commit/0aa73ba))
+
 <a name="1.4.8"></a>
 ## [1.4.8](https://github.com/oclif/config/compare/v1.4.7...v1.4.8) (2018-04-09)
 
