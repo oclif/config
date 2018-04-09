@@ -1,3 +1,13 @@
+<a name="1.4.8"></a>
+## [1.4.8](https://github.com/oclif/config/compare/v1.4.7...v1.4.8) (2018-04-09)
+
+
+### Bug Fixes
+
+* fix channel type ([3623715](https://github.com/oclif/config/commit/3623715))
+* grab channel from version ([7bba041](https://github.com/oclif/config/commit/7bba041))
+* null version strings ([01b9e68](https://github.com/oclif/config/commit/01b9e68))
+
 <a name="1.4.7"></a>
 ## [1.4.7](https://github.com/oclif/config/compare/v1.4.6...v1.4.7) (2018-04-09)
 
