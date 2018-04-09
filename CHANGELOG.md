@@ -1,3 +1,11 @@
+<a name="1.4.10"></a>
+## [1.4.10](https://github.com/oclif/config/compare/v1.4.9...v1.4.10) (2018-04-09)
+
+
+### Bug Fixes
+
+* add baseDir templates ([0a545f0](https://github.com/oclif/config/commit/0a545f0))
+
 <a name="1.4.9"></a>
 ## [1.4.9](https://github.com/oclif/config/compare/v1.4.8...v1.4.9) (2018-04-09)
 
