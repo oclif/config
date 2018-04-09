@@ -1,7 +1,7 @@
 import {CLIError, error, exit, warn} from '@oclif/errors'
 import * as os from 'os'
 import * as path from 'path'
-import {inspect} from 'util'
+import {format} from 'util'
 
 import {Command} from './command'
 import Debug from './debug'
@@ -228,10 +228,10 @@ export class Config implements IConfig {
     debug('start %s hook', event)
     const context: Hook.Context = {
       config: this,
+      debug: require('debug')([this.bin, 'hooks', event].join(':')),
       exit(code = 0) { exit(code) },
-      log(message: any = '') {
-        message = typeof message === 'string' ? message : inspect(message)
-        process.stdout.write(message + '\n')
+      log(message?: any, ...args: any[]) {
+        process.stdout.write(format(message, ...args) + '\n')
       },
       error(message, options: {code?: string, exit?: number} = {}) {
         error(message, options)

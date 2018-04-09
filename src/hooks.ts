@@ -25,6 +25,7 @@ export namespace Hook {
     exit(code?: number): void
     error(message: string | Error, options?: {code?: string, exit?: number}): void
     warn(message: string): void
-    log(message?: any): void
+    log(message?: any, ...args: any[]): void
+    debug(...args: any[]): void
   }
 }
