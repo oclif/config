@@ -1,3 +1,11 @@
+<a name="1.4.12"></a>
+## [1.4.12](https://github.com/oclif/config/compare/v1.4.11...v1.4.12) (2018-04-09)
+
+
+### Bug Fixes
+
+* new template format for stable channels ([1f27a10](https://github.com/oclif/config/commit/1f27a10))
+
 <a name="1.4.11"></a>
 ## [1.4.11](https://github.com/oclif/config/compare/v1.4.10...v1.4.11) (2018-04-09)
 
