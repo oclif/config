@@ -1,3 +1,11 @@
+<a name="1.4.7"></a>
+## [1.4.7](https://github.com/oclif/config/compare/v1.4.6...v1.4.7) (2018-04-09)
+
+
+### Bug Fixes
+
+* add debug to hook context ([8c9d9bd](https://github.com/oclif/config/commit/8c9d9bd))
+
 <a name="1.4.6"></a>
 ## [1.4.6](https://github.com/oclif/config/compare/v1.4.5...v1.4.6) (2018-04-09)
 
