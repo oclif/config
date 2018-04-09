@@ -1,3 +1,11 @@
+<a name="1.4.13"></a>
+## [1.4.13](https://github.com/oclif/config/compare/v1.4.12...v1.4.13) (2018-04-09)
+
+
+### Bug Fixes
+
+* add versioned/non-versioned tarball templates ([b8409f6](https://github.com/oclif/config/commit/b8409f6))
+
 <a name="1.4.12"></a>
 ## [1.4.12](https://github.com/oclif/config/compare/v1.4.11...v1.4.12) (2018-04-09)
 
