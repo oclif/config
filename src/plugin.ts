@@ -70,7 +70,6 @@ export interface IPlugin {
   load(): Promise<void>
 }
 
-const debug = Debug()
 const _pjson = require('../package.json')
 
 export class Plugin implements IPlugin {
@@ -87,6 +86,7 @@ export class Plugin implements IPlugin {
   hooks!: {[k: string]: string[]}
   valid = false
   alreadyLoaded = false
+  protected _debug = Debug()
   protected warned = false
 
   constructor(public options: Options) {}
@@ -97,9 +97,10 @@ export class Plugin implements IPlugin {
     const root = await findRoot(this.options.name, this.options.root)
     if (!root) throw new Error(`could not find package.json with ${inspect(this.options)}`)
     this.root = root
-    debug('reading %s plugin %s', this.type, root)
+    this._debug('reading %s plugin %s', this.type, root)
     this.pjson = await loadJSON(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
+    this._debug = Debug(this.name)
     this.version = this.pjson.version
     if (this.pjson.oclif) {
       this.valid = true
@@ -123,10 +124,10 @@ export class Plugin implements IPlugin {
     try {
       globby = require('globby')
     } catch {
-      debug('not loading plugins, globby not found')
+      this._debug('not loading plugins, globby not found')
       return []
     }
-    debug(`loading IDs from ${this.commandsDir}`)
+    this._debug(`loading IDs from ${this.commandsDir}`)
     const ids = globby.sync(['**/*.+(js|ts)', '!**/*.+(d.ts|test.ts|test.js)'], {cwd: this.commandsDir})
     .map(file => {
       const p = path.parse(file)
@@ -134,7 +135,7 @@ export class Plugin implements IPlugin {
       let command = p.name !== 'index' && p.name
       return [...topics, command].filter(f => f).join(':')
     })
-    debug('found commands', ids)
+    this._debug('found commands', ids)
     return ids
   }
 
@@ -149,7 +150,7 @@ export class Plugin implements IPlugin {
         return Object.values(cmd).find((cmd: any) => typeof cmd.run === 'function')
       }
       const p = require.resolve(path.join(this.commandsDir, ...id.split(':')))
-      debug('require', p)
+      this._debug('require', p)
       let m
       try {
         m = require(p)
@@ -176,7 +177,7 @@ export class Plugin implements IPlugin {
         if (!process.env.OCLIF_NEXT_VERSION && manifest.version.split('-')[0] !== this.version.split('-')[0]) {
           process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}\nThis usually means you have an .oclif.manifest.json file that should be deleted in development. This file should be automatically generated when publishing.`)
         } else {
-          debug('using manifest from', p)
+          this._debug('using manifest from', p)
           return manifest
         }
       } catch (err) {
