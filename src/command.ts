@@ -62,7 +62,7 @@ export namespace Command {
   }
 
   export interface Class extends Base {
-    plugin: Config.IPlugin
+    plugin?: Config.IPlugin
     flags?: Parser.flags.Input<any>
     args?: Parser.args.Input
     new(argv: string[], config: Config.IConfig): Instance
