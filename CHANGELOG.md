@@ -1,3 +1,16 @@
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/oclif/config/compare/v1.5.0...v1.6.0) (2018-04-10)
+
+
+### Bug Fixes
+
+* export platform and arch types ([471ba1a](https://github.com/oclif/config/commit/471ba1a))
+
+
+### Features
+
+* added s3Url() ([1930702](https://github.com/oclif/config/commit/1930702))
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/oclif/config/compare/v1.4.14...v1.5.0) (2018-04-10)
 
