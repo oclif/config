@@ -201,16 +201,16 @@ export class Config implements IConfig {
     s3.templates = {
       target: {
         baseDir: '<%- bin %>',
-        unversioned: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
-        versioned: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %><%- ext %>",
-        manifest: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- platform %>-<%- arch %>",
+        unversioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
+        versioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %><%- ext %>",
+        manifest: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- platform %>-<%- arch %>",
         ...(s3.templates && s3.templates.target || {}),
       },
       vanilla: {
-        unversioned: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %><%- ext %>",
-        versioned: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/<%- bin %>-v<%- version %>/<%- bin %>-v<%- version %><%- ext %>",
+        unversioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %><%- ext %>",
+        versioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %><%- ext %>",
         baseDir: '<%- bin %>',
-        manifest: "<%- name %><%- channel === 'stable' ? '' : '/channels/' + channel %>/version",
+        manifest: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %>version",
         ...(s3.templates && s3.templates.vanilla || {}),
       },
       ...s3.templates,
