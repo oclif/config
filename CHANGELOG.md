@@ -1,3 +1,11 @@
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/oclif/config/compare/v1.6.0...v1.6.1) (2018-04-10)
+
+
+### Bug Fixes
+
+* remove name from paths ([8b478dc](https://github.com/oclif/config/commit/8b478dc))
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/oclif/config/compare/v1.5.0...v1.6.0) (2018-04-10)
 
