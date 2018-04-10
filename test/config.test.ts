@@ -100,4 +100,12 @@ describe('Config', () => {
     .hasS3Key('versioned', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta.tar.gz', beta)
     .hasS3Key('versioned', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta-darwin-x64.tar.gz', {...beta, ...target})
   })
+
+  testConfig()
+  .it('has s3Url', config => {
+    const orig = config.pjson.oclif.update.s3.host
+    config.pjson.oclif.update.s3.host = 'https://bar.com/a/'
+    expect(config.s3Url('/b/c')).to.equal('https://bar.com/a/b/c')
+    config.pjson.oclif.update.s3.host = orig
+  })
 })

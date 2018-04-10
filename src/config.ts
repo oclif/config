@@ -3,6 +3,7 @@ import * as Lodash from 'lodash'
 import * as os from 'os'
 import * as path from 'path'
 import {format} from 'util'
+import {URL} from 'url'
 
 import {Command} from './command'
 import Debug from './debug'
@@ -114,6 +115,7 @@ export interface IConfig {
   scopedEnvVar(key: string): string | undefined
   scopedEnvVarKey(key: string): string
   scopedEnvVarTrue(key: string): boolean
+  s3Url(key: string): string
   s3Key(type: 'versioned' | 'unversioned', ext: '.tar.gz' | '.tar.xz', options?: IConfig.s3Key.Options): string
   s3Key(type: keyof PJSON.S3.Templates, options?: IConfig.s3Key.Options): string
 }
@@ -365,6 +367,13 @@ export class Config implements IConfig {
     else if (ext) options.ext = ext
     const _: typeof Lodash = require('lodash')
     return _.template(this.pjson.oclif.update.s3.templates[options.platform ? 'target' : 'vanilla'][type])({...this as any, ...options})
+  }
+  s3Url(key: string) {
+    const host = this.pjson.oclif.update.s3.host
+    if (!host) throw new Error('no s3 host is set')
+    const url = new URL(host)
+    url.pathname = path.join(url.pathname, key)
+    return url.toString()
   }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
