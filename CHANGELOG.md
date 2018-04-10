@@ -1,3 +1,11 @@
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/oclif/config/compare/v1.6.1...v1.6.2) (2018-04-10)
+
+
+### Bug Fixes
+
+* plugin actually needs to be nullable ([0669622](https://github.com/oclif/config/commit/0669622))
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/oclif/config/compare/v1.6.0...v1.6.1) (2018-04-10)
 
