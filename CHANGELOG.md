@@ -1,3 +1,11 @@
+<a name="1.6.3"></a>
+## [1.6.3](https://github.com/oclif/config/compare/v1.6.2...v1.6.3) (2018-04-10)
+
+
+### Bug Fixes
+
+* add scope to debug ([f7b9493](https://github.com/oclif/config/commit/f7b9493))
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/oclif/config/compare/v1.6.1...v1.6.2) (2018-04-10)
 
