@@ -1,4 +1,5 @@
 import {CLIError, error, exit, warn} from '@oclif/errors'
+import * as Lodash from 'lodash'
 import * as os from 'os'
 import * as path from 'path'
 import {format} from 'util'
@@ -113,6 +114,18 @@ export interface IConfig {
   scopedEnvVar(key: string): string | undefined
   scopedEnvVarKey(key: string): string
   scopedEnvVarTrue(key: string): boolean
+  s3Key(type: 'versioned' | 'unversioned', ext: '.tar.gz' | '.tar.xz', options?: IConfig.s3Key.Options): string
+  s3Key(type: keyof PJSON.S3.Templates, options?: IConfig.s3Key.Options): string
+}
+
+export namespace IConfig {
+  export namespace s3Key {
+    export interface Options {
+      platform?: PlatformTypes
+      arch?: ArchTypes
+      [key: string]: any
+    }
+  }
 }
 
 const _pjson = require('../package.json')
@@ -345,6 +358,13 @@ export class Config implements IConfig {
       }
     }
     return topics
+  }
+
+  s3Key(type: keyof PJSON.S3.Templates, ext?: '.tar.gz' | '.tar.xz' | IConfig.s3Key.Options, options: IConfig.s3Key.Options = {}) {
+    if (typeof ext === 'object') options = ext
+    else if (ext) options.ext = ext
+    const _: typeof Lodash = require('lodash')
+    return _.template(this.pjson.oclif.update.s3.templates[options.platform ? 'target' : 'vanilla'][type])({...this as any, ...options})
   }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {

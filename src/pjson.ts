@@ -19,6 +19,7 @@ export namespace PJSON {
       plugins?: string[]
       devPlugins?: string[]
       update: {
+        s3: S3
         autoupdate?: {
           rollout?: number
           debounce?: number
@@ -27,27 +28,6 @@ export namespace PJSON {
           version?: string
           targets?: string[]
         }
-        s3: {
-          bucket?: string
-          host?: string
-          xz?: boolean
-          gz?: boolean
-          templates: {
-            target: {
-              baseDir: string
-              versioned: string
-              unversioned: string
-              manifest: string
-            }
-            vanilla: {
-              baseDir: string
-              versioned: string
-              unversioned: string
-              manifest: string
-            }
-          }
-        }
-        // github?: {}
       }
       topics?: {
         [k: string]: {
@@ -56,6 +36,26 @@ export namespace PJSON {
           hidden?: boolean
         }
       }
+    }
+  }
+
+  export interface S3 {
+    bucket?: string
+    host?: string
+    xz?: boolean
+    gz?: boolean
+    templates: {
+      target: S3.Templates
+      vanilla: S3.Templates
+    }
+  }
+
+  export namespace S3 {
+    export interface Templates {
+      baseDir: string
+      versioned: string
+      unversioned: string
+      manifest: string
     }
   }
 
