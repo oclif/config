@@ -1,3 +1,11 @@
+<a name="1.4.14"></a>
+## [1.4.14](https://github.com/oclif/config/compare/v1.4.13...v1.4.14) (2018-04-10)
+
+
+### Bug Fixes
+
+* refactor templates ([1b65f54](https://github.com/oclif/config/commit/1b65f54))
+
 <a name="1.4.13"></a>
 ## [1.4.13](https://github.com/oclif/config/compare/v1.4.12...v1.4.13) (2018-04-09)
 
