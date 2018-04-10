@@ -1,3 +1,11 @@
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/oclif/config/compare/v1.4.14...v1.5.0) (2018-04-10)
+
+
+### Features
+
+* added s3Key() ([71e0582](https://github.com/oclif/config/commit/71e0582))
+
 <a name="1.4.14"></a>
 ## [1.4.14](https://github.com/oclif/config/compare/v1.4.13...v1.4.14) (2018-04-10)
 
