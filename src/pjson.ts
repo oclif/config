@@ -33,14 +33,18 @@ export namespace PJSON {
           xz?: boolean
           gz?: boolean
           templates: {
-            versionedPlatformTarball: string
-            versionedVanillaTarball: string
-            platformTarball: string
-            vanillaTarball: string
-            platformManifest: string
-            vanillaManifest: string
-            platformBaseDir: string
-            vanillaBaseDir: string
+            target: {
+              baseDir: string
+              versioned: string
+              unversioned: string
+              manifest: string
+            }
+            vanilla: {
+              baseDir: string
+              versioned: string
+              unversioned: string
+              manifest: string
+            }
           }
         }
         // github?: {}

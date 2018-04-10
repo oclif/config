@@ -21,28 +21,29 @@ describe('PluginConfig', () => {
       dataDir: path.join('/my/home/.local/share/@oclif/config'),
       home: path.join('/my/home'),
     })
-    const checkTemplate = (k: keyof Config.PJSON.Plugin['oclif']['update']['s3']['templates'], expected: string, extra: any = {}) => {
-      expect(_.template(config.pjson.oclif.update.s3.templates[k])({
+    const checkTemplate = (type: 'target' | 'vanilla', k: keyof Config.PJSON.Plugin['oclif']['update']['s3']['templates']['vanilla'], expected: string, extra: any = {}) => {
+      expect(_.template(config.pjson.oclif.update.s3.templates[type][k])({
         ...config,
         bin: 'oclif-cli',
         version: '1.0.0',
+        ext: '.tar.gz',
         ...extra
       })).to.equal(expected)
     }
-    checkTemplate('platformBaseDir', 'oclif-cli')
-    checkTemplate('vanillaBaseDir', 'oclif-cli')
-    checkTemplate('versionedPlatformTarball', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0-darwin-x64')
-    checkTemplate('platformTarball', '@oclif/config/oclif-cli-darwin-x64')
-    checkTemplate('platformManifest', '@oclif/config/darwin-x64')
-    checkTemplate('vanillaManifest', '@oclif/config/version')
-    checkTemplate('versionedVanillaTarball', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0')
-    checkTemplate('vanillaTarball', '@oclif/config/oclif-cli')
-    checkTemplate('versionedPlatformTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta-darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('platformTarball', '@oclif/config/channels/beta/oclif-cli-darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('platformManifest', '@oclif/config/channels/beta/darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('vanillaManifest', '@oclif/config/channels/beta/version', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('versionedVanillaTarball', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta', {version: '2.0.0-beta', channel: 'beta'})
-    checkTemplate('vanillaTarball', '@oclif/config/channels/beta/oclif-cli', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('target', 'baseDir', 'oclif-cli')
+    checkTemplate('vanilla', 'baseDir', 'oclif-cli')
+    checkTemplate('target', 'versioned', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0-darwin-x64.tar.gz')
+    checkTemplate('target', 'unversioned', '@oclif/config/oclif-cli-darwin-x64.tar.gz')
+    checkTemplate('target', 'manifest', '@oclif/config/darwin-x64')
+    checkTemplate('vanilla', 'manifest', '@oclif/config/version')
+    checkTemplate('vanilla', 'versioned', '@oclif/config/oclif-cli-v1.0.0/oclif-cli-v1.0.0.tar.gz')
+    checkTemplate('vanilla', 'unversioned', '@oclif/config/oclif-cli.tar.gz')
+    checkTemplate('target', 'versioned', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta-darwin-x64.tar.gz', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('target', 'unversioned', '@oclif/config/channels/beta/oclif-cli-darwin-x64.tar.gz', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('target', 'manifest', '@oclif/config/channels/beta/darwin-x64', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('vanilla', 'manifest', '@oclif/config/channels/beta/version', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('vanilla', 'versioned', '@oclif/config/channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta.tar.gz', {version: '2.0.0-beta', channel: 'beta'})
+    checkTemplate('vanilla', 'unversioned', '@oclif/config/channels/beta/oclif-cli.tar.gz', {version: '2.0.0-beta', channel: 'beta'})
   })
 
   fancy
