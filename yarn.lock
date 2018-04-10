@@ -16,9 +16,9 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@oclif/linewrap/-/linewrap-1.0.0.tgz#aedcb64b479d4db7be24196384897b5000901d91"
 
-"@oclif/parser@^3.2.13":
-  version "3.2.13"
-  resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.2.13.tgz#4baf2b4ea23165e57adaae1f223861d8d9a33a24"
+"@oclif/parser@^3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.3.2.tgz#81af56d4f97beae376abb59e461005489abd9e19"
   dependencies:
     "@oclif/linewrap" "^1.0.0"
     chalk "^2.3.2"
