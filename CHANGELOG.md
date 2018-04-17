@@ -1,3 +1,11 @@
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/oclif/config/compare/v1.6.3...v1.6.4) (2018-04-17)
+
+
+### Bug Fixes
+
+* ts-node 6.x compatible ([6079753](https://github.com/oclif/config/commit/6079753))
+
 <a name="1.6.3"></a>
 ## [1.6.3](https://github.com/oclif/config/compare/v1.6.2...v1.6.3) (2018-04-10)
 
