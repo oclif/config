@@ -34,6 +34,7 @@ function registerTSNode(root: string) {
   }
   tsNode.register({
     skipProject: true,
+    transpileOnly: true,
     // cache: false,
     // typeCheck: true,
     compilerOptions: {
