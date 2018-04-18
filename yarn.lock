@@ -425,12 +425,12 @@ extglob@^2.0.2:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-fancy-test@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-1.0.4.tgz#fa689cfc98abec74a0b2f4386d92c58f1ef20f11"
+fancy-test@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-1.0.5.tgz#323970de576f7dc0938402c3a731ee4d59896a11"
   dependencies:
     lodash "^4.17.5"
-    stdout-stderr "^0.1.8"
+    stdout-stderr "^0.1.9"
 
 fast-glob@^2.0.2:
   version "2.0.3"
@@ -1031,7 +1031,7 @@ static-extend@^0.1.1:
     define-property "^0.2.5"
     object-copy "^0.1.0"
 
-stdout-stderr@^0.1.8:
+stdout-stderr@^0.1.9:
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/stdout-stderr/-/stdout-stderr-0.1.9.tgz#9b48ee04eff955ee07776e27125d5524d9d02f57"
   dependencies:
