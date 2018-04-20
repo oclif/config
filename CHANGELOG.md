@@ -1,3 +1,11 @@
+<a name="1.6.6"></a>
+## [1.6.6](https://github.com/oclif/config/compare/v1.6.5...v1.6.6) (2018-04-20)
+
+
+### Bug Fixes
+
+* fixed debug message ([4beac37](https://github.com/oclif/config/commit/4beac37))
+
 <a name="1.6.5"></a>
 ## [1.6.5](https://github.com/oclif/config/compare/v1.6.4...v1.6.5) (2018-04-20)
 
