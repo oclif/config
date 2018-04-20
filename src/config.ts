@@ -256,24 +256,25 @@ export class Config implements IConfig {
 
   async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
     debug('start %s hook', event)
-    const context: Hook.Context = {
-      config: this,
-      debug: require('debug')([this.bin, 'hooks', event].join(':')),
-      exit(code = 0) { exit(code) },
-      log(message?: any, ...args: any[]) {
-        process.stdout.write(format(message, ...args) + '\n')
-      },
-      error(message, options: {code?: string, exit?: number} = {}) {
-        error(message, options)
-      },
-      warn(message: string) { warn(message) },
-    }
     const promises = this.plugins.map(p => {
+      const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
+      const context: Hook.Context = {
+        config: this,
+        debug,
+        exit(code = 0) { exit(code) },
+        log(message?: any, ...args: any[]) {
+          process.stdout.write(format(message, ...args) + '\n')
+        },
+        error(message, options: {code?: string, exit?: number} = {}) {
+          error(message, options)
+        },
+        warn(message: string) { warn(message) },
+      }
       return Promise.all((p.hooks[event] || [])
       .map(async hook => {
         try {
           const f = tsPath(p.root, hook)
-          debug('hook', event, f)
+          debug('start', f)
           const search = (m: any): Hook<K> => {
             if (typeof m === 'function') return m
             if (m.default && typeof m.default === 'function') return m.default
@@ -281,6 +282,7 @@ export class Config implements IConfig {
           }
 
           await search(require(f)).call(context, {...opts as any, config: this})
+          debug('done')
         } catch (err) {
           if (err && err.oclif && err.oclif.exit !== undefined) throw err
           this.warn(err, `runHook ${event}`)
