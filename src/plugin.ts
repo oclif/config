@@ -124,7 +124,7 @@ export class Plugin implements IPlugin {
     try {
       globby = require('globby')
     } catch {
-      this._debug('not loading plugins, globby not found')
+      this._debug('not loading commands, globby not found')
       return []
     }
     this._debug(`loading IDs from ${this.commandsDir}`)
