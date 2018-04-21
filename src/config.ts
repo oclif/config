@@ -168,8 +168,9 @@ export class Config implements IConfig {
   constructor(public options: Options) {}
 
   async load() {
-    await this.loadPlugins(this.options.root, 'core', [{root: this.options.root}], {must: true})
-    const plugin = this.plugins[0]
+    const plugin = new Plugin.Plugin({root: this.options.root})
+    await plugin.load()
+    this.plugins.push(plugin)
     this.root = plugin.root
     this.pjson = plugin.pjson
     this.name = this.pjson.name
@@ -412,7 +413,7 @@ export class Config implements IConfig {
     } catch {}
     return 0
   }
-  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], options: {must?: boolean} = {}) {
+  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[]) {
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
     await Promise.all((plugins || []).map(async plugin => {
@@ -431,7 +432,6 @@ export class Config implements IConfig {
         this.plugins.push(instance)
         await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [])
       } catch (err) {
-        if (options.must) throw err
         this.warn(err, 'loadPlugins')
       }
     }))
