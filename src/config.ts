@@ -249,7 +249,8 @@ export class Config implements IConfig {
         const userPJSONPath = path.join(this.dataDir, 'package.json')
         const pjson = this.userPJSON = await loadJSON(userPJSONPath)
         if (!pjson.oclif) pjson.oclif = {schema: 1}
-        await this.loadPlugins(userPJSONPath, 'user', pjson.oclif.plugins)
+        await this.loadPlugins(userPJSONPath, 'user', pjson.oclif.plugins.filter((p: any) => p.type === 'user'))
+        await this.loadPlugins(userPJSONPath, 'link', pjson.oclif.plugins.filter((p: any) => p.type === 'link'))
       } catch (err) {
         if (err.code !== 'ENOENT') process.emitWarning(err)
       }
