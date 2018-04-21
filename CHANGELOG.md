@@ -1,3 +1,11 @@
+<a name="1.6.10"></a>
+## [1.6.10](https://github.com/oclif/config/compare/v1.6.9...v1.6.10) (2018-04-21)
+
+
+### Bug Fixes
+
+* skip loading existing plugins ([f6d5a76](https://github.com/oclif/config/commit/f6d5a76))
+
 <a name="1.6.9"></a>
 ## [1.6.9](https://github.com/oclif/config/compare/v1.6.8...v1.6.9) (2018-04-21)
 
