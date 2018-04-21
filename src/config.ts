@@ -219,8 +219,8 @@ export class Config implements IConfig {
       ...s3.templates,
     }
 
-    await this.loadDevPlugins()
     await this.loadUserPlugins()
+    await this.loadDevPlugins()
     await this.loadCorePlugins()
     debug('config done')
   }
@@ -427,6 +427,7 @@ export class Config implements IConfig {
         }
         let instance = new Plugin.Plugin(opts)
         await instance.load()
+        if (this.plugins.find(p => p.name === instance.name)) return
         this.plugins.push(instance)
         await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [])
       } catch (err) {
