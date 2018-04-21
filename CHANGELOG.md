@@ -1,3 +1,11 @@
+<a name="1.6.13"></a>
+## [1.6.13](https://github.com/oclif/config/compare/v1.6.12...v1.6.13) (2018-04-21)
+
+
+### Bug Fixes
+
+* set link plugin type ([a23329a](https://github.com/oclif/config/commit/a23329a))
+
 <a name="1.6.12"></a>
 ## [1.6.12](https://github.com/oclif/config/compare/v1.6.11...v1.6.12) (2018-04-21)
 
