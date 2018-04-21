@@ -102,6 +102,7 @@ export interface IConfig {
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[]
   binPath?: string
+  valid: boolean
   readonly commands: Command.Plugin[]
   readonly topics: Topic[]
   readonly commandIDs: string[]
@@ -161,6 +162,7 @@ export class Config implements IConfig {
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[] = []
   binPath?: string
+  valid!: boolean
   protected warned = false
 
   constructor(public options: Options) {}
@@ -173,6 +175,7 @@ export class Config implements IConfig {
     this.name = this.pjson.name
     this.version = this.pjson.version || '0.0.0'
     this.channel = channelFromVersion(this.version)
+    this.valid = plugin.valid
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
     this.platform = os.platform() as any
