@@ -1,3 +1,11 @@
+<a name="1.6.12"></a>
+## [1.6.12](https://github.com/oclif/config/compare/v1.6.11...v1.6.12) (2018-04-21)
+
+
+### Bug Fixes
+
+* ensure name is set ([c34b3ac](https://github.com/oclif/config/commit/c34b3ac))
+
 <a name="1.6.11"></a>
 ## [1.6.11](https://github.com/oclif/config/compare/v1.6.10...v1.6.11) (2018-04-21)
 
