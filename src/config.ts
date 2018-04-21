@@ -219,11 +219,9 @@ export class Config implements IConfig {
       ...s3.templates,
     }
 
-    await Promise.all([
-      this.loadCorePlugins(),
-      this.loadUserPlugins(),
-      this.loadDevPlugins(),
-    ])
+    await this.loadDevPlugins()
+    await this.loadUserPlugins()
+    await this.loadCorePlugins()
     debug('config done')
   }
 
