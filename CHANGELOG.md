@@ -1,3 +1,11 @@
+<a name="1.6.8"></a>
+## [1.6.8](https://github.com/oclif/config/compare/v1.6.7...v1.6.8) (2018-04-21)
+
+
+### Bug Fixes
+
+* load subplugins ([4508dff](https://github.com/oclif/config/commit/4508dff))
+
 <a name="1.6.7"></a>
 ## [1.6.7](https://github.com/oclif/config/compare/v1.6.6...v1.6.7) (2018-04-21)
 
