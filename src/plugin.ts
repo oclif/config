@@ -100,6 +100,7 @@ export class Plugin implements IPlugin {
     this._debug('reading %s plugin %s', this.type, root)
     this.pjson = await loadJSON(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
+    if (!this.name) throw new Error(`no name in ${path.join(root, 'package.json')}`)
     this._debug = Debug(this.name)
     this.version = this.pjson.version
     if (this.pjson.oclif) {
