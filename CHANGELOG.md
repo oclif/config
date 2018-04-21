@@ -1,3 +1,11 @@
+<a name="1.6.7"></a>
+## [1.6.7](https://github.com/oclif/config/compare/v1.6.6...v1.6.7) (2018-04-21)
+
+
+### Bug Fixes
+
+* add valid flag to iconfig ([80d4bf9](https://github.com/oclif/config/commit/80d4bf9))
+
 <a name="1.6.6"></a>
 ## [1.6.6](https://github.com/oclif/config/compare/v1.6.5...v1.6.6) (2018-04-20)
 
