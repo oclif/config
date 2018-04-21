@@ -1,3 +1,11 @@
+<a name="1.6.11"></a>
+## [1.6.11](https://github.com/oclif/config/compare/v1.6.10...v1.6.11) (2018-04-21)
+
+
+### Bug Fixes
+
+* loading plugins ([9082eb0](https://github.com/oclif/config/commit/9082eb0))
+
 <a name="1.6.10"></a>
 ## [1.6.10](https://github.com/oclif/config/compare/v1.6.9...v1.6.10) (2018-04-21)
 
