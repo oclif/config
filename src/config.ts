@@ -415,7 +415,6 @@ export class Config implements IConfig {
     return 0
   }
   protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], options: {must?: boolean} = {}) {
-    if (!plugins.length) return
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
     await Promise.all((plugins || []).map(async plugin => {
@@ -431,6 +430,7 @@ export class Config implements IConfig {
         let instance = new Plugin.Plugin(opts)
         await instance.load()
         this.plugins.push(instance)
+        await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [])
       } catch (err) {
         if (options.must) throw err
         this.warn(err, 'loadPlugins')
