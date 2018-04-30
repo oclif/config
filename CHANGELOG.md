@@ -1,3 +1,11 @@
+<a name="1.6.15"></a>
+## [1.6.15](https://github.com/oclif/config/compare/v1.6.14...v1.6.15) (2018-04-30)
+
+
+### Bug Fixes
+
+* use require.resolve to find globby and ts-node ([0a75d62](https://github.com/oclif/config/commit/0a75d62))
+
 <a name="1.6.14"></a>
 ## [1.6.14](https://github.com/oclif/config/compare/v1.6.13...v1.6.14) (2018-04-30)
 
