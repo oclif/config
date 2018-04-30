@@ -123,7 +123,8 @@ export class Plugin implements IPlugin {
     if (!this.commandsDir) return []
     let globby: typeof Globby
     try {
-      globby = require(`${this.root}/node_modules/globby`)
+      const globbyPath = require.resolve('globby', {paths: [this.root, __dirname]})
+      globby = require(globbyPath)
     } catch (err) {
       this.warn(err, 'not loading commands, globby not found')
       return []

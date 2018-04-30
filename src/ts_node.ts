@@ -24,7 +24,8 @@ function registerTSNode(root: string) {
   const tsconfig = loadTSConfig(root)
   if (!tsconfig) return
   debug('registering ts-node at', root)
-  const tsNode: typeof TSNode = require(`${root}/node_modules/ts-node`)
+  const tsNodePath = require.resolve('ts-node', {paths: [root, __dirname]})
+  const tsNode: typeof TSNode = require(tsNodePath)
   tsconfigs[root] = tsconfig
   typeRoots.push(`${root}/node_modules/@types`)
   if (tsconfig.compilerOptions.rootDirs) {
