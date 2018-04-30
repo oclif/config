@@ -123,9 +123,9 @@ export class Plugin implements IPlugin {
     if (!this.commandsDir) return []
     let globby: typeof Globby
     try {
-      globby = require('globby')
-    } catch {
-      this._debug('not loading commands, globby not found')
+      globby = require(`${this.root}/node_modules/globby`)
+    } catch (err) {
+      this.warn(err, 'not loading commands, globby not found')
       return []
     }
     this._debug(`loading IDs from ${this.commandsDir}`)
