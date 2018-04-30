@@ -5,7 +5,13 @@
     "commands": "./lib/commands",
     "hooks": {
       "init": "./lib/hooks/init",
-      "prerun": ["./lib/hooks/prerun"]
+      "prerun": [
+        "./lib/hooks/prerun"
+      ]
     }
+  },
+  "devDependencies": {
+    "globby": "^8.0.1",
+    "ts-node": "^6.0.2"
   }
 }
