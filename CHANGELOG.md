@@ -1,3 +1,11 @@
+<a name="1.6.14"></a>
+## [1.6.14](https://github.com/oclif/config/compare/v1.6.13...v1.6.14) (2018-04-30)
+
+
+### Bug Fixes
+
+* use ts-node and globby from root of plugin ([e86e23a](https://github.com/oclif/config/commit/e86e23a))
+
 <a name="1.6.13"></a>
 ## [1.6.13](https://github.com/oclif/config/compare/v1.6.12...v1.6.13) (2018-04-21)
 
