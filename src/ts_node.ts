@@ -33,19 +33,25 @@ function registerTSNode(root: string) {
   } else {
     rootDirs.push(`${root}/src`)
   }
-  tsNode.register({
-    skipProject: true,
-    transpileOnly: true,
-    // cache: false,
-    // typeCheck: true,
-    compilerOptions: {
-      target: tsconfig.compilerOptions.target || 'es2017',
-      module: 'commonjs',
-      sourceMap: true,
-      rootDirs,
-      typeRoots,
-    }
-  })
+  const cwd = process.cwd()
+  try {
+    process.chdir(root)
+    tsNode.register({
+      skipProject: true,
+      transpileOnly: true,
+      // cache: false,
+      // typeCheck: true,
+      compilerOptions: {
+        target: tsconfig.compilerOptions.target || 'es2017',
+        module: 'commonjs',
+        sourceMap: true,
+        rootDirs,
+        typeRoots,
+      }
+    })
+  } finally {
+    process.chdir(cwd)
+  }
 }
 
 function loadTSConfig(root: string): TSConfig | undefined {
