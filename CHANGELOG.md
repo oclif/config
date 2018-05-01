@@ -1,3 +1,11 @@
+<a name="1.6.16"></a>
+## [1.6.16](https://github.com/oclif/config/compare/v1.6.15...v1.6.16) (2018-05-01)
+
+
+### Bug Fixes
+
+* set cwd to project root when loading ts-node ([d120ec1](https://github.com/oclif/config/commit/d120ec1))
+
 <a name="1.6.15"></a>
 ## [1.6.15](https://github.com/oclif/config/compare/v1.6.14...v1.6.15) (2018-04-30)
 
