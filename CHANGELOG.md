@@ -1,3 +1,11 @@
+<a name="1.6.17"></a>
+## [1.6.17](https://github.com/oclif/config/compare/v1.6.16...v1.6.17) (2018-05-03)
+
+
+### Bug Fixes
+
+* allow reading oclif manifest not as a dotfile ([7ee3007](https://github.com/oclif/config/commit/7ee3007))
+
 <a name="1.6.16"></a>
 ## [1.6.16](https://github.com/oclif/config/compare/v1.6.15...v1.6.16) (2018-05-01)
 
