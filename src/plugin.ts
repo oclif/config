@@ -172,18 +172,23 @@ export class Plugin implements IPlugin {
   }
 
   protected async _manifest(ignoreManifest: boolean, errorOnManifestCreate: boolean = false): Promise<Manifest> {
-    const readManifest = async () => {
+    const readManifest = async (dotfile = false): Promise<Manifest | undefined> => {
       try {
-        const p = path.join(this.root, '.oclif.manifest.json')
+        const p = path.join(this.root, `${dotfile ? '.' : '' }oclif.manifest.json`)
         const manifest: Manifest = await loadJSON(p)
         if (!process.env.OCLIF_NEXT_VERSION && manifest.version.split('-')[0] !== this.version.split('-')[0]) {
-          process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}\nThis usually means you have an .oclif.manifest.json file that should be deleted in development. This file should be automatically generated when publishing.`)
+          process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}\nThis usually means you have an oclif.manifest.json file that should be deleted in development. This file should be automatically generated when publishing.`)
         } else {
           this._debug('using manifest from', p)
           return manifest
         }
       } catch (err) {
-        if (err.code !== 'ENOENT') this.warn(err, 'readManifest')
+        if (err.code === 'ENOENT') {
+          if (!dotfile) return readManifest(true)
+        } else {
+          this.warn(err, 'readManifest')
+          return
+        }
       }
     }
     if (!ignoreManifest) {
