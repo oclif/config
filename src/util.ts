@@ -21,6 +21,7 @@ export function loadJSONSync(path: string): any {
 }
 
 export function exists(path: string): Promise<boolean> {
+  // tslint:disable-next-line
   return new Promise(resolve => fs.exists(path, resolve))
 }
 
