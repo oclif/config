@@ -1,3 +1,11 @@
+<a name="1.6.18"></a>
+## [1.6.18](https://github.com/oclif/config/compare/v1.6.17...v1.6.18) (2018-05-11)
+
+
+### Bug Fixes
+
+* handle invalid json ([eb49618](https://github.com/oclif/config/commit/eb49618))
+
 <a name="1.6.17"></a>
 ## [1.6.17](https://github.com/oclif/config/compare/v1.6.16...v1.6.17) (2018-05-03)
 
