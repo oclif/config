@@ -1,3 +1,11 @@
+<a name="1.6.19"></a>
+## [1.6.19](https://github.com/oclif/config/compare/v1.6.18...v1.6.19) (2018-05-17)
+
+
+### Bug Fixes
+
+* add DEBUG=* to error ([9aa6384](https://github.com/oclif/config/commit/9aa6384))
+
 <a name="1.6.18"></a>
 ## [1.6.18](https://github.com/oclif/config/compare/v1.6.17...v1.6.18) (2018-05-11)
 
