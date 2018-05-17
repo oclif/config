@@ -222,7 +222,7 @@ export class Plugin implements IPlugin {
 
   private addErrorScope(err: any, scope?: string) {
     err.name = `${err.name} Plugin: ${this.name}`
-    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`]).join('\n')
+    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`, 'See more details with DEBUG=*']).join('\n')
     return err
   }
 }

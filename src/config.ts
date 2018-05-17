@@ -442,7 +442,7 @@ export class Config implements IConfig {
   protected warn(err: any, scope?: string) {
     if (this.warned) return
     err.name = `${err.name} Plugin: ${this.name}`
-    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`]).join('\n')
+    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`, 'See more details with DEBUG=*']).join('\n')
     process.emitWarning(err)
   }
 }
