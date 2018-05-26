@@ -1,3 +1,11 @@
+<a name="1.6.20"></a>
+## [1.6.20](https://github.com/oclif/config/compare/v1.6.19...v1.6.20) (2018-05-26)
+
+
+### Bug Fixes
+
+* warn if files attribute is not specified ([cc73cb5](https://github.com/oclif/config/commit/cc73cb5))
+
 <a name="1.6.19"></a>
 ## [1.6.19](https://github.com/oclif/config/compare/v1.6.18...v1.6.19) (2018-05-17)
 
