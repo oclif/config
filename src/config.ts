@@ -98,7 +98,7 @@ export interface IConfig {
   /**
    * npm registry to use for installing plugins
    */
-  npmRegistry: string
+  npmRegistry?: string
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[]
   binPath?: string
@@ -157,7 +157,7 @@ export class Config implements IConfig {
   windows!: boolean
   userAgent!: string
   debug: number = 0
-  npmRegistry!: string
+  npmRegistry?: string
   pjson!: PJSON.CLI
   userPJSON?: PJSON.User
   plugins: Plugin.IPlugin[] = []
@@ -195,7 +195,7 @@ export class Config implements IConfig {
     this.errlog = path.join(this.cacheDir, 'error.log')
     this.binPath = this.scopedEnvVar('BINPATH')
 
-    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.oclif.npmRegistry || 'https://registry.yarnpkg.com'
+    this.npmRegistry = this.scopedEnvVar('NPM_REGISTRY') || this.pjson.oclif.npmRegistry
 
     this.pjson.oclif.update = this.pjson.oclif.update || {}
     this.pjson.oclif.update.node = this.pjson.oclif.update.node || {}
