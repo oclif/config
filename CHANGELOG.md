@@ -1,3 +1,11 @@
+<a name="1.6.21"></a>
+## [1.6.21](https://github.com/oclif/config/compare/v1.6.20...v1.6.21) (2018-05-26)
+
+
+### Bug Fixes
+
+* do not default registry ([e29ceef](https://github.com/oclif/config/commit/e29ceef))
+
 <a name="1.6.20"></a>
 ## [1.6.20](https://github.com/oclif/config/compare/v1.6.19...v1.6.20) (2018-05-26)
 
