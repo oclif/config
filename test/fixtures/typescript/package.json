@@ -1,6 +1,7 @@
 {
   "name": "ts-plugin",
   "private": true,
+  "files": [],
   "oclif": {
     "commands": "./lib/commands",
     "hooks": {

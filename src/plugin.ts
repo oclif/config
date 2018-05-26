@@ -100,7 +100,9 @@ export class Plugin implements IPlugin {
     this._debug('reading %s plugin %s', this.type, root)
     this.pjson = await loadJSON(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
-    if (!this.name) throw new Error(`no name in ${path.join(root, 'package.json')}`)
+    const pjsonPath = path.join(root, 'package.json')
+    if (!this.name) throw new Error(`no name in ${pjsonPath}`)
+    if (!this.pjson.files) this.warn(`files attribute must be specified in ${pjsonPath}`)
     this._debug = Debug(this.name)
     this.version = this.pjson.version
     if (this.pjson.oclif) {
@@ -217,6 +219,7 @@ export class Plugin implements IPlugin {
 
   protected warn(err: any, scope?: string) {
     if (this.warned) return
+    if (typeof err === 'string') err = new Error(err)
     process.emitWarning(this.addErrorScope(err, scope))
   }
 
