@@ -1,3 +1,11 @@
+<a name="1.6.23"></a>
+## [1.6.23](https://github.com/oclif/config/compare/v1.6.22...v1.6.23) (2018-05-31)
+
+
+### Bug Fixes
+
+* make imports not use "import *" to avoid node warning ([eac2edc](https://github.com/oclif/config/commit/eac2edc))
+
 <a name="1.6.22"></a>
 ## [1.6.22](https://github.com/oclif/config/compare/v1.6.21...v1.6.22) (2018-05-31)
 
