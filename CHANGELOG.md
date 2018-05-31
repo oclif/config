@@ -1,3 +1,12 @@
+<a name="1.6.22"></a>
+## [1.6.22](https://github.com/oclif/config/compare/v1.6.21...v1.6.22) (2018-05-31)
+
+
+### Bug Fixes
+
+* triggering release ([cd409fc](https://github.com/oclif/config/commit/cd409fc))
+* typescript 2.9 ([8e25da5](https://github.com/oclif/config/commit/8e25da5))
+
 <a name="1.6.21"></a>
 ## [1.6.21](https://github.com/oclif/config/compare/v1.6.20...v1.6.21) (2018-05-26)
 
