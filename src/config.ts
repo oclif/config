@@ -1,7 +1,7 @@
 import {CLIError, error, exit, warn} from '@oclif/errors'
-import * as Lodash from 'lodash'
-import * as os from 'os'
-import * as path from 'path'
+import Lodash from 'lodash'
+import os from 'os'
+import path from 'path'
 import {URL} from 'url'
 import {format} from 'util'
 
@@ -108,7 +108,7 @@ export interface IConfig {
   readonly commandIDs: string[]
 
   runCommand(id: string, argv?: string[]): Promise<void>
-  runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]): Promise<void>
+  runHook<T extends Hooks, K extends Extract<keyof T, string>>(event: K, opts: T[K]): Promise<void>
   findCommand(id: string, opts: {must: true}): Command.Plugin
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
   findTopic(id: string, opts: {must: true}): Topic
@@ -258,7 +258,7 @@ export class Config implements IConfig {
     }
   }
 
-  async runHook<T extends Hooks, K extends keyof T>(event: K, opts: T[K]) {
+  async runHook<T extends Hooks, K extends Extract<keyof T, string>>(event: K, opts: T[K]) {
     debug('start %s hook', event)
     const promises = this.plugins.map(p => {
       const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
