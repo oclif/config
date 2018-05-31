@@ -109,7 +109,7 @@ export namespace Command {
           options: flag.options,
           default: typeof flag.default === 'function' ? flag.default({options: {}, flags: {}}) : flag.default,
         }
-      }),
+      }) as {[k: string]: Flag},
       args: c.args ? c.args.map(a => ({
         name: a.name,
         description: a.description,
