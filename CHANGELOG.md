@@ -1,3 +1,11 @@
+<a name="1.6.25"></a>
+## [1.6.25](https://github.com/oclif/config/compare/v1.6.24...v1.6.25) (2018-06-01)
+
+
+### Bug Fixes
+
+* add tslib ([f44135a](https://github.com/oclif/config/commit/f44135a))
+
 <a name="1.6.23"></a>
 ## [1.6.23](https://github.com/oclif/config/compare/v1.6.22...v1.6.23) (2018-05-31)
 
