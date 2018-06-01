@@ -1,3 +1,11 @@
+<a name="1.6.27"></a>
+## [1.6.27](https://github.com/oclif/config/compare/v1.6.26...v1.6.27) (2018-06-01)
+
+
+### Bug Fixes
+
+* imports ([9b17c77](https://github.com/oclif/config/commit/9b17c77))
+
 <a name="1.6.26"></a>
 ## [1.6.26](https://github.com/oclif/config/compare/v1.6.25...v1.6.26) (2018-06-01)
 
