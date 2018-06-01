@@ -1,5 +1,5 @@
 // tslint:disable no-implicit-dependencies
-import fs from 'fs'
+import * as fs from 'fs'
 
 const debug = require('debug')('@oclif/config')
 
