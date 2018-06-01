@@ -80,6 +80,7 @@ export namespace PJSON {
     export interface User {
       type: 'user',
       name: string,
+      url?: string,
       tag?: string,
     }
     export interface Link {
