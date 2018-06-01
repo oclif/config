@@ -1,3 +1,11 @@
+<a name="1.6.26"></a>
+## [1.6.26](https://github.com/oclif/config/compare/v1.6.25...v1.6.26) (2018-06-01)
+
+
+### Bug Fixes
+
+* add optional url type to user plugins ([57cb0c5](https://github.com/oclif/config/commit/57cb0c5))
+
 <a name="1.6.25"></a>
 ## [1.6.25](https://github.com/oclif/config/compare/v1.6.24...v1.6.25) (2018-06-01)
 
