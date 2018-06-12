@@ -18,6 +18,7 @@ export namespace PJSON {
       commands?: string
       plugins?: string[]
       devPlugins?: string[]
+      aliases?: { [name: string]: string | null }
       update: {
         s3: S3
         autoupdate?: {
