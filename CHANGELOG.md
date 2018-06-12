@@ -1,3 +1,11 @@
+<a name="1.6.28"></a>
+## [1.6.28](https://github.com/oclif/config/compare/v1.6.27...v1.6.28) (2018-06-12)
+
+
+### Bug Fixes
+
+* add aliases to pjson ([859499d](https://github.com/oclif/config/commit/859499d))
+
 <a name="1.6.27"></a>
 ## [1.6.27](https://github.com/oclif/config/compare/v1.6.26...v1.6.27) (2018-06-01)
 
