@@ -1,3 +1,11 @@
+<a name="1.6.29"></a>
+## [1.6.29](https://github.com/oclif/config/compare/v1.6.28...v1.6.29) (2018-06-15)
+
+
+### Bug Fixes
+
+* sort commands by id ([8245d9c](https://github.com/oclif/config/commit/8245d9c))
+
 <a name="1.6.28"></a>
 ## [1.6.28](https://github.com/oclif/config/compare/v1.6.27...v1.6.28) (2018-06-12)
 
