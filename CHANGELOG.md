@@ -1,3 +1,11 @@
+<a name="1.6.30"></a>
+## [1.6.30](https://github.com/oclif/config/compare/v1.6.29...v1.6.30) (2018-06-15)
+
+
+### Bug Fixes
+
+* s3 template defaulting ([03f61ec](https://github.com/oclif/config/commit/03f61ec))
+
 <a name="1.6.29"></a>
 ## [1.6.29](https://github.com/oclif/config/compare/v1.6.28...v1.6.29) (2018-06-15)
 
