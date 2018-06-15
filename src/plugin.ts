@@ -116,6 +116,11 @@ export class Plugin implements IPlugin {
     this.manifest = await this._manifest(!!this.options.ignoreManifest, !!this.options.errorOnManifestCreate)
     this.commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this.findCommand(id, {must: true})}))
+    this.commands.sort((a, b) => {
+      if (a.id < b.id) return -1
+      if (a.id > b.id) return 1
+      return 0
+    })
   }
 
   get topics(): Topic[] { return topicsToArray(this.pjson.oclif.topics || {}) }
