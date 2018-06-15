@@ -203,21 +203,21 @@ export class Config implements IConfig {
     s3.bucket = this.scopedEnvVar('S3_BUCKET') || s3.bucket
     if (s3.bucket && !s3.host) s3.host = `https://${s3.bucket}.s3.amazonaws.com`
     s3.templates = {
+      ...s3.templates,
       target: {
         baseDir: '<%- bin %>',
         unversioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
         versioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %><%- ext %>",
         manifest: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- platform %>-<%- arch %>",
-        ...(s3.templates && s3.templates.target || {}),
+        ...s3.templates && s3.templates.target,
       },
       vanilla: {
         unversioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %><%- ext %>",
         versioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %><%- ext %>",
         baseDir: '<%- bin %>',
         manifest: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %>version",
-        ...(s3.templates && s3.templates.vanilla || {}),
+        ...s3.templates && s3.templates.vanilla,
       },
-      ...s3.templates,
     }
 
     await this.loadUserPlugins()
