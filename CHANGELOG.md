@@ -1,3 +1,11 @@
+<a name="1.6.31"></a>
+## [1.6.31](https://github.com/oclif/config/compare/v1.6.30...v1.6.31) (2018-06-16)
+
+
+### Bug Fixes
+
+* --declarationMap ([e0c5171](https://github.com/oclif/config/commit/e0c5171))
+
 <a name="1.6.30"></a>
 ## [1.6.30](https://github.com/oclif/config/compare/v1.6.29...v1.6.30) (2018-06-15)
 
