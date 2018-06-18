@@ -84,7 +84,7 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     const tsconfig = tsconfigs[root]
     if (!tsconfig) return orig
     const {rootDir, rootDirs, outDir} = tsconfig.compilerOptions
-    const rootDirPath = (rootDirs || (rootDir && [rootDir]) || [])[0]
+    const rootDirPath = rootDir || (rootDirs || [])[0]
     if (!rootDirPath || !outDir) return orig
     // rewrite path from ./lib/foo to ./src/foo
     const lib = path.join(root, outDir) // ./lib
