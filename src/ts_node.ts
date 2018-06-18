@@ -13,6 +13,7 @@ const debug = Debug()
 
 export interface TSConfig {
   compilerOptions: {
+    rootDir?: string
     rootDirs?: string[]
     outDir?: string
     target?: string
@@ -82,12 +83,12 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     registerTSNode(root)
     const tsconfig = tsconfigs[root]
     if (!tsconfig) return orig
-    const {rootDirs, outDir} = tsconfig.compilerOptions
-    const rootDir = (rootDirs || [])[0]
-    if (!rootDir || !outDir) return orig
+    const {rootDir, rootDirs, outDir} = tsconfig.compilerOptions
+    const rootDirPath = rootDir || (rootDirs || [])[0]
+    if (!rootDirPath || !outDir) return orig
     // rewrite path from ./lib/foo to ./src/foo
     const lib = path.join(root, outDir) // ./lib
-    const src = path.join(root, rootDir) // ./src
+    const src = path.join(root, rootDirPath) // ./src
     const relative = path.relative(lib, orig) // ./commands
     const out = path.join(src, relative) // ./src/commands
     // this can be a directory of commands or point to a hook file
