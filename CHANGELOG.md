@@ -1,3 +1,11 @@
+<a name="1.6.32"></a>
+## [1.6.32](https://github.com/oclif/config/compare/v1.6.31...v1.6.32) (2018-06-18)
+
+
+### Bug Fixes
+
+* add rootDir from tsconfig for plugins that use it ([#39](https://github.com/oclif/config/issues/39)) ([a6078d1](https://github.com/oclif/config/commit/a6078d1))
+
 <a name="1.6.31"></a>
 ## [1.6.31](https://github.com/oclif/config/compare/v1.6.30...v1.6.31) (2018-06-16)
 
