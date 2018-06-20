@@ -19,6 +19,7 @@ export namespace PJSON {
       plugins?: string[]
       devPlugins?: string[]
       aliases?: { [name: string]: string | null }
+      repositoryPrefix?: string
       update: {
         s3: S3
         autoupdate?: {
