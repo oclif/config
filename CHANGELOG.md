@@ -1,3 +1,11 @@
+<a name="1.6.33"></a>
+## [1.6.33](https://github.com/oclif/config/compare/v1.6.32...v1.6.33) (2018-06-20)
+
+
+### Bug Fixes
+
+* add repositoryPrefix ([73698bd](https://github.com/oclif/config/commit/73698bd))
+
 <a name="1.6.32"></a>
 ## [1.6.32](https://github.com/oclif/config/compare/v1.6.31...v1.6.32) (2018-06-18)
 
