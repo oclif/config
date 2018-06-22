@@ -13,7 +13,7 @@
     "@oclif/parser": "^3.5.2",
     "@oclif/tslint": "^1.1.2",
     "@types/chai": "^4.1.4",
-    "@types/globby": "^6.1.0",
+    "@types/globby": "^8.0.0",
     "@types/indent-string": "^3.0.0",
     "@types/lodash": "^4.14.110",
     "@types/mocha": "^5.2.2",
