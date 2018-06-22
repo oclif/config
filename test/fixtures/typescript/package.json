@@ -13,6 +13,6 @@
   },
   "devDependencies": {
     "globby": "^8.0.1",
-    "ts-node": "^6.0.2"
+    "ts-node": "^7.0.0"
   }
 }
