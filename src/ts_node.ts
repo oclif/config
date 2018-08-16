@@ -38,16 +38,10 @@ function registerTSNode(root: string) {
   try {
     process.chdir(root)
     tsNode.register({
-      skipProject: true,
-      transpileOnly: true,
-      // cache: false,
-      // typeCheck: true,
+      typeCheck: true,
       compilerOptions: {
-        target: tsconfig.compilerOptions.target || 'es2017',
-        module: 'commonjs',
-        sourceMap: true,
         rootDirs,
-        typeRoots,
+        typeRoots
       }
     })
   } finally {
