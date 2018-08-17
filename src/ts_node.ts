@@ -6,8 +6,6 @@ import Debug from './debug'
 import {loadJSONSync} from './util'
 
 const tsconfigs: {[root: string]: TSConfig} = {}
-const rootDirs: string[] = []
-const typeRoots = [`${__dirname}/../node_modules/@types`]
 
 const debug = Debug()
 
@@ -28,22 +26,10 @@ function registerTSNode(root: string) {
   const tsNodePath = require.resolve('ts-node', {paths: [root, __dirname]})
   const tsNode: typeof TSNode = require(tsNodePath)
   tsconfigs[root] = tsconfig
-  typeRoots.push(`${root}/node_modules/@types`)
-  if (tsconfig.compilerOptions.rootDirs) {
-    rootDirs.push(...tsconfig.compilerOptions.rootDirs.map(r => path.join(root, r)))
-  } else {
-    rootDirs.push(`${root}/src`)
-  }
   const cwd = process.cwd()
   try {
     process.chdir(root)
-    tsNode.register({
-      typeCheck: true,
-      compilerOptions: {
-        rootDirs,
-        typeRoots
-      }
-    })
+    tsNode.register()
   } finally {
     process.chdir(cwd)
   }
