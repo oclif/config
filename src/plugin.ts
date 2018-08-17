@@ -8,7 +8,7 @@ import Debug from './debug'
 import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
-import {tsPath} from './ts_node'
+import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
 export interface Options {
@@ -178,7 +178,7 @@ export class Plugin implements IPlugin {
     return cmd
   }
 
-  protected async _manifest(ignoreManifest: boolean, errorOnManifestCreate: boolean = false): Promise<Manifest> {
+  protected async _manifest(ignoreManifest: boolean, errorOnManifestCreate = false): Promise<Manifest> {
     const readManifest = async (dotfile = false): Promise<Manifest | undefined> => {
       try {
         const p = path.join(this.root, `${dotfile ? '.' : '' }oclif.manifest.json`)

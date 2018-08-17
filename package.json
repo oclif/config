@@ -10,23 +10,23 @@
   },
   "devDependencies": {
     "@oclif/errors": "^1.1.2",
-    "@oclif/parser": "^3.5.2",
-    "@oclif/tslint": "^1.1.2",
+    "@oclif/parser": "^3.5.3",
+    "@oclif/tslint": "^2.0.0",
     "@types/chai": "^4.1.4",
     "@types/globby": "^8.0.0",
     "@types/indent-string": "^3.0.0",
-    "@types/lodash": "^4.14.110",
-    "@types/mocha": "^5.2.3",
-    "@types/node": "^10.3.6",
+    "@types/lodash": "^4.14.116",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.7.1",
     "@types/wrap-ansi": "^3.0.0",
     "chai": "^4.1.2",
     "fancy-test": "^1.2.0",
     "globby": "^8.0.1",
     "lodash": "^4.17.10",
     "mocha": "^5.2.0",
-    "ts-node": "^7.0.0",
-    "tslint": "^5.10.0",
-    "typescript": "^2.9.2"
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
   },
   "engines": {
     "node": ">=8.0.0"

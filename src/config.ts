@@ -11,7 +11,7 @@ import {Hook, Hooks} from './hooks'
 import {PJSON} from './pjson'
 import * as Plugin from './plugin'
 import {Topic} from './topic'
-import {tsPath} from './ts_node'
+import {tsPath} from './ts-node'
 import {compact, flatMap, loadJSON, uniq} from './util'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
@@ -156,7 +156,7 @@ export class Config implements IConfig {
   shell!: string
   windows!: boolean
   userAgent!: string
-  debug: number = 0
+  debug = 0
   npmRegistry?: string
   pjson!: PJSON.CLI
   userPJSON?: PJSON.User
