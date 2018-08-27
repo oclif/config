@@ -140,7 +140,7 @@ export class Plugin implements IPlugin {
     const patterns = [
       '**/*.+(js|ts)',
       '!**/*.+(d.ts|test.ts|test.js|spec.ts|spec.js)',
-    ];
+    ]
     const ids = globby.sync(patterns, {cwd: this.commandsDir})
     .map(file => {
       const p = path.parse(file)
