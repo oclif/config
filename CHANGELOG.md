@@ -1,3 +1,11 @@
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/oclif/config/compare/v1.7.1...v1.7.2) (2018-08-27)
+
+
+### Bug Fixes
+
+* ensure plugins are set ([1ed0eb2](https://github.com/oclif/config/commit/1ed0eb2))
+
 <a name="1.7.1"></a>
 ## [1.7.1](https://github.com/oclif/config/compare/v1.7.0...v1.7.1) (2018-08-27)
 
