@@ -250,6 +250,7 @@ export class Config implements IConfig {
         debug('reading user plugins pjson %s', userPJSONPath)
         const pjson = this.userPJSON = await loadJSON(userPJSONPath)
         if (!pjson.oclif) pjson.oclif = {schema: 1}
+        if (!pjson.oclif.plugins) pjson.oclif.plugins = []
         await this.loadPlugins(userPJSONPath, 'user', pjson.oclif.plugins.filter((p: any) => p.type === 'user'))
         await this.loadPlugins(userPJSONPath, 'link', pjson.oclif.plugins.filter((p: any) => p.type === 'link'))
       } catch (err) {
