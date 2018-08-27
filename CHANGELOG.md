@@ -1,3 +1,11 @@
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/oclif/config/compare/v1.7.0...v1.7.1) (2018-08-27)
+
+
+### Bug Fixes
+
+* exclude `spec` files from being loaded as commands ([#46](https://github.com/oclif/config/issues/46)) ([5854d34](https://github.com/oclif/config/commit/5854d34)), closes [#158](https://github.com/oclif/config/issues/158)
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/oclif/config/compare/v1.6.33...v1.7.0) (2018-08-17)
 
