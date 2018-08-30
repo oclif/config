@@ -2,23 +2,28 @@ import * as os from 'os'
 import * as path from 'path'
 
 import {IConfig, load, PJSON} from '../src'
+import * as util from '../src/util'
 
 import {expect, fancy} from './test'
 
 interface Options {
+  pjson?: any,
   homedir?: string,
     platform?: string,
     env?: {[k: string]: string},
 }
 
 describe('Config', () => {
-  const testConfig = ({homedir = '/my/home', platform = 'darwin', env = {}}: Options = {}) => {
-    const test = fancy
+  const testConfig = ({pjson, homedir = '/my/home', platform = 'darwin', env = {}}: Options = {}) => {
+    let test = fancy
     .resetConfig()
     .env(env, {clear: true})
     .stub(os, 'homedir', () => path.join(homedir))
     .stub(os, 'platform', () => platform)
-    .add('config', () => load())
+
+    if (pjson) test = test.stub(util, 'loadJSON', () => Promise.resolve(pjson))
+
+    test = test.add('config', () => load())
 
     return {
       hasS3Key(k: keyof PJSON.S3.Templates, expected: string, extra: any = {}) {
@@ -107,5 +112,34 @@ describe('Config', () => {
     config.pjson.oclif.update.s3.host = 'https://bar.com/a/'
     expect(config.s3Url('/b/c')).to.equal('https://bar.com/a/b/c')
     config.pjson.oclif.update.s3.host = orig
+  })
+
+  testConfig({
+    pjson: {
+      name: 'foo',
+      oclif: {
+        topics: {
+          t1: {
+            description: 'desc for t1',
+            subtopics: {
+              't1-1': {
+                description: 'desc for t1-1',
+                subtopics: {
+                  't1-1-1': {
+                    description: 'desc for t1-1-1'
+                  },
+                  't1-1-2': {
+                    description: 'desc for t1-1-2'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  })
+  .it('has subtopics', config => {
+    expect(config.topics.map(t => t.name)).to.have.members(['t1', 't1:t1-1', 't1:t1-1:t1-1-1', 't1:t1-1:t1-1-2'])
   })
 })
