@@ -246,6 +246,7 @@ function topicsToArray(input: any, base?: string): Topic[] {
     return input.concat(flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
   }
   return flatMap(Object.keys(input), k => {
+    input[k].name = k
     return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
   })
 }
