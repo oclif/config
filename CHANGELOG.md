@@ -1,3 +1,11 @@
+<a name="1.7.3"></a>
+## [1.7.3](https://github.com/oclif/config/compare/v1.7.2...v1.7.3) (2018-08-30)
+
+
+### Bug Fixes
+
+* default subtopic names ([#49](https://github.com/oclif/config/issues/49)) ([c084b64](https://github.com/oclif/config/commit/c084b64)), closes [#48](https://github.com/oclif/config/issues/48)
+
 <a name="1.7.2"></a>
 ## [1.7.2](https://github.com/oclif/config/compare/v1.7.1...v1.7.2) (2018-08-27)
 
