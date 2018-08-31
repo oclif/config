@@ -1,3 +1,11 @@
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/oclif/config/compare/v1.7.3...v1.7.4) (2018-08-31)
+
+
+### Bug Fixes
+
+* cache allowNo on boolean flags ([05964f7](https://github.com/oclif/config/commit/05964f7))
+
 <a name="1.7.3"></a>
 ## [1.7.3](https://github.com/oclif/config/compare/v1.7.2...v1.7.3) (2018-08-30)
 
