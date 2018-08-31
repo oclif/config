@@ -37,6 +37,7 @@ export namespace Command {
       char?: string
       hidden?: boolean
       description?: string
+      allowNo?: boolean
     }
     export interface Option {
       type: 'option'
@@ -96,6 +97,7 @@ export namespace Command {
             description: flag.description,
             hidden: flag.hidden,
             required: flag.required,
+            allowNo: flag.allowNo,
           }
         }
         return {
