@@ -276,23 +276,23 @@ export class Config implements IConfig {
         warn(message: string) { warn(message) },
       }
       return Promise.all((p.hooks[event] || [])
-      .map(async hook => {
-        try {
-          const f = tsPath(p.root, hook)
-          debug('start', f)
-          const search = (m: any): Hook<K> => {
-            if (typeof m === 'function') return m
-            if (m.default && typeof m.default === 'function') return m.default
-            return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
-          }
+        .map(async hook => {
+          try {
+            const f = tsPath(p.root, hook)
+            debug('start', f)
+            const search = (m: any): Hook<K> => {
+              if (typeof m === 'function') return m
+              if (m.default && typeof m.default === 'function') return m.default
+              return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
+            }
 
-          await search(require(f)).call(context, {...opts as any, config: this})
-          debug('done')
-        } catch (err) {
-          if (err && err.oclif && err.oclif.exit !== undefined) throw err
-          this.warn(err, `runHook ${event}`)
-        }
-      }))
+            await search(require(f)).call(context, {...opts as any, config: this})
+            debug('done')
+          } catch (err) {
+            if (err && err.oclif && err.oclif.exit !== undefined) throw err
+            this.warn(err, `runHook ${event}`)
+          }
+        }))
     })
     await Promise.all(promises)
     debug('%s hook done', event)

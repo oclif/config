@@ -218,11 +218,11 @@ export class Plugin implements IPlugin {
           else throw this.addErrorScope(err, scope)
         }
       })
-      .filter((f): f is [string, Command] => !!f)
-      .reduce((commands, [id, c]) => {
-        commands[id] = c
-        return commands
-      }, {} as {[k: string]: Command})
+        .filter((f): f is [string, Command] => !!f)
+        .reduce((commands, [id, c]) => {
+          commands[id] = c
+          return commands
+        }, {} as {[k: string]: Command})
     }
   }
 
