@@ -1,3 +1,11 @@
+<a name="1.7.6"></a>
+## [1.7.6](https://github.com/oclif/config/compare/v1.7.5...v1.7.6) (2018-09-14)
+
+
+### Bug Fixes
+
+* argv is not required ([143f7a6](https://github.com/oclif/config/commit/143f7a6))
+
 <a name="1.7.5"></a>
 ## [1.7.5](https://github.com/oclif/config/compare/v1.7.4...v1.7.5) (2018-09-13)
 
