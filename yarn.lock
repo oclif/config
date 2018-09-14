@@ -466,9 +466,9 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-fancy-test@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-1.4.0.tgz#93e8b1904afbcefb496f58a05f6d2d99fc9c4acc"
+fancy-test@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-1.4.1.tgz#c87267e01c71185ef4cd5a9cf508eb7e3adbdc94"
   dependencies:
     "@types/chai" "^4.1.4"
     "@types/lodash" "^4.14.116"
@@ -476,7 +476,7 @@ fancy-test@^1.4.0:
     "@types/nock" "^9.3.0"
     "@types/node" "^10.9.4"
     "@types/sinon" "^5.0.2"
-    lodash "^4.17.10"
+    lodash "^4.17.11"
     mock-stdin "^0.3.1"
     stdout-stderr "^0.1.9"
 
@@ -796,7 +796,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-lodash@^4.17.10, lodash@^4.17.11:
+lodash@^4.17.11:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
