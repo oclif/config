@@ -67,7 +67,7 @@ export namespace Command {
     flags?: Parser.flags.Input<any>
     args?: Parser.args.Input
     new(argv: string[], config: Config.IConfig): Instance
-    run(argv?: string[], config?: Config.LoadOptions): Promise<any>
+    run(argv?: string[], config?: Config.LoadOptions): PromiseLike<any>
   }
 
   export interface Instance {
