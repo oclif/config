@@ -12,8 +12,12 @@ export interface Hooks {
   }
   update: {}
   'command_not_found': {id: string},
-  'plugins:parse': {
-    pjson: Config.IPlugin
+  'plugins:install': {
+    plugin: {
+      name: string,
+      tag: string,
+      type: 'npm'
+    }
   }
 }
 
