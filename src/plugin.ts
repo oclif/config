@@ -18,7 +18,7 @@ export interface Options {
   tag?: string
   ignoreManifest?: boolean,
   errorOnManifestCreate?: boolean
-  parent: IPlugin | undefined
+  parent?: IPlugin | undefined
 }
 
 export interface IPlugin {

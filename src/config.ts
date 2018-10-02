@@ -416,7 +416,7 @@ export class Config implements IConfig {
     } catch {}
     return 0
   }
-  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], parent: Plugin.IPlugin | undefined) {
+  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], parent?: Plugin.IPlugin) {
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
     await Promise.all((plugins || []).map(async plugin => {
