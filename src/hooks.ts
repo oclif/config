@@ -12,7 +12,7 @@ export interface Hooks {
   }
   update: {}
   'command_not_found': {id: string},
-  'plugins:install': {
+  'plugins:preinstall': {
     plugin: {
       name: string,
       tag: string,
