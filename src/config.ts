@@ -416,12 +416,12 @@ export class Config implements IConfig {
     } catch {}
     return 0
   }
-  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[]) {
+  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], parent: Plugin.IPlugin | undefined) {
     if (!plugins || !plugins.length) return
     debug('loading plugins', plugins)
     await Promise.all((plugins || []).map(async plugin => {
       try {
-        let opts: Options = {type, root}
+        let opts: Options = {type, root, parent}
         if (typeof plugin === 'string') {
           opts.name = plugin
         } else {
@@ -433,7 +433,7 @@ export class Config implements IConfig {
         await instance.load()
         if (this.plugins.find(p => p.name === instance.name)) return
         this.plugins.push(instance)
-        await this.loadPlugins(instance.root, instance.name, instance.pjson.oclif.plugins || [])
+        await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [], instance)
       } catch (err) {
         this.warn(err, 'loadPlugins')
       }
