@@ -433,7 +433,7 @@ export class Config implements IConfig {
         await instance.load()
         if (this.plugins.find(p => p.name === instance.name)) return
         this.plugins.push(instance)
-        await this.loadPlugins(instance.root, opts.name!, instance.pjson.oclif.plugins || [])
+        await this.loadPlugins(instance.root, instance.name, instance.pjson.oclif.plugins || [])
       } catch (err) {
         this.warn(err, 'loadPlugins')
       }
