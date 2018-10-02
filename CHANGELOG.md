@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/oclif/config/compare/v1.7.6...v1.8.0) (2018-10-02)
+
+
+### Features
+
+* plugins:preinstall ([954d1c6](https://github.com/oclif/config/commit/954d1c6))
+
 <a name="1.7.6"></a>
 ## [1.7.6](https://github.com/oclif/config/compare/v1.7.5...v1.7.6) (2018-09-14)
 
