@@ -1,3 +1,10 @@
+## [1.8.4](https://github.com/oclif/config/compare/v1.8.3...v1.8.4) (2018-10-03)
+
+
+### Bug Fixes
+
+* Hook.PluginsPreinstall shape ([52a420a](https://github.com/oclif/config/commit/52a420a))
+
 ## [1.8.3](https://github.com/oclif/config/compare/v1.8.2...v1.8.3) (2018-10-03)
 
 
