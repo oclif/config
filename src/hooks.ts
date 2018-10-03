@@ -38,6 +38,7 @@ export namespace Hook {
     Command: Config.Command.Class
     argv: string[]
   }>
+  export type Update = Hook<{}>
   export type CommandNotFound = Hook<{
     id: string
   }>
