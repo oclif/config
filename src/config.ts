@@ -259,7 +259,7 @@ export class Config implements IConfig {
     }
   }
 
-  async runHook<T extends Hooks, K extends Extract<keyof T, string>>(event: K, opts: T[K]) {
+  async runHook<T>(event: string, opts: T) {
     debug('start %s hook', event)
     const promises = this.plugins.map(p => {
       const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
@@ -280,10 +280,10 @@ export class Config implements IConfig {
           try {
             const f = tsPath(p.root, hook)
             debug('start', f)
-            const search = (m: any): Hook<K> => {
+            const search = (m: any): Hook<T> => {
               if (typeof m === 'function') return m
               if (m.default && typeof m.default === 'function') return m.default
-              return Object.values(m).find((m: any) => typeof m === 'function') as Hook<K>
+              return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
             }
 
             await search(require(f)).call(context, {...opts as any, config: this})

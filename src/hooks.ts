@@ -21,9 +21,27 @@ export interface Hooks {
   }
 }
 
-export type Hook<K extends keyof Hooks> = (this: Hook.Context, options: Hooks[K] & {config: Config.IConfig}) => any
+export type HookKeyOrOptions<K> = K extends (keyof Hooks) ? Hooks[K] : K
+export type Hook<T> = (this: Hook.Context, options: HookKeyOrOptions<T> & {config: Config.IConfig}) => any
 
 export namespace Hook {
+  export type Init = Hook<{
+    id: string | undefined,
+    argv: string[],
+  }>
+  export type PluginsPreinstall = Hook<{
+    name: string,
+    tag: string,
+    type: 'npm'
+  }>
+  export type Prerun = Hook<{
+    Command: Config.Command.Class
+    argv: string[]
+  }>
+  export type CommandNotFound = Hook<{
+    id: string
+  }>
+
   export interface Context {
     config: Config.IConfig
     exit(code?: number): void
