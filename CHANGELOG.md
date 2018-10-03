@@ -1,3 +1,10 @@
+## [1.8.2](https://github.com/oclif/config/compare/v1.8.1...v1.8.2) (2018-10-03)
+
+
+### Bug Fixes
+
+* make hook typing less strict ([#58](https://github.com/oclif/config/issues/58)) ([b148583](https://github.com/oclif/config/commit/b148583))
+
 ## [1.8.1](https://github.com/oclif/config/compare/v1.8.0...v1.8.1) (2018-10-02)
 
 
