@@ -1,7 +1,7 @@
 import * as os from 'os'
 import * as path from 'path'
 
-import {IConfig, load, PJSON} from '../src'
+import {Config, IConfig, load, PJSON} from '../src'
 import * as util from '../src/util'
 
 import {expect, fancy} from './test'
@@ -104,6 +104,15 @@ describe('Config', () => {
       .hasS3Key('versioned', 'oclif-cli-v1.0.0/oclif-cli-v1.0.0-darwin-x64.tar.gz', target)
       .hasS3Key('versioned', 'channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta.tar.gz', beta)
       .hasS3Key('versioned', 'channels/beta/oclif-cli-v2.0.0-beta/oclif-cli-v2.0.0-beta-darwin-x64.tar.gz', {...beta, ...target})
+  })
+
+  describe('options', () => {
+    it('should set the channel and version', async () => {
+      let config = new Config({root: process.cwd(), channel: 'test-channel', version: '0.1.2-test'})
+      await config.load()
+      expect(config).to.have.property('channel', 'test-channel')
+      expect(config).to.have.property('version', '0.1.2-test')
+    })
   })
 
   testConfig()
