@@ -1,3 +1,10 @@
+## [1.8.6](https://github.com/oclif/config/compare/v1.8.5...v1.8.6) (2018-10-04)
+
+
+### Bug Fixes
+
+* Add channel and version to config ctor options ([#60](https://github.com/oclif/config/issues/60)) ([65ce583](https://github.com/oclif/config/commit/65ce583))
+
 ## [1.8.5](https://github.com/oclif/config/compare/v1.8.4...v1.8.5) (2018-10-04)
 
 
