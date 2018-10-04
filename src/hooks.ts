@@ -10,7 +10,8 @@ export interface Hooks {
     Command: Config.Command.Class
     argv: string[]
   }
-  update: {}
+  preupdate: {channel: string}
+  update: {channel: string}
   'command_not_found': {id: string},
   'plugins:preinstall': {
     plugin: {
@@ -28,6 +29,7 @@ export namespace Hook {
   export type Init = Hook<Hooks['init']>
   export type PluginsPreinstall = Hook<Hooks['plugins:preinstall']>
   export type Prerun = Hook<Hooks['prerun']>
+  export type Preupdate = Hook<Hooks['preupdate']>
   export type Update = Hook<Hooks['update']>
   export type CommandNotFound = Hook<Hooks['command_not_found']>
 
