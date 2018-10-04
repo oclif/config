@@ -1,3 +1,10 @@
+## [1.8.5](https://github.com/oclif/config/compare/v1.8.4...v1.8.5) (2018-10-04)
+
+
+### Bug Fixes
+
+* Add preupdate hook ([#59](https://github.com/oclif/config/issues/59)) ([81890f9](https://github.com/oclif/config/commit/81890f9))
+
 ## [1.8.4](https://github.com/oclif/config/compare/v1.8.3...v1.8.4) (2018-10-03)
 
 
