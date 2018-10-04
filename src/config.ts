@@ -19,6 +19,8 @@ export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 
 export interface Options extends Plugin.Options {
   devPlugins?: boolean
   userPlugins?: boolean
+  channel?: string
+  version?: string
 }
 
 const debug = Debug()
@@ -174,8 +176,8 @@ export class Config implements IConfig {
     this.root = plugin.root
     this.pjson = plugin.pjson
     this.name = this.pjson.name
-    this.version = this.pjson.version || '0.0.0'
-    this.channel = channelFromVersion(this.version)
+    this.version = this.options.version || this.pjson.version || '0.0.0'
+    this.channel = this.options.channel || channelFromVersion(this.version)
     this.valid = plugin.valid
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
