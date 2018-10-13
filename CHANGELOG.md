@@ -1,3 +1,10 @@
+## [1.8.7](https://github.com/oclif/config/compare/v1.8.6...v1.8.7) (2018-10-13)
+
+
+### Bug Fixes
+
+* return promiselike ([#55](https://github.com/oclif/config/issues/55)) ([f079e79](https://github.com/oclif/config/commit/f079e79))
+
 ## [1.8.6](https://github.com/oclif/config/compare/v1.8.5...v1.8.6) (2018-10-04)
 
 
