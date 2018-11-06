@@ -178,7 +178,7 @@ export class Plugin implements IPlugin {
       return cmd
     }
     const cmd = fetch()
-    if (!cmd && opts.must) error(`command ${id} not found`)
+    if (!cmd && opts.must) error(`command ${id} file found, but without an implementation`)
     return cmd
   }
 
