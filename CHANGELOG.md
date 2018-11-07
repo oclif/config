@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/oclif/config/compare/v1.8.8...v1.9.0) (2018-11-07)
+
+
+### Features
+
+* use esModuleInterop when defined (fixes [#179](https://github.com/oclif/config/issues/179)) ([#61](https://github.com/oclif/config/issues/61)) ([5778618](https://github.com/oclif/config/commit/5778618))
+
 ## [1.8.8](https://github.com/oclif/config/compare/v1.8.7...v1.8.8) (2018-10-13)
 
 
