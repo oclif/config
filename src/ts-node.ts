@@ -17,6 +17,7 @@ export interface TSConfig {
     rootDirs?: string[]
     outDir?: string
     target?: string
+    esModuleInterop?: boolean;
   }
 }
 
@@ -43,6 +44,7 @@ function registerTSNode(root: string) {
       // cache: false,
       // typeCheck: true,
       compilerOptions: {
+        esModuleInterop: tsconfig.compilerOptions.esModuleInterop,
         target: tsconfig.compilerOptions.target || 'es2017',
         module: 'commonjs',
         sourceMap: true,
