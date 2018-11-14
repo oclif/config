@@ -146,7 +146,7 @@ export class Plugin implements IPlugin {
       const p = path.parse(file)
       const topics = p.dir.split('/')
       let command = p.name !== 'index' && p.name
-      return [...topics, command].filter(f => f).join(':')
+      return [...topics, command].filter(f => f).join(' ')
     })
     this._debug('found commands', ids)
     return ids
@@ -162,7 +162,7 @@ export class Plugin implements IPlugin {
         if (cmd.default && cmd.default.run) return cmd.default
         return Object.values(cmd).find((cmd: any) => typeof cmd.run === 'function')
       }
-      const p = require.resolve(path.join(this.commandsDir, ...id.split(':')))
+      const p = require.resolve(path.join(this.commandsDir, ...id.split(' ')))
       this._debug('require', p)
       let m
       try {
