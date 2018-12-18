@@ -1,3 +1,12 @@
+## [1.10.1](https://github.com/oclif/config/compare/v1.10.0...v1.10.1) (2018-12-18)
+
+
+### Bug Fixes
+
+* move conventional-changelog to devDeps ([466ead8](https://github.com/oclif/config/commit/466ead8))
+
+
+
 # [1.10.0](https://github.com/oclif/config/compare/v1.9.0...v1.10.0) (2018-12-18)
 
 
