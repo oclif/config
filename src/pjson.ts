@@ -42,6 +42,7 @@ export namespace PJSON {
   }
 
   export interface S3 {
+    acl?: string
     bucket?: string
     host?: string
     xz?: boolean
