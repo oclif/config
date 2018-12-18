@@ -1,3 +1,12 @@
+# [1.10.0](https://github.com/oclif/config/compare/v1.9.0...v1.10.0) (2018-12-18)
+
+
+### Features
+
+* Allow acl in S3 interface ([#65](https://github.com/oclif/config/issues/65)) ([bd2e633](https://github.com/oclif/config/commit/bd2e633))
+
+
+
 # [1.9.0](https://github.com/oclif/config/compare/v1.8.8...v1.9.0) (2018-11-07)
 
 
