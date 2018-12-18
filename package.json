@@ -5,7 +5,6 @@
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/oclif/config/issues",
   "dependencies": {
-    "conventional-changelog-cli": "^2.0.11",
     "debug": "^4.1.0",
     "tslib": "^1.9.3"
   },
@@ -21,6 +20,7 @@
     "@types/node": "^10.12.15",
     "@types/wrap-ansi": "^3.0.0",
     "chai": "^4.2.0",
+    "conventional-changelog-cli": "^2.0.11",
     "fancy-test": "^1.4.1",
     "globby": "^8.0.1",
     "lodash": "^4.17.11",
