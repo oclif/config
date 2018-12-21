@@ -1,3 +1,12 @@
+## [1.10.3](https://github.com/oclif/config/compare/v1.10.2...v1.10.3) (2018-12-21)
+
+
+### Bug Fixes
+
+* parent & child plugins ([#57](https://github.com/oclif/config/issues/57)) ([e0b5e95](https://github.com/oclif/config/commit/e0b5e95))
+
+
+
 ## [1.10.2](https://github.com/oclif/config/compare/v1.10.1...v1.10.2) (2018-12-18)
 
 
