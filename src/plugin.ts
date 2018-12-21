@@ -18,6 +18,8 @@ export interface Options {
   tag?: string
   ignoreManifest?: boolean,
   errorOnManifestCreate?: boolean
+  parent?: Plugin
+  children?: Plugin[]
 }
 
 export interface IPlugin {
@@ -86,6 +88,8 @@ export class Plugin implements IPlugin {
   hooks!: {[k: string]: string[]}
   valid = false
   alreadyLoaded = false
+  parent: Plugin | undefined
+  children: Plugin[] = []
   protected _debug = Debug()
   protected warned = false
 
