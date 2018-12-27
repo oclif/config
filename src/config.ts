@@ -437,6 +437,7 @@ export class Config implements IConfig {
         this.plugins.push(instance)
         if (parent) {
           instance.parent = parent
+          if (!parent.children) parent.children = []
           parent.children.push(instance)
         }
         await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [], instance)
