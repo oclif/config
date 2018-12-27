@@ -1,3 +1,12 @@
+## [1.10.4](https://github.com/oclif/config/compare/v1.10.3...v1.10.4) (2018-12-27)
+
+
+### Bug Fixes
+
+* undefined children ([#68](https://github.com/oclif/config/issues/68)) ([1b6d02f](https://github.com/oclif/config/commit/1b6d02f))
+
+
+
 ## [1.10.3](https://github.com/oclif/config/compare/v1.10.2...v1.10.3) (2018-12-21)
 
 
