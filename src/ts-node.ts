@@ -22,6 +22,7 @@ export interface TSConfig {
 }
 
 function registerTSNode(root: string) {
+  if (process.env.OCLIF_TS_NODE === '0') return
   if (tsconfigs[root]) return
   const tsconfig = loadTSConfig(root)
   if (!tsconfig) return
