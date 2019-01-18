@@ -1,3 +1,7 @@
+# [1.12.0](https://github.com/oclif/config/compare/v1.11.0...v1.12.0) (2019-01-18)
+
+
+
 # [1.11.0](https://github.com/oclif/config/compare/v1.10.4...v1.11.0) (2019-01-18)
 
 
