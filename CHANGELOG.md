@@ -1,3 +1,12 @@
+# [1.11.0](https://github.com/oclif/config/compare/v1.10.4...v1.11.0) (2019-01-18)
+
+
+### Features
+
+* disable registering of ts-node ([#69](https://github.com/oclif/config/issues/69)) ([3346db8](https://github.com/oclif/config/commit/3346db8))
+
+
+
 ## [1.10.4](https://github.com/oclif/config/compare/v1.10.3...v1.10.4) (2018-12-27)
 
 
