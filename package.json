@@ -5,29 +5,29 @@
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/oclif/config/issues",
   "dependencies": {
-    "debug": "^4.1.0",
+    "debug": "^4.1.1",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@oclif/errors": "^1.2.2",
-    "@oclif/parser": "^3.7.0",
+    "@oclif/parser": "^3.7.2",
     "@oclif/tslint": "^3.1.1",
     "@types/chai": "^4.1.7",
     "@types/globby": "^8.0.0",
-    "@types/indent-string": "^3.0.0",
-    "@types/lodash": "^4.14.119",
+    "@types/indent-string": "^3.2.0",
+    "@types/lodash": "^4.14.120",
     "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.15",
+    "@types/node": "^10.12.18",
     "@types/wrap-ansi": "^3.0.0",
     "chai": "^4.2.0",
     "conventional-changelog-cli": "^2.0.11",
-    "fancy-test": "^1.4.1",
-    "globby": "^8.0.1",
+    "fancy-test": "^1.4.3",
+    "globby": "^9.0.0",
     "lodash": "^4.17.11",
     "mocha": "^5.2.0",
     "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typescript": "^3.2.2"
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4"
   },
   "engines": {
     "node": ">=8.0.0"
