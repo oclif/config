@@ -2,7 +2,6 @@ import * as path from 'path'
 import * as tsNode from 'ts-node'
 
 import {TSConfig} from '../src/ts-node'
-import * as util from '../src/util'
 
 import {expect, fancy} from './test'
 
@@ -22,32 +21,31 @@ const DEFAULT_TS_CONFIG: TSConfig = {
   compilerOptions: {}
 }
 
-const withMockTsConfig = (config: TSConfig = DEFAULT_TS_CONFIG) =>
-  fancy
+const withMockTsConfig = (config: TSConfig = DEFAULT_TS_CONFIG) => {
+  const {tsPath} = freshRequire('../src/ts-node')
+
+  return fancy
+    .add('tsPath', () => tsPath)
     .stub(tsNode, 'register', (arg: any) => {
       tsNodeRegisterCallArguments.push(arg)
     })
-    .stub(util, 'loadJSONSync', (arg: string) => {
-      if (arg.endsWith('tsconfig.json')) {
-        return config
-      }
-    })
+    .stub(tsPath, 'loadTSConfig', (_: any) => { console.log('asdfasdfasdfasdfasdfasdfasdf'); return config })
+    // .do(ctx => console.log(ctx.tsPath.loadTSConfig(null)))
     .finally(() => {
       tsNodeRegisterCallArguments = []
     })
+}
 
 describe('tsPath', () => {
   withMockTsConfig()
-    .it('should resolve a .ts file', () => {
-      const {tsPath} = freshRequire('../src/ts-node')
-      const result = tsPath(root, orig)
+    .it('should resolve a .ts file', ctx => {
+      const result = ctx.tsPath(root, orig)
       expect(result).to.equal(path.join(root, orig))
     })
 
   withMockTsConfig()
-    .it('should leave esModuleInterop undefined by default', () => {
-      const {tsPath} = freshRequire('../src/ts-node')
-      tsPath(root, orig)
+    .it('should leave esModuleInterop undefined by default', ctx => {
+      ctx.tsPath(root, orig)
       expect(tsNodeRegisterCallArguments.length).is.equal(1)
       expect(tsNodeRegisterCallArguments[0])
         .to.have.nested.property('compilerOptions.esModuleInterop')
@@ -59,9 +57,8 @@ describe('tsPath', () => {
       esModuleInterop: true
     }
   })
-    .it('should use the provided esModuleInterop option', () => {
-      const {tsPath} = freshRequire('../src/ts-node')
-      tsPath(root, orig)
+    .it('should use the provided esModuleInterop option', ctx => {
+      ctx.tsPath(root, orig)
       expect(tsNodeRegisterCallArguments.length).is.equal(1)
       expect(tsNodeRegisterCallArguments[0])
         .to.have.nested.property('compilerOptions.esModuleInterop')
