@@ -1,3 +1,12 @@
+## [1.12.1](https://github.com/oclif/config/compare/v1.12.0...v1.12.1) (2019-01-30)
+
+
+### Bug Fixes
+
+* Use typescript's tsconfig.json parsing functionality instead of JSON.parse ([#70](https://github.com/oclif/config/issues/70)) ([7324a99](https://github.com/oclif/config/commit/7324a99))
+
+
+
 # [1.12.0](https://github.com/oclif/config/compare/v1.11.0...v1.12.0) (2019-01-18)
 
 
