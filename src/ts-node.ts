@@ -1,9 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
+import {parseConfigFileTextToJson} from 'typescript'
 
 import Debug from './debug'
-import {loadJSONSync} from './util'
 
 const tsconfigs: {[root: string]: TSConfig} = {}
 const rootDirs: string[] = []
@@ -59,16 +59,18 @@ function registerTSNode(root: string) {
 }
 
 function loadTSConfig(root: string): TSConfig | undefined {
-  try {
-    // // ignore if no .git as it's likely not in dev mode
-    // if (!await fs.pathExists(path.join(this.root, '.git'))) return
-
-    const tsconfigPath = path.join(root, 'tsconfig.json')
-    const tsconfig = loadJSONSync(tsconfigPath)
-    if (!tsconfig || !tsconfig.compilerOptions) return
+  const tsconfigPath = path.join(root, 'tsconfig.json')
+  if (fs.existsSync(tsconfigPath)) {
+    const tsconfig = parseConfigFileTextToJson(
+      tsconfigPath,
+      fs.readFileSync(tsconfigPath, 'utf8')
+    ).config
+    if (!tsconfig || !tsconfig.compilerOptions) {
+      throw new Error(
+        `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
+        'did not contain a "compilerOptions" section.')
+    }
     return tsconfig
-  } catch (err) {
-    if (err.code !== 'ENOENT') throw err
   }
 }
 

@@ -15,14 +15,6 @@ export function mapValues<T extends object, TResult>(obj: {[P in keyof T]: T[P]}
     }, {} as any)
 }
 
-export function loadJSONSync(path: string): any {
-  debug('loadJSONSync %s', path)
-  // let loadJSON
-  // try { loadJSON = require('load-json-file') } catch {}
-  // if (loadJSON) return loadJSON.sync(path)
-  return JSON.parse(fs.readFileSync(path, 'utf8'))
-}
-
 export function exists(path: string): Promise<boolean> {
   // tslint:disable-next-line
   return new Promise(resolve => fs.exists(path, resolve))
