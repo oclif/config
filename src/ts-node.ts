@@ -59,7 +59,6 @@ function registerTSNode(root: string) {
 }
 
 function loadTSConfig(root: string): TSConfig | undefined {
-  console.log('loadTSConfig unstubbed')
   const tsconfigPath = path.join(root, 'tsconfig.json')
   if (fs.existsSync(tsconfigPath)) {
     const tsconfig = parseConfigFileTextToJson(

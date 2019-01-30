@@ -1,6 +1,5 @@
 import * as path from 'path'
 import * as proxyquire from 'proxyquire'
-// import * as rewire from 'rewire'
 import * as tsNode from 'ts-node'
 
 import {TSConfig} from '../src/ts-node'
@@ -11,24 +10,15 @@ const root = path.resolve(__dirname, 'fixtures/typescript')
 const orig = 'src/hooks/init.ts'
 let tsNodeRegisterCallArguments: any[] = []
 
-/**
- * Delete a module from the require cache before requiring it.
- */
-// export default function freshRequire(name: string) {
-//   delete require.cache[require.resolve(name)]
-//   return require(name)
-// }
-
 const DEFAULT_TS_CONFIG: TSConfig = {
   compilerOptions: {}
 }
 
 const withMockTsConfig = (config: TSConfig = DEFAULT_TS_CONFIG) => {
-  const stubLoader = (_: any) => {
-    console.log('loadTSConfig proxyquire')
-    return config
-  }
-  const tsNodePlugin = proxyquire('../src/ts-node', {'loadTSConfig': stubLoader})
+  const tsNodePlugin = proxyquire('../src/ts-node', {fs: {
+    existsSync: () => true,
+    readFileSync: () => JSON.stringify(config)
+  }})
 
   // This prints "loadTSConfig unstubbed" not "loadTSConfig proxyquire"!
   tsNodePlugin.tsPath('poop', 'asdf')
