@@ -1,3 +1,12 @@
+## [1.12.3](https://github.com/oclif/config/compare/v1.12.2...v1.12.3) (2019-01-31)
+
+
+### Bug Fixes
+
+* Lazy require 'typescript' module. ([#72](https://github.com/oclif/config/issues/72)) ([49ed0bd](https://github.com/oclif/config/commit/49ed0bd))
+
+
+
 ## [1.12.2](https://github.com/oclif/config/compare/v1.12.1...v1.12.2) (2019-01-30)
 
 
