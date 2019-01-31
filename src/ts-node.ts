@@ -2,22 +2,21 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
 
-let parseConfigFileTextToJson
+import Debug from './debug'
+const debug = Debug()
+
+let parseConfigFileTextToJson: any = null
 try {
   // Lazy-require 'typescript' to support JavaScript @oclif projects.
   ({parseConfigFileTextToJson} = require('typescript'))
-} catch(ex) {
+} catch (ex) {
   // Ignore errors
+  debug('Cannot find typescript', ex)
 }
-
-
-import Debug from './debug'
 
 const tsconfigs: {[root: string]: TSConfig} = {}
 const rootDirs: string[] = []
 const typeRoots = [`${__dirname}/../node_modules/@types`]
-
-const debug = Debug()
 
 export interface TSConfig {
   compilerOptions: {
