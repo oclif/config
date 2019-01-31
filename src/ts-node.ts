@@ -5,12 +5,10 @@ import * as TSNode from 'ts-node'
 import Debug from './debug'
 const debug = Debug()
 
-let parseConfigFileTextToJson: any = null
+let typescript: typeof import('typescript')
 try {
-  // Lazy-require 'typescript' to support JavaScript @oclif projects.
-  ({parseConfigFileTextToJson} = require('typescript'))
+  typescript = require('typescript')
 } catch (ex) {
-  // Ignore errors
   debug('Cannot find typescript', ex)
 }
 
@@ -67,8 +65,8 @@ function registerTSNode(root: string) {
 
 function loadTSConfig(root: string): TSConfig | undefined {
   const tsconfigPath = path.join(root, 'tsconfig.json')
-  if (fs.existsSync(tsconfigPath) && parseConfigFileTextToJson) {
-    const tsconfig = parseConfigFileTextToJson(
+  if (fs.existsSync(tsconfigPath) && typescript) {
+    const tsconfig = typescript.parseConfigFileTextToJson(
       tsconfigPath,
       fs.readFileSync(tsconfigPath, 'utf8')
     ).config
