@@ -1,15 +1,20 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
-import {parseConfigFileTextToJson} from 'typescript'
 
 import Debug from './debug'
+const debug = Debug()
+
+let typescript: typeof import('typescript')
+try {
+  typescript = require('typescript')
+} catch (ex) {
+  debug('Cannot find typescript', ex)
+}
 
 const tsconfigs: {[root: string]: TSConfig} = {}
 const rootDirs: string[] = []
 const typeRoots = [`${__dirname}/../node_modules/@types`]
-
-const debug = Debug()
 
 export interface TSConfig {
   compilerOptions: {
@@ -60,8 +65,8 @@ function registerTSNode(root: string) {
 
 function loadTSConfig(root: string): TSConfig | undefined {
   const tsconfigPath = path.join(root, 'tsconfig.json')
-  if (fs.existsSync(tsconfigPath)) {
-    const tsconfig = parseConfigFileTextToJson(
+  if (fs.existsSync(tsconfigPath) && typescript) {
+    const tsconfig = typescript.parseConfigFileTextToJson(
       tsconfigPath,
       fs.readFileSync(tsconfigPath, 'utf8')
     ).config
