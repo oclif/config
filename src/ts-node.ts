@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
-import {parseConfigFileTextToJson} from 'typescript'
 
 import Debug from './debug'
 
@@ -61,6 +60,8 @@ function registerTSNode(root: string) {
 function loadTSConfig(root: string): TSConfig | undefined {
   const tsconfigPath = path.join(root, 'tsconfig.json')
   if (fs.existsSync(tsconfigPath)) {
+    // Lazy-require 'typescript' to support JavaScript @oclif projects.
+    const {parseConfigFileTextToJson} = require('typescript')
     const tsconfig = parseConfigFileTextToJson(
       tsconfigPath,
       fs.readFileSync(tsconfigPath, 'utf8')
