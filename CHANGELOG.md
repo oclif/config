@@ -1,3 +1,12 @@
+## [1.12.7](https://github.com/oclif/config/compare/v1.12.6...v1.12.7) (2019-02-19)
+
+
+### Bug Fixes
+
+* hide debug warning if typescript is not found ([#75](https://github.com/oclif/config/issues/75)) ([6994d0a](https://github.com/oclif/config/commit/6994d0a))
+
+
+
 ## [1.12.6](https://github.com/oclif/config/compare/v1.12.5...v1.12.6) (2019-02-11)
 
 
@@ -1237,9 +1246,9 @@
 
 ### Bug Fixes
 
-* move [@anycli](https://github.com/anycli)/errors to dev deps ([41bb4b5](https://github.com/oclif/config/commit/41bb4b5))
-* move [@anycli](https://github.com/anycli)/errors to dev deps ([34cd88a](https://github.com/oclif/config/commit/34cd88a))
-* use [@anycli](https://github.com/anycli)/errors ([d23cd49](https://github.com/oclif/config/commit/d23cd49))
+* move @anycli/errors to dev deps ([41bb4b5](https://github.com/oclif/config/commit/41bb4b5))
+* move @anycli/errors to dev deps ([34cd88a](https://github.com/oclif/config/commit/34cd88a))
+* use @anycli/errors ([d23cd49](https://github.com/oclif/config/commit/d23cd49))
 
 
 
@@ -2040,7 +2049,7 @@ and @anycli/engine
 
 ### Bug Fixes
 
-* make compatible with [@dxcli](https://github.com/dxcli)/command ([3ac9c6d](https://github.com/oclif/config/commit/3ac9c6d))
+* make compatible with @dxcli/command ([3ac9c6d](https://github.com/oclif/config/commit/3ac9c6d))
 
 
 
