@@ -5,13 +5,6 @@ import * as TSNode from 'ts-node'
 import Debug from './debug'
 const debug = Debug()
 
-let typescript: typeof import('typescript')
-try {
-  typescript = require('typescript')
-} catch (ex) {
-  debug('Cannot find typescript', ex)
-}
-
 const tsconfigs: {[root: string]: TSConfig} = {}
 const rootDirs: string[] = []
 const typeRoots = [`${__dirname}/../node_modules/@types`]
@@ -65,6 +58,13 @@ function registerTSNode(root: string) {
 
 function loadTSConfig(root: string): TSConfig | undefined {
   const tsconfigPath = path.join(root, 'tsconfig.json')
+  let typescript: typeof import('typescript') | undefined
+  try {
+    typescript = require('typescript')
+  } catch {
+    // debug('Cannot find typescript', ex)
+  }
+
   if (fs.existsSync(tsconfigPath) && typescript) {
     const tsconfig = typescript.parseConfigFileTextToJson(
       tsconfigPath,
