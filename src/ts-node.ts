@@ -62,7 +62,9 @@ function loadTSConfig(root: string): TSConfig | undefined {
   try {
     typescript = require('typescript')
   } catch {
-    // debug('Cannot find typescript', ex)
+    try {
+      typescript = require(root + '/node_modules/typescript')
+    } catch {}
   }
 
   if (fs.existsSync(tsconfigPath) && typescript) {
