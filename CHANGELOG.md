@@ -1,3 +1,12 @@
+## [1.12.10](https://github.com/oclif/config/compare/v1.12.9...v1.12.10) (2019-03-13)
+
+
+### Bug Fixes
+
+* allow loading typescript from plugin root ([#77](https://github.com/oclif/config/issues/77)) ([30df3fe](https://github.com/oclif/config/commit/30df3fe))
+
+
+
 ## [1.12.9](https://github.com/oclif/config/compare/v1.12.8...v1.12.9) (2019-02-27)
 
 
