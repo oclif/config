@@ -1,3 +1,12 @@
+## [1.12.11](https://github.com/oclif/config/compare/v1.12.10...v1.12.11) (2019-03-20)
+
+
+### Bug Fixes
+
+* use proper plugin type def ([#78](https://github.com/oclif/config/issues/78)) ([5dca287](https://github.com/oclif/config/commit/5dca287))
+
+
+
 ## [1.12.10](https://github.com/oclif/config/compare/v1.12.9...v1.12.10) (2019-03-13)
 
 
