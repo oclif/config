@@ -50,10 +50,10 @@
   resolved "https://registry.yarnpkg.com/@oclif/linewrap/-/linewrap-1.0.0.tgz#aedcb64b479d4db7be24196384897b5000901d91"
   integrity sha512-Ups2dShK52xXa8w6iBWLgcjPJWjais6KPJQq3gQ/88AY6BXoTX+MIGFPrWQO1KLMiQfoTpcLnUwloN4brrVUHw==
 
-"@oclif/parser@^3.7.2":
-  version "3.7.2"
-  resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.7.2.tgz#b06c73377a1f027f10444109a8a4a6cc31ffd8ba"
-  integrity sha512-ssYXztaf9TuOGCJQOYMg62L1Q4y2lB4wZORWng+Iy0ckP2A6IUnQy97V8YjAJkkohYZOu3Mga8LGfQcf+xdIIw==
+"@oclif/parser@^3.7.3":
+  version "3.7.3"
+  resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.7.3.tgz#cb2240f457396e7b1af2f13caa0dca85b92a5a37"
+  integrity sha512-yfYpDzVn9ipo4HZtYLfMtd3j3ArpTQlRbQfy9pNnHFd4VedE2PNYQTRWYYMuu1FxEOoknlMZbzsewVvl41TvKg==
   dependencies:
     "@oclif/linewrap" "^1.0.0"
     chalk "^2.4.1"
@@ -120,10 +120,15 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^11.11.3":
+"@types/node@*":
   version "11.11.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.3.tgz#7c6b0f8eaf16ae530795de2ad1b85d34bf2f5c58"
   integrity sha512-wp6IOGu1lxsfnrD+5mX6qwSwWuqsdkKKxTN4aQc4wByHAKZJf9/D4KXPQ1POUjEbnCP5LMggB0OEFNY9OTsMqg==
+
+"@types/node@^11.11.4":
+  version "11.11.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.4.tgz#8808bd5a82bbf6f5d412eff1c228d178e7c24bb3"
+  integrity sha512-02tIL+QIi/RW4E5xILdoAMjeJ9kYq5t5S2vciUdFPXv/ikFTb0zK8q9vXkg4+WAJuYXGiVT1H28AkD2C+IkXVw==
 
 "@types/proxyquire@^1.3.28":
   version "1.3.28"
@@ -2799,10 +2804,10 @@ type-detect@^4.0.0, type-detect@^4.0.5:
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
-typescript@^3.3.3333:
-  version "3.3.3333"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.3333.tgz#171b2c5af66c59e9431199117a3bcadc66fdcfd6"
-  integrity sha512-JjSKsAfuHBE/fB2oZ8NxtRTk5iGcg6hkYXMnZ3Wc+b2RSqejEqTaem11mHASMnFilHrax3sLK0GDzcJrekZYLw==
+typescript@^3.3.4000:
+  version "3.3.4000"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.4000.tgz#76b0f89cfdbf97827e1112d64f283f1151d6adf0"
+  integrity sha512-jjOcCZvpkl2+z7JFn0yBOoLQyLoIkNZAs/fYJkUG6VKy6zLPHJGfQJYFHzibB6GJaF/8QrcECtlQ5cpvRHSMEA==
 
 uglify-js@^3.1.4:
   version "3.4.9"
