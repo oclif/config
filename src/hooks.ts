@@ -15,9 +15,12 @@ export interface Hooks {
   'command_not_found': {id: string},
   'plugins:preinstall': {
     plugin: {
-      name: string,
-      tag: string,
-      type: 'npm'
+      name: string;
+      tag: string;
+      type: 'npm';
+    } | {
+      url: string;
+      type: 'repo';
     }
   }
 }
