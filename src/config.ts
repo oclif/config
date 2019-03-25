@@ -447,11 +447,17 @@ export class Config implements IConfig {
     }))
   }
 
-  protected warn(err: any, scope?: string) {
+  protected warn(err: {name: string, detail: string}, scope?: string) {
     if (this.warned) return
-    err.name = `${err.name} Plugin: ${this.name}`
-    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`, 'See more details with DEBUG=*']).join('\n')
-    process.emitWarning(err)
+    const errorDetails = compact([
+      `${err.name} Plugin: ${this.name}`,
+      err.detail, `module: ${this._base}`,
+      scope && `task: ${scope}`,
+      `plugin: ${this.name}`,
+      `root: ${this.root}`,
+      'See more details with DEBUG=*'
+    ]).join('\n')
+    process.emitWarning(Error(errorDetails))
   }
 }
 export type LoadOptions = Options | string | IConfig | undefined
