@@ -447,11 +447,42 @@ export class Config implements IConfig {
     }))
   }
 
-  protected warn(err: any, scope?: string) {
+  protected warn(err: string | Error | {name: string, detail: string}, scope?: string) {
     if (this.warned) return
+
+    if (typeof err === 'string') {
+      process.emitWarning(err)
+      return
+    }
+
+    if (err instanceof Error) {
+      const modifiedErr: any = err
+      modifiedErr.name = `${err.name} Plugin: ${this.name}`
+      modifiedErr.detail = compact([
+        (err as any).detail,
+        `module: ${this._base}`,
+        scope && `task: ${scope}`,
+        `plugin: ${this.name}`,
+        `root: ${this.root}`,
+        'See more details with DEBUG=*'
+      ]).join('\n')
+      process.emitWarning(err)
+      return
+    }
+
+    // err is an object
+    process.emitWarning('Config.warn expected either a string or Error, but instead received an object')
     err.name = `${err.name} Plugin: ${this.name}`
-    err.detail = compact([err.detail, `module: ${this._base}`, scope && `task: ${scope}`, `plugin: ${this.name}`, `root: ${this.root}`, 'See more details with DEBUG=*']).join('\n')
-    process.emitWarning(err)
+    err.detail = compact([
+      err.detail,
+      `module: ${this._base}`,
+      scope && `task: ${scope}`,
+      `plugin: ${this.name}`,
+      `root: ${this.root}`,
+      'See more details with DEBUG=*'
+    ]).join('\n')
+
+    process.emitWarning(JSON.stringify(err))
   }
 }
 export type LoadOptions = Options | string | IConfig | undefined
