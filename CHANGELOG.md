@@ -1,3 +1,12 @@
+## [1.12.12](https://github.com/oclif/config/compare/v1.12.11...v1.12.12) (2019-03-29)
+
+
+### Bug Fixes
+
+* allow process.emitWarning to receive non-error object ([#79](https://github.com/oclif/config/issues/79)) ([647a78e](https://github.com/oclif/config/commit/647a78e))
+
+
+
 ## [1.12.11](https://github.com/oclif/config/compare/v1.12.10...v1.12.11) (2019-03-20)
 
 
