@@ -37,6 +37,7 @@ export namespace Command {
       char?: string
       hidden?: boolean
       description?: string
+      helpLabel?: string
       allowNo?: boolean
     }
     export interface Option {
@@ -46,6 +47,7 @@ export namespace Command {
       char?: string
       hidden?: boolean
       description?: string
+      helpLabel?: string
       helpValue?: string
       default?: string
       options?: string[]
@@ -97,6 +99,7 @@ export namespace Command {
             description: flag.description,
             hidden: flag.hidden,
             required: flag.required,
+            helpLabel: flag.helpLabel,
             allowNo: flag.allowNo,
           }
         }
@@ -107,6 +110,7 @@ export namespace Command {
           description: flag.description,
           hidden: flag.hidden,
           required: flag.required,
+          helpLabel: flag.helpLabel,
           helpValue: flag.helpValue,
           options: flag.options,
           default: typeof flag.default === 'function' ? flag.default({options: {}, flags: {}}) : flag.default,
