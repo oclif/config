@@ -1,3 +1,12 @@
+# [1.13.0](https://github.com/oclif/config/compare/v1.12.12...v1.13.0) (2019-05-09)
+
+
+### Features
+
+* Add 'helpLabel' flag option ([#81](https://github.com/oclif/config/issues/81)) ([a672f9c](https://github.com/oclif/config/commit/a672f9c))
+
+
+
 ## [1.12.12](https://github.com/oclif/config/compare/v1.12.11...v1.12.12) (2019-03-29)
 
 
