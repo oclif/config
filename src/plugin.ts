@@ -74,6 +74,15 @@ export interface IPlugin {
 
 const _pjson = require('../package.json')
 
+const hasManifest = function (p: string): boolean {
+  try {
+    require(p)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export class Plugin implements IPlugin {
   // static loadedPlugins: {[name: string]: Plugin} = {}
   _base = `${_pjson.name}@${_pjson.version}`
@@ -106,7 +115,8 @@ export class Plugin implements IPlugin {
     this.name = this.pjson.name
     const pjsonPath = path.join(root, 'package.json')
     if (!this.name) throw new Error(`no name in ${pjsonPath}`)
-    if (!this.pjson.files) this.warn(`files attribute must be specified in ${pjsonPath}`)
+    const isProd = hasManifest(path.join(root, 'oclif.manifest.json'))
+    if (!isProd && !this.pjson.files) this.warn(`files attribute must be specified in ${pjsonPath}`)
     this._debug = Debug(this.name)
     this.version = this.pjson.version
     if (this.pjson.oclif) {
