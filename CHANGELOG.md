@@ -1,3 +1,12 @@
+## [1.13.3](https://github.com/oclif/config/compare/v1.13.2...v1.13.3) (2019-08-15)
+
+
+### Bug Fixes
+
+* limit warning about missing files attribute ([#86](https://github.com/oclif/config/issues/86)) ([d84a238](https://github.com/oclif/config/commit/d84a238))
+
+
+
 ## [1.13.2](https://github.com/oclif/config/compare/v1.13.1...v1.13.2) (2019-07-11)
 
 
