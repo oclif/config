@@ -33,5 +33,5 @@ workflows:
   "@oclif/config":
     jobs:
       - node-latest
+      - node-12
       - node-10
-      - node-8
