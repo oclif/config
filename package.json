@@ -5,12 +5,12 @@
   "author": "Jeff Dickey @jdxcode",
   "bugs": "https://github.com/oclif/config/issues",
   "dependencies": {
+    "@oclif/errors": "^1.2.2",
     "@oclif/parser": "^3.8.0",
     "debug": "^4.1.1",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@oclif/errors": "^1.2.2",
     "@oclif/tslint": "^3.1.1",
     "@types/chai": "^4.1.7",
     "@types/indent-string": "^3.2.0",
