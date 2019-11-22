@@ -1,4 +1,3 @@
-// tslint:disable no-implicit-dependencies
 import * as fs from 'fs'
 
 const debug = require('debug')('@oclif/config')
@@ -16,8 +15,7 @@ export function mapValues<T extends object, TResult>(obj: {[P in keyof T]: T[P]}
 }
 
 export function exists(path: string): Promise<boolean> {
-  // tslint:disable-next-line
-  return new Promise(resolve => fs.exists(path, resolve))
+  return new Promise(resolve => resolve(fs.existsSync(path)))
 }
 
 export function loadJSON(path: string): Promise<any> {
@@ -30,8 +28,8 @@ export function loadJSON(path: string): Promise<any> {
       try {
         if (err) reject(err)
         else resolve(JSON.parse(d))
-      } catch (err) {
-        reject(err)
+      } catch (error) {
+        reject(error)
       }
     })
   })

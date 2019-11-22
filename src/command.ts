@@ -80,6 +80,7 @@ export namespace Command {
     load(): Class;
   }
 
+  // eslint-disable-next-line no-inner-declarations
   export function toCached(c: Class, plugin?: Config.Plugin): Command {
     return {
       id: c.id,

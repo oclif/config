@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as TSNode from 'ts-node'
 
 import Debug from './debug'
+// eslint-disable-next-line new-cap
 const debug = Debug()
 
 const tsconfigs: {[root: string]: TSConfig} = {}
@@ -17,6 +18,31 @@ export interface TSConfig {
     target?: string;
     esModuleInterop?: boolean;
   };
+}
+
+function loadTSConfig(root: string): TSConfig | undefined {
+  const tsconfigPath = path.join(root, 'tsconfig.json')
+  let typescript: typeof import('typescript') | undefined
+  try {
+    typescript = require('typescript')
+  } catch {
+    try {
+      typescript = require(root + '/node_modules/typescript')
+    } catch { }
+  }
+
+  if (fs.existsSync(tsconfigPath) && typescript) {
+    const tsconfig = typescript.parseConfigFileTextToJson(
+      tsconfigPath,
+      fs.readFileSync(tsconfigPath, 'utf8'),
+    ).config
+    if (!tsconfig || !tsconfig.compilerOptions) {
+      throw new Error(
+        `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
+        'did not contain a "compilerOptions" section.')
+    }
+    return tsconfig
+  }
 }
 
 function registerTSNode(root: string) {
@@ -56,31 +82,6 @@ function registerTSNode(root: string) {
   }
 }
 
-function loadTSConfig(root: string): TSConfig | undefined {
-  const tsconfigPath = path.join(root, 'tsconfig.json')
-  let typescript: typeof import('typescript') | undefined
-  try {
-    typescript = require('typescript')
-  } catch {
-    try {
-      typescript = require(root + '/node_modules/typescript')
-    } catch {}
-  }
-
-  if (fs.existsSync(tsconfigPath) && typescript) {
-    const tsconfig = typescript.parseConfigFileTextToJson(
-      tsconfigPath,
-      fs.readFileSync(tsconfigPath, 'utf8'),
-    ).config
-    if (!tsconfig || !tsconfig.compilerOptions) {
-      throw new Error(
-        `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
-        'did not contain a "compilerOptions" section.')
-    }
-    return tsconfig
-  }
-}
-
 /**
  * convert a path from the compiled ./lib files to the ./src typescript source
  * this is for developing typescript plugins/CLIs
@@ -110,8 +111,8 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     // In that case we attempt to resolve to the filename. If it fails it will revert back to the lib path
     if (fs.existsSync(out) || fs.existsSync(out + '.ts')) return out
     return orig
-  } catch (err) {
-    debug(err)
+  } catch (error) {
+    debug(error)
     return orig
   }
 }

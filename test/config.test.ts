@@ -29,6 +29,7 @@ describe('Config', () => {
       hasS3Key(k: keyof PJSON.S3.Templates, expected: string, extra: any = {}) {
         return this
         .it(`renders ${k} template as ${expected}`, config => {
+          // eslint-disable-next-line prefer-const
           let {ext, ...options} = extra
           options = {
             bin: 'oclif-cli',

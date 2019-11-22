@@ -23,8 +23,10 @@ export interface Options extends Plugin.Options {
   version?: string;
 }
 
+// eslint-disable-next-line new-cap
 const debug = Debug()
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IConfig {
   name: string;
   version: string;
@@ -191,8 +193,10 @@ export class Config implements IConfig {
 
   protected warned = false
 
+  // eslint-disable-next-line no-useless-constructor
   constructor(public options: Options) {}
 
+  // eslint-disable-next-line complexity
   async load() {
     const plugin = new Plugin.Plugin({root: this.options.root})
     await plugin.load()
@@ -225,7 +229,8 @@ export class Config implements IConfig {
 
     this.pjson.oclif.update = this.pjson.oclif.update || {}
     this.pjson.oclif.update.node = this.pjson.oclif.update.node || {}
-    const s3 = this.pjson.oclif.update.s3 = this.pjson.oclif.update.s3 || {}
+    const s3 = this.pjson.oclif.update.s3 || {}
+    this.pjson.oclif.update.s3 = s3
     s3.bucket = this.scopedEnvVar('S3_BUCKET') || s3.bucket
     if (s3.bucket && !s3.host) s3.host = `https://${s3.bucket}.s3.amazonaws.com`
     s3.templates = {
@@ -263,8 +268,8 @@ export class Config implements IConfig {
       try {
         const devPlugins = this.pjson.oclif.devPlugins
         if (devPlugins) await this.loadPlugins(this.root, 'dev', devPlugins)
-      } catch (err) {
-        process.emitWarning(err)
+      } catch (error) {
+        process.emitWarning(error)
       }
     }
   }
@@ -274,13 +279,14 @@ export class Config implements IConfig {
       try {
         const userPJSONPath = path.join(this.dataDir, 'package.json')
         debug('reading user plugins pjson %s', userPJSONPath)
-        const pjson = this.userPJSON = await loadJSON(userPJSONPath)
+        const pjson = await loadJSON(userPJSONPath)
+        this.userPJSON = pjson
         if (!pjson.oclif) pjson.oclif = {schema: 1}
         if (!pjson.oclif.plugins) pjson.oclif.plugins = []
         await this.loadPlugins(userPJSONPath, 'user', pjson.oclif.plugins.filter((p: any) => p.type === 'user'))
         await this.loadPlugins(userPJSONPath, 'link', pjson.oclif.plugins.filter((p: any) => p.type === 'link'))
-      } catch (err) {
-        if (err.code !== 'ENOENT') process.emitWarning(err)
+      } catch (error) {
+        if (error.code !== 'ENOENT') process.emitWarning(error)
       }
     }
   }
@@ -318,9 +324,9 @@ export class Config implements IConfig {
 
           await search(require(f)).call(context, {...opts as any, config: this})
           debug('done')
-        } catch (err) {
-          if (err && err.oclif && err.oclif.exit !== undefined) throw err
-          this.warn(err, `runHook ${event}`)
+        } catch (error) {
+          if (error && error.oclif && error.oclif.exit !== undefined) throw error
+          this.warn(error, `runHook ${event}`)
         }
       }))
     })
@@ -351,6 +357,7 @@ export class Config implements IConfig {
 
   scopedEnvVarKey(k: string) {
     return [this.bin, k]
+    // eslint-disable-next-line no-useless-escape
     .map(p => p.replace(/@/g, '').replace(/[-\/]/g, '_'))
     .join('_')
     .toUpperCase()
@@ -444,7 +451,7 @@ export class Config implements IConfig {
   }
 
   protected macosCacheDir(): string | undefined {
-    return this.platform === 'darwin' && path.join(this.home, 'Library', 'Caches', this.dirname) || undefined
+    return (this.platform === 'darwin' && path.join(this.home, 'Library', 'Caches', this.dirname)) || undefined
   }
 
   protected _shell(): string {
@@ -470,7 +477,7 @@ export class Config implements IConfig {
   }
 
   protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string; name?: string; tag?: string})[], parent?: Plugin.Plugin) {
-    if (!plugins || !plugins.length) return
+    if (!plugins || plugins.length === 0) return
     debug('loading plugins', plugins)
     await Promise.all((plugins || []).map(async plugin => {
       try {
@@ -487,13 +494,14 @@ export class Config implements IConfig {
         if (this.plugins.find(p => p.name === instance.name)) return
         this.plugins.push(instance)
         if (parent) {
+          // eslint-disable-next-line require-atomic-updates
           instance.parent = parent
           if (!parent.children) parent.children = []
           parent.children.push(instance)
         }
         await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [], instance)
-      } catch (err) {
-        this.warn(err, 'loadPlugins')
+      } catch (error) {
+        this.warn(error, 'loadPlugins')
       }
     }))
   }
@@ -536,6 +544,11 @@ export class Config implements IConfig {
     process.emitWarning(JSON.stringify(err))
   }
 }
+
+function isConfig(o: any): o is IConfig {
+  return o && Boolean(o._base)
+}
+
 export type LoadOptions = Options | string | IConfig | undefined
 export async function load(opts: LoadOptions = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
   if (typeof opts === 'string') opts = {root: opts}
@@ -543,8 +556,4 @@ export async function load(opts: LoadOptions = (module.parent && module.parent &
   const config = new Config(opts)
   await config.load()
   return config
-}
-
-function isConfig(o: any): o is IConfig {
-  return o && Boolean(o._base)
 }

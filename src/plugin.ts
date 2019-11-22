@@ -22,6 +22,7 @@ export interface Options {
   children?: Plugin[];
 }
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IPlugin {
   /**
    * @oclif/config version
@@ -83,6 +84,54 @@ const hasManifest = function (p: string): boolean {
   }
 }
 
+function topicsToArray(input: any, base?: string): Topic[] {
+  if (!input) return []
+  base = base ? `${base}:` : ''
+  if (Array.isArray(input)) {
+    return input.concat(flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
+  }
+  return flatMap(Object.keys(input), k => {
+    input[k].name = k
+    return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
+  })
+}
+
+// eslint-disable-next-line valid-jsdoc
+/**
+ * find package root
+ * for packages installed into node_modules this will go up directories until
+ * it finds a node_modules directory with the plugin installed into it
+ *
+ * This is needed because of the deduping npm does
+ */
+async function findRoot(name: string | undefined, root: string) {
+  // essentially just "cd .."
+  function * up(from: string) {
+    while (path.dirname(from) !== from) {
+      yield from
+      from = path.dirname(from)
+    }
+    yield from
+  }
+  for (const next of up(root)) {
+    let cur
+    if (name) {
+      cur = path.join(next, 'node_modules', name, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const pkg = await loadJSON(path.join(next, 'package.json'))
+        if (pkg.name === name) return next
+      } catch { }
+    } else {
+      cur = path.join(next, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+    }
+  }
+}
+
 export class Plugin implements IPlugin {
   // static loadedPlugins: {[name: string]: Plugin} = {}
   _base = `${_pjson.name}@${_pjson.version}`
@@ -113,10 +162,12 @@ export class Plugin implements IPlugin {
 
   children: Plugin[] = []
 
+  // eslint-disable-next-line new-cap
   protected _debug = Debug()
 
   protected warned = false
 
+  // eslint-disable-next-line no-useless-constructor
   constructor(public options: Options) {}
 
   async load() {
@@ -132,6 +183,7 @@ export class Plugin implements IPlugin {
     if (!this.name) throw new Error(`no name in ${pjsonPath}`)
     const isProd = hasManifest(path.join(root, 'oclif.manifest.json'))
     if (!isProd && !this.pjson.files) this.warn(`files attribute must be specified in ${pjsonPath}`)
+    // eslint-disable-next-line new-cap
     this._debug = Debug(this.name)
     this.version = this.pjson.version
     if (this.pjson.oclif) {
@@ -166,8 +218,8 @@ export class Plugin implements IPlugin {
     try {
       const globbyPath = require.resolve('globby', {paths: [this.root, __dirname]})
       globby = require(globbyPath)
-    } catch (err) {
-      this.warn(err, 'not loading commands, globby not found')
+    } catch (error) {
+      this.warn(error, 'not loading commands, globby not found')
       return []
     }
     this._debug(`loading IDs from ${this.commandsDir}`)
@@ -203,9 +255,9 @@ export class Plugin implements IPlugin {
       let m
       try {
         m = require(p)
-      } catch (err) {
-        if (!opts.must && err.code === 'MODULE_NOT_FOUND') return
-        throw err
+      } catch (error) {
+        if (!opts.must && error.code === 'MODULE_NOT_FOUND') return
+        throw error
       }
       const cmd = search(m)
       if (!cmd) return
@@ -229,11 +281,11 @@ export class Plugin implements IPlugin {
           this._debug('using manifest from', p)
           return manifest
         }
-      } catch (err) {
-        if (err.code === 'ENOENT') {
+      } catch (error) {
+        if (error.code === 'ENOENT') {
           if (!dotfile) return readManifest(true)
         } else {
-          this.warn(err, 'readManifest')
+          this.warn(error, 'readManifest')
         }
       }
     }
@@ -244,13 +296,14 @@ export class Plugin implements IPlugin {
 
     return {
       version: this.version,
+      // eslint-disable-next-line array-callback-return
       commands: this.commandIDs.map(id => {
         try {
           return [id, Command.toCached(this.findCommand(id, {must: true}), this)]
-        } catch (err) {
+        } catch (error) {
           const scope = 'toCached'
-          if (!errorOnManifestCreate) this.warn(err, scope)
-          else throw this.addErrorScope(err, scope)
+          if (Boolean(errorOnManifestCreate) === false) this.warn(error, scope)
+          else throw this.addErrorScope(error, scope)
         }
       })
       .filter((f): f is [string, Command] => Boolean(f))
@@ -274,46 +327,3 @@ export class Plugin implements IPlugin {
   }
 }
 
-function topicsToArray(input: any, base?: string): Topic[] {
-  if (!input) return []
-  base = base ? `${base}:` : ''
-  if (Array.isArray(input)) {
-    return input.concat(flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
-  }
-  return flatMap(Object.keys(input), k => {
-    input[k].name = k
-    return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
-  })
-}
-
-/**
- * find package root
- * for packages installed into node_modules this will go up directories until
- * it finds a node_modules directory with the plugin installed into it
- *
- * This is needed because of the deduping npm does
- */
-async function findRoot(name: string | undefined, root: string) {
-  // essentially just "cd .."
-  function * up(from: string) {
-    while (path.dirname(from) !== from) {
-      yield from
-      from = path.dirname(from)
-    }
-    yield from
-  }
-  for (const next of up(root)) {
-    let cur
-    if (name) {
-      cur = path.join(next, 'node_modules', name, 'package.json')
-      if (await exists(cur)) return path.dirname(cur)
-      try {
-        const pkg = await loadJSON(path.join(next, 'package.json'))
-        if (pkg.name === name) return next
-      } catch {}
-    } else {
-      cur = path.join(next, 'package.json')
-      if (await exists(cur)) return path.dirname(cur)
-    }
-  }
-}

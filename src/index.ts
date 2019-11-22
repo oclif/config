@@ -1,5 +1,5 @@
-// tslint:disable no-implicit-dependencies
 try {
+  // eslint-disable-next-line node/no-missing-require
   require('fs-extra-debug')
 } catch {}
 
