@@ -1,18 +1,18 @@
 import * as Config from '.'
 
 export interface Hooks {
-  [event: string]: object
+  [event: string]: object;
   init: {
-    id: string | undefined,
-    argv: string[],
-  }
+    id: string | undefined;
+    argv: string[];
+  };
   prerun: {
-    Command: Config.Command.Class
-    argv: string[]
-  }
-  preupdate: {channel: string}
-  update: {channel: string}
-  'command_not_found': {id: string},
+    Command: Config.Command.Class;
+    argv: string[];
+  };
+  preupdate: {channel: string};
+  update: {channel: string};
+  'command_not_found': {id: string};
   'plugins:preinstall': {
     plugin: {
       name: string;
@@ -21,8 +21,8 @@ export interface Hooks {
     } | {
       url: string;
       type: 'repo';
-    }
-  }
+    };
+  };
 }
 
 export type HookKeyOrOptions<K> = K extends (keyof Hooks) ? Hooks[K] : K
@@ -37,11 +37,11 @@ export namespace Hook {
   export type CommandNotFound = Hook<Hooks['command_not_found']>
 
   export interface Context {
-    config: Config.IConfig
-    exit(code?: number): void
-    error(message: string | Error, options?: {code?: string, exit?: number}): void
-    warn(message: string): void
-    log(message?: any, ...args: any[]): void
-    debug(...args: any[]): void
+    config: Config.IConfig;
+    exit(code?: number): void;
+    error(message: string | Error, options?: {code?: string; exit?: number}): void;
+    warn(message: string): void;
+    log(message?: any, ...args: any[]): void;
+    debug(...args: any[]): void;
   }
 }

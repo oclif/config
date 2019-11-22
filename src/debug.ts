@@ -1,6 +1,8 @@
 // tslint:disable no-console
 let debug: any
-try { debug = require('debug') } catch {}
+try {
+  debug = require('debug')
+} catch {}
 
 function displayWarnings() {
   if (process.listenerCount('warning') > 1) return

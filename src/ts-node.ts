@@ -11,12 +11,12 @@ const typeRoots = [`${__dirname}/../node_modules/@types`]
 
 export interface TSConfig {
   compilerOptions: {
-    rootDir?: string
-    rootDirs?: string[]
-    outDir?: string
-    target?: string
+    rootDir?: string;
+    rootDirs?: string[];
+    outDir?: string;
+    target?: string;
     esModuleInterop?: boolean;
-  }
+  };
 }
 
 function registerTSNode(root: string) {
@@ -49,7 +49,7 @@ function registerTSNode(root: string) {
         sourceMap: true,
         rootDirs,
         typeRoots,
-      }
+      },
     })
   } finally {
     process.chdir(cwd)
@@ -70,7 +70,7 @@ function loadTSConfig(root: string): TSConfig | undefined {
   if (fs.existsSync(tsconfigPath) && typescript) {
     const tsconfig = typescript.parseConfigFileTextToJson(
       tsconfigPath,
-      fs.readFileSync(tsconfigPath, 'utf8')
+      fs.readFileSync(tsconfigPath, 'utf8'),
     ).config
     if (!tsconfig || !tsconfig.compilerOptions) {
       throw new Error(
@@ -109,7 +109,7 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     // That file doesn't exist, and the real file is "./hooks/myhook.ts"
     // In that case we attempt to resolve to the filename. If it fails it will revert back to the lib path
     if (fs.existsSync(out) || fs.existsSync(out + '.ts')) return out
-    else return orig
+    return orig
   } catch (err) {
     debug(err)
     return orig

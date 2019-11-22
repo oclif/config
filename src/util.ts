@@ -9,10 +9,10 @@ export function flatMap<T, U>(arr: T[], fn: (i: T) => U[]): U[] {
 
 export function mapValues<T extends object, TResult>(obj: {[P in keyof T]: T[P]}, fn: (i: T[keyof T], k: keyof T) => TResult): {[P in keyof T]: TResult} {
   return Object.entries(obj)
-    .reduce((o, [k, v]) => {
-      o[k] = fn(v as any, k as any)
-      return o
-    }, {} as any)
+  .reduce((o, [k, v]) => {
+    o[k] = fn(v as any, k as any)
+    return o
+  }, {} as any)
 }
 
 export function exists(path: string): Promise<boolean> {
@@ -38,7 +38,7 @@ export function loadJSON(path: string): Promise<any> {
 }
 
 export function compact<T>(a: (T | undefined)[]): T[] {
-  return a.filter((a): a is T => !!a)
+  return a.filter((a): a is T => Boolean(a))
 }
 
 export function uniq<T>(arr: T[]): T[] {

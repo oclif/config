@@ -12,64 +12,64 @@ import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
 export interface Options {
-  root: string
-  name?: string
-  type?: string
-  tag?: string
-  ignoreManifest?: boolean,
-  errorOnManifestCreate?: boolean
-  parent?: Plugin
-  children?: Plugin[]
+  root: string;
+  name?: string;
+  type?: string;
+  tag?: string;
+  ignoreManifest?: boolean;
+  errorOnManifestCreate?: boolean;
+  parent?: Plugin;
+  children?: Plugin[];
 }
 
 export interface IPlugin {
   /**
    * @oclif/config version
    */
-  _base: string
+  _base: string;
   /**
    * name from package.json
    */
-  name: string
+  name: string;
   /**
    * version from package.json
    *
    * example: 1.2.3
    */
-  version: string
+  version: string;
   /**
    * full package.json
    *
    * parsed with read-pkg
    */
-  pjson: PJSON.Plugin | PJSON.CLI
+  pjson: PJSON.Plugin | PJSON.CLI;
   /**
    * used to tell the user how the plugin was installed
    * examples: core, link, user, dev
    */
-  type: string
+  type: string;
   /**
    * base path of plugin
    */
-  root: string
+  root: string;
   /**
    * npm dist-tag of plugin
    * only used for user plugins
    */
-  tag?: string
+  tag?: string;
   /**
    * if it appears to be an npm package but does not look like it's really a CLI plugin, this is set to false
    */
-  valid: boolean
+  valid: boolean;
 
-  commands: Command.Plugin[]
-  hooks: {[k: string]: string[]}
-  readonly commandIDs: string[]
-  readonly topics: Topic[]
+  commands: Command.Plugin[];
+  hooks: {[k: string]: string[]};
+  readonly commandIDs: string[];
+  readonly topics: Topic[];
 
-  findCommand(id: string, opts: {must: true}): Command.Class
-  findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
-  load(): Promise<void>
+  findCommand(id: string, opts: {must: true}): Command.Class;
+  findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined;
+  load(): Promise<void>;
 }
 
 const _pjson = require('../package.json')
@@ -86,20 +86,35 @@ const hasManifest = function (p: string): boolean {
 export class Plugin implements IPlugin {
   // static loadedPlugins: {[name: string]: Plugin} = {}
   _base = `${_pjson.name}@${_pjson.version}`
+
   name!: string
+
   version!: string
+
   pjson!: PJSON.Plugin
+
   type!: string
+
   root!: string
+
   tag?: string
+
   manifest!: Manifest
+
   commands!: Command.Plugin[]
+
   hooks!: {[k: string]: string[]}
+
   valid = false
+
   alreadyLoaded = false
+
   parent: Plugin | undefined
+
   children: Plugin[] = []
+
   protected _debug = Debug()
+
   protected warned = false
 
   constructor(public options: Options) {}
@@ -127,7 +142,7 @@ export class Plugin implements IPlugin {
 
     this.hooks = mapValues(this.pjson.oclif.hooks || {}, i => Array.isArray(i) ? i : [i])
 
-    this.manifest = await this._manifest(!!this.options.ignoreManifest, !!this.options.errorOnManifestCreate)
+    this.manifest = await this._manifest(Boolean(this.options.ignoreManifest), Boolean(this.options.errorOnManifestCreate))
     this.commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this.findCommand(id, {must: true})}))
     this.commands.sort((a, b) => {
@@ -137,9 +152,14 @@ export class Plugin implements IPlugin {
     })
   }
 
-  get topics(): Topic[] { return topicsToArray(this.pjson.oclif.topics || {}) }
+  get topics(): Topic[] {
+    return topicsToArray(this.pjson.oclif.topics || {})
+  }
 
-  get commandsDir() { return tsPath(this.root, this.pjson.oclif.commands) }
+  get commandsDir() {
+    return tsPath(this.root, this.pjson.oclif.commands)
+  }
+
   get commandIDs() {
     if (!this.commandsDir) return []
     let globby: typeof Globby
@@ -159,7 +179,7 @@ export class Plugin implements IPlugin {
     .map(file => {
       const p = path.parse(file)
       const topics = p.dir.split('/')
-      let command = p.name !== 'index' && p.name
+      const command = p.name !== 'index' && p.name
       return [...topics, command].filter(f => f).join(':')
     })
     this._debug('found commands', ids)
@@ -167,7 +187,9 @@ export class Plugin implements IPlugin {
   }
 
   findCommand(id: string, opts: {must: true}): Command.Class
+
   findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
+
   findCommand(id: string, opts: {must?: boolean} = {}): Command.Class | undefined {
     const fetch = () => {
       if (!this.commandsDir) return
@@ -199,7 +221,7 @@ export class Plugin implements IPlugin {
   protected async _manifest(ignoreManifest: boolean, errorOnManifestCreate = false): Promise<Manifest> {
     const readManifest = async (dotfile = false): Promise<Manifest | undefined> => {
       try {
-        const p = path.join(this.root, `${dotfile ? '.' : '' }oclif.manifest.json`)
+        const p = path.join(this.root, `${dotfile ? '.' : ''}oclif.manifest.json`)
         const manifest: Manifest = await loadJSON(p)
         if (!process.env.OCLIF_NEXT_VERSION && manifest.version.split('-')[0] !== this.version.split('-')[0]) {
           process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}\nThis usually means you have an oclif.manifest.json file that should be deleted in development. This file should be automatically generated when publishing.`)
@@ -212,12 +234,11 @@ export class Plugin implements IPlugin {
           if (!dotfile) return readManifest(true)
         } else {
           this.warn(err, 'readManifest')
-          return
         }
       }
     }
     if (!ignoreManifest) {
-      let manifest = await readManifest()
+      const manifest = await readManifest()
       if (manifest) return manifest
     }
 
@@ -232,11 +253,11 @@ export class Plugin implements IPlugin {
           else throw this.addErrorScope(err, scope)
         }
       })
-        .filter((f): f is [string, Command] => !!f)
-        .reduce((commands, [id, c]) => {
-          commands[id] = c
-          return commands
-        }, {} as {[k: string]: Command})
+      .filter((f): f is [string, Command] => Boolean(f))
+      .reduce((commands, [id, c]) => {
+        commands[id] = c
+        return commands
+      }, {} as {[k: string]: Command}),
     }
   }
 
@@ -274,20 +295,20 @@ function topicsToArray(input: any, base?: string): Topic[] {
  */
 async function findRoot(name: string | undefined, root: string) {
   // essentially just "cd .."
-  function* up(from: string) {
+  function * up(from: string) {
     while (path.dirname(from) !== from) {
       yield from
       from = path.dirname(from)
     }
     yield from
   }
-  for (let next of up(root)) {
+  for (const next of up(root)) {
     let cur
     if (name) {
       cur = path.join(next, 'node_modules', name, 'package.json')
       if (await exists(cur)) return path.dirname(cur)
       try {
-        let pkg = await loadJSON(path.join(next, 'package.json'))
+        const pkg = await loadJSON(path.join(next, 'package.json'))
         if (pkg.name === name) return next
       } catch {}
     } else {

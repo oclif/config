@@ -12,23 +12,23 @@ const withConfig = fancy
 
 describe('typescript', () => {
   withConfig
-    .it('has commandsDir', ({config}) => {
-      expect(config.plugins[0]).to.deep.include({
-        commandsDir: p('src/commands'),
-      })
+  .it('has commandsDir', ({config}) => {
+    expect(config.plugins[0]).to.deep.include({
+      commandsDir: p('src/commands'),
     })
+  })
 
   withConfig
-    .stdout()
-    .it('runs ts command and prerun hooks', async ctx => {
-      await ctx.config.runCommand('foo:bar:baz')
-      expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\n')
-    })
+  .stdout()
+  .it('runs ts command and prerun hooks', async ctx => {
+    await ctx.config.runCommand('foo:bar:baz')
+    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\n')
+  })
 
   withConfig
-    .stdout()
-    .it('runs init hook', async ctx => {
-      await ctx.config.runHook('init', {id: 'myid', argv: ['foo']})
-      expect(ctx.stdout).to.equal('running ts init hook\n')
-    })
+  .stdout()
+  .it('runs init hook', async ctx => {
+    await ctx.config.runHook('init', {id: 'myid', argv: ['foo']})
+    expect(ctx.stdout).to.equal('running ts init hook\n')
+  })
 })

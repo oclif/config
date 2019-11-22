@@ -14,5 +14,5 @@ function termwidth(stream: any): number {
 
 const columns: number | null = (global as any).columns
 
-export let stdtermwidth = columns || termwidth(process.stdout)
-export let errtermwidth = columns || termwidth(process.stderr)
+export const stdtermwidth = columns || termwidth(process.stdout)
+export const errtermwidth = columns || termwidth(process.stderr)
