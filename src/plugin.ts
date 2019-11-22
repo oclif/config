@@ -12,64 +12,65 @@ import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
 export interface Options {
-  root: string
-  name?: string
-  type?: string
-  tag?: string
-  ignoreManifest?: boolean,
-  errorOnManifestCreate?: boolean
-  parent?: Plugin
-  children?: Plugin[]
+  root: string;
+  name?: string;
+  type?: string;
+  tag?: string;
+  ignoreManifest?: boolean;
+  errorOnManifestCreate?: boolean;
+  parent?: Plugin;
+  children?: Plugin[];
 }
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IPlugin {
   /**
    * @oclif/config version
    */
-  _base: string
+  _base: string;
   /**
    * name from package.json
    */
-  name: string
+  name: string;
   /**
    * version from package.json
    *
    * example: 1.2.3
    */
-  version: string
+  version: string;
   /**
    * full package.json
    *
    * parsed with read-pkg
    */
-  pjson: PJSON.Plugin | PJSON.CLI
+  pjson: PJSON.Plugin | PJSON.CLI;
   /**
    * used to tell the user how the plugin was installed
    * examples: core, link, user, dev
    */
-  type: string
+  type: string;
   /**
    * base path of plugin
    */
-  root: string
+  root: string;
   /**
    * npm dist-tag of plugin
    * only used for user plugins
    */
-  tag?: string
+  tag?: string;
   /**
    * if it appears to be an npm package but does not look like it's really a CLI plugin, this is set to false
    */
-  valid: boolean
+  valid: boolean;
 
-  commands: Command.Plugin[]
-  hooks: {[k: string]: string[]}
-  readonly commandIDs: string[]
-  readonly topics: Topic[]
+  commands: Command.Plugin[];
+  hooks: {[k: string]: string[]};
+  readonly commandIDs: string[];
+  readonly topics: Topic[];
 
-  findCommand(id: string, opts: {must: true}): Command.Class
-  findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
-  load(): Promise<void>
+  findCommand(id: string, opts: {must: true}): Command.Class;
+  findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined;
+  load(): Promise<void>;
 }
 
 const _pjson = require('../package.json')
@@ -83,25 +84,90 @@ const hasManifest = function (p: string): boolean {
   }
 }
 
+function topicsToArray(input: any, base?: string): Topic[] {
+  if (!input) return []
+  base = base ? `${base}:` : ''
+  if (Array.isArray(input)) {
+    return input.concat(flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
+  }
+  return flatMap(Object.keys(input), k => {
+    input[k].name = k
+    return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
+  })
+}
+
+// eslint-disable-next-line valid-jsdoc
+/**
+ * find package root
+ * for packages installed into node_modules this will go up directories until
+ * it finds a node_modules directory with the plugin installed into it
+ *
+ * This is needed because of the deduping npm does
+ */
+async function findRoot(name: string | undefined, root: string) {
+  // essentially just "cd .."
+  function * up(from: string) {
+    while (path.dirname(from) !== from) {
+      yield from
+      from = path.dirname(from)
+    }
+    yield from
+  }
+  for (const next of up(root)) {
+    let cur
+    if (name) {
+      cur = path.join(next, 'node_modules', name, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const pkg = await loadJSON(path.join(next, 'package.json'))
+        if (pkg.name === name) return next
+      } catch { }
+    } else {
+      cur = path.join(next, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+    }
+  }
+}
+
 export class Plugin implements IPlugin {
   // static loadedPlugins: {[name: string]: Plugin} = {}
   _base = `${_pjson.name}@${_pjson.version}`
+
   name!: string
+
   version!: string
+
   pjson!: PJSON.Plugin
+
   type!: string
+
   root!: string
+
   tag?: string
+
   manifest!: Manifest
+
   commands!: Command.Plugin[]
+
   hooks!: {[k: string]: string[]}
+
   valid = false
+
   alreadyLoaded = false
+
   parent: Plugin | undefined
+
   children: Plugin[] = []
+
+  // eslint-disable-next-line new-cap
   protected _debug = Debug()
+
   protected warned = false
 
+  // eslint-disable-next-line no-useless-constructor
   constructor(public options: Options) {}
 
   async load() {
@@ -117,6 +183,7 @@ export class Plugin implements IPlugin {
     if (!this.name) throw new Error(`no name in ${pjsonPath}`)
     const isProd = hasManifest(path.join(root, 'oclif.manifest.json'))
     if (!isProd && !this.pjson.files) this.warn(`files attribute must be specified in ${pjsonPath}`)
+    // eslint-disable-next-line new-cap
     this._debug = Debug(this.name)
     this.version = this.pjson.version
     if (this.pjson.oclif) {
@@ -127,7 +194,7 @@ export class Plugin implements IPlugin {
 
     this.hooks = mapValues(this.pjson.oclif.hooks || {}, i => Array.isArray(i) ? i : [i])
 
-    this.manifest = await this._manifest(!!this.options.ignoreManifest, !!this.options.errorOnManifestCreate)
+    this.manifest = await this._manifest(Boolean(this.options.ignoreManifest), Boolean(this.options.errorOnManifestCreate))
     this.commands = Object.entries(this.manifest.commands)
     .map(([id, c]) => ({...c, load: () => this.findCommand(id, {must: true})}))
     this.commands.sort((a, b) => {
@@ -137,17 +204,22 @@ export class Plugin implements IPlugin {
     })
   }
 
-  get topics(): Topic[] { return topicsToArray(this.pjson.oclif.topics || {}) }
+  get topics(): Topic[] {
+    return topicsToArray(this.pjson.oclif.topics || {})
+  }
 
-  get commandsDir() { return tsPath(this.root, this.pjson.oclif.commands) }
+  get commandsDir() {
+    return tsPath(this.root, this.pjson.oclif.commands)
+  }
+
   get commandIDs() {
     if (!this.commandsDir) return []
     let globby: typeof Globby
     try {
       const globbyPath = require.resolve('globby', {paths: [this.root, __dirname]})
       globby = require(globbyPath)
-    } catch (err) {
-      this.warn(err, 'not loading commands, globby not found')
+    } catch (error) {
+      this.warn(error, 'not loading commands, globby not found')
       return []
     }
     this._debug(`loading IDs from ${this.commandsDir}`)
@@ -159,7 +231,7 @@ export class Plugin implements IPlugin {
     .map(file => {
       const p = path.parse(file)
       const topics = p.dir.split('/')
-      let command = p.name !== 'index' && p.name
+      const command = p.name !== 'index' && p.name
       return [...topics, command].filter(f => f).join(':')
     })
     this._debug('found commands', ids)
@@ -167,7 +239,9 @@ export class Plugin implements IPlugin {
   }
 
   findCommand(id: string, opts: {must: true}): Command.Class
+
   findCommand(id: string, opts?: {must: boolean}): Command.Class | undefined
+
   findCommand(id: string, opts: {must?: boolean} = {}): Command.Class | undefined {
     const fetch = () => {
       if (!this.commandsDir) return
@@ -181,9 +255,9 @@ export class Plugin implements IPlugin {
       let m
       try {
         m = require(p)
-      } catch (err) {
-        if (!opts.must && err.code === 'MODULE_NOT_FOUND') return
-        throw err
+      } catch (error) {
+        if (!opts.must && error.code === 'MODULE_NOT_FOUND') return
+        throw error
       }
       const cmd = search(m)
       if (!cmd) return
@@ -199,7 +273,7 @@ export class Plugin implements IPlugin {
   protected async _manifest(ignoreManifest: boolean, errorOnManifestCreate = false): Promise<Manifest> {
     const readManifest = async (dotfile = false): Promise<Manifest | undefined> => {
       try {
-        const p = path.join(this.root, `${dotfile ? '.' : '' }oclif.manifest.json`)
+        const p = path.join(this.root, `${dotfile ? '.' : ''}oclif.manifest.json`)
         const manifest: Manifest = await loadJSON(p)
         if (!process.env.OCLIF_NEXT_VERSION && manifest.version.split('-')[0] !== this.version.split('-')[0]) {
           process.emitWarning(`Mismatched version in ${this.name} plugin manifest. Expected: ${this.version} Received: ${manifest.version}\nThis usually means you have an oclif.manifest.json file that should be deleted in development. This file should be automatically generated when publishing.`)
@@ -207,36 +281,36 @@ export class Plugin implements IPlugin {
           this._debug('using manifest from', p)
           return manifest
         }
-      } catch (err) {
-        if (err.code === 'ENOENT') {
+      } catch (error) {
+        if (error.code === 'ENOENT') {
           if (!dotfile) return readManifest(true)
         } else {
-          this.warn(err, 'readManifest')
-          return
+          this.warn(error, 'readManifest')
         }
       }
     }
     if (!ignoreManifest) {
-      let manifest = await readManifest()
+      const manifest = await readManifest()
       if (manifest) return manifest
     }
 
     return {
       version: this.version,
+      // eslint-disable-next-line array-callback-return
       commands: this.commandIDs.map(id => {
         try {
           return [id, Command.toCached(this.findCommand(id, {must: true}), this)]
-        } catch (err) {
+        } catch (error) {
           const scope = 'toCached'
-          if (!errorOnManifestCreate) this.warn(err, scope)
-          else throw this.addErrorScope(err, scope)
+          if (Boolean(errorOnManifestCreate) === false) this.warn(error, scope)
+          else throw this.addErrorScope(error, scope)
         }
       })
-        .filter((f): f is [string, Command] => !!f)
-        .reduce((commands, [id, c]) => {
-          commands[id] = c
-          return commands
-        }, {} as {[k: string]: Command})
+      .filter((f): f is [string, Command] => Boolean(f))
+      .reduce((commands, [id, c]) => {
+        commands[id] = c
+        return commands
+      }, {} as {[k: string]: Command}),
     }
   }
 
@@ -253,46 +327,3 @@ export class Plugin implements IPlugin {
   }
 }
 
-function topicsToArray(input: any, base?: string): Topic[] {
-  if (!input) return []
-  base = base ? `${base}:` : ''
-  if (Array.isArray(input)) {
-    return input.concat(flatMap(input, t => topicsToArray(t.subtopics, `${base}${t.name}`)))
-  }
-  return flatMap(Object.keys(input), k => {
-    input[k].name = k
-    return [{...input[k], name: `${base}${k}`}].concat(topicsToArray(input[k].subtopics, `${base}${input[k].name}`))
-  })
-}
-
-/**
- * find package root
- * for packages installed into node_modules this will go up directories until
- * it finds a node_modules directory with the plugin installed into it
- *
- * This is needed because of the deduping npm does
- */
-async function findRoot(name: string | undefined, root: string) {
-  // essentially just "cd .."
-  function* up(from: string) {
-    while (path.dirname(from) !== from) {
-      yield from
-      from = path.dirname(from)
-    }
-    yield from
-  }
-  for (let next of up(root)) {
-    let cur
-    if (name) {
-      cur = path.join(next, 'node_modules', name, 'package.json')
-      if (await exists(cur)) return path.dirname(cur)
-      try {
-        let pkg = await loadJSON(path.join(next, 'package.json'))
-        if (pkg.name === name) return next
-      } catch {}
-    } else {
-      cur = path.join(next, 'package.json')
-      if (await exists(cur)) return path.dirname(cur)
-    }
-  }
-}

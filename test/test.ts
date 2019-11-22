@@ -6,7 +6,7 @@ export const fancy = base
 .register('resetConfig', () => ({
   run(ctx: {config: Config.IConfig}) {
     delete ctx.config
-  }
+  },
 }))
 
 export {

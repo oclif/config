@@ -1,4 +1,3 @@
-// tslint:disable no-implicit-dependencies
 import * as fs from 'fs'
 
 const debug = require('debug')('@oclif/config')
@@ -9,15 +8,14 @@ export function flatMap<T, U>(arr: T[], fn: (i: T) => U[]): U[] {
 
 export function mapValues<T extends object, TResult>(obj: {[P in keyof T]: T[P]}, fn: (i: T[keyof T], k: keyof T) => TResult): {[P in keyof T]: TResult} {
   return Object.entries(obj)
-    .reduce((o, [k, v]) => {
-      o[k] = fn(v as any, k as any)
-      return o
-    }, {} as any)
+  .reduce((o, [k, v]) => {
+    o[k] = fn(v as any, k as any)
+    return o
+  }, {} as any)
 }
 
 export function exists(path: string): Promise<boolean> {
-  // tslint:disable-next-line
-  return new Promise(resolve => fs.exists(path, resolve))
+  return new Promise(resolve => resolve(fs.existsSync(path)))
 }
 
 export function loadJSON(path: string): Promise<any> {
@@ -30,15 +28,15 @@ export function loadJSON(path: string): Promise<any> {
       try {
         if (err) reject(err)
         else resolve(JSON.parse(d))
-      } catch (err) {
-        reject(err)
+      } catch (error) {
+        reject(error)
       }
     })
   })
 }
 
 export function compact<T>(a: (T | undefined)[]): T[] {
-  return a.filter((a): a is T => !!a)
+  return a.filter((a): a is T => Boolean(a))
 }
 
 export function uniq<T>(arr: T[]): T[] {

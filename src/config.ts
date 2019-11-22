@@ -17,118 +17,120 @@ import {compact, flatMap, loadJSON, uniq} from './util'
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
 export interface Options extends Plugin.Options {
-  devPlugins?: boolean
-  userPlugins?: boolean
-  channel?: string
-  version?: string
+  devPlugins?: boolean;
+  userPlugins?: boolean;
+  channel?: string;
+  version?: string;
 }
 
+// eslint-disable-next-line new-cap
 const debug = Debug()
 
+// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface IConfig {
-  name: string
-  version: string
-  channel: string
-  pjson: PJSON.CLI
-  root: string
+  name: string;
+  version: string;
+  channel: string;
+  pjson: PJSON.CLI;
+  root: string;
   /**
    * process.arch
    */
-  arch: ArchTypes
+  arch: ArchTypes;
   /**
    * bin name of CLI command
    */
-  bin: string
+  bin: string;
   /**
    * cache directory to use for CLI
    *
    * example ~/Library/Caches/mycli or ~/.cache/mycli
    */
-  cacheDir: string
+  cacheDir: string;
   /**
    * config directory to use for CLI
    *
    * example: ~/.config/mycli
    */
-  configDir: string
+  configDir: string;
   /**
    * data directory to use for CLI
    *
    * example: ~/.local/share/mycli
    */
-  dataDir: string
+  dataDir: string;
   /**
    * base dirname to use in cacheDir/configDir/dataDir
    */
-  dirname: string
+  dirname: string;
   /**
    * points to a file that should be appended to for error logs
    *
    * example: ~/Library/Caches/mycli/error.log
    */
-  errlog: string
+  errlog: string;
   /**
    * path to home directory
    *
    * example: /home/myuser
    */
-  home: string
+  home: string;
   /**
    * process.platform
    */
-  platform: PlatformTypes
+  platform: PlatformTypes;
   /**
    * active shell
    */
-  shell: string
+  shell: string;
   /**
    * user agent to use for http calls
    *
    * example: mycli/1.2.3 (darwin-x64) node-9.0.0
    */
-  userAgent: string
+  userAgent: string;
   /**
    * if windows
    */
-  windows: boolean
+  windows: boolean;
   /**
    * debugging level
    *
    * set by ${BIN}_DEBUG or DEBUG=$BIN
    */
-  debug: number
+  debug: number;
   /**
    * npm registry to use for installing plugins
    */
-  npmRegistry?: string
-  userPJSON?: PJSON.User
-  plugins: Plugin.IPlugin[]
-  binPath?: string
-  valid: boolean
-  readonly commands: Command.Plugin[]
-  readonly topics: Topic[]
-  readonly commandIDs: string[]
+  npmRegistry?: string;
+  userPJSON?: PJSON.User;
+  plugins: Plugin.IPlugin[];
+  binPath?: string;
+  valid: boolean;
+  readonly commands: Command.Plugin[];
+  readonly topics: Topic[];
+  readonly commandIDs: string[];
 
-  runCommand(id: string, argv?: string[]): Promise<void>
-  runHook<T extends Hooks, K extends Extract<keyof T, string>>(event: K, opts: T[K]): Promise<void>
-  findCommand(id: string, opts: {must: true}): Command.Plugin
-  findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
-  findTopic(id: string, opts: {must: true}): Topic
-  findTopic(id: string, opts?: {must: boolean}): Topic | undefined
-  scopedEnvVar(key: string): string | undefined
-  scopedEnvVarKey(key: string): string
-  scopedEnvVarTrue(key: string): boolean
-  s3Url(key: string): string
-  s3Key(type: 'versioned' | 'unversioned', ext: '.tar.gz' | '.tar.xz', options?: IConfig.s3Key.Options): string
-  s3Key(type: keyof PJSON.S3.Templates, options?: IConfig.s3Key.Options): string
+  runCommand(id: string, argv?: string[]): Promise<void>;
+  runHook<T extends Hooks, K extends Extract<keyof T, string>>(event: K, opts: T[K]): Promise<void>;
+  findCommand(id: string, opts: {must: true}): Command.Plugin;
+  findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined;
+  findTopic(id: string, opts: {must: true}): Topic;
+  findTopic(id: string, opts?: {must: boolean}): Topic | undefined;
+  scopedEnvVar(key: string): string | undefined;
+  scopedEnvVarKey(key: string): string;
+  scopedEnvVarTrue(key: string): boolean;
+  s3Url(key: string): string;
+  s3Key(type: 'versioned' | 'unversioned', ext: '.tar.gz' | '.tar.xz', options?: IConfig.s3Key.Options): string;
+  s3Key(type: keyof PJSON.S3.Templates, options?: IConfig.s3Key.Options): string;
 }
 
 export namespace IConfig {
   export namespace s3Key {
     export interface Options {
-      platform?: PlatformTypes
-      arch?: ArchTypes
-      [key: string]: any
+      platform?: PlatformTypes;
+      arch?: ArchTypes;
+      [key: string]: any;
     }
   }
 }
@@ -142,33 +144,59 @@ function channelFromVersion(version: string) {
 
 export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
+
   name!: string
+
   version!: string
+
   channel!: string
+
   root!: string
+
   arch!: ArchTypes
+
   bin!: string
+
   cacheDir!: string
+
   configDir!: string
+
   dataDir!: string
+
   dirname!: string
+
   errlog!: string
+
   home!: string
+
   platform!: PlatformTypes
+
   shell!: string
+
   windows!: boolean
+
   userAgent!: string
+
   debug = 0
+
   npmRegistry?: string
+
   pjson!: PJSON.CLI
+
   userPJSON?: PJSON.User
+
   plugins: Plugin.IPlugin[] = []
+
   binPath?: string
+
   valid!: boolean
+
   protected warned = false
 
+  // eslint-disable-next-line no-useless-constructor
   constructor(public options: Options) {}
 
+  // eslint-disable-next-line complexity
   async load() {
     const plugin = new Plugin.Plugin({root: this.options.root})
     await plugin.load()
@@ -201,7 +229,8 @@ export class Config implements IConfig {
 
     this.pjson.oclif.update = this.pjson.oclif.update || {}
     this.pjson.oclif.update.node = this.pjson.oclif.update.node || {}
-    const s3 = this.pjson.oclif.update.s3 = this.pjson.oclif.update.s3 || {}
+    const s3 = this.pjson.oclif.update.s3 || {}
+    this.pjson.oclif.update.s3 = s3
     s3.bucket = this.scopedEnvVar('S3_BUCKET') || s3.bucket
     if (s3.bucket && !s3.host) s3.host = `https://${s3.bucket}.s3.amazonaws.com`
     s3.templates = {
@@ -239,8 +268,8 @@ export class Config implements IConfig {
       try {
         const devPlugins = this.pjson.oclif.devPlugins
         if (devPlugins) await this.loadPlugins(this.root, 'dev', devPlugins)
-      } catch (err) {
-        process.emitWarning(err)
+      } catch (error) {
+        process.emitWarning(error)
       }
     }
   }
@@ -250,13 +279,14 @@ export class Config implements IConfig {
       try {
         const userPJSONPath = path.join(this.dataDir, 'package.json')
         debug('reading user plugins pjson %s', userPJSONPath)
-        const pjson = this.userPJSON = await loadJSON(userPJSONPath)
+        const pjson = await loadJSON(userPJSONPath)
+        this.userPJSON = pjson
         if (!pjson.oclif) pjson.oclif = {schema: 1}
         if (!pjson.oclif.plugins) pjson.oclif.plugins = []
         await this.loadPlugins(userPJSONPath, 'user', pjson.oclif.plugins.filter((p: any) => p.type === 'user'))
         await this.loadPlugins(userPJSONPath, 'link', pjson.oclif.plugins.filter((p: any) => p.type === 'link'))
-      } catch (err) {
-        if (err.code !== 'ENOENT') process.emitWarning(err)
+      } catch (error) {
+        if (error.code !== 'ENOENT') process.emitWarning(error)
       }
     }
   }
@@ -268,33 +298,37 @@ export class Config implements IConfig {
       const context: Hook.Context = {
         config: this,
         debug,
-        exit(code = 0) { exit(code) },
+        exit(code = 0) {
+          exit(code)
+        },
         log(message?: any, ...args: any[]) {
           process.stdout.write(format(message, ...args) + '\n')
         },
-        error(message, options: {code?: string, exit?: number} = {}) {
+        error(message, options: {code?: string; exit?: number} = {}) {
           error(message, options)
         },
-        warn(message: string) { warn(message) },
+        warn(message: string) {
+          warn(message)
+        },
       }
       return Promise.all((p.hooks[event] || [])
-        .map(async hook => {
-          try {
-            const f = tsPath(p.root, hook)
-            debug('start', f)
-            const search = (m: any): Hook<T> => {
-              if (typeof m === 'function') return m
-              if (m.default && typeof m.default === 'function') return m.default
-              return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
-            }
-
-            await search(require(f)).call(context, {...opts as any, config: this})
-            debug('done')
-          } catch (err) {
-            if (err && err.oclif && err.oclif.exit !== undefined) throw err
-            this.warn(err, `runHook ${event}`)
+      .map(async hook => {
+        try {
+          const f = tsPath(p.root, hook)
+          debug('start', f)
+          const search = (m: any): Hook<T> => {
+            if (typeof m === 'function') return m
+            if (m.default && typeof m.default === 'function') return m.default
+            return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
           }
-        }))
+
+          await search(require(f)).call(context, {...opts as any, config: this})
+          debug('done')
+        } catch (error) {
+          if (error && error.oclif && error.oclif.exit !== undefined) throw error
+          this.warn(error, `runHook ${event}`)
+        }
+      }))
     })
     await Promise.all(promises)
     debug('%s hook done', event)
@@ -317,40 +351,51 @@ export class Config implements IConfig {
   }
 
   scopedEnvVarTrue(k: string): boolean {
-    let v = process.env[this.scopedEnvVarKey(k)]
+    const v = process.env[this.scopedEnvVarKey(k)]
     return v === '1' || v === 'true'
   }
 
   scopedEnvVarKey(k: string) {
     return [this.bin, k]
-      .map(p => p.replace(/@/g, '').replace(/[-\/]/g, '_'))
-      .join('_')
-      .toUpperCase()
+    // eslint-disable-next-line no-useless-escape
+    .map(p => p.replace(/@/g, '').replace(/[-\/]/g, '_'))
+    .join('_')
+    .toUpperCase()
   }
 
   findCommand(id: string, opts: {must: true}): Command.Plugin
+
   findCommand(id: string, opts?: {must: boolean}): Command.Plugin | undefined
+
   findCommand(id: string, opts: {must?: boolean} = {}): Command.Plugin | undefined {
-    let command = this.commands.find(c => c.id === id || c.aliases.includes(id))
+    const command = this.commands.find(c => c.id === id || c.aliases.includes(id))
     if (command) return command
     if (opts.must) error(`command ${id} not found`)
   }
 
   findTopic(id: string, opts: {must: true}): Topic
+
   findTopic(id: string, opts?: {must: boolean}): Topic | undefined
+
   findTopic(name: string, opts: {must?: boolean} = {}) {
-    let topic = this.topics.find(t => t.name === name)
+    const topic = this.topics.find(t => t.name === name)
     if (topic) return topic
     if (opts.must) throw new Error(`topic ${name} not found`)
   }
 
-  get commands(): Command.Plugin[] { return flatMap(this.plugins, p => p.commands) }
-  get commandIDs() { return uniq(this.commands.map(c => c.id)) }
+  get commands(): Command.Plugin[] {
+    return flatMap(this.plugins, p => p.commands)
+  }
+
+  get commandIDs() {
+    return uniq(this.commands.map(c => c.id))
+  }
+
   get topics(): Topic[] {
-    let topics: Topic[] = []
-    for (let plugin of this.plugins) {
-      for (let topic of compact(plugin.topics)) {
-        let existing = topics.find(t => t.name === topic.name)
+    const topics: Topic[] = []
+    for (const plugin of this.plugins) {
+      for (const topic of compact(plugin.topics)) {
+        const existing = topics.find(t => t.name === topic.name)
         if (existing) {
           existing.description = topic.description || existing.description
           existing.hidden = existing.hidden || topic.hidden
@@ -358,10 +403,10 @@ export class Config implements IConfig {
       }
     }
     // add missing topics
-    for (let c of this.commands.filter(c => !c.hidden)) {
-      let parts = c.id.split(':')
+    for (const c of this.commands.filter(c => !c.hidden)) {
+      const parts = c.id.split(':')
       while (parts.length) {
-        let name = parts.join(':')
+        const name = parts.join(':')
         if (name && !topics.find(t => t.name === name)) {
           topics.push({name, description: c.description})
         }
@@ -377,6 +422,7 @@ export class Config implements IConfig {
     const _: typeof Lodash = require('lodash')
     return _.template(this.pjson.oclif.update.s3.templates[options.platform ? 'target' : 'vanilla'][type])({...this as any, ...options})
   }
+
   s3Url(key: string) {
     const host = this.pjson.oclif.update.s3.host
     if (!host) throw new Error('no s3 host is set')
@@ -386,16 +432,27 @@ export class Config implements IConfig {
   }
 
   protected dir(category: 'cache' | 'data' | 'config'): string {
-    const base = process.env[`XDG_${category.toUpperCase()}_HOME`]
-      || (this.windows && process.env.LOCALAPPDATA)
-      || path.join(this.home, category === 'data' ? '.local/share' : '.' + category)
+    const base = process.env[`XDG_${category.toUpperCase()}_HOME`] ||
+      (this.windows && process.env.LOCALAPPDATA) ||
+      path.join(this.home, category === 'data' ? '.local/share' : '.' + category)
     return path.join(base, this.dirname)
   }
 
-  protected windowsHome() { return this.windowsHomedriveHome() || this.windowsUserprofileHome() }
-  protected windowsHomedriveHome() { return (process.env.HOMEDRIVE && process.env.HOMEPATH && path.join(process.env.HOMEDRIVE!, process.env.HOMEPATH!)) }
-  protected windowsUserprofileHome() { return process.env.USERPROFILE }
-  protected macosCacheDir(): string | undefined { return this.platform === 'darwin' && path.join(this.home, 'Library', 'Caches', this.dirname) || undefined }
+  protected windowsHome() {
+    return this.windowsHomedriveHome() || this.windowsUserprofileHome()
+  }
+
+  protected windowsHomedriveHome() {
+    return (process.env.HOMEDRIVE && process.env.HOMEPATH && path.join(process.env.HOMEDRIVE!, process.env.HOMEPATH!))
+  }
+
+  protected windowsUserprofileHome() {
+    return process.env.USERPROFILE
+  }
+
+  protected macosCacheDir(): string | undefined {
+    return (this.platform === 'darwin' && path.join(this.home, 'Library', 'Caches', this.dirname)) || undefined
+  }
 
   protected _shell(): string {
     let shellPath
@@ -418,12 +475,13 @@ export class Config implements IConfig {
     } catch {}
     return 0
   }
-  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string, name?: string, tag?: string})[], parent?: Plugin.Plugin) {
-    if (!plugins || !plugins.length) return
+
+  protected async loadPlugins(root: string, type: string, plugins: (string | {root?: string; name?: string; tag?: string})[], parent?: Plugin.Plugin) {
+    if (!plugins || plugins.length === 0) return
     debug('loading plugins', plugins)
     await Promise.all((plugins || []).map(async plugin => {
       try {
-        let opts: Options = {type, root}
+        const opts: Options = {type, root}
         if (typeof plugin === 'string') {
           opts.name = plugin
         } else {
@@ -431,23 +489,24 @@ export class Config implements IConfig {
           opts.tag = plugin.tag || opts.tag
           opts.root = plugin.root || opts.root
         }
-        let instance = new Plugin.Plugin(opts)
+        const instance = new Plugin.Plugin(opts)
         await instance.load()
         if (this.plugins.find(p => p.name === instance.name)) return
         this.plugins.push(instance)
         if (parent) {
+          // eslint-disable-next-line require-atomic-updates
           instance.parent = parent
           if (!parent.children) parent.children = []
           parent.children.push(instance)
         }
         await this.loadPlugins(instance.root, type, instance.pjson.oclif.plugins || [], instance)
-      } catch (err) {
-        this.warn(err, 'loadPlugins')
+      } catch (error) {
+        this.warn(error, 'loadPlugins')
       }
     }))
   }
 
-  protected warn(err: string | Error | {name: string, detail: string}, scope?: string) {
+  protected warn(err: string | Error | {name: string; detail: string}, scope?: string) {
     if (this.warned) return
 
     if (typeof err === 'string') {
@@ -464,7 +523,7 @@ export class Config implements IConfig {
         scope && `task: ${scope}`,
         `plugin: ${this.name}`,
         `root: ${this.root}`,
-        'See more details with DEBUG=*'
+        'See more details with DEBUG=*',
       ]).join('\n')
       process.emitWarning(err)
       return
@@ -479,21 +538,22 @@ export class Config implements IConfig {
       scope && `task: ${scope}`,
       `plugin: ${this.name}`,
       `root: ${this.root}`,
-      'See more details with DEBUG=*'
+      'See more details with DEBUG=*',
     ]).join('\n')
 
     process.emitWarning(JSON.stringify(err))
   }
 }
+
+function isConfig(o: any): o is IConfig {
+  return o && Boolean(o._base)
+}
+
 export type LoadOptions = Options | string | IConfig | undefined
 export async function load(opts: LoadOptions = (module.parent && module.parent && module.parent.parent && module.parent.parent.filename) || __dirname) {
   if (typeof opts === 'string') opts = {root: opts}
   if (isConfig(opts)) return opts
-  let config = new Config(opts)
+  const config = new Config(opts)
   await config.load()
   return config
-}
-
-function isConfig(o: any): o is IConfig {
-  return o && !!o._base
 }

@@ -3,6 +3,7 @@ import * as path from 'path'
 import * as TSNode from 'ts-node'
 
 import Debug from './debug'
+// eslint-disable-next-line new-cap
 const debug = Debug()
 
 const tsconfigs: {[root: string]: TSConfig} = {}
@@ -11,11 +12,36 @@ const typeRoots = [`${__dirname}/../node_modules/@types`]
 
 export interface TSConfig {
   compilerOptions: {
-    rootDir?: string
-    rootDirs?: string[]
-    outDir?: string
-    target?: string
+    rootDir?: string;
+    rootDirs?: string[];
+    outDir?: string;
+    target?: string;
     esModuleInterop?: boolean;
+  };
+}
+
+function loadTSConfig(root: string): TSConfig | undefined {
+  const tsconfigPath = path.join(root, 'tsconfig.json')
+  let typescript: typeof import('typescript') | undefined
+  try {
+    typescript = require('typescript')
+  } catch {
+    try {
+      typescript = require(root + '/node_modules/typescript')
+    } catch { }
+  }
+
+  if (fs.existsSync(tsconfigPath) && typescript) {
+    const tsconfig = typescript.parseConfigFileTextToJson(
+      tsconfigPath,
+      fs.readFileSync(tsconfigPath, 'utf8'),
+    ).config
+    if (!tsconfig || !tsconfig.compilerOptions) {
+      throw new Error(
+        `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
+        'did not contain a "compilerOptions" section.')
+    }
+    return tsconfig
   }
 }
 
@@ -49,35 +75,10 @@ function registerTSNode(root: string) {
         sourceMap: true,
         rootDirs,
         typeRoots,
-      }
+      },
     })
   } finally {
     process.chdir(cwd)
-  }
-}
-
-function loadTSConfig(root: string): TSConfig | undefined {
-  const tsconfigPath = path.join(root, 'tsconfig.json')
-  let typescript: typeof import('typescript') | undefined
-  try {
-    typescript = require('typescript')
-  } catch {
-    try {
-      typescript = require(root + '/node_modules/typescript')
-    } catch {}
-  }
-
-  if (fs.existsSync(tsconfigPath) && typescript) {
-    const tsconfig = typescript.parseConfigFileTextToJson(
-      tsconfigPath,
-      fs.readFileSync(tsconfigPath, 'utf8')
-    ).config
-    if (!tsconfig || !tsconfig.compilerOptions) {
-      throw new Error(
-        `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
-        'did not contain a "compilerOptions" section.')
-    }
-    return tsconfig
   }
 }
 
@@ -109,9 +110,9 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     // That file doesn't exist, and the real file is "./hooks/myhook.ts"
     // In that case we attempt to resolve to the filename. If it fails it will revert back to the lib path
     if (fs.existsSync(out) || fs.existsSync(out + '.ts')) return out
-    else return orig
-  } catch (err) {
-    debug(err)
+    return orig
+  } catch (error) {
+    debug(error)
     return orig
   }
 }

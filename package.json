@@ -11,7 +11,6 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@oclif/tslint": "^3.1.1",
     "@types/chai": "^4.1.7",
     "@types/indent-string": "^3.2.0",
     "@types/lodash": "^4.14.123",
@@ -21,13 +20,15 @@
     "@types/wrap-ansi": "^3.0.0",
     "chai": "^4.2.0",
     "conventional-changelog-cli": "^2.0.21",
+    "eslint": "^6.6.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.1.0",
     "fancy-test": "^1.4.3",
     "globby": "^9.2.0",
     "lodash": "^4.17.11",
     "mocha": "^6.1.4",
     "proxyquire": "^2.1.0",
     "ts-node": "^8.1.0",
-    "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
   "engines": {
@@ -45,11 +46,12 @@
   "repository": "oclif/config",
   "scripts": {
     "build": "rm -rf lib && tsc",
-    "lint": "tsc -p test --noEmit && tslint -p test",
-    "posttest": "yarn run lint",
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "posttest": "yarn lint",
     "prepack": "yarn run build",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "pretest": "tsc -p test --noEmit"
   },
   "types": "lib/index.d.ts"
 }

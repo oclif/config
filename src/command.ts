@@ -4,82 +4,83 @@ import * as Config from '.'
 import {mapValues} from './util'
 
 export interface Command {
-  id: string
-  hidden: boolean
-  aliases: string[]
-  description?: string
-  usage?: string | string[]
-  examples?: string[]
-  type?: string
-  pluginName?: string
-  pluginType?: string
-  flags: {[name: string]: Command.Flag}
-  args: Command.Arg[]
+  id: string;
+  hidden: boolean;
+  aliases: string[];
+  description?: string;
+  usage?: string | string[];
+  examples?: string[];
+  type?: string;
+  pluginName?: string;
+  pluginType?: string;
+  flags: {[name: string]: Command.Flag};
+  args: Command.Arg[];
 }
 
 export namespace Command {
   export interface Arg {
-    name: string
-    description?: string
-    required?: boolean
-    hidden?: boolean
-    default?: string
-    options?: string[]
+    name: string;
+    description?: string;
+    required?: boolean;
+    hidden?: boolean;
+    default?: string;
+    options?: string[];
   }
 
   export type Flag = Flag.Boolean | Flag.Option
 
   export namespace Flag {
     export interface Boolean {
-      type: 'boolean'
-      name: string
-      required?: boolean
-      char?: string
-      hidden?: boolean
-      description?: string
-      helpLabel?: string
-      allowNo?: boolean
+      type: 'boolean';
+      name: string;
+      required?: boolean;
+      char?: string;
+      hidden?: boolean;
+      description?: string;
+      helpLabel?: string;
+      allowNo?: boolean;
     }
     export interface Option {
-      type: 'option'
-      name: string
-      required?: boolean
-      char?: string
-      hidden?: boolean
-      description?: string
-      helpLabel?: string
-      helpValue?: string
-      default?: string
-      options?: string[]
+      type: 'option';
+      name: string;
+      required?: boolean;
+      char?: string;
+      hidden?: boolean;
+      description?: string;
+      helpLabel?: string;
+      helpValue?: string;
+      default?: string;
+      options?: string[];
     }
   }
 
   export interface Base {
-    _base: string
-    id: string
-    hidden: boolean
-    aliases: string[]
-    description?: string
-    usage?: string | string[]
-    examples?: string[]
+    _base: string;
+    id: string;
+    hidden: boolean;
+    aliases: string[];
+    description?: string;
+    usage?: string | string[];
+    examples?: string[];
   }
 
   export interface Class extends Base {
-    plugin?: Config.IPlugin
-    flags?: Parser.flags.Input<any>
-    args?: Parser.args.Input
-    new(argv: string[], config: Config.IConfig): Instance
-    run(argv?: string[], config?: Config.LoadOptions): PromiseLike<any>
+    plugin?: Config.IPlugin;
+    flags?: Parser.flags.Input<any>;
+    args?: Parser.args.Input;
+    new(argv: string[], config: Config.IConfig): Instance;
+    run(argv?: string[], config?: Config.LoadOptions): PromiseLike<any>;
   }
 
   export interface Instance {
-    _run(argv: string[]): Promise<any>
+    _run(argv: string[]): Promise<any>;
   }
 
   export interface Plugin extends Command {
-    load(): Class
+    load(): Class;
   }
 
+  // eslint-disable-next-line no-inner-declarations
   export function toCached(c: Class, plugin?: Config.Plugin): Command {
     return {
       id: c.id,
