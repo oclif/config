@@ -225,7 +225,7 @@ export class Plugin implements IPlugin {
     this._debug(`loading IDs from ${this.commandsDir}`)
     const patterns = [
       '**/*.+(js|ts)',
-      '!**/*.+(d.ts|test.ts|test.js|spec.ts|spec.js)',
+      '!**/(*.+(d.ts|test.ts|test.js|spec.ts|spec.js)|__*__/*)',
     ]
     const ids = globby.sync(patterns, {cwd: this.commandsDir})
     .map(file => {
