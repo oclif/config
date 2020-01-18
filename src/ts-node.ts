@@ -75,7 +75,7 @@ function registerTSNode(root: string) {
         sourceMap: true,
         rootDirs,
         typeRoots,
-        jsx: "react",
+        jsx: 'react',
       },
     })
   } finally {
