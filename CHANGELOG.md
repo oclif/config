@@ -1,3 +1,17 @@
+# [1.14.0](https://github.com/oclif/config/compare/v1.13.3...v1.14.0) (2020-02-06)
+
+
+### Bug Fixes
+
+* make `@oclif/errors` a dependency ([#90](https://github.com/oclif/config/issues/90)) ([e96277c](https://github.com/oclif/config/commit/e96277c))
+
+
+### Features
+
+* support .tsx files with JSX syntax ([#96](https://github.com/oclif/config/issues/96)) ([6c800f2](https://github.com/oclif/config/commit/6c800f2))
+
+
+
 ## [1.13.3](https://github.com/oclif/config/compare/v1.13.2...v1.13.3) (2019-08-15)
 
 
