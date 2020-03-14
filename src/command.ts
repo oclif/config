@@ -64,16 +64,20 @@ export namespace Command {
     examples?: string[];
   }
 
+  export type RunOptions = {
+    isBeingRunByDefault?: boolean
+  }
+
   export interface Class extends Base {
     plugin?: Config.IPlugin;
     flags?: Parser.flags.Input<any>;
     args?: Parser.args.Input;
     new(argv: string[], config: Config.IConfig): Instance;
-    run(argv?: string[], config?: Config.LoadOptions): PromiseLike<any>;
+    run(argv?: string[], config?: Config.LoadOptions, options?: RunOptions): PromiseLike<any>;
   }
 
   export interface Instance {
-    _run(argv: string[]): Promise<any>;
+    _run(argv: string[], options?: RunOptions): Promise<any>;
   }
 
   export interface Plugin extends Command {
