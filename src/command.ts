@@ -72,7 +72,7 @@ export namespace Command {
     plugin?: Config.IPlugin;
     flags?: Parser.flags.Input<any>;
     args?: Parser.args.Input;
-    new(argv: string[], config: Config.IConfig): Instance;
+    new(argv: string[], config: Config.IConfig, options?: RunOptions): Instance;
     run(argv?: string[], config?: Config.LoadOptions, options?: RunOptions): PromiseLike<any>;
   }
 
