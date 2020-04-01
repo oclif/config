@@ -18,6 +18,7 @@ export namespace PJSON {
       commands?: string;
       plugins?: string[];
       devPlugins?: string[];
+      helpClass?: string;
       aliases?: { [name: string]: string | null };
       repositoryPrefix?: string;
       update: {
