@@ -1,3 +1,12 @@
+# [1.15.0](https://github.com/oclif/config/compare/v1.14.0...v1.15.0) (2020-04-14)
+
+
+### Features
+
+* add helpClass to pjson.oclif types ([#103](https://github.com/oclif/config/issues/103)) ([b40d645](https://github.com/oclif/config/commit/b40d645))
+
+
+
 # [1.14.0](https://github.com/oclif/config/compare/v1.13.3...v1.14.0) (2020-02-06)
 
 
