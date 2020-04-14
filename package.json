@@ -8,6 +8,7 @@
     "@oclif/errors": "^1.0.0",
     "@oclif/parser": "^3.8.0",
     "debug": "^4.1.1",
+    "globby": "^9.2.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -24,7 +25,6 @@
     "eslint-config-oclif": "^3.1.0",
     "eslint-config-oclif-typescript": "^0.1.0",
     "fancy-test": "^1.4.3",
-    "globby": "^9.2.0",
     "lodash": "^4.17.11",
     "mocha": "^6.1.4",
     "proxyquire": "^2.1.0",
