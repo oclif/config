@@ -142,6 +142,15 @@ function channelFromVersion(version: string) {
   return (m && m[1]) || 'stable'
 }
 
+function hasManifest(p: string): boolean {
+  try {
+    require(p)
+    return true
+  } catch {
+    return false
+  }
+}
+
 export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
 
@@ -265,6 +274,8 @@ export class Config implements IConfig {
 
   async loadDevPlugins() {
     if (this.options.devPlugins !== false) {
+      // do not load oclif.devPlugins in production
+      if (hasManifest(path.join(this.root, 'oclif.manifest.json'))) return
       try {
         const devPlugins = this.pjson.oclif.devPlugins
         if (devPlugins) await this.loadPlugins(this.root, 'dev', devPlugins)
