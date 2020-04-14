@@ -1,3 +1,12 @@
+## [1.15.1](https://github.com/oclif/config/compare/v1.15.0...v1.15.1) (2020-04-14)
+
+
+### Bug Fixes
+
+* do not load oclif.devPlugins in production ([#104](https://github.com/oclif/config/issues/104)) ([c850bbe](https://github.com/oclif/config/commit/c850bbe))
+
+
+
 # [1.15.0](https://github.com/oclif/config/compare/v1.14.0...v1.15.0) (2020-04-14)
 
 
