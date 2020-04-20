@@ -418,6 +418,8 @@ export class Config implements IConfig {
       const parts = c.id.split(':')
       while (parts.length) {
         const name = parts.join(':')
+        // removes commands at ends of namespaces
+        parts.pop()
         if (name && !topics.find(t => t.name === name)) {
           topics.push({name, description: c.description})
         }
