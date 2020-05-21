@@ -21,7 +21,7 @@ describe('typescript', () => {
   .stdout()
   .it('runs ts command and prerun and postrun hooks', async ctx => {
     await ctx.config.runCommand('foo:bar:baz')
-    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning postrun hook\n')
+    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning ts postrun hook\n')
   })
   withConfig
   .stdout()
