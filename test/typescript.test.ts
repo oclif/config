@@ -17,14 +17,12 @@ describe('typescript', () => {
       commandsDir: p('src/commands'),
     })
   })
-
   withConfig
   .stdout()
-  .it('runs ts command and prerun hooks', async ctx => {
+  .it('runs ts command and prerun and postrun hooks', async ctx => {
     await ctx.config.runCommand('foo:bar:baz')
-    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\n')
+    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning postrun hook\n')
   })
-
   withConfig
   .stdout()
   .it('runs init hook', async ctx => {

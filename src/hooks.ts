@@ -10,6 +10,10 @@ export interface Hooks {
     Command: Config.Command.Class;
     argv: string[];
   };
+  postrun: {
+    Command: Config.Command.Class;
+    argv: string[];
+  };
   preupdate: {channel: string};
   update: {channel: string};
   'command_not_found': {id: string};
@@ -32,6 +36,7 @@ export namespace Hook {
   export type Init = Hook<Hooks['init']>
   export type PluginsPreinstall = Hook<Hooks['plugins:preinstall']>
   export type Prerun = Hook<Hooks['prerun']>
+  export type Postrun = Hook<Hooks['postrun']>
   export type Preupdate = Hook<Hooks['preupdate']>
   export type Update = Hook<Hooks['update']>
   export type CommandNotFound = Hook<Hooks['command_not_found']>

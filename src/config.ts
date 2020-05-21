@@ -355,6 +355,7 @@ export class Config implements IConfig {
     const command = c.load()
     await this.runHook('prerun', {Command: command, argv})
     await command.run(argv, this)
+    await this.runHook('postrun', {Command: command, argv})
   }
 
   scopedEnvVar(k: string) {

@@ -8,6 +8,9 @@
       "init": "./lib/hooks/init",
       "prerun": [
         "./lib/hooks/prerun"
+      ],
+      "postrun": [
+        "./lib/hooks/postrun"
       ]
     }
   },
