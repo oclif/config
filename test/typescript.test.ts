@@ -35,6 +35,12 @@ describe('typescript', () => {
   })
   withConfig
   .stdout()
+  .it('runs ts command, postrun hook captures command result', async ctx => {
+    await ctx.config.runCommand('foo:bar:test-result')
+    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning ts postrun hook\nreturned success!\n')
+  })
+  withConfig
+  .stdout()
   .it('runs init hook', async ctx => {
     // to-do: fix union types
     await (ctx.config.runHook as any)('init', {id: 'myid', argv: ['foo']})
