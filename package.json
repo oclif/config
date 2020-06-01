@@ -50,7 +50,6 @@
     "posttest": "yarn lint",
     "prepack": "yarn run build",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "hooktest": "mocha --forbid-only \"test/typescript.test.ts\"",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "pretest": "tsc -p test --noEmit"
   },
