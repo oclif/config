@@ -17,12 +17,14 @@ describe('typescript', () => {
       commandsDir: p('src/commands'),
     })
   })
+
   withConfig
   .stdout()
-  .it('runs ts command, prerun and postrun hooks both trigger', async ctx => {
+  .it('runs ts command and prerun & postrun hooks', async ctx => {
     await ctx.config.runCommand('foo:bar:baz')
     expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning ts postrun hook\n')
   })
+
   withConfig
   .stdout()
   .it('runs faulty command, only prerun hook triggers', async ctx => {
@@ -33,12 +35,14 @@ describe('typescript', () => {
     }
     expect(ctx.stdout).to.equal('running ts prerun hook\nit fails!\ncaught error\n')
   })
+
   withConfig
   .stdout()
   .it('runs ts command, postrun hook captures command result', async ctx => {
     await ctx.config.runCommand('foo:bar:test-result')
     expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning ts postrun hook\nreturned success!\n')
   })
+
   withConfig
   .stdout()
   .it('runs init hook', async ctx => {
