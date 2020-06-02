@@ -12,7 +12,7 @@ export interface Hooks {
   };
   postrun: {
     Command: Config.Command.Class;
-    result: any | undefined;
+    result?: any
     argv: string[];
   };
   preupdate: {channel: string};
