@@ -1,5 +1,4 @@
 import {CLIError, error, exit, warn} from '@oclif/errors'
-import WSL = require('is-wsl')
 import * as Lodash from 'lodash'
 import * as os from 'os'
 import * as path from 'path'
@@ -151,6 +150,8 @@ function hasManifest(p: string): boolean {
     return false
   }
 }
+
+const WSL = require('is-wsl')
 
 export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
