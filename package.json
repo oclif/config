@@ -9,6 +9,7 @@
     "@oclif/parser": "^3.8.0",
     "debug": "^4.1.1",
     "globby": "^9.2.0",
+    "is-wsl": "^2.1.1",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

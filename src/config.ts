@@ -14,7 +14,7 @@ import {Topic} from './topic'
 import {tsPath} from './ts-node'
 import {compact, flatMap, loadJSON, uniq} from './util'
 
-export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos'
+export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos' | 'wsl'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
 export interface Options extends Plugin.Options {
   devPlugins?: boolean;
@@ -151,6 +151,8 @@ function hasManifest(p: string): boolean {
   }
 }
 
+const WSL = require('is-wsl')
+
 export class Config implements IConfig {
   _base = `${_pjson.name}@${_pjson.version}`
 
@@ -218,7 +220,7 @@ export class Config implements IConfig {
     this.valid = plugin.valid
 
     this.arch = (os.arch() === 'ia32' ? 'x86' : os.arch() as any)
-    this.platform = os.platform() as any
+    this.platform = WSL ? 'wsl' : os.platform() as any
     this.windows = this.platform === 'win32'
     this.bin = this.pjson.oclif.bin || this.name
     this.dirname = this.pjson.oclif.dirname || this.name
