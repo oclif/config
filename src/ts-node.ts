@@ -17,6 +17,8 @@ export interface TSConfig {
     outDir?: string;
     target?: string;
     esModuleInterop?: boolean;
+    experimentalDecorators?: boolean;
+    emitDecoratorMetadata?: boolean;
   };
 }
 
@@ -71,6 +73,8 @@ function registerTSNode(root: string) {
       compilerOptions: {
         esModuleInterop: tsconfig.compilerOptions.esModuleInterop,
         target: tsconfig.compilerOptions.target || 'es2017',
+        experimentalDecorators: tsconfig.compilerOptions.experimentalDecorators || false,
+        emitDecoratorMetadata: tsconfig.compilerOptions.emitDecoratorMetadata || false,
         module: 'commonjs',
         sourceMap: true,
         rootDirs,
