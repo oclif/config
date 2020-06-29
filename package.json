@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/indent-string": "^3.2.0",
+    "@types/indent-string": "^4.0.1",
     "@types/lodash": "^4.14.123",
     "@types/mocha": "^7.0.2",
     "@types/node": "^11.13.10",
