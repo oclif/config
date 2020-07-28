@@ -231,7 +231,7 @@ export class Plugin implements IPlugin {
     .map(file => {
       const p = path.parse(file)
       const topics = p.dir.split('/')
-      const command = p.name !== 'index' && p.name
+      const command = (p.name !== 'index' && p.name) || (p.dir.length === 0 && p.name === 'index' && '')
       return [...topics, command].filter(f => f).join(':')
     })
     this._debug('found commands', ids)
