@@ -11,6 +11,7 @@ import {Topic} from './topic'
 import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
+const ROOT_INDEX_CMD_ID = ''
 export interface Options {
   root: string;
   name?: string;
@@ -231,14 +232,10 @@ export class Plugin implements IPlugin {
     .map(file => {
       const p = path.parse(file)
       const topics = p.dir.split('/')
-      const command = (p.name !== 'index' && p.name) ||
-        (this.type === 'core' && p.dir.length === 0 && p.name === 'index' && '')
+      const command = (p.name !== 'index' && p.name)
+      // support src/commands/index as a "root" command
+      if (!command && this.type === 'core' && p.dir.length === 0 && p.name === 'index') return ROOT_INDEX_CMD_ID
       return [...topics, command].filter(f => f).join(':')
-      // Note: if a cli "root" command is present, this works b/c
-      // empty strings are falsey
-      // but an empty array join'd returns an empty string
-      // which is the ID of a cli "root" command
-      // ['', ''] => [] then [].join(':') => ''
     })
     this._debug('found commands', ids)
     return ids
