@@ -12,6 +12,7 @@ import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
 const ROOT_INDEX_CMD_ID = ''
+
 export interface Options {
   root: string;
   name?: string;
