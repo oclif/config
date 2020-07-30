@@ -232,7 +232,7 @@ export class Plugin implements IPlugin {
     .map(file => {
       const p = path.parse(file)
       const topics = p.dir.split('/')
-      const command = (p.name !== 'index' && p.name)
+      const command = p.name !== 'index' && p.name
       // support src/commands/index as a "root" command
       if (!command && this.type === 'core' && p.dir.length === 0 && p.name === 'index') return ROOT_INDEX_CMD_ID
       return [...topics, command].filter(f => f).join(':')
