@@ -304,7 +304,7 @@ export class Config implements IConfig {
     }
   }
 
-  async runHook<T>(event: string, opts: T) {
+  async runHook<T extends Hooks, K extends Extract<keyof T, string>>(event: K, opts: T[K]): Promise<void> {
     debug('start %s hook', event)
     const promises = this.plugins.map(p => {
       const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
