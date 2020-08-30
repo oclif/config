@@ -23,7 +23,7 @@ const withPluginInstance = () => {
     return Promise.resolve(pluginLocation)
   })
   .stub(util, 'loadJSON', (jsonPath: string) => {
-    if (jsonPath !== pluginLocation) {
+    if (jsonPath !== path.join(pluginLocation, 'package.json')) {
       return {}
     }
     return {
