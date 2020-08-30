@@ -7,6 +7,7 @@ import * as util from '../src/util'
 const root = path.resolve(__dirname, 'fixtures/typescript')
 const pluginName = '@oclif/plugin-help'
 const pluginLocation = 'some/external/directory'
+const pluginPjsonLocation = path.join(pluginLocation, 'package.json')
 
 const withPluginInstance = () => {
   return fancy
@@ -16,14 +17,15 @@ const withPluginInstance = () => {
     name: pluginName,
     ignoreManifest: true,
   }))
+  .stub(util, 'exists', (checkPath: string) => checkPath === pluginPjsonLocation)
   .stub(util, 'resolvePackage', (id: string): Promise<string> => {
     if (id !== pluginName) {
       return Promise.reject()
     }
-    return Promise.resolve(pluginLocation)
+    return Promise.resolve(path.join(pluginLocation, 'lib', 'index.js'))
   })
   .stub(util, 'loadJSON', (jsonPath: string) => {
-    if (jsonPath !== path.join(pluginLocation, 'package.json')) {
+    if (jsonPath !== pluginPjsonLocation) {
       return {}
     }
     return {
