@@ -21,6 +21,7 @@ export namespace PJSON {
       helpClass?: string;
       aliases?: { [name: string]: string | null };
       repositoryPrefix?: string;
+      typescript?: boolean;
       update: {
         s3: S3;
         autoupdate?: {
