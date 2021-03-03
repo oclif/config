@@ -77,7 +77,7 @@ export namespace Command {
   }
 
   export interface Plugin extends Command {
-    load(): Class;
+    load(): Promise<Class>;
   }
 
   // eslint-disable-next-line no-inner-declarations

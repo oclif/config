@@ -354,7 +354,7 @@ export class Config implements IConfig {
       await this.runHook('command_not_found', {id})
       throw new CLIError(`command ${id} not found`)
     }
-    const command = c.load()
+    const command = await c.load()
     await this.runHook('prerun', {Command: command, argv})
     const result = await command.run(argv, this)
     await this.runHook('postrun', {Command: command, result: result, argv})
