@@ -264,10 +264,10 @@ export class Plugin implements IPlugin {
         return Object.values(cmd).find((cmd: any) => typeof cmd.run === 'function')
       }
       const p = require.resolve(path.join(this.commandsDir, ...id.split(':')))
-      this._debug('require', p)
+      this._debug(this.module ? '(import)' : '(require)', p)
       let m
       try {
-        m = require(p)
+        m = this.module ? await import(p) : require(p)
       } catch (error) {
         if (!opts.must && error.code === 'MODULE_NOT_FOUND') return
         throw error

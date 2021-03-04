@@ -306,7 +306,15 @@ export class Config implements IConfig {
 
   async runHook<T>(event: string, opts: T) {
     debug('start %s hook', event)
-    const promises = this.plugins.map(p => {
+
+    const search = (m: any): Hook<T> => {
+      if (typeof m === 'function') return m
+      if (m.default && typeof m.default === 'function') return m.default
+      return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
+    }
+
+    for (const p of this.plugins)
+    {
       const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
       const context: Hook.Context = {
         config: this,
@@ -324,28 +332,74 @@ export class Config implements IConfig {
           warn(message)
         },
       }
-      return Promise.all((p.hooks[event] || [])
-      .map(async hook => {
-        try {
-          const f = tsPath(p.root, hook)
-          debug('start', f)
-          const search = (m: any): Hook<T> => {
-            if (typeof m === 'function') return m
-            if (m.default && typeof m.default === 'function') return m.default
-            return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
-          }
 
-          await search(require(f)).call(context, {...opts as any, config: this})
+      const hooks = p.hooks[event] || [];
+
+      for (const hook of hooks) {
+        try {
+          // If the plugin package.json has type = 'module' then require resolve is used for the path + extension
+          // for use with import() otherwise tsPath will give the file path without the extension for require.
+          const f = p.module ? require.resolve(path.join(p.root, hook)) : tsPath(p.root, hook)
+
+          debug('start', p.module ? '(import)' : '(require)', f)
+
+          await search(p.module ? await import(f) : require(f)).call(context, {...opts as any, config: this})
+
           debug('done')
-        } catch (error) {
+        }
+        catch (error)
+        {
           if (error && error.oclif && error.oclif.exit !== undefined) throw error
           this.warn(error, `runHook ${event}`)
         }
-      }))
-    })
-    await Promise.all(promises)
+      }
+    }
+
     debug('%s hook done', event)
   }
+
+  // TODO REMOVE: Old runHook method for comparison
+  // async runHook<T>(event: string, opts: T) {
+  //   debug('start %s hook', event)
+  //   const promises = this.plugins.map(p => {
+  //     const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
+  //     const context: Hook.Context = {
+  //       config: this,
+  //       debug,
+  //       exit(code = 0) {
+  //         exit(code)
+  //       },
+  //       log(message?: any, ...args: any[]) {
+  //         process.stdout.write(format(message, ...args) + '\n')
+  //       },
+  //       error(message, options: {code?: string; exit?: number} = {}) {
+  //         error(message, options)
+  //       },
+  //       warn(message: string) {
+  //         warn(message)
+  //       },
+  //     }
+  //     return Promise.all((p.hooks[event] || [])
+  //     .map(async hook => {
+  //       try {
+  //         const f = tsPath(p.root, hook)
+  //         debug('start', f)
+  //         const search = (m: any): Hook<T> => {
+  //           if (typeof m === 'function') return m
+  //           if (m.default && typeof m.default === 'function') return m.default
+  //           return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
+  //         }
+  //         await search(require(f)).call(context, {...opts as any, config: this})
+  //         debug('done')
+  //       } catch (error) {
+  //         if (error && error.oclif && error.oclif.exit !== undefined) throw error
+  //         this.warn(error, `runHook ${event}`)
+  //       }
+  //     }))
+  //   })
+  //   await Promise.all(promises)
+  //   debug('%s hook done', event)
+  // }
 
   async runCommand(id: string, argv: string[] = []) {
     debug('runCommand %s %o', id, argv)
