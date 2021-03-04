@@ -358,49 +358,6 @@ export class Config implements IConfig {
     debug('%s hook done', event)
   }
 
-  // TODO REMOVE: Old runHook method for comparison
-  // async runHook<T>(event: string, opts: T) {
-  //   debug('start %s hook', event)
-  //   const promises = this.plugins.map(p => {
-  //     const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
-  //     const context: Hook.Context = {
-  //       config: this,
-  //       debug,
-  //       exit(code = 0) {
-  //         exit(code)
-  //       },
-  //       log(message?: any, ...args: any[]) {
-  //         process.stdout.write(format(message, ...args) + '\n')
-  //       },
-  //       error(message, options: {code?: string; exit?: number} = {}) {
-  //         error(message, options)
-  //       },
-  //       warn(message: string) {
-  //         warn(message)
-  //       },
-  //     }
-  //     return Promise.all((p.hooks[event] || [])
-  //     .map(async hook => {
-  //       try {
-  //         const f = tsPath(p.root, hook)
-  //         debug('start', f)
-  //         const search = (m: any): Hook<T> => {
-  //           if (typeof m === 'function') return m
-  //           if (m.default && typeof m.default === 'function') return m.default
-  //           return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
-  //         }
-  //         await search(require(f)).call(context, {...opts as any, config: this})
-  //         debug('done')
-  //       } catch (error) {
-  //         if (error && error.oclif && error.oclif.exit !== undefined) throw error
-  //         this.warn(error, `runHook ${event}`)
-  //       }
-  //     }))
-  //   })
-  //   await Promise.all(promises)
-  //   debug('%s hook done', event)
-  // }
-
   async runCommand(id: string, argv: string[] = []) {
     debug('runCommand %s %o', id, argv)
     const c = this.findCommand(id)
