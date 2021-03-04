@@ -11,6 +11,8 @@ import {Topic} from './topic'
 import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
+import importDynamic from './importDynamic'
+
 const ROOT_INDEX_CMD_ID = ''
 
 export interface Options {
@@ -267,7 +269,7 @@ export class Plugin implements IPlugin {
       this._debug(this.module ? '(import)' : '(require)', p)
       let m
       try {
-        m = this.module ? await import(p) : require(p)
+        m = this.module ? await importDynamic(p) : require(p)
       } catch (error) {
         if (!opts.must && error.code === 'MODULE_NOT_FOUND') return
         throw error

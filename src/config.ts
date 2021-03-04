@@ -14,6 +14,8 @@ import {Topic} from './topic'
 import {tsPath} from './ts-node'
 import {compact, flatMap, loadJSON, uniq} from './util'
 
+import importDynamic from './importDynamic'
+
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos' | 'wsl'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
 export interface Options extends Plugin.Options {
@@ -343,7 +345,8 @@ export class Config implements IConfig {
 
           debug('start', p.module ? '(import)' : '(require)', f)
 
-          await search(p.module ? await import(f) : require(f)).call(context, {...opts as any, config: this})
+          await search(p.module ? await importDynamic(f) : require(f)).call(
+           context, {...opts as any, config: this})
 
           debug('done')
         }
