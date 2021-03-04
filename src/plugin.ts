@@ -11,7 +11,7 @@ import {Topic} from './topic'
 import {tsPath} from './ts-node'
 import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
-import importDynamic from './importDynamic'
+import importDynamic from './import-dynamic'
 
 const ROOT_INDEX_CMD_ID = ''
 

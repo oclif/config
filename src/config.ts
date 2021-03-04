@@ -14,7 +14,7 @@ import {Topic} from './topic'
 import {tsPath} from './ts-node'
 import {compact, flatMap, loadJSON, uniq} from './util'
 
-import importDynamic from './importDynamic'
+import importDynamic from './import-dynamic'
 
 export type PlatformTypes = 'darwin' | 'linux' | 'win32' | 'aix' | 'freebsd' | 'openbsd' | 'sunos' | 'wsl'
 export type ArchTypes = 'arm' | 'arm64' | 'mips' | 'mipsel' | 'ppc' | 'ppc64' | 's390' | 's390x' | 'x32' | 'x64' | 'x86'
@@ -315,8 +315,7 @@ export class Config implements IConfig {
       return Object.values(m).find((m: any) => typeof m === 'function') as Hook<T>
     }
 
-    for (const p of this.plugins)
-    {
+    for (const p of this.plugins) {
       const debug = require('debug')([this.bin, p.name, 'hooks', event].join(':'))
       const context: Hook.Context = {
         config: this,
@@ -335,7 +334,7 @@ export class Config implements IConfig {
         },
       }
 
-      const hooks = p.hooks[event] || [];
+      const hooks = p.hooks[event] || []
 
       for (const hook of hooks) {
         try {
@@ -346,12 +345,11 @@ export class Config implements IConfig {
           debug('start', p.module ? '(import)' : '(require)', f)
 
           await search(p.module ? await importDynamic(f) : require(f)).call(
-           context, {...opts as any, config: this})
+            context, {...opts as any, config: this})
 
           debug('done')
         }
-        catch (error)
-        {
+        catch (error) {
           if (error && error.oclif && error.oclif.exit !== undefined) throw error
           this.warn(error, `runHook ${event}`)
         }
