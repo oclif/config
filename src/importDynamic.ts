@@ -4,4 +4,4 @@
  *
  * Simply import and use in the same manner as import().
  */
-export default new Function('modulePath', `return import(modulePath)`);
+export default new Function('modulePath', 'return import(modulePath)');
