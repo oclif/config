@@ -4,4 +4,5 @@
  *
  * Simply import and use in the same manner as import().
  */
+/* eslint-disable no-new-func */
 export default new Function('modulePath', 'return import(modulePath)')

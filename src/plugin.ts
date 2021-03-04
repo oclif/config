@@ -191,7 +191,7 @@ export class Plugin implements IPlugin {
     this._debug('reading %s plugin %s', this.type, root)
     this.pjson = await loadJSON(path.join(root, 'package.json')) as any
     this.name = this.pjson.name
-    this.module = this.pjson.type === 'module';
+    this.module = this.pjson.type === 'module'
     const pjsonPath = path.join(root, 'package.json')
     if (!this.name) throw new Error(`no name in ${pjsonPath}`)
     const isProd = hasManifest(path.join(root, 'oclif.manifest.json'))
@@ -323,9 +323,9 @@ export class Plugin implements IPlugin {
       })))
       .filter((f): f is [string, Command] => Boolean(f))
       .reduce((commands, [id, c]) => {
-          commands[id] = c
-          return commands
-        }, {} as {[k: string]: Command}),
+        commands[id] = c
+        return commands
+      }, {} as {[k: string]: Command}),
     }
   }
 

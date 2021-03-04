@@ -344,6 +344,7 @@ export class Config implements IConfig {
 
           debug('start', p.module ? '(import)' : '(require)', f)
 
+          /* eslint-disable no-await-in-loop */
           await search(p.module ? await importDynamic(f) : require(f)).call(
             context, {...opts as any, config: this})
 
