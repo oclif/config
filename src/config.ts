@@ -349,8 +349,7 @@ export class Config implements IConfig {
             context, {...opts as any, config: this})
 
           debug('done')
-        }
-        catch (error) {
+        } catch (error) {
           if (error && error.oclif && error.oclif.exit !== undefined) throw error
           this.warn(error, `runHook ${event}`)
         }
