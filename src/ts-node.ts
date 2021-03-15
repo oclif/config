@@ -1,6 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as TSNode from 'ts-node'
+import type * as TS from 'typescript'
 
 import Debug from './debug'
 // eslint-disable-next-line new-cap
@@ -11,20 +12,11 @@ const rootDirs: string[] = []
 const typeRoots = [`${__dirname}/../node_modules/@types`]
 
 export interface TSConfig {
-  compilerOptions: {
-    rootDir?: string;
-    rootDirs?: string[];
-    outDir?: string;
-    target?: string;
-    esModuleInterop?: boolean;
-    experimentalDecorators?: boolean;
-    emitDecoratorMetadata?: boolean;
-  };
+  compilerOptions: TS.CompilerOptions;
 }
 
-function loadTSConfig(root: string): TSConfig | undefined {
-  const tsconfigPath = path.join(root, 'tsconfig.json')
-  let typescript: typeof import('typescript') | undefined
+function loadTSConfig(root: string, configPath = 'tsconfig.json'): TSConfig | undefined {
+  let typescript: typeof TS | undefined
   try {
     typescript = require('typescript')
   } catch {
@@ -32,25 +24,39 @@ function loadTSConfig(root: string): TSConfig | undefined {
       typescript = require(root + '/node_modules/typescript')
     } catch { }
   }
-
-  if (fs.existsSync(tsconfigPath) && typescript) {
-    const tsconfig = typescript.parseConfigFileTextToJson(
-      tsconfigPath,
-      fs.readFileSync(tsconfigPath, 'utf8'),
-    ).config
-    if (!tsconfig || !tsconfig.compilerOptions) {
-      throw new Error(
-        `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
+  if (typescript) {
+    const {findConfigFile, readConfigFile, parseJsonConfigFileContent, sys} = typescript
+    const tsconfigPath = findConfigFile(
+      root,
+      sys.fileExists,
+      configPath,
+    )
+    if (tsconfigPath) {
+      // Read the user's raw tsconfig file
+      const readFile = (path: string): string | undefined => fs.readFileSync(path).toString('utf8')
+      const tsconfig = readConfigFile(tsconfigPath, readFile).config
+      // Parse the raw config, resolving any configuration files it extends from
+      const compilerOptions = parseJsonConfigFileContent(
+        tsconfig,
+        sys,
+        root,
+      ).options
+      console.log({root, tsconfig, compilerOptions})
+      if (!tsconfig || !compilerOptions) {
+        throw new Error(
+          `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
         'did not contain a "compilerOptions" section.')
+      }
+      // Return only the combined compiler options
+      return {compilerOptions}
     }
-    return tsconfig
   }
 }
 
-function registerTSNode(root: string) {
+function registerTSNode(root: string, configPath?: string) {
   if (process.env.OCLIF_TS_NODE === '0') return
   if (tsconfigs[root]) return
-  const tsconfig = loadTSConfig(root)
+  const tsconfig = loadTSConfig(root, configPath)
   if (!tsconfig) return
   debug('registering ts-node at', root)
   const tsNodePath = require.resolve('ts-node', {paths: [root, __dirname]})
@@ -71,6 +77,7 @@ function registerTSNode(root: string) {
       // cache: false,
       // typeCheck: true,
       compilerOptions: {
+        ...tsconfig.compilerOptions,
         esModuleInterop: tsconfig.compilerOptions.esModuleInterop,
         target: tsconfig.compilerOptions.target || 'es2017',
         experimentalDecorators: tsconfig.compilerOptions.experimentalDecorators || false,
@@ -92,13 +99,13 @@ function registerTSNode(root: string) {
  * this is for developing typescript plugins/CLIs
  * if there is a tsconfig and the original sources exist, it attempts to require ts-
  */
-export function tsPath(root: string, orig: string): string
-export function tsPath(root: string, orig: string | undefined): string | undefined
-export function tsPath(root: string, orig: string | undefined): string | undefined {
+export function tsPath(root: string, orig: string, configPath?: string): string
+export function tsPath(root: string, orig: string | undefined, configPath?: string): string | undefined
+export function tsPath(root: string, orig: string | undefined, configPath?: string): string | undefined {
   if (!orig) return orig
   orig = path.join(root, orig)
   try {
-    registerTSNode(root)
+    registerTSNode(root, configPath)
     const tsconfig = tsconfigs[root]
     if (!tsconfig) return orig
     const {rootDir, rootDirs, outDir} = tsconfig.compilerOptions
