@@ -1,8 +1,9 @@
 export interface PJSON {
   [k: string]: any;
-  dependencies?: {[name: string]: string};
+  dependencies?: { [name: string]: string };
   oclif: {
     schema?: number;
+    tsConfig?: string;
   };
 }
 
@@ -14,7 +15,7 @@ export namespace PJSON {
       schema?: number;
       title?: string;
       description?: string;
-      hooks?: { [name: string]: (string | string[]) };
+      hooks?: { [name: string]: string | string[] };
       commands?: string;
       plugins?: string[];
       devPlugins?: string[];
@@ -76,10 +77,14 @@ export namespace PJSON {
   export interface User extends PJSON {
     private?: boolean;
     oclif: PJSON['oclif'] & {
-      plugins?: (string | PluginTypes.User | PluginTypes.Link)[]; };
+      plugins?: (string | PluginTypes.User | PluginTypes.Link)[];
+    };
   }
 
-  export type PluginTypes = PluginTypes.User | PluginTypes.Link | {root: string}
+  export type PluginTypes =
+    | PluginTypes.User
+    | PluginTypes.Link
+    | { root: string };
   export namespace PluginTypes {
     export interface User {
       type: 'user';

@@ -2,7 +2,7 @@ import * as path from 'path'
 import * as proxyquire from 'proxyquire'
 import * as tsNode from 'ts-node'
 
-import {TSConfig} from '../src/ts-node'
+import {TSConfig, tsPath} from '../src/ts-node'
 
 import {expect, fancy} from './test'
 
@@ -37,6 +37,11 @@ describe('tsPath', () => {
   withMockTsConfig()
   .it('should resolve a .ts file', ctx => {
     const result = ctx.tsNodePlugin.tsPath(root, orig)
+    expect(result).to.equal(path.join(root, orig))
+  })
+
+  it('should resolve a .ts file using custom config using "extends"', () => {
+    const result = tsPath(root, orig, 'tsconfig.custom.json')
     expect(result).to.equal(path.join(root, orig))
   })
 

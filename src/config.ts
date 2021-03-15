@@ -247,18 +247,18 @@ export class Config implements IConfig {
     s3.templates = {
       ...s3.templates,
       target: {
+        ...s3.templates && s3.templates.target,
         baseDir: '<%- bin %>',
         unversioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-<%- platform %>-<%- arch %><%- ext %>",
         versioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %>-<%- platform %>-<%- arch %><%- ext %>",
         manifest: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- platform %>-<%- arch %>",
-        ...s3.templates && s3.templates.target,
       },
       vanilla: {
+        ...s3.templates && s3.templates.vanilla,
         unversioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %><%- ext %>",
         versioned: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %><%- bin %>-v<%- version %>/<%- bin %>-v<%- version %><%- ext %>",
         baseDir: '<%- bin %>',
         manifest: "<%- channel === 'stable' ? '' : 'channels/' + channel + '/' %>version",
-        ...s3.templates && s3.templates.vanilla,
       },
     }
 
@@ -327,7 +327,7 @@ export class Config implements IConfig {
       return Promise.all((p.hooks[event] || [])
       .map(async hook => {
         try {
-          const f = tsPath(p.root, hook)
+          const f = tsPath(p.root, hook, this.pjson.oclif.tsConfig)
           debug('start', f)
           const search = (m: any): Hook<T> => {
             if (typeof m === 'function') return m

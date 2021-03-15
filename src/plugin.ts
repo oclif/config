@@ -211,7 +211,7 @@ export class Plugin implements IPlugin {
   }
 
   get commandsDir() {
-    return tsPath(this.root, this.pjson.oclif.commands)
+    return tsPath(this.root, this.pjson.oclif.commands, this.pjson.oclif.tsConfig)
   }
 
   get commandIDs() {
