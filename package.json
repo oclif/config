@@ -24,7 +24,7 @@
     "conventional-changelog-cli": "^2.0.21",
     "eslint": "^7.3.1",
     "eslint-config-oclif": "^3.1.0",
-    "eslint-config-oclif-typescript": "^0.2.0",
+    "eslint-config-oclif-typescript": "^1.0.2",
     "fancy-test": "^1.4.3",
     "lodash": "^4.17.11",
     "mocha": "^8.2.1",
