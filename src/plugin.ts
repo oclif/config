@@ -9,7 +9,7 @@ import {Manifest} from './manifest'
 import {PJSON} from './pjson'
 import {Topic} from './topic'
 import {tsPath} from './ts-node'
-import {compact, exists, resolvePackage, flatMap, loadJSON, mapValues} from './util'
+import {compact, exists, flatMap, loadJSON, mapValues} from './util'
 
 const ROOT_INDEX_CMD_ID = ''
 
@@ -98,32 +98,40 @@ function topicsToArray(input: any, base?: string): Topic[] {
   })
 }
 
-// essentially just "cd .."
-function * up(from: string) {
-  while (path.dirname(from) !== from) {
-    yield from
-    from = path.dirname(from)
-  }
-  yield from
-}
-
-async function findSourcesRoot(root: string) {
-  for (const next of up(root)) {
-    const cur = path.join(next, 'package.json')
-    // eslint-disable-next-line no-await-in-loop
-    if (await exists(cur)) return path.dirname(cur)
-  }
-}
-
+// eslint-disable-next-line valid-jsdoc
+/**
+ * find package root
+ * for packages installed into node_modules this will go up directories until
+ * it finds a node_modules directory with the plugin installed into it
+ *
+ * This is needed because of the deduping npm does
+ */
 async function findRoot(name: string | undefined, root: string) {
-  if (name) {
-    let pkgPath
-    try {
-      pkgPath = await resolvePackage(name)
-    } catch (error) {}
-    return pkgPath ? findSourcesRoot(path.dirname(pkgPath)) : pkgPath
+  // essentially just "cd .."
+  function * up(from: string) {
+    while (path.dirname(from) !== from) {
+      yield from
+      from = path.dirname(from)
+    }
+    yield from
   }
-  return findSourcesRoot(root)
+  for (const next of up(root)) {
+    let cur
+    if (name) {
+      cur = path.join(next, 'node_modules', name, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const pkg = await loadJSON(path.join(next, 'package.json'))
+        if (pkg.name === name) return next
+      } catch { }
+    } else {
+      cur = path.join(next, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+    }
+  }
 }
 
 export class Plugin implements IPlugin {
