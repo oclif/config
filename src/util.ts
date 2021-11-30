@@ -1,5 +1,4 @@
 import * as fs from 'fs'
-import * as _resolve from 'resolve'
 
 const debug = require('debug')('@oclif/config')
 
@@ -19,15 +18,8 @@ export function exists(path: string): Promise<boolean> {
   return new Promise(resolve => resolve(fs.existsSync(path)))
 }
 
-export function resolvePackage(id: string): Promise<string> {
-  return new Promise(
-    (resolve, reject) =>
-      _resolve(
-        id,
-        (err, pkgPath) =>
-          err ? reject(err) : resolve(pkgPath),
-      ),
-  )
+export function resolvePackage(id: string): string {
+  return require.resolve(id)
 }
 
 export function loadJSON(path: string): Promise<any> {

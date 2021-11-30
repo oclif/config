@@ -18,11 +18,11 @@ const withPluginInstance = () => {
     ignoreManifest: true,
   }))
   .stub(util, 'exists', (checkPath: string) => checkPath === pluginPjsonLocation)
-  .stub(util, 'resolvePackage', (id: string): Promise<string> => {
+  .stub(util, 'resolvePackage', (id: string): string => {
     if (id !== pluginName) {
-      return Promise.reject()
+      throw new Error(`resolvePackage: expected ${pluginName} but got ${id}`)
     }
-    return Promise.resolve(path.join(pluginLocation, 'lib', 'index.js'))
+    return path.join(pluginLocation, 'lib', 'index.js')
   })
   .stub(util, 'loadJSON', (jsonPath: string) => {
     if (jsonPath !== pluginPjsonLocation) {
