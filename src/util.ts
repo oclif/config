@@ -1,5 +1,4 @@
 import * as fs from 'fs'
-import * as path from 'path'
 
 const debug = require('debug')('@oclif/config')
 
@@ -20,7 +19,7 @@ export function exists(path: string): Promise<boolean> {
 }
 
 export function resolvePackage(id: string): string {
-  return path.dirname(require.resolve(id))
+  return require.resolve(id)
 }
 
 export function loadJSON(path: string): Promise<any> {
