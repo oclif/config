@@ -18,8 +18,8 @@ export function exists(path: string): Promise<boolean> {
   return new Promise(resolve => resolve(fs.existsSync(path)))
 }
 
-export function resolvePackage(id: string): string {
-  return require.resolve(id)
+export function resolvePackage(id: string, paths: { paths: string[] }): string {
+  return require.resolve(id, paths)
 }
 
 export function loadJSON(path: string): Promise<any> {

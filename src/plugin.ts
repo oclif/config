@@ -119,7 +119,7 @@ async function findRoot(name: string | undefined, root: string) {
   if (name) {
     let pkgPath
     try {
-      pkgPath = resolvePackage(name)
+      pkgPath = resolvePackage(name, {paths: [__dirname, root]})
     } catch (error) {}
     return pkgPath ? findSourcesRoot(path.dirname(pkgPath)) : pkgPath
   }
