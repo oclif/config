@@ -115,13 +115,44 @@ async function findSourcesRoot(root: string) {
   }
 }
 
+/**
+ * @returns string
+ * @param name string
+ * @param root string
+ * find package root
+ * for packages installed into node_modules this will go up directories until
+ * it finds a node_modules directory with the plugin installed into it
+ *
+ * This is needed because of some oclif plugins do not declare the `main` field in their package.json
+ * https://github.com/oclif/config/pull/289#issuecomment-983904051
+ */
+async function findRootLegacy(name: string | undefined, root: string): Promise<string | undefined> {
+  for (const next of up(root)) {
+    let cur
+    if (name) {
+      cur = path.join(next, 'node_modules', name, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const pkg = await loadJSON(path.join(next, 'package.json'))
+        if (pkg.name === name) return next
+      } catch { }
+    } else {
+      cur = path.join(next, 'package.json')
+      // eslint-disable-next-line no-await-in-loop
+      if (await exists(cur)) return path.dirname(cur)
+    }
+  }
+}
+
 async function findRoot(name: string | undefined, root: string) {
   if (name) {
     let pkgPath
     try {
       pkgPath = resolvePackage(name, {paths: [__dirname, root]})
     } catch (error) {}
-    return pkgPath ? findSourcesRoot(path.dirname(pkgPath)) : pkgPath
+    return pkgPath ? findSourcesRoot(path.dirname(pkgPath)) : findRootLegacy(name, root)
   }
   return findSourcesRoot(root)
 }
