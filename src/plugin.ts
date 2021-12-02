@@ -123,7 +123,7 @@ async function findSourcesRoot(root: string) {
  * for packages installed into node_modules this will go up directories until
  * it finds a node_modules directory with the plugin installed into it
  *
- * This is needed because of some oclif plugins do not declare the `main` field in their package.json
+ * This is needed because some oclif plugins do not declare the `main` field in their package.json
  * https://github.com/oclif/config/pull/289#issuecomment-983904051
  */
 async function findRootLegacy(name: string | undefined, root: string): Promise<string | undefined> {
