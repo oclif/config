@@ -31,3 +31,13 @@ workflows:
       - node-latest
       - node-12
       - node-10
+  dependabot-automerge:
+    triggers:
+      - schedule:
+          cron: '0 2,5,8,11 * * *'
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - release-management/dependabot-automerge
