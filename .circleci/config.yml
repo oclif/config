@@ -28,7 +28,7 @@ jobs:
 
 workflows:
   version: 2
-  "@oclif/config":
+  test:
     jobs:
       - node-latest
       - node-12
