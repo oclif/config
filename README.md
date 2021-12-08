@@ -1,6 +1,8 @@
 @oclif/config
 ==============
 
+**This library has been replaced by [@oclif/core](https://github.com/oclif/core) and is now in maintenance mode. We will only consider PRs that address security concerns.**
+
 base config object and standard interfaces for oclif components
 
 [![Version](https://img.shields.io/npm/v/@oclif/config.svg)](https://npmjs.org/package/@oclif/config)
