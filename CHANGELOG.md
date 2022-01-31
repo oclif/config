@@ -1,3 +1,28 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.18.3](https://github.com/oclif/config/compare/v1.17.0...v1.18.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* module resolution of linked plugins ([#302](https://github.com/oclif/config/issues/302)) ([2ca8627](https://github.com/oclif/config/commit/2ca862707d65201b946a6792a47da171234b4d0c))
+
+## [1.18.3](https://github.com/oclif/config/compare/v1.17.0...v1.18.3) (2022-01-31)
+
+
+### Bug Fixes
+
+* module resolution of linked plugins ([#302](https://github.com/oclif/config/issues/302)) ([2ca8627](https://github.com/oclif/config/commit/2ca862707d65201b946a6792a47da171234b4d0c))
+
+
+### Reverts
+
+* Revert "Fix plugins not being found when no node_modules exists (#171)" ([3ac747b](https://github.com/oclif/config/commit/3ac747b0f1adf4c7b43d57305dcc944c597ac6df)), closes [#171](https://github.com/oclif/config/issues/171)
+
+
+
 # [1.17.0](https://github.com/oclif/config/compare/v1.16.0...v1.17.0) (2020-08-03)
 
 
@@ -2295,6 +2320,3 @@ and @anycli/engine
 
 
 # 0.0.0 (2018-01-13)
-
-
-
