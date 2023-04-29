@@ -13,7 +13,7 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.4",
+    "@types/chai": "^4.3.5",
     "@types/indent-string": "^4.0.1",
     "@types/lodash": "^4.14.181",
     "@types/mocha": "^8.2.3",
