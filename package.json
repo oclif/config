@@ -10,7 +10,7 @@
     "debug": "^4.3.4",
     "globby": "^11.1.0",
     "is-wsl": "^2.1.1",
-    "tslib": "^2.5.0"
+    "tslib": "^2.5.2"
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
