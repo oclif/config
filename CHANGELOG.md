@@ -1,13 +1,56 @@
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-### [1.18.3](https://github.com/oclif/config/compare/v1.17.0...v1.18.3) (2022-01-31)
+## [1.18.9](https://github.com/oclif/config/compare/1.18.8...1.18.9) (2023-05-21)
 
 
 ### Bug Fixes
 
-* module resolution of linked plugins ([#302](https://github.com/oclif/config/issues/302)) ([2ca8627](https://github.com/oclif/config/commit/2ca862707d65201b946a6792a47da171234b4d0c))
+* **deps:** bump @oclif/parser from 3.8.10 to 3.8.11 ([3c58128](https://github.com/oclif/config/commit/3c5812899166a50fd3518bf1b8b7108caa388198))
+
+
+
+## [1.18.8](https://github.com/oclif/config/compare/1.18.7...1.18.8) (2023-01-29)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/parser from 3.8.9 to 3.8.10 ([61a8dc8](https://github.com/oclif/config/commit/61a8dc86a989242f603f97097f8af084efd25805))
+
+
+
+## [1.18.7](https://github.com/oclif/config/compare/1.18.6...1.18.7) (2023-01-29)
+
+
+### Bug Fixes
+
+* **deps:** bump tslib from 2.4.1 to 2.5.0 ([48f732c](https://github.com/oclif/config/commit/48f732c22294e840f4f7fe92802b7425ee3ada4c))
+
+
+
+## [1.18.6](https://github.com/oclif/config/compare/1.18.5...1.18.6) (2022-11-06)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/parser from 3.8.8 to 3.8.9 ([6c30537](https://github.com/oclif/config/commit/6c30537f9a9fff472c4d109fc486e3d6f6380aa7))
+
+
+
+## [1.18.5](https://github.com/oclif/config/compare/1.18.4...1.18.5) (2022-10-02)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/parser from 3.8.7 to 3.8.8 ([b03591e](https://github.com/oclif/config/commit/b03591e782844b74e92d2317583a2ec82b806e42))
+
+
+
+## [1.18.4](https://github.com/oclif/config/compare/v1.18.3...1.18.4) (2022-10-01)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/errors from 1.3.5 to 1.3.6 ([8fbab15](https://github.com/oclif/config/commit/8fbab1517fb174f091831e34c35fa4682fa0b4e9))
+
+
 
 ## [1.18.3](https://github.com/oclif/config/compare/v1.17.0...v1.18.3) (2022-01-31)
 
@@ -2320,3 +2363,6 @@ and @anycli/engine
 
 
 # 0.0.0 (2018-01-13)
+
+
+
