@@ -1,3 +1,12 @@
+## [1.18.12](https://github.com/oclif/config/compare/1.18.11...1.18.12) (2023-07-11)
+
+
+### Bug Fixes
+
+* **deps:** bump semver from 5.7.0 to 5.7.2 ([16fa2c2](https://github.com/oclif/config/commit/16fa2c2a6ab4c2142cb82473729e85be01574dd6))
+
+
+
 ## [1.18.11](https://github.com/oclif/config/compare/1.18.10...1.18.11) (2023-07-02)
 
 
