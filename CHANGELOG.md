@@ -1,3 +1,12 @@
+## [1.18.14](https://github.com/oclif/config/compare/1.18.13...1.18.14) (2023-07-19)
+
+
+### Bug Fixes
+
+* **deps:** bump word-wrap from 1.2.3 to 1.2.4 ([820f7e7](https://github.com/oclif/config/commit/820f7e7016736b9afad670697bcc64f58ee84a35))
+
+
+
 ## [1.18.13](https://github.com/oclif/config/compare/1.18.12...1.18.13) (2023-07-16)
 
 
