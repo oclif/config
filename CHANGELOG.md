@@ -1,3 +1,12 @@
+## [1.18.15](https://github.com/oclif/config/compare/1.18.14...1.18.15) (2023-07-23)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/parser from 3.8.14 to 3.8.15 ([c9477dc](https://github.com/oclif/config/commit/c9477dcf1435f3a024110cfcdd48074add17b041))
+
+
+
 ## [1.18.14](https://github.com/oclif/config/compare/1.18.13...1.18.14) (2023-07-19)
 
 
