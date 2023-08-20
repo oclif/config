@@ -1,7 +1,7 @@
 {
   "name": "@oclif/config",
   "description": "base config object and standard interfaces for oclif components",
-  "version": "1.18.16",
+  "version": "1.18.17",
   "author": "Salesforce",
   "bugs": "https://github.com/oclif/config/issues",
   "dependencies": {
