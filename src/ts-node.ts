@@ -38,12 +38,24 @@ function loadTSConfig(root: string): TSConfig | undefined {
       tsconfigPath,
       fs.readFileSync(tsconfigPath, 'utf8'),
     ).config
-    if (!tsconfig || !tsconfig.compilerOptions) {
+    const tsconfigParsed = typescript.parseJsonConfigFileContent(
+      tsconfig,
+      typescript.sys,
+      root,
+    )
+    if (!tsconfigParsed || !tsconfigParsed.options) {
       throw new Error(
         `Could not read and parse tsconfig.json at ${tsconfigPath}, or it ` +
         'did not contain a "compilerOptions" section.')
     }
-    return tsconfig
+    return {
+      compilerOptions: {
+        ...tsconfigParsed.options,
+        target: tsconfigParsed.options.target === undefined ?
+          tsconfigParsed.options.target :
+          typescript.ScriptTarget[tsconfigParsed.options.target],
+      },
+    }
   }
 }
 
@@ -101,12 +113,10 @@ export function tsPath(root: string, orig: string | undefined): string | undefin
     registerTSNode(root)
     const tsconfig = tsconfigs[root]
     if (!tsconfig) return orig
-    const {rootDir, rootDirs, outDir} = tsconfig.compilerOptions
-    const rootDirPath = rootDir || (rootDirs || [])[0]
-    if (!rootDirPath || !outDir) return orig
+    const {rootDir, rootDirs, outDir: lib} = tsconfig.compilerOptions // ./lib
+    const src = rootDir || (rootDirs || [])[0] // ./src
+    if (!src || !lib) return orig
     // rewrite path from ./lib/foo to ./src/foo
-    const lib = path.join(root, outDir) // ./lib
-    const src = path.join(root, rootDirPath) // ./src
     const relative = path.relative(lib, orig) // ./commands
     const out = path.join(src, relative) // ./src/commands
     // this can be a directory of commands or point to a hook file
