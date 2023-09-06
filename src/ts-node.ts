@@ -23,7 +23,7 @@ export interface TSConfig {
 }
 
 function loadTSConfig(root: string): TSConfig | undefined {
-  const tsconfigPath = path.join(root, 'tsconfig.json')
+  const tsconfigPath = path.join(root, process.env.OCLIF_TSCONFIG || 'tsconfig.json')
   let typescript: typeof import('typescript') | undefined
   try {
     typescript = require('typescript')
