@@ -50,4 +50,11 @@ describe('typescript', () => {
     await (ctx.config.runHook as any)('init', {id: 'myid', argv: ['foo']})
     expect(ctx.stdout).to.equal('running ts init hook\n')
   })
+
+  withConfig
+  .stdout()
+  .it('runs ts default command if command not found', async ctx => {
+    await ctx.config.runCommand('no-such-command')
+    expect(ctx.stdout).to.equal('running ts prerun hook\nit works!\nrunning ts postrun hook\n[ \'no-such-command\' ]\n')
+  })
 })

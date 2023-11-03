@@ -349,7 +349,11 @@ export class Config implements IConfig {
 
   async runCommand(id: string, argv: string[] = []) {
     debug('runCommand %s %o', id, argv)
-    const c = this.findCommand(id)
+    let c = this.findCommand(id)
+    if (!c) {
+      c = this.findCommand('default')
+      argv.unshift(id)
+    }
     if (!c) {
       await this.runHook('command_not_found', {id})
       throw new CLIError(`command ${id} not found`)
