@@ -44,6 +44,7 @@ export namespace Command {
       type: 'option';
       name: string;
       required?: boolean;
+      multiple?: boolean;
       char?: string;
       hidden?: boolean;
       description?: string;
@@ -111,6 +112,7 @@ export namespace Command {
           description: flag.description,
           hidden: flag.hidden,
           required: flag.required,
+          multiple: flag.multiple,
           helpLabel: flag.helpLabel,
           helpValue: flag.helpValue,
           options: flag.options,
